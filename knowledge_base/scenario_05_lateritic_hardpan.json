@@ -1,0 +1,709 @@
+{
+  "collection": "scenario_05_lateritic_hardpan",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "scenario_05_lateritic_hardpan",
+      "topic": "scenario",
+      "title": "Lateritic Hardpan Plateau",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A flat-topped rise of reddish, stony ground where digging stops after about a hand's depth and hard rain runs off in red streams. The soil is shallow, gravelly, usually acidic and poor, and the wet season is short before a long dry period.",
+      "instructions": [
+        "Do not try to dig deep or till: the hard layer stops roots and tools.",
+        "Build soil depth where you plant (pits where the ground allows, raised beds or containers where it does not).",
+        "Catch the short wet season's water with stone lines, half-moons and stored rainwater, while keeping overflow safe.",
+        "Feed the soil with organic matter and keep it covered with mulch.",
+        "Sow short-season crops after the first reliable soaking rains, start small, and expand only what works."
+      ],
+      "everyday_amounts": [
+        "pits about a forearm wide and a forearm deep",
+        "raised beds about knee-high",
+        "stone lines a few paces apart across the slope",
+        "a bucketful or two of compost per pit"
+      ],
+      "limitations": [
+        "No lab: acidity and nutrient levels can only be guessed from clues and plant response.",
+        "Rain timing varies year to year; local knowledge is a clue to confirm."
+      ],
+      "safety_notes": [
+        "Never force tools through rock or dig near edges or drop-offs.",
+        "Never send runoff toward homes, paths, neighbours or unstable edges."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols",
+        "src_fao_swc_case_studies",
+        "src_wocat_contour_stone_bunds",
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "soil_archetype": "shallow acidic lateritic soil over a hard layer (hardpan)",
+      "climate": "A short, heavy wet season with intense downpours, followed by a long dry period.",
+      "main_constraints": [
+        "Very shallow rooting depth above a hard layer",
+        "Fast runoff: rain does not soak in and washes soil away",
+        "Likely acidity (leached reddish soil)",
+        "Low nutrients and little organic matter",
+        "Poor water holding and a long dry season"
+      ],
+      "signals": [
+        {
+          "tag": "colour_reddish",
+          "label": "reddish surface",
+          "weight": 2
+        },
+        {
+          "tag": "texture_stony",
+          "label": "stony ground",
+          "weight": 1
+        },
+        {
+          "tag": "texture_gravelly",
+          "label": "gravelly ground",
+          "weight": 2
+        },
+        {
+          "tag": "texture_rock_lumps",
+          "label": "rusty rock lumps / ironstone pieces",
+          "weight": 1
+        },
+        {
+          "tag": "texture_crusted",
+          "label": "hard crust on the surface",
+          "weight": 1
+        },
+        {
+          "tag": "digging_shallow",
+          "label": "digging stops at about a hand's depth",
+          "weight": 3
+        },
+        {
+          "tag": "hardpan_patchy",
+          "label": "hard layer that varies from spot to spot",
+          "weight": 2
+        },
+        {
+          "tag": "hardpan_continuous",
+          "label": "hard rock-like sheet everywhere",
+          "weight": 2
+        },
+        {
+          "tag": "runoff_fast",
+          "label": "rain runs off fast instead of soaking in",
+          "weight": 2
+        },
+        {
+          "tag": "erosion_marks",
+          "label": "red streams, channels or washed patches",
+          "weight": 1
+        },
+        {
+          "tag": "vegetation_dry_grass",
+          "label": "dry grass in tufts",
+          "weight": 1
+        },
+        {
+          "tag": "vegetation_thorny_shrubs",
+          "label": "a few thorny shrubs",
+          "weight": 1
+        }
+      ],
+      "match_thresholds": {
+        "strong": 6,
+        "partial": 3
+      },
+      "unknowns": [
+        {
+          "id": "unknown_hardpan_continuity",
+          "label": "How deep and how continuous the hard layer is",
+          "why_it_matters": "If the hard layer has softer pockets you can deepen planting pits there; if it is one continuous sheet, pits will not get deeper and you must build soil upward with raised beds or containers.",
+          "resolved_by_tags": [
+            "hardpan_patchy",
+            "hardpan_continuous",
+            "digging_deep_possible"
+          ],
+          "check_ids": [
+            "check_probe_multiple_spots",
+            "check_rock_lumps_ironstone"
+          ]
+        },
+        {
+          "id": "unknown_slope_water_path",
+          "label": "Whether the ground slopes and which way runoff goes",
+          "why_it_matters": "On a slope, stone lines across the slope and half-moons catch water; on flat ground the same lines can trap water and drown plants. Runoff must never be sent toward homes, paths or edges.",
+          "resolved_by_tags": [
+            "slope_flat",
+            "slope_slight",
+            "slope_steep"
+          ],
+          "check_ids": [
+            "check_watch_first_heavy_rain",
+            "check_pour_water_slope"
+          ]
+        },
+        {
+          "id": "unknown_pooling",
+          "label": "Whether and where rainwater pools",
+          "why_it_matters": "Water sitting on the hard layer can rot roots and seeds. Where water pools, plant on raised ground and give the water a safe way out.",
+          "resolved_by_tags": [
+            "pooling_none",
+            "pooling_some",
+            "pooling_widespread"
+          ],
+          "check_ids": [
+            "check_watch_first_heavy_rain"
+          ]
+        },
+        {
+          "id": "unknown_rain_window",
+          "label": "Where we are in the rainy season (not started, just started, ongoing, ending)",
+          "why_it_matters": "Sowing after a single shower risks the seedlings dying in the dry gap that follows; sowing too late leaves too few wet weeks for the crop to finish.",
+          "resolved_by_tags": [
+            "rain_not_started",
+            "rain_just_started",
+            "rain_ongoing",
+            "rain_ending"
+          ],
+          "check_ids": [
+            "check_ask_neighbours",
+            "check_soaking_rain_depth"
+          ]
+        },
+        {
+          "id": "unknown_season_length",
+          "label": "How many wet weeks are left this season",
+          "why_it_matters": "Crop choice depends on whether the crop can finish before the long dry period. Without an estimate, short-season crops are the safer bet.",
+          "resolved_by_tags": [
+            "season_known"
+          ],
+          "check_ids": [
+            "check_ask_neighbours"
+          ]
+        },
+        {
+          "id": "unknown_acidity_nutrients",
+          "label": "How acidic and how short of nutrients the soil really is",
+          "why_it_matters": "Reddish, leached laterite is usually acidic and poor, but without a lab nobody can say how strongly. Plans must assume poor soil, add organic matter, and watch how trial plants respond instead of relying on any home test.",
+          "resolved_by_tags": [],
+          "check_ids": [
+            "check_baking_soda_fizz",
+            "check_observe_vegetation",
+            "check_watch_trial_plants"
+          ]
+        },
+        {
+          "id": "unknown_resources",
+          "label": "What materials and tools are actually on hand",
+          "why_it_matters": "Pit filling, mulch, stone lines and water storage all depend on what can be gathered; the plan swaps in alternatives when something is missing.",
+          "resolved_by_tags": [
+            "res_compost",
+            "res_manure",
+            "res_mulch",
+            "res_leaf_litter",
+            "res_stones",
+            "res_wood_ash",
+            "res_crushed_shells",
+            "res_water_containers",
+            "res_seeds",
+            "res_hand_tools",
+            "res_bucket",
+            "no_compost",
+            "low_water"
+          ],
+          "check_ids": [
+            "check_inventory_resources"
+          ]
+        },
+        {
+          "id": "unknown_local_experience",
+          "label": "What local people say grows here, and whether it holds up",
+          "why_it_matters": "Local advice is valuable but is treated as a claim to check. 'Only trees grow here' may reflect the hard layer, or simply that nobody has tried pits and beds.",
+          "resolved_by_tags": [
+            "local_advice_trees_only",
+            "local_advice_other"
+          ],
+          "check_ids": [
+            "check_ask_neighbours"
+          ]
+        },
+        {
+          "id": "unknown_drainage",
+          "label": "Whether water drains away or sits on the hard layer",
+          "why_it_matters": "If water sits in a hole, deep pits can become waterlogged after heavy rain; raised beds or drained pits are safer.",
+          "resolved_by_tags": [
+            "drains_fast",
+            "drains_slow"
+          ],
+          "check_ids": [
+            "check_water_hole_drainage"
+          ]
+        }
+      ],
+      "readiness_gate": [
+        {
+          "id": "gate_growing_spot_chosen",
+          "label": "Growing spot chosen",
+          "detail": "A spot is chosen on safe ground, away from edges and from where runoff would go toward homes or paths, with the deepest or softest digging you found.",
+          "required": true,
+          "satisfied_by_tasks": [
+            "task_choose_growing_spot"
+          ],
+          "applies_when": {
+            "any_tags": [],
+            "all_tags": [],
+            "none_tags": []
+          },
+          "source_ids": [
+            "src_fao_swc_case_studies"
+          ],
+          "verification": {
+            "test": "Stand at the chosen spot and follow, on foot, the way water would run off it (use the marks from the rain or pour-water check) until the ground levels out.",
+            "pass": "Overflow ends on open, stable ground away from homes, paths, neighbours' land and edges, and the spot has at least some marked deeper or softer patches.",
+            "fail": "Overflow would reach a home, path, neighbour's land or an edge, or every probe at the spot stopped very shallow.",
+            "if_fail": "Move the plot a few paces to safer ground, or plan a shallow diversion that ends on safe ground; choose the spot with the deepest probe marks."
+          }
+        },
+        {
+          "id": "gate_beds_or_pits_ready",
+          "label": "Planting pits, raised beds or containers built and filled",
+          "detail": "Any one of these is enough: pits about a forearm wide and a forearm deep (where the ground allows), knee-high raised beds, or filled sacks/containers. Each is filled with a mix of soil and organic matter before sowing.",
+          "required": true,
+          "satisfied_by_tasks": [
+            "task_build_pits",
+            "task_build_raised_beds",
+            "task_prepare_containers"
+          ],
+          "applies_when": {
+            "any_tags": [],
+            "all_tags": [],
+            "none_tags": []
+          },
+          "source_ids": [
+            "src_fao_swc_case_studies",
+            "src_unccd_microcatchment"
+          ],
+          "verification": {
+            "test": "Pour a bucketful of water slowly into one finished, filled pit or onto one finished bed, and look again by evening and the next morning.",
+            "pass": "The water soaks in and none is standing by the next morning; the fill has settled but has not slumped below the rim.",
+            "fail": "Water is still standing by the next morning, or the fill washed out or sank well below the rim.",
+            "if_fail": "Raise the bed higher or fill the pit above ground level, cut an overflow notch on the downhill side, mix in more coarse organic matter (stalks, leaf litter), and test again."
+          }
+        },
+        {
+          "id": "gate_organic_matter_mulch_ready",
+          "label": "Organic matter and mulch on hand (or plan adapted)",
+          "detail": "Compost, manure, leaf litter, dry grass or crop residues are gathered for filling and for covering the soil. If there is no compost, the plan uses leaf litter, dry grass and prunings instead.",
+          "required": true,
+          "satisfied_by_tasks": [
+            "task_gather_mulch",
+            "task_gather_organic_matter",
+            "task_fill_compost"
+          ],
+          "applies_when": {
+            "any_tags": [],
+            "all_tags": [],
+            "none_tags": []
+          },
+          "source_ids": [
+            "src_fao_swc_case_studies"
+          ],
+          "verification": {
+            "test": "Take a moist handful of the pit or bed fill mix and squeeze it in your fist, then poke the lump with a finger. Also check you have enough mulch to cover every pit or bed a hand deep.",
+            "pass": "The handful holds together loosely and then crumbles when poked, and there is enough mulch for every planting spot.",
+            "fail": "The fill runs through your fingers like loose gravel, or stays a hard sticky lump; or the mulch would not cover all planting spots.",
+            "if_fail": "Mix in more leaf litter, chopped dry grass or compost and test again; gather more mulch, or reduce the number of pits or beds to what you can cover."
+          }
+        },
+        {
+          "id": "gate_runoff_slowed",
+          "label": "Runoff slowed safely, overflow path checked",
+          "detail": "Stone lines across the slope (a few paces apart) or half-moons are in place, and you have watched or planned where overflow goes so it never heads toward homes, paths, neighbours or unstable edges.",
+          "required": true,
+          "satisfied_by_tasks": [
+            "task_build_stone_lines",
+            "task_build_half_moons"
+          ],
+          "applies_when": {
+            "any_tags": [
+              "slope_slight",
+              "slope_steep",
+              "slope_unknown"
+            ],
+            "all_tags": [],
+            "none_tags": [
+              "pooling_widespread"
+            ]
+          },
+          "source_ids": [
+            "src_wocat_contour_stone_bunds",
+            "src_fao_swc_case_studies"
+          ],
+          "verification": {
+            "test": "After the next heavy rain (or by pouring a few buckets above the lines in the dry season), walk the stone lines or half-moons and follow the overflow.",
+            "pass": "Water slows and spreads behind the lines, fine red soil settles on their uphill side, no new channels have formed, and overflow leaves along the planned safe path.",
+            "fail": "Water cuts around the ends or through gaps, new channels or red streams appear, or overflow heads toward homes, paths, neighbours or edges.",
+            "if_fail": "Close the gaps with more stones packed tightly, extend the line ends uphill slightly, re-lay any line that is not level, and open a safe overflow that ends on stable ground."
+          }
+        },
+        {
+          "id": "gate_pooling_handled",
+          "label": "Pooling water given a safe way out",
+          "detail": "Where water pools on flat ground, planting spots are raised and a shallow overflow path leads extra water away safely, rather than trapping it with bunds.",
+          "required": true,
+          "satisfied_by_tasks": [
+            "task_plan_overflow"
+          ],
+          "applies_when": {
+            "any_tags": [
+              "pooling_some",
+              "pooling_widespread"
+            ],
+            "all_tags": [],
+            "none_tags": []
+          },
+          "source_ids": [
+            "src_fao_swc_case_studies"
+          ],
+          "verification": {
+            "test": "After a heavy rain, look at the planting spots and the overflow path that evening and again the next morning.",
+            "pass": "Raised planting spots stand above any water, and standing water drains away along the shallow path within a day or two without cutting a new gully.",
+            "fail": "Planting spots are under water, or water is still standing days later, or the drain is cutting deeper.",
+            "if_fail": "Raise beds or mounds higher, move planting off the lowest spots, widen (not deepen) the overflow path, and line the drain with stones where it is cutting."
+          }
+        },
+        {
+          "id": "gate_water_storage_ready",
+          "label": "Rainwater storage ready",
+          "detail": "Clean, covered household containers are set where they can catch rain from a roof, sheet or tarp, so seedlings can be helped through dry spells.",
+          "required": true,
+          "satisfied_by_tasks": [
+            "task_set_up_water_storage"
+          ],
+          "applies_when": {
+            "any_tags": [],
+            "all_tags": [],
+            "none_tags": []
+          },
+          "source_ids": [
+            "src_unccd_microcatchment"
+          ],
+          "verification": {
+            "test": "After a rain, look at every storage container and its cover.",
+            "pass": "Containers are covered, hold water after the rain, and none is leaking or growing mosquito larvae.",
+            "fail": "Containers stay empty, leak, are uncovered, or have wrigglers in the water.",
+            "if_fail": "Re-rig the sheet or roof edge so water runs into the containers, patch or replace leaking ones, and cover every container."
+          }
+        },
+        {
+          "id": "gate_planting_timed_to_rains",
+          "label": "Planting timed to the first reliable rains",
+          "detail": "Sow only after soaking rains have come more than once and the soil is moist down to the hard layer, not after a single shower.",
+          "required": true,
+          "satisfied_by_tasks": [
+            "task_confirm_reliable_rains"
+          ],
+          "applies_when": {
+            "any_tags": [],
+            "all_tags": [],
+            "none_tags": []
+          },
+          "source_ids": [
+            "src_tnau_ragi"
+          ],
+          "verification": {
+            "test": "The day after a soaking rain, dig a small hole beside a pit or bed with a finger or stick and feel the soil down to the hard layer.",
+            "pass": "After more than one soaking rain, the soil is moist and dark all the way down to the hard layer, and a pinch holds together when squeezed.",
+            "fail": "Only a thin wet skin with dry soil below, or this is the first rain only.",
+            "if_fail": "Do not sow yet: keep preparing pits, beds, mulch and storage, and check again after the next soaking rain."
+          }
+        },
+        {
+          "id": "gate_moisture_retention_checked",
+          "label": "Mulched soil holds moisture",
+          "detail": "Under mulch, the pit or bed soil should still be damp a finger deep a couple of days after rain (or after a bucketful of water). This shows the fill and mulch will carry seedlings through short dry gaps.",
+          "required": false,
+          "satisfied_by_tasks": [
+            "task_test_moisture_retention"
+          ],
+          "applies_when": {
+            "any_tags": [],
+            "all_tags": [],
+            "none_tags": []
+          },
+          "source_ids": [
+            "src_fao_reosa_ca_brief",
+            "src_fao_soil_biodiversity_termites"
+          ],
+          "verification": {
+            "test": "A couple of days after a rain (or after pouring a bucketful on one mulched pit or bed), lift the mulch and push a finger into the soil, and compare with a bare spot.",
+            "pass": "Under the mulch the soil a finger deep is still damp and cool, while the bare spot is dry.",
+            "fail": "The soil under the mulch is as dry as the bare ground.",
+            "if_fail": "Thicken the mulch to about a hand's depth, mix more organic matter into the fill, and shade seedlings in dry spells; test again."
+          }
+        },
+        {
+          "id": "gate_trial_plot_marked",
+          "label": "Small trial plot marked",
+          "detail": "Because the hard layer is continuous or local advice says only trees grow here, start with a small marked trial (a few pits or one bed) and compare how it does before expanding.",
+          "required": true,
+          "satisfied_by_tasks": [
+            "task_mark_trial_plot"
+          ],
+          "applies_when": {
+            "any_tags": [
+              "hardpan_continuous",
+              "local_advice_trees_only"
+            ],
+            "all_tags": [],
+            "none_tags": []
+          },
+          "source_ids": [],
+          "verification": {
+            "test": "Look at the plot: are the trial pits or bed marked, and is there a journal entry naming what will be sown where?",
+            "pass": "The trial area is marked with stones or sticks and the journal lists each crop and spot.",
+            "fail": "No marks, or no record of what goes where.",
+            "if_fail": "Mark the trial spots and write down the crop for each before sowing."
+          }
+        },
+        {
+          "id": "gate_trial_plot_suggested",
+          "label": "Small trial plot marked (suggested)",
+          "detail": "Starting small is still wise on poor soil: mark a few pits or one bed as a trial and expand only once it works.",
+          "required": false,
+          "satisfied_by_tasks": [
+            "task_mark_trial_plot"
+          ],
+          "applies_when": {
+            "any_tags": [],
+            "all_tags": [],
+            "none_tags": [
+              "hardpan_continuous",
+              "local_advice_trees_only"
+            ]
+          },
+          "source_ids": [],
+          "verification": null
+        },
+        {
+          "id": "gate_fizz_recheck_optional",
+          "label": "Optional: repeat the baking-soda fizz check after treatment",
+          "detail": "Optional weak clue only. A weaker fizz after adding organic matter and a little ash may hint at change, but it is not a soil test and is never needed before planting.",
+          "required": false,
+          "satisfied_by_tasks": [
+            "task_recheck_fizz_optional"
+          ],
+          "applies_when": {
+            "any_tags": [],
+            "all_tags": [],
+            "none_tags": []
+          },
+          "source_ids": [],
+          "verification": {
+            "test": "Optional weak clue: repeat the baking-soda fizz check on a spoonful of wet soil from a filled pit.",
+            "pass": "Any result is acceptable: a weaker fizz than before is only a weak hint of change.",
+            "fail": "There is no fail for this optional clue; it never blocks planting.",
+            "if_fail": "Nothing needed; keep relying on organic matter, tolerant crops and plant response."
+          }
+        }
+      ],
+      "failure_factors": [
+        {
+          "id": "factor_shallow_rooting",
+          "label": "Very shallow rooting depth",
+          "explanation": "A hard layer about a hand's depth down stops roots and tools, so crops have very little soil to grow in and to draw water from.",
+          "what_is_missing": "rooting depth",
+          "triggered_by_tags": [
+            "digging_shallow",
+            "hardpan_patchy",
+            "hardpan_continuous"
+          ],
+          "always_likely": false,
+          "addressed_by": [
+            "treat_planting_pits",
+            "treat_raised_beds",
+            "treat_containers_sacks",
+            "treat_avoid_deep_tilling",
+            "plant_raised_beds"
+          ],
+          "indirect_tags": [
+            "texture_rock_lumps"
+          ]
+        },
+        {
+          "id": "factor_fast_runoff",
+          "label": "Fast runoff: the rain is lost",
+          "explanation": "Hard, crusted, sloping ground sheds the short season's heavy rain in red streams instead of letting it soak in, so water and topsoil leave the plot.",
+          "what_is_missing": "water capture and drainage control",
+          "triggered_by_tags": [
+            "runoff_fast",
+            "erosion_marks"
+          ],
+          "always_likely": false,
+          "addressed_by": [
+            "treat_stone_lines",
+            "treat_half_moons",
+            "treat_planting_pits",
+            "treat_mulch_cover",
+            "stress_heavy_rain_washout"
+          ],
+          "indirect_tags": [
+            "texture_crusted",
+            "slope_slight",
+            "slope_steep"
+          ]
+        },
+        {
+          "id": "factor_poor_water_retention",
+          "label": "Poor water retention",
+          "explanation": "Thin, gravelly soil holds little water, so plants dry out within days of rain.",
+          "what_is_missing": "moisture retention",
+          "triggered_by_tags": [
+            "drains_fast"
+          ],
+          "always_likely": true,
+          "addressed_by": [
+            "treat_mulch_cover",
+            "treat_compost_fill",
+            "treat_organic_alternatives",
+            "plant_mulched_basin",
+            "stress_dry_spell"
+          ],
+          "indirect_tags": [
+            "texture_stony",
+            "texture_gravelly",
+            "digging_shallow"
+          ]
+        },
+        {
+          "id": "factor_low_organic_matter",
+          "label": "Little organic matter and weak soil structure",
+          "explanation": "Leached reddish or pale soil with sparse grass and a crusting surface suggests little organic matter, so it crumbles poorly and holds little water or plant food. These are clues, not a measurement.",
+          "what_is_missing": "organic matter and soil structure",
+          "triggered_by_tags": [],
+          "always_likely": true,
+          "addressed_by": [
+            "treat_compost_fill",
+            "treat_organic_alternatives",
+            "treat_sheet_compost_next_season",
+            "regen_return_residue",
+            "regen_cover_crop_living_mulch"
+          ],
+          "indirect_tags": [
+            "colour_reddish",
+            "colour_pale",
+            "texture_crusted",
+            "vegetation_dry_grass",
+            "no_compost"
+          ]
+        },
+        {
+          "id": "factor_low_nutrients",
+          "label": "Low nutrients",
+          "explanation": "Heavily weathered laterite is usually poor in plant food; without lab tests the exact shortage is unknown, so the plan feeds the soil and watches plant response.",
+          "what_is_missing": "plant nutrients (exact shortage unknown without a lab)",
+          "triggered_by_tags": [],
+          "always_likely": true,
+          "addressed_by": [
+            "treat_compost_fill",
+            "treat_legume_rotation",
+            "stress_nutrient",
+            "regen_legume_rotation"
+          ],
+          "indirect_tags": [
+            "colour_reddish",
+            "colour_pale",
+            "vegetation_dry_grass"
+          ]
+        },
+        {
+          "id": "factor_likely_acidity",
+          "label": "Likely acidity (unconfirmed)",
+          "explanation": "Reddish, leached laterite is usually acidic, but without a lab this cannot be confirmed or measured. A baking-soda fizz is only a weak clue, and no fizz (fizz_none) proves nothing either way, so it never clears this factor.",
+          "what_is_missing": "a soil less hostile to sensitive crops (strength of acidity unknown)",
+          "triggered_by_tags": [],
+          "always_likely": true,
+          "addressed_by": [
+            "treat_ash_shell_optional",
+            "treat_avoid_compost_claims",
+            "treat_avoid_large_ash",
+            "stress_acidity"
+          ],
+          "indirect_tags": [
+            "colour_reddish",
+            "fizz_seen"
+          ]
+        },
+        {
+          "id": "factor_bare_ground_no_shelter",
+          "label": "Sparse ground cover, no windbreak or shade",
+          "explanation": "Only dry grass tufts and a few shrubs cover the ground (observed as sparse cover), leaving soil bare to sun, hot wind and hard rain, which dries and crusts the surface and stresses seedlings.",
+          "what_is_missing": "ground cover, canopy and windbreak",
+          "triggered_by_tags": [
+            "vegetation_dry_grass",
+            "vegetation_thorny_shrubs"
+          ],
+          "always_likely": true,
+          "addressed_by": [
+            "treat_mulch_cover",
+            "stress_hot_wind",
+            "stress_heat",
+            "regen_hedges_trees",
+            "regen_preserve_beds_windbreaks"
+          ],
+          "indirect_tags": [
+            "texture_crusted",
+            "erosion_marks"
+          ]
+        },
+        {
+          "id": "factor_short_window",
+          "label": "Short wet season, long dry season",
+          "explanation": "The scenario's climate is a short, heavy wet season and a long dry period, so this is always likely. It is observed only when the user reports the rains are ending; an unknown season length is not evidence.",
+          "what_is_missing": "time and stored water",
+          "triggered_by_tags": [
+            "rain_ending"
+          ],
+          "always_likely": true,
+          "addressed_by": [
+            "time_buffer_late_start",
+            "time_remediation_prep",
+            "treat_water_storage",
+            "plant_confirm_reliable_rains",
+            "stress_dry_spell"
+          ],
+          "indirect_tags": [
+            "rain_ongoing",
+            "low_water"
+          ]
+        },
+        {
+          "id": "factor_waterlogging",
+          "label": "Pooling and waterlogging on flat ground",
+          "explanation": "On flat parts of the plateau, heavy rain sits on top of the hard layer and can drown seeds and rot roots.",
+          "what_is_missing": "drainage",
+          "triggered_by_tags": [
+            "pooling_some",
+            "pooling_widespread",
+            "drains_slow"
+          ],
+          "always_likely": false,
+          "addressed_by": [
+            "treat_overflow_pooling",
+            "treat_raised_beds",
+            "treat_avoid_trapping_water_flat",
+            "stress_waterlogging"
+          ],
+          "indirect_tags": []
+        }
+      ]
+    }
+  ]
+}

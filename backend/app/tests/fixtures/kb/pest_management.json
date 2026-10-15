@@ -1,0 +1,108 @@
+{
+ "collection": "pest_management",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "pest_termites",
+   "topic": "pest",
+   "title": "Termites",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture pest Termites.",
+   "instructions": [
+    "Fixture step for Termites."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Termites."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_ids": [
+    "*"
+   ],
+   "signs": [
+    "Fixture sign."
+   ],
+   "actions": [
+    "Fixture action."
+   ],
+   "bio_options": [
+    {
+     "name": "Fixture neem",
+     "preparation": "Fixture prep.",
+     "safe_use": [
+      "Fixture safe use."
+     ],
+     "cautions": [
+      "Fixture caution."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pest_shoot_fly",
+   "topic": "pest",
+   "title": "Shoot fly",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture pest Shoot fly.",
+   "instructions": [
+    "Fixture step for Shoot fly."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Shoot fly."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_ids": [
+    "crop_pearl_millet"
+   ],
+   "signs": [
+    "Fixture sign."
+   ],
+   "actions": [
+    "Fixture action."
+   ],
+   "bio_options": [
+    {
+     "name": "Fixture neem",
+     "preparation": "Fixture prep.",
+     "safe_use": [
+      "Fixture safe use."
+     ],
+     "cautions": [
+      "Fixture caution."
+     ]
+    }
+   ]
+  }
+ ]
+}

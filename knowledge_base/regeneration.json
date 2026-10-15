@@ -1,0 +1,474 @@
+{
+  "collection": "regeneration",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "regen_return_residue",
+      "topic": "regeneration",
+      "title": "Return healthy crop residue to the soil",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "After harvest, cut healthy stalks, leaves and roots and leave them on pits and beds instead of removing or burning them.",
+      "instructions": [
+        "Leave roots of legumes in the soil.",
+        "Chop stalks to forearm lengths and lay them over pits and beds.",
+        "Pin them down with a few stones against wind."
+      ],
+      "everyday_amounts": [
+        "all healthy residue stays on the plot"
+      ],
+      "limitations": [
+        "Residue may also be needed for animal feed; keep at least the pit and bed residue on the soil."
+      ],
+      "safety_notes": [
+        "Do not burn residue; dry-season fires spread quickly."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief",
+        "src_fao_soil_biodiversity_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Put organic matter back into the thin soil and keep it covered through the long dry season.",
+      "timing": "Right after harvest",
+      "expected_observable_change": [
+        "Soil under residue stays darker and softer",
+        "Termites and soil life break residue down over the dry season"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_keep_mulch_dry_season",
+      "topic": "regeneration",
+      "title": "Keep the soil covered through the dry season",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Keep mulch on pits and beds all through the dry period and top it up before the next rains.",
+      "instructions": [
+        "Top up with dry grass, leaves and prunings whenever available.",
+        "Keep animals and fire away from the plot."
+      ],
+      "everyday_amounts": [
+        "a layer about a hand's depth"
+      ],
+      "limitations": [
+        "Mulch disappears quickly to termites; expect to top it up."
+      ],
+      "safety_notes": [
+        "Clear a firebreak around the plot."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Protect the surface from crusting and loss, and let soil life work.",
+      "timing": "Through the dry season",
+      "expected_observable_change": [
+        "Less crust and more soil life when rains return"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_compost_healthy_residue",
+      "topic": "regeneration",
+      "title": "Compost healthy residue and scraps",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pile healthy residue, leaves, scraps and any manure into a compost heap or pit to fill pits next season.",
+      "instructions": [
+        "Layer coarse stalks, leaves, scraps and a little soil.",
+        "Keep it damp when possible; cover with grass.",
+        "Use when dark and crumbly."
+      ],
+      "everyday_amounts": [
+        "a pile about knee-high"
+      ],
+      "limitations": [
+        "Slow in the dry season without moisture."
+      ],
+      "safety_notes": [
+        "Keep compost away from wells and drinking water."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Build next season's main fertility input.",
+      "timing": "After harvest and through the dry season",
+      "expected_observable_change": [
+        "Material shrinks and darkens"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_remove_diseased_residue",
+      "topic": "regeneration",
+      "title": "Remove diseased residue and striga safely",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Residue from heavily diseased plants, and all striga plants, should be taken off the plot and burned in a safe place or buried deep.",
+      "instructions": [
+        "Bag striga plants before carrying them so seeds do not drop.",
+        "Burn only in a small, cleared spot away from dry grass, homes and trees, on a calm day, and watch it until it is out.",
+        "Or bury deeply far from the plot."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Striga seed in the soil lasts many years."
+      ],
+      "safety_notes": [
+        "Never leave a fire unattended; keep water or sand at hand.",
+        "Do not burn near homes, trees or dry grass."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_farmradio_striga",
+        "src_iita_propas_striga"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Stop diseases and striga seed carrying over to the next season.",
+      "timing": "At harvest",
+      "expected_observable_change": [
+        "Fewer diseased plants and striga next season"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_extend_pits_stone_lines",
+      "topic": "regeneration",
+      "title": "Extend pits and stone lines in the dry season",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Use the dry season to dig more pits in the softest spots, re-fill old pits with organic matter, and extend or repair stone lines.",
+      "instructions": [
+        "Re-open last season's pits, add a bucketful or two of compost, and reuse them.",
+        "Dig new pits beside the best-performing ones.",
+        "Extend stone lines along the same contour and add new lines below.",
+        "Repair any line where water broke through."
+      ],
+      "everyday_amounts": [
+        "one to two bucketfuls of compost per re-used pit",
+        "new lines a few paces apart"
+      ],
+      "limitations": [
+        "Labour is the limit; extend what worked, not everything."
+      ],
+      "safety_notes": [
+        "Do not force tools through rock; keep away from edges."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_wocat_contour_stone_bunds"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Grow the improved area step by step while labour is free and before the rains.",
+      "timing": "Dry season, before the next rains",
+      "expected_observable_change": [
+        "Old pits darken and soften season by season",
+        "More soil builds behind stone lines"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_gradual_expansion",
+      "topic": "regeneration",
+      "title": "Expand gradually, only after the trial works",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Grow the planted area only with the crops and methods that did well in the trial.",
+      "instructions": [
+        "Compare trial pits, beds and crops from your journal.",
+        "Next season, double at most the area under the best method.",
+        "Keep a small part as a new trial for one more crop or method."
+      ],
+      "everyday_amounts": [
+        "at most about double the trial area each season"
+      ],
+      "limitations": [
+        "A single season can mislead; weigh unusual weather."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Avoid spending scarce seed, water and labour on untested methods.",
+      "timing": "Planning before the next season",
+      "expected_observable_change": [
+        "Bigger harvest from proven methods"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_legume_rotation",
+      "topic": "regeneration",
+      "title": "Rotate legumes and cereals",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Next season, sow millet where legumes grew and legumes where millet grew.",
+      "instructions": [
+        "Mark in the journal what grew in each pit or bed.",
+        "Swap cereal and legume places next season."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Benefits build slowly."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_iita_propas_striga"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Spread the nitrogen benefit of legumes and break pest and striga cycles.",
+      "timing": "Next season",
+      "expected_observable_change": [
+        "Millet after legumes looks greener",
+        "Fewer striga plants over seasons"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_hedges_trees",
+      "topic": "regeneration",
+      "title": "Plant hedges and trees along stone lines",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Plant gliricidia cuttings or tufted grasses along stone lines and bed edges, and trees such as cashew in the deepest pockets.",
+      "instructions": [
+        "Plant cuttings along stone lines at the start of the rains.",
+        "Plant tree seedlings in enlarged pits in the deepest spots.",
+        "Protect young plants from animals with thorny branches."
+      ],
+      "everyday_amounts": [
+        "cuttings about a pace apart along lines"
+      ],
+      "limitations": [
+        "Trees take years; they do not replace this season's field crops."
+      ],
+      "safety_notes": [
+        "Gliricidia seeds and bark are toxic; do not eat."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_wocat_contour_stone_bunds",
+        "src_fao_cashew_sri_lanka"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Hold stone lines in place, add leaf litter, and build long-term options on the plateau.",
+      "timing": "Start of the next rains",
+      "expected_observable_change": [
+        "Living lines hold more soil and give mulch"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_save_seed",
+      "topic": "regeneration",
+      "title": "Save seed from the best plants",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Keep seed from the healthiest plants that did best on this ground.",
+      "instructions": [
+        "Mark the best plants before harvest.",
+        "Harvest, dry and store their seed separately, labelled.",
+        "Store seed in sealed containers in a cool, dry place."
+      ],
+      "everyday_amounts": [
+        "keep at least a few handfuls of each crop"
+      ],
+      "limitations": [
+        "Hybrid seed may not breed true."
+      ],
+      "safety_notes": [
+        "Never eat seed treated with chemicals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Build seed suited to this soil and season.",
+      "timing": "At harvest",
+      "expected_observable_change": [
+        "More reliable germination and growth over seasons"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_cover_crop_living_mulch",
+      "topic": "regeneration",
+      "title": "Cover crop or living mulch after harvest",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Where moisture remains after the main harvest, sow cowpea or horse gram as a cover crop so the ground is not left bare; cut it down and leave it as mulch before it competes with the next crop.",
+      "instructions": [
+        "Right after the main harvest, if the soil is still moist a finger deep, sow cowpea or horse gram thinly into pits and beds between the residue.",
+        "Horse gram is the hardier choice late in the season; cowpea covers the ground faster.",
+        "Let it grow as long as moisture lasts; pick a few leaves or pods if they come.",
+        "Before the next sowing, cut it at the soil surface and lay it on the bed as mulch; leave the roots in the soil.",
+        "Where moisture is too short, keep a dead mulch of residue instead."
+      ],
+      "everyday_amounts": [
+        "sow thinly: a pinch of seeds about two hand-spans apart",
+        "cut at the soil surface before the next sowing"
+      ],
+      "limitations": [
+        "Needs some moisture left after harvest; in a dry end of season it may not establish.",
+        "A cover crop left growing too long competes with the next crop for water."
+      ],
+      "safety_notes": [
+        "Cook any dry beans thoroughly before eating."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_sare_cowpea_cover",
+        "src_tnau_horsegram"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Keep living cover on the soil, add nitrogen and organic matter, and shade out weeds through the end of the rains.",
+      "timing": "Right after harvest, while soil is still moist",
+      "expected_observable_change": [
+        "Soil stays covered and cool",
+        "Fewer weeds under the cover",
+        "Next crop greener where the cover grew"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    },
+    {
+      "id": "regen_preserve_beds_windbreaks",
+      "topic": "regeneration",
+      "title": "Preserve beds, pits, stone lines and windbreaks between seasons",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Do not flatten or dig out what you built: keep beds, pits, stone lines, half-moons and windbreaks in place and improve them each season.",
+      "instructions": [
+        "Leave raised beds standing; top them up with compost and residue rather than rebuilding.",
+        "Mark pits so they can be re-opened and refilled, not dug anew.",
+        "Repair stone lines and half-moon banks after the last storms of the season.",
+        "Keep dead hedges and live hedges in place; add brush to gaps and replant failed cuttings.",
+        "Keep animals and fire away from beds and hedges in the dry season; walking paths go between beds, never on them."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Structures need some repair every season; plan the work for the dry season."
+      ],
+      "safety_notes": [
+        "Never burn hedges or residue near beds; fires spread fast on dry plateaus."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_wocat_contour_stone_bunds",
+        "src_fao_windbreaks"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Each season's work adds to the last; keeping structures saves labour and keeps building soil depth.",
+      "timing": "Between seasons",
+      "expected_observable_change": [
+        "Beds get deeper and darker over seasons",
+        "More soil collects behind stone lines each year",
+        "Hedges thicken and shelter more of the plot"
+      ],
+      "priority": null,
+      "category": "regeneration",
+      "task": null
+    }
+  ]
+}

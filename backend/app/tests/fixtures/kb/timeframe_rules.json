@@ -1,0 +1,189 @@
+{
+ "collection": "timeframe_rules",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "time_buffer_late_start",
+   "topic": "timeframe",
+   "title": "Late start buffer",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture buffer.",
+   "instructions": [
+    "Fixture step for Late start buffer."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Late start buffer."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "buffer_weeks": {
+    "min": 2,
+    "max": 3
+   },
+   "explanation": "Fixture: add a buffer for a late start."
+  },
+  {
+   "id": "time_remediation_prep",
+   "topic": "timeframe",
+   "title": "Soil preparation before sowing",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture prep summary.",
+   "instructions": [
+    "Fixture step for Soil preparation before sowing."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Soil preparation before sowing."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "prep_weeks": {
+    "min": 2,
+    "max": 4
+   },
+   "explanation": "Fixture: preparation happens before the first reliable rains, so it does not use up the wet weeks."
+  },
+  {
+   "id": "time_soil_recovery",
+   "topic": "timeframe",
+   "title": "Soil recovery over several seasons",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture recovery summary.",
+   "instructions": [
+    "Fixture step for Soil recovery over several seasons."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Soil recovery over several seasons."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "explanation": "Fixture: soil improves slowly over several seasons."
+  },
+  {
+   "id": "time_calendar_relative_to_rain",
+   "topic": "timeframe",
+   "title": "Planting calendar relative to the first reliable rain",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture calendar.",
+   "instructions": [
+    "Fixture step for Planting calendar relative to the first reliable rain."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Planting calendar relative to the first reliable rain."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "phases": [
+    {
+     "when": "Before the first reliable rain (R)",
+     "actions": [
+      "Fixture: build beds.",
+      "Fixture: gather mulch."
+     ]
+    },
+    {
+     "when": "At R, after a soaking rain",
+     "actions": [
+      "Fixture: sow."
+     ]
+    },
+    {
+     "when": "A few weeks after R",
+     "actions": [
+      "Fixture: thin and mulch."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "time_rule_unknown_season",
+   "topic": "timeframe",
+   "title": "Season length unknown",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Season fit cannot be determined until you estimate how many weeks of rain remain.",
+   "instructions": [
+    "Fixture step for Season length unknown."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Season length unknown."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "explanation": "Season fit cannot be determined until you estimate how many weeks of rain remain."
+  }
+ ]
+}

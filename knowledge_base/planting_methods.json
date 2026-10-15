@@ -1,0 +1,1067 @@
+{
+  "collection": "planting_methods",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "plant_planting_pits",
+      "topic": "planting_method",
+      "title": "Sowing into planting pits",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": [
+          "hardpan_continuous"
+        ]
+      },
+      "summary": "Build pits before the rains, fill them with soil and organic matter, and sow a few seeds into each once the rains are reliable.",
+      "instructions": [
+        "Dig pits in the softest spots, about a forearm wide and as close to a forearm deep as the hard layer allows.",
+        "Pile dug soil on the downhill side as a small lip to catch runoff.",
+        "Fill with dug soil mixed with one to two bucketfuls of compost or manure, plus leaf litter or chopped grass.",
+        "Leave the filled surface a little below ground level so the pit catches water.",
+        "Wait for reliable rains, then sow in the centre of each pit: a pinch of four or five millet seeds about one finger-joint deep, or two or three bean-sized seeds about two finger-joints deep.",
+        "When seedlings have a few leaves, thin to the strongest two or three (millets) or one or two (legumes).",
+        "Mulch around seedlings once they are up."
+      ],
+      "everyday_amounts": [
+        "pits about a forearm wide and deep (where possible)",
+        "about a long pace between pits",
+        "one to two bucketfuls of compost per pit",
+        "a few seeds per pit, about one finger-joint deep"
+      ],
+      "limitations": [
+        "Shallow pits on hard ground can fill with water; give them an overflow notch if water stood in the drainage check."
+      ],
+      "safety_notes": [
+        "Do not force tools through rock; keep away from edges; mark open pits."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_unccd_microcatchment",
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "planting_pit",
+      "steps": [
+        "Dig pits in the softest spots, about a forearm wide and as close to a forearm deep as the hard layer allows.",
+        "Pile dug soil on the downhill side as a small lip to catch runoff.",
+        "Fill with dug soil mixed with one to two bucketfuls of compost or manure, plus leaf litter or chopped grass.",
+        "Leave the filled surface a little below ground level so the pit catches water.",
+        "Wait for reliable rains, then sow in the centre of each pit: a pinch of four or five millet seeds about one finger-joint deep, or two or three bean-sized seeds about two finger-joints deep.",
+        "When seedlings have a few leaves, thin to the strongest two or three (millets) or one or two (legumes).",
+        "Mulch around seedlings once they are up."
+      ],
+      "when_to_sow": "After the first reliable soaking rains: more than one good rain, soil moist down to the hard layer, and no long dry gap expected. Not after a single shower.",
+      "task": null
+    },
+    {
+      "id": "plant_raised_beds",
+      "topic": "planting_method",
+      "title": "Sowing into knee-high raised beds",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Build beds upward over the hard layer, let the first rain settle them, and sow in rows or spots across the bed.",
+      "instructions": [
+        "Edge a bed about one arm-span wide with stones, logs or packed earth.",
+        "Fill in layers: scraped soil, compost or manure, leaf litter and grass, finishing about knee-high.",
+        "Let the first good rain settle the bed; top up any low spots.",
+        "Sow in short rows across the bed or in spots about a hand-span apart for small millets, wider for legumes.",
+        "Mulch between rows once seedlings are up.",
+        "Where water pools, keep the paths between beds open so water drains away."
+      ],
+      "everyday_amounts": [
+        "beds about knee-high and one arm-span wide",
+        "spots about a hand-span apart for millets, about a forearm apart for legumes",
+        "a few seeds per spot, about one finger-joint deep"
+      ],
+      "limitations": [
+        "Beds dry faster than the ground in dry spells; mulch heavily."
+      ],
+      "safety_notes": [
+        "Do not strip soil from slopes or edges to fill beds."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "raised_bed",
+      "steps": [
+        "Edge a bed about one arm-span wide with stones, logs or packed earth.",
+        "Fill in layers: scraped soil, compost or manure, leaf litter and grass, finishing about knee-high.",
+        "Let the first good rain settle the bed; top up any low spots.",
+        "Sow in short rows across the bed or in spots about a hand-span apart for small millets, wider for legumes.",
+        "Mulch between rows once seedlings are up.",
+        "Where water pools, keep the paths between beds open so water drains away."
+      ],
+      "when_to_sow": "After the first reliable soaking rains: more than one good rain, soil moist down to the hard layer, and no long dry gap expected. Not after a single shower.",
+      "task": null
+    },
+    {
+      "id": "plant_containers",
+      "topic": "planting_method",
+      "title": "Growing in containers or sacks",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "hardpan_continuous"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "On a continuous rock sheet, grow a few plants in filled sacks, containers or stone rings.",
+      "instructions": [
+        "Use sacks, broken containers or stone rings about a forearm across, with drainage gaps at the bottom.",
+        "Fill with a mix of scraped soil and organic matter.",
+        "Sow a few seeds per container after reliable rains; thin to one or two strong plants.",
+        "Mulch the top and keep close to stored water."
+      ],
+      "everyday_amounts": [
+        "containers about knee-high when filled",
+        "one or two plants per container"
+      ],
+      "limitations": [
+        "Only a few plants; a trial or stop-gap."
+      ],
+      "safety_notes": [
+        "Never use containers that held fuel, poisons or chemicals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "container",
+      "steps": [
+        "Use sacks, broken containers or stone rings about a forearm across, with drainage gaps at the bottom.",
+        "Fill with a mix of scraped soil and organic matter.",
+        "Sow a few seeds per container after reliable rains; thin to one or two strong plants.",
+        "Mulch the top and keep close to stored water."
+      ],
+      "when_to_sow": "After the first reliable soaking rains: more than one good rain, soil moist down to the hard layer, and no long dry gap expected. Not after a single shower.",
+      "task": null
+    },
+    {
+      "id": "plant_stone_lines",
+      "topic": "planting_method",
+      "title": "Laying stone lines across the slope",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "slope_slight",
+          "slope_steep",
+          "slope_unknown"
+        ],
+        "all_tags": [],
+        "none_tags": [
+          "pooling_widespread"
+        ]
+      },
+      "summary": "Lay stones along the contour, a few paces apart, before the rains; plant along the uphill side where soil and moisture collect.",
+      "instructions": [
+        "Find the slope direction (pour-water check or watching the first rain).",
+        "Mark level lines across the slope a few paces apart.",
+        "Scrape a shallow groove and set large stones downhill with smaller stones packed behind.",
+        "Check where overflow will go; it must end somewhere safe.",
+        "Plant pits, beds or grass and hedge cuttings just uphill of the lines.",
+        "Repair after every heavy rain."
+      ],
+      "everyday_amounts": [
+        "lines about ankle to shin high",
+        "a few paces apart"
+      ],
+      "limitations": [
+        "Lines that are not level make water run along them and break through."
+      ],
+      "safety_notes": [
+        "Never send runoff toward homes, paths, neighbours or edges.",
+        "Lift stones carefully."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_wocat_contour_stone_bunds",
+        "src_cgiar_csa_stone_bunds",
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "stone_line",
+      "steps": [
+        "Find the slope direction (pour-water check or watching the first rain).",
+        "Mark level lines across the slope a few paces apart.",
+        "Scrape a shallow groove and set large stones downhill with smaller stones packed behind.",
+        "Check where overflow will go; it must end somewhere safe.",
+        "Plant pits, beds or grass and hedge cuttings just uphill of the lines.",
+        "Repair after every heavy rain."
+      ],
+      "when_to_sow": "Build before the rains; plant along them once rains are reliable.",
+      "task": null
+    },
+    {
+      "id": "plant_half_moons",
+      "topic": "planting_method",
+      "title": "Planting in half-moon catchments",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "slope_slight"
+        ],
+        "all_tags": [],
+        "none_tags": [
+          "slope_steep",
+          "pooling_widespread"
+        ]
+      },
+      "summary": "On gentle slopes, plant crops or a young tree inside half-moon basins that open uphill.",
+      "instructions": [
+        "Build half-moons a couple of paces across, open side uphill, bank lined with stones.",
+        "Mix compost or organic matter into the lower part of the basin.",
+        "Sow a few seeds or plant a tree seedling in the lower part, where water gathers.",
+        "Mulch the basin floor; repair the bank after storms."
+      ],
+      "everyday_amounts": [
+        "a couple of paces across",
+        "a bucketful or two of compost per basin"
+      ],
+      "limitations": [
+        "Not for flat pooling ground or steep slopes."
+      ],
+      "safety_notes": [
+        "Never point overflow toward homes or paths."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_ccardesa_half_moon",
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "half_moon",
+      "steps": [
+        "Build half-moons a couple of paces across, open side uphill, bank lined with stones.",
+        "Mix compost or organic matter into the lower part of the basin.",
+        "Sow a few seeds or plant a tree seedling in the lower part, where water gathers.",
+        "Mulch the basin floor; repair the bank after storms."
+      ],
+      "when_to_sow": "After the first reliable soaking rains: more than one good rain, soil moist down to the hard layer, and no long dry gap expected. Not after a single shower.",
+      "task": null
+    },
+    {
+      "id": "plant_confirm_reliable_rains",
+      "topic": "planting_method",
+      "title": "Confirm the rains are reliable before sowing",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Wait until soaking rains have come more than once and the soil is moist down to the hard layer before sowing most of your seed.",
+      "instructions": [
+        "Count the soaking rains since the season started; one shower is not enough.",
+        "The day after a rain, dig with a stick beside a pit: the soil should be moist all the way to the hard layer.",
+        "Ask neighbours whether this is when rains usually settle in.",
+        "If unsure, sow only part of the seed now and keep the rest to re-sow."
+      ],
+      "everyday_amounts": [
+        "more than one soaking rain",
+        "soil moist down to the hard layer"
+      ],
+      "limitations": [
+        "Even reliable-looking rains can pause; keep reserve seed and stored water."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_ragi"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "sowing",
+      "steps": [
+        "Count the soaking rains since the season started; one shower is not enough.",
+        "The day after a rain, dig with a stick beside a pit: the soil should be moist all the way to the hard layer.",
+        "Ask neighbours whether this is when rains usually settle in.",
+        "If unsure, sow only part of the seed now and keep the rest to re-sow."
+      ],
+      "when_to_sow": "After the first reliable soaking rains: more than one good rain, soil moist down to the hard layer, and no long dry gap expected. Not after a single shower.",
+      "task": {
+        "task_id": "task_confirm_reliable_rains",
+        "label": "Confirm the first reliable soaking rains"
+      }
+    },
+    {
+      "id": "plant_direct_sowing",
+      "topic": "planting_method",
+      "title": "Sowing seeds: depth, spacing and thinning",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Sow a few seeds per spot into moist pits or beds: small seeds about one finger-joint deep, bean-sized seeds about two finger-joints deep, then thin to the strongest plants.",
+      "instructions": [
+        "Sow in the early morning or late afternoon into soil that is moist down to the hard layer.",
+        "Depth: tiny seeds (niger, little millet) are only just covered; small seeds (finger millet, pearl millet) about one finger-joint deep; bean-sized seeds (cowpea, horse gram, groundnut, pigeon pea) about two finger-joints deep.",
+        "Seeds per spot: a small pinch of four or five millet seeds; two or three bean-sized seeds; one or two shelled groundnuts.",
+        "Spacing in beds: millets about a hand-span apart each way; legumes about two hand-spans apart; rows across the bed, not along a slope.",
+        "Spacing in pits: sow in the centre of each pit, in the lowest part where water collects; pits themselves about a long pace apart.",
+        "Cover the seed, press the soil gently with your palm so seed touches moist soil, and mark the spot with a small stick.",
+        "Keep back a handful of each seed for re-sowing gaps.",
+        "Thinning: when seedlings have three or four leaves, keep the strongest two or three millet plants or one or two legume plants per spot; pinch out (do not pull) the rest to avoid disturbing roots.",
+        "Write what you sowed, where and when in the journal."
+      ],
+      "everyday_amounts": [
+        "small seeds about one finger-joint deep; bean-sized seeds about two finger-joints deep; tiny seeds just covered",
+        "a pinch of four or five millet seeds, or two or three bean-sized seeds, per spot",
+        "millets a hand-span apart, legumes two hand-spans apart in beds; pits a long pace apart",
+        "thin to two or three millet plants or one or two legume plants per spot",
+        "keep back a handful of each seed for re-sowing"
+      ],
+      "limitations": [
+        "Seeds sown too deep in crusting soil may not come up; seeds sown too shallow dry out.",
+        "Spacing is a starting point: on very poor soil, wider spacing shares scarce water better."
+      ],
+      "safety_notes": [
+        "Wash hands after handling any treated seed; never eat treated seed."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_ragi",
+        "src_tnau_cowpea",
+        "src_tnau_horsegram"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "sowing",
+      "steps": [
+        "Sow in the early morning or late afternoon into soil that is moist down to the hard layer.",
+        "Depth: tiny seeds (niger, little millet) are only just covered; small seeds (finger millet, pearl millet) about one finger-joint deep; bean-sized seeds (cowpea, horse gram, groundnut, pigeon pea) about two finger-joints deep.",
+        "Seeds per spot: a small pinch of four or five millet seeds; two or three bean-sized seeds; one or two shelled groundnuts.",
+        "Spacing in beds: millets about a hand-span apart each way; legumes about two hand-spans apart; rows across the bed, not along a slope.",
+        "Spacing in pits: sow in the centre of each pit, in the lowest part where water collects; pits themselves about a long pace apart.",
+        "Cover the seed, press the soil gently with your palm so seed touches moist soil, and mark the spot with a small stick.",
+        "Keep back a handful of each seed for re-sowing gaps.",
+        "Thinning: when seedlings have three or four leaves, keep the strongest two or three millet plants or one or two legume plants per spot; pinch out (do not pull) the rest to avoid disturbing roots.",
+        "Write what you sowed, where and when in the journal."
+      ],
+      "when_to_sow": "After the first reliable soaking rains: more than one good rain, soil moist down to the hard layer, and no long dry gap expected. Not after a single shower.",
+      "task": {
+        "task_id": "task_sow_seeds",
+        "label": "Sow the trial pits or beds"
+      },
+      "planting_depth": "Tiny seeds just covered; small seeds about one finger-joint deep; bean-sized seeds about two finger-joints deep.",
+      "spacing": "Beds: millets about a hand-span apart, legumes about two hand-spans apart. Pits: one sowing spot per pit, pits a long pace apart.",
+      "seeds_per_spot": "A pinch of four or five millet seeds; two or three bean-sized seeds; one or two shelled groundnuts.",
+      "thinning": "At three or four leaves: keep two or three millet plants or one or two legume plants per spot."
+    },
+    {
+      "id": "plant_mulch_after_sowing",
+      "topic": "planting_method",
+      "title": "Mulching after sowing",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Once seedlings are up, spread mulch around them and keep it topped up through dry spells.",
+      "instructions": [
+        "Wait until seedlings are visible, then spread mulch around them, leaving a finger's width clear of each stem.",
+        "Keep a layer about a hand's depth when fresh, thicker before a dry spell.",
+        "Top up as termites and weather break it down."
+      ],
+      "everyday_amounts": [
+        "a layer about a hand's depth when fresh",
+        "an armful per pit"
+      ],
+      "limitations": [
+        "Mulch can shelter pests; check under it now and then."
+      ],
+      "safety_notes": [
+        "Check grass for snakes before gathering."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief",
+        "src_fao_soil_biodiversity_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "mulching",
+      "steps": [
+        "Wait until seedlings are visible, then spread mulch around them, leaving a finger's width clear of each stem.",
+        "Keep a layer about a hand's depth when fresh, thicker before a dry spell.",
+        "Top up as termites and weather break it down."
+      ],
+      "when_to_sow": "Right after seedlings emerge, and again before the dry spells.",
+      "task": {
+        "task_id": "task_mulch_after_sowing",
+        "label": "Mulch around emerged seedlings"
+      }
+    },
+    {
+      "id": "plant_rainwater_harvest",
+      "topic": "planting_method",
+      "title": "Harvesting and storing rainwater",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Catch rain from roofs, sheets or tarps into covered containers, and use it only to rescue seedlings in dry spells.",
+      "instructions": [
+        "Set clean, covered containers under a roof edge, sheet or tarp before storms.",
+        "Let the first minutes of rain rinse the surface before collecting.",
+        "Keep containers covered and shaded.",
+        "In a dry spell, give each seedling a cupful at the base, early morning or evening.",
+        "Refill whenever it rains."
+      ],
+      "everyday_amounts": [
+        "a cupful per seedling in dry spells"
+      ],
+      "limitations": [
+        "Stored water is small; it rescues seedlings, it does not irrigate a field."
+      ],
+      "safety_notes": [
+        "Never use containers that held fuel or chemicals; keep drinking water separate; cover containers."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "water_storage",
+      "steps": [
+        "Set clean, covered containers under a roof edge, sheet or tarp before storms.",
+        "Let the first minutes of rain rinse the surface before collecting.",
+        "Keep containers covered and shaded.",
+        "In a dry spell, give each seedling a cupful at the base, early morning or evening.",
+        "Refill whenever it rains."
+      ],
+      "when_to_sow": "Set up before the rains start.",
+      "task": null
+    },
+    {
+      "id": "plant_tree_seedling_pits",
+      "topic": "planting_method",
+      "title": "Planting tree seedlings in enlarged pits",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Plant tree seedlings or cuttings at the start of reliable rains in the deepest pocket you can find, in a pit enlarged as much as the ground allows and filled with good soil.",
+      "instructions": [
+        "Use your probing marks to find the deepest pocket or a crack in the hard layer.",
+        "Before the rains, enlarge the pit as wide and deep as the ground allows without forcing rock (aim for wider than a forearm).",
+        "Fill with topsoil mixed with compost or manure and leaf litter.",
+        "At the start of reliable rains, plant the seedling at the same depth it grew in its pot or bag; firm the soil.",
+        "Build a small basin or half-moon around it and mulch widely.",
+        "Help it with stored water in the first dry season; shade it with a few branches if needed.",
+        "Protect from grazing animals with thorny branches."
+      ],
+      "everyday_amounts": [
+        "pit wider than a forearm, as deep as the ground allows",
+        "two or more bucketfuls of compost per tree pit"
+      ],
+      "limitations": [
+        "On a continuous rock sheet, trees will struggle; plant only in cracks or pockets."
+      ],
+      "safety_notes": [
+        "Do not force tools through rock.",
+        "Keep pits marked so people do not fall in."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_ccari_cashew_dss",
+        "src_fao_cashew_sri_lanka"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "planting_pit",
+      "steps": [
+        "Use your probing marks to find the deepest pocket or a crack in the hard layer.",
+        "Before the rains, enlarge the pit as wide and deep as the ground allows without forcing rock (aim for wider than a forearm).",
+        "Fill with topsoil mixed with compost or manure and leaf litter.",
+        "At the start of reliable rains, plant the seedling at the same depth it grew in its pot or bag; firm the soil.",
+        "Build a small basin or half-moon around it and mulch widely.",
+        "Help it with stored water in the first dry season; shade it with a few branches if needed.",
+        "Protect from grazing animals with thorny branches."
+      ],
+      "when_to_sow": "At the start of reliable rains, so roots grow through the whole wet season before the first dry season.",
+      "task": {
+        "task_id": "task_plant_tree_seedlings",
+        "label": "Plant tree seedlings in enlarged pits"
+      }
+    },
+    {
+      "id": "plant_resow_gaps",
+      "topic": "planting_method",
+      "title": "Re-sowing gaps after a dry gap or failed germination",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "If seedlings die in a dry gap or fail to come up, re-sow the empty spots with reserved seed as soon as the soil is moist again.",
+      "instructions": [
+        "A week or so after sowing, count spots with no seedlings.",
+        "If rain has returned and the soil is moist to the hard layer, re-sow those spots with reserved seed.",
+        "If time is short, re-sow with the quickest crop you have (such as pearl millet, little millet or cowpea)."
+      ],
+      "everyday_amounts": [
+        "the handful of seed you kept back"
+      ],
+      "limitations": [
+        "Re-sowing uses up part of the season; this is why the plan adds buffer weeks."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "sowing",
+      "steps": [
+        "A week or so after sowing, count spots with no seedlings.",
+        "If rain has returned and the soil is moist to the hard layer, re-sow those spots with reserved seed.",
+        "If time is short, re-sow with the quickest crop you have (such as pearl millet, little millet or cowpea)."
+      ],
+      "when_to_sow": "As soon as the soil is moist again after a failed start.",
+      "task": null
+    },
+    {
+      "id": "plant_intercrop_cereal_legume",
+      "topic": "planting_method",
+      "title": "Mixing millet and legume",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Sow millet and a legume (cowpea or horse gram) in alternate pits or rows to share risk and feed the soil.",
+      "instructions": [
+        "Alternate millet and legume pits, or sow rows of each across a bed.",
+        "Do not crowd: thin each crop to its usual number per spot.",
+        "Next season, swap places."
+      ],
+      "everyday_amounts": [
+        "alternate pits or rows"
+      ],
+      "limitations": [
+        "Mixed crops compete for scarce water in dry spells; keep spacing generous."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_iita_propas_striga"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "sowing",
+      "steps": [
+        "Alternate millet and legume pits, or sow rows of each across a bed.",
+        "Do not crowd: thin each crop to its usual number per spot.",
+        "Next season, swap places."
+      ],
+      "when_to_sow": "After the first reliable soaking rains: more than one good rain, soil moist down to the hard layer, and no long dry gap expected. Not after a single shower.",
+      "task": null
+    },
+    {
+      "id": "plant_clay_pot_irrigation",
+      "topic": "planting_method",
+      "title": "Buried unglazed clay pot",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Bury an unglazed clay pot up to its neck beside one or a few plants and keep it filled; water seeps slowly through the clay to the roots with little lost to the sun.",
+      "instructions": [
+        "Use an unglazed, unpainted clay pot with a narrow neck (glazed or painted pots do not seep).",
+        "Before sowing, bury it in a pit or bed up to its neck, so the mouth sits just above the soil.",
+        "Sow or plant two to four plants around it, about a hand's width from the pot wall.",
+        "Fill the pot with stored water and cover the mouth with a flat stone or lid to stop evaporation and mosquitoes.",
+        "Check every few days with a finger: refill when the pot is about half empty.",
+        "Test before relying on it: fill it and feel whether the soil beside it is damp by the next day."
+      ],
+      "everyday_amounts": [
+        "one pot per pit or a few plants",
+        "plants about a hand's width from the pot",
+        "refill when about half empty"
+      ],
+      "limitations": [
+        "Pots crack if they dry out and refill in strong sun; keep them partly full.",
+        "Seepage is slow in tight soil and fast in gravel; watch and adjust.",
+        "Only as much area as you can keep the pots filled from stored water."
+      ],
+      "safety_notes": [
+        "Cover the pot so children, animals and mosquitoes cannot get in.",
+        "Never use containers that held fuel, poisons or chemicals.",
+        "Keep drinking water separate and covered."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_pitcher_irrigation"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "irrigation",
+      "steps": [
+        "Use an unglazed, unpainted clay pot with a narrow neck (glazed or painted pots do not seep).",
+        "Before sowing, bury it in a pit or bed up to its neck, so the mouth sits just above the soil.",
+        "Sow or plant two to four plants around it, about a hand's width from the pot wall.",
+        "Fill the pot with stored water and cover the mouth with a flat stone or lid to stop evaporation and mosquitoes.",
+        "Check every few days with a finger: refill when the pot is about half empty.",
+        "Test before relying on it: fill it and feel whether the soil beside it is damp by the next day."
+      ],
+      "when_to_sow": "Set up when pits or beds are built, before sowing.",
+      "task": null
+    },
+    {
+      "id": "plant_bottle_drip",
+      "topic": "planting_method",
+      "title": "Bottle drip from a household bottle",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Make a slow drip from a plastic bottle with a tiny hole in its cap, buried neck-down beside a plant, to deliver stored water straight to the roots.",
+      "instructions": [
+        "Make one or two tiny holes in the bottle cap with a hot nail or thorn; the water should drip, not pour.",
+        "Cut the bottom off the bottle (or make a hole) so it can be refilled.",
+        "Push the bottle neck-down into the soil about a hand's width from the plant, cap buried about a finger-joint deep.",
+        "Fill it with stored water in the cool of the morning or evening and cover the open end with a leaf or cloth.",
+        "Check that the soil around the cap gets damp; widen the hole if nothing comes out, narrow it if it empties at once."
+      ],
+      "everyday_amounts": [
+        "one bottle per plant or per seedling pit",
+        "a hand's width from the stem"
+      ],
+      "limitations": [
+        "Holes clog with soil; check and clear them.",
+        "Only for a few plants; it is a rescue measure."
+      ],
+      "safety_notes": [
+        "Handle hot nails with care.",
+        "Never use containers that held fuel, poisons or chemicals.",
+        "Keep drinking water separate and covered."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "irrigation",
+      "steps": [
+        "Make one or two tiny holes in the bottle cap with a hot nail or thorn; the water should drip, not pour.",
+        "Cut the bottom off the bottle (or make a hole) so it can be refilled.",
+        "Push the bottle neck-down into the soil about a hand's width from the plant, cap buried about a finger-joint deep.",
+        "Fill it with stored water in the cool of the morning or evening and cover the open end with a leaf or cloth.",
+        "Check that the soil around the cap gets damp; widen the hole if nothing comes out, narrow it if it empties at once."
+      ],
+      "when_to_sow": "Set up after seedlings are up, before a dry spell.",
+      "task": null
+    },
+    {
+      "id": "plant_mulched_basin",
+      "topic": "planting_method",
+      "title": "Mulched basin around each plant",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Shape a small saucer-shaped basin around each plant or pit, keep it mulched, and pour water only into the basin so none runs off.",
+      "instructions": [
+        "Scrape a shallow saucer about a forearm across around the plant, with a low ring of soil on the edge.",
+        "Fill the basin with mulch, keeping a finger's width clear of the stem.",
+        "When watering, pour slowly into the basin, under the mulch, so it soaks in rather than running away.",
+        "Rebuild the ring after heavy rain."
+      ],
+      "everyday_amounts": [
+        "a basin about a forearm across",
+        "mulch about a hand's depth"
+      ],
+      "limitations": [
+        "On pooling ground, basins can hold too much water after storms: open the ring on the downhill side in heavy rain."
+      ],
+      "safety_notes": [
+        "Never send overflow toward homes or paths."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_unccd_microcatchment",
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "irrigation",
+      "steps": [
+        "Scrape a shallow saucer about a forearm across around the plant, with a low ring of soil on the edge.",
+        "Fill the basin with mulch, keeping a finger's width clear of the stem.",
+        "When watering, pour slowly into the basin, under the mulch, so it soaks in rather than running away.",
+        "Rebuild the ring after heavy rain."
+      ],
+      "when_to_sow": "At sowing or transplanting, and kept through the season.",
+      "task": null
+    },
+    {
+      "id": "plant_water_at_base_cool_times",
+      "topic": "planting_method",
+      "title": "Watering at the base in the cool of the day",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Give stored water at the base of the plant, under the mulch, only in the early morning or evening.",
+      "instructions": [
+        "Water only when the soil a finger deep under the mulch is dry, not on a fixed schedule.",
+        "Pour slowly at the base or into the basin, never over the leaves.",
+        "Use a cup or a can with small holes so water soaks in rather than running off.",
+        "Water early morning or late afternoon; midday water evaporates."
+      ],
+      "everyday_amounts": [
+        "a cupful per seedling; a few cupfuls per older plant",
+        "check a finger deep before watering"
+      ],
+      "limitations": [
+        "Watering every day wastes stored water and keeps roots shallow."
+      ],
+      "safety_notes": [
+        "Never use containers that held fuel, poisons or chemicals.",
+        "Keep drinking water separate and covered."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "irrigation",
+      "steps": [
+        "Water only when the soil a finger deep under the mulch is dry, not on a fixed schedule.",
+        "Pour slowly at the base or into the basin, never over the leaves.",
+        "Use a cup or a can with small holes so water soaks in rather than running off.",
+        "Water early morning or late afternoon; midday water evaporates."
+      ],
+      "when_to_sow": "During dry spells, from sowing until the crop is well established.",
+      "task": null
+    },
+    {
+      "id": "plant_water_priority_rules",
+      "topic": "planting_method",
+      "title": "Matching planted area to stored water",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Use stored water for seedlings and flowering plants first, and never plant more spots than your stored water can rescue through a dry spell.",
+      "instructions": [
+        "Before sowing, count stored buckets and the number of planting spots: plan on rescuing every spot through at least one dry gap.",
+        "Water order in a dry spell: newly sown and seedling spots first, then flowering plants, then the rest.",
+        "If water runs low, keep the best pits alive rather than spreading water thinly over all.",
+        "Expand the planted area only when storage has grown, not before."
+      ],
+      "everyday_amounts": [
+        "count stored buckets against planting spots",
+        "seedlings first, then flowering plants"
+      ],
+      "limitations": [
+        "A long dry spell can exhaust any household store; mulch and timing matter more than watering."
+      ],
+      "safety_notes": [
+        "Never use containers that held fuel, poisons or chemicals.",
+        "Keep drinking water separate and covered."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "irrigation",
+      "steps": [
+        "Before sowing, count stored buckets and the number of planting spots: plan on rescuing every spot through at least one dry gap.",
+        "Water order in a dry spell: newly sown and seedling spots first, then flowering plants, then the rest.",
+        "If water runs low, keep the best pits alive rather than spreading water thinly over all.",
+        "Expand the planted area only when storage has grown, not before."
+      ],
+      "when_to_sow": "Decide before sowing; follow during every dry spell.",
+      "task": null
+    },
+    {
+      "id": "plant_soil_mix_layers",
+      "topic": "planting_method",
+      "title": "Soil mixes for pits, beds, tree pockets and greens",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Fill every planting pocket with clean soil mixed through with mature compost, a thin plain-soil top and mulch, adjusted for pits, raised beds, tree pockets and small greens beds.",
+      "instructions": [
+        "Where to find fill soil: fine soil gathered behind stone lines, soil from gaps between stones, dry stream-bed silt, old abandoned termite-mound soil and rotted leaf litter. Leave stony crumbs out.",
+        "Planting pit: stop at the solid hard layer; widen rather than force. Mix soil and mature compost all through the rooting layer, top with a thin layer of plain soil, then mulch.",
+        "Raised bed: build a stable stone border, fill with the same soil-and-compost mix, top with plain soil and mulch, and give it an overflow notch.",
+        "Tree pocket: use whatever depth the workable soil allows, widen or build up instead of forcing a deep hole, mix compost through the root zone, and shape a low basin only where water drains.",
+        "Greens patch: a container with drainage holes or a small rich bed of soil and plenty of mature compost, near shelter and clean water.",
+        "If you try ash or crushed shell at all, keep it to a small, well-mixed trial patch, away from seed and roots.",
+        "Do the squeeze test on the mix: it should hold together loosely and crumble when poked."
+      ],
+      "everyday_amounts": [
+        "roughly half soil and half mature compost by bucketfuls in the richest pits",
+        "a thin layer of plain soil on top",
+        "mulch about a hand's depth"
+      ],
+      "limitations": [
+        "Do not plant in a pocket where water stays standing.",
+        "Do not rely on a thick layer of dry grass at the bottom to hold water; mix organic matter through."
+      ],
+      "safety_notes": [
+        "Take mound soil only from old, empty termite mounds.",
+        "Do not use silt or soil that smells of fuel or chemicals, or lies below rubbish."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "planting_pit",
+      "steps": [
+        "Where to find fill soil: fine soil gathered behind stone lines, soil from gaps between stones, dry stream-bed silt, old abandoned termite-mound soil and rotted leaf litter. Leave stony crumbs out.",
+        "Planting pit: stop at the solid hard layer; widen rather than force. Mix soil and mature compost all through the rooting layer, top with a thin layer of plain soil, then mulch.",
+        "Raised bed: build a stable stone border, fill with the same soil-and-compost mix, top with plain soil and mulch, and give it an overflow notch.",
+        "Tree pocket: use whatever depth the workable soil allows, widen or build up instead of forcing a deep hole, mix compost through the root zone, and shape a low basin only where water drains.",
+        "Greens patch: a container with drainage holes or a small rich bed of soil and plenty of mature compost, near shelter and clean water.",
+        "If you try ash or crushed shell at all, keep it to a small, well-mixed trial patch, away from seed and roots.",
+        "Do the squeeze test on the mix: it should hold together loosely and crumble when poked."
+      ],
+      "when_to_sow": "Mix and fill before the first reliable rains, so the fill settles before sowing.",
+      "task": null
+    },
+    {
+      "id": "plant_cuttings_and_slips",
+      "topic": "planting_method",
+      "title": "Planting cuttings, tops and slips",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Plant sweet potato vines, cassava stems, pineapple tops, moringa cuttings and grass-hedge slips once the soil is well wet, with the right part buried and the growing tip out.",
+      "instructions": [
+        "Sweet potato: take vine tips about a forearm long from healthy plants; bury a few leaf joints at a slant in a mound or raised bed with the tip out.",
+        "Cassava: cut stem pieces about a forearm long from healthy plants; push about two-thirds into a tall mound at a slant with buds pointing up.",
+        "Pineapple: twist off the leafy top, let the cut end dry for a few days, then set it into a rich pit or bed just deep enough to stand firm.",
+        "Moringa and gliricidia: push thick cuttings about a forearm long a hand deep into a filled pit, or along stone lines for a live hedge.",
+        "Grass hedge: split clumps into slips and plant them about a hand-span apart in a tight line on the uphill side of a stone line.",
+        "Firm the soil, mulch around (not over) the cuttings, and keep them damp for the first couple of weeks."
+      ],
+      "everyday_amounts": [
+        "cuttings about a forearm long",
+        "slips about a hand-span apart in a line",
+        "about two-thirds of a cassava stem buried"
+      ],
+      "limitations": [
+        "Cuttings from diseased plants spread disease.",
+        "Cuttings dry out fast in sun: plant the same day they are cut, in the cool of the day."
+      ],
+      "safety_notes": [
+        "Use a sharp knife carefully.",
+        "Cassava stems and leaves are not food without proper processing."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_tnau_sweet_potato",
+        "src_fao_cassava_soil_notes",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "sowing",
+      "steps": [
+        "Sweet potato: take vine tips about a forearm long from healthy plants; bury a few leaf joints at a slant in a mound or raised bed with the tip out.",
+        "Cassava: cut stem pieces about a forearm long from healthy plants; push about two-thirds into a tall mound at a slant with buds pointing up.",
+        "Pineapple: twist off the leafy top, let the cut end dry for a few days, then set it into a rich pit or bed just deep enough to stand firm.",
+        "Moringa and gliricidia: push thick cuttings about a forearm long a hand deep into a filled pit, or along stone lines for a live hedge.",
+        "Grass hedge: split clumps into slips and plant them about a hand-span apart in a tight line on the uphill side of a stone line.",
+        "Firm the soil, mulch around (not over) the cuttings, and keep them damp for the first couple of weeks."
+      ],
+      "when_to_sow": "Once soaking rains have wet the soil well, early in the reliable rains; not in the last weeks of the rains.",
+      "task": null
+    },
+    {
+      "id": "plant_seed_sourcing",
+      "topic": "planting_method",
+      "title": "Finding seed when you have none",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": [
+          "res_seeds"
+        ]
+      },
+      "summary": "If no seed is on hand, look for planting material in the kitchen, from fruit, from neighbours and from wild plants, and test it before sowing.",
+      "instructions": [
+        "Kitchen and market: dry cowpeas or other beans, raw (unroasted) groundnuts, whole millet or sorghum grain.",
+        "From food: sweet potato pieces or vine tips, a pineapple top, seeds from chilli or squash fruit.",
+        "From people: ask neighbours, local farmers, markets or a farm extension office for a handful of locally adapted seed.",
+        "Always run the seed sprout test before relying on any seed.",
+        "Roasted, cooked, split or polished grain will not grow; chemically treated seed must never be eaten."
+      ],
+      "everyday_amounts": [
+        "a handful of each kind is enough for a trial plot",
+        "ten seeds for the sprout test"
+      ],
+      "limitations": [
+        "Market grain may be a type that does not suit this ground; trial it small."
+      ],
+      "safety_notes": [
+        "Never eat seed that has been chemically treated (often brightly coloured).",
+        "Ask before taking seed or cuttings from other people's land."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "sowing",
+      "steps": [
+        "Kitchen and market: dry cowpeas or other beans, raw (unroasted) groundnuts, whole millet or sorghum grain.",
+        "From food: sweet potato pieces or vine tips, a pineapple top, seeds from chilli or squash fruit.",
+        "From people: ask neighbours, local farmers, markets or a farm extension office for a handful of locally adapted seed.",
+        "Always run the seed sprout test before relying on any seed.",
+        "Roasted, cooked, split or polished grain will not grow; chemically treated seed must never be eaten."
+      ],
+      "when_to_sow": "Gather and test seed well before the first reliable rains.",
+      "task": null
+    },
+    {
+      "id": "plant_covered_hollow_store",
+      "topic": "planting_method",
+      "title": "Covered rainwater store in a natural hollow (with strong safety limits)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "pooling_some",
+          "pooling_widespread",
+          "drains_slow",
+          "hardpan_continuous"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Where the hard layer forms a natural hollow that holds rain, it can be used as a separate, covered water store for base-watering, never as a planting pit, and only where it is safe.",
+      "instructions": [
+        "Use only a shallow, natural hollow on stable ground, well away from edges, drop-offs, homes and paths.",
+        "Keep it separate from planting pits: crop roots must never stand in it.",
+        "Cover it securely with branches and a sheet, or a lid, so children and animals cannot fall in and mosquitoes cannot breed.",
+        "Make a safe overflow so a full store spills to stable ground.",
+        "Draw water with a container for careful base-watering only; do not drink it unless it is properly made safe."
+      ],
+      "everyday_amounts": [
+        "a shallow hollow only",
+        "covered at all times"
+      ],
+      "limitations": [
+        "Open water evaporates fast in the dry season and is quickly fouled.",
+        "If there is any doubt about safety, use covered household containers instead."
+      ],
+      "safety_notes": [
+        "Drowning risk: never make or keep a deep or uncovered water hole; keep children and animals away.",
+        "Mosquitoes breed in open water within days: keep it covered; empty or fill in a store you cannot keep covered.",
+        "Keep well away from edges and unstable ground.",
+        "Do not use if the water looks oily, smells of chemicals or receives runoff from rubbish."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "method_type": "water_storage",
+      "steps": [
+        "Use only a shallow, natural hollow on stable ground, well away from edges, drop-offs, homes and paths.",
+        "Keep it separate from planting pits: crop roots must never stand in it.",
+        "Cover it securely with branches and a sheet, or a lid, so children and animals cannot fall in and mosquitoes cannot breed.",
+        "Make a safe overflow so a full store spills to stable ground.",
+        "Draw water with a container for careful base-watering only; do not drink it unless it is properly made safe."
+      ],
+      "when_to_sow": "Set up before the rains; check after every storm.",
+      "task": null
+    }
+  ]
+}

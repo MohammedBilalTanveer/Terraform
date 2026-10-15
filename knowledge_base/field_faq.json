@@ -1,0 +1,1227 @@
+{
+  "collection": "field_faq",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "faq_first_steps",
+      "topic": "field_faq",
+      "title": "I know nothing about this land. What do I do first?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Look before you dig. Walk the area, watch where rain runs and pools, then do the hand checks: probe several spots with a stick, the hand-deep drainage hole, and inventory what you have. Start small.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "I know nothing about this land. What do I do first?",
+      "answer": "Look before you dig. Walk the area, watch where rain runs and pools, then do the hand checks: probe several spots with a stick, the hand-deep drainage hole, and inventory what you have. Start small.",
+      "related_kb_ids": [
+        "check_probe_multiple_spots",
+        "check_water_hole_drainage",
+        "check_watch_first_heavy_rain",
+        "check_inventory_resources"
+      ]
+    },
+    {
+      "id": "faq_why_shallow",
+      "topic": "field_faq",
+      "title": "Why can't I dig deeper than about a hand?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A hard, cemented iron-rich layer lies close under the surface, typical of laterite. Hand tools will not break a solid one, so work with the shallow soil.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Why can't I dig deeper than about a hand?",
+      "answer": "A hard, cemented iron-rich layer lies close under the surface, typical of laterite. Hand tools will not break a solid one, so work with the shallow soil.",
+      "related_kb_ids": [
+        "check_probe_multiple_spots",
+        "treat_avoid_deep_tilling"
+      ]
+    },
+    {
+      "id": "faq_break_hard_layer",
+      "topic": "field_faq",
+      "title": "Can I break the hard layer?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Only loose, gravelly spots can be scraped out a little. A solid sheet cannot be broken by hand; build raised beds or containers above it instead of losing days and tools.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Can I break the hard layer?",
+      "answer": "Only loose, gravelly spots can be scraped out a little. A solid sheet cannot be broken by hand; build raised beds or containers above it instead of losing days and tools.",
+      "related_kb_ids": [
+        "treat_avoid_deep_tilling",
+        "treat_raised_beds",
+        "treat_containers_sacks"
+      ]
+    },
+    {
+      "id": "faq_soil_dead",
+      "topic": "field_faq",
+      "title": "Is this soil dead?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "No. It is poor, shallow and probably acidic, but the grass tufts and thorny shrubs show life is possible. Organic matter, mulch and the right crops bring it back slowly.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Is this soil dead?",
+      "answer": "No. It is poor, shallow and probably acidic, but the grass tufts and thorny shrubs show life is possible. Organic matter, mulch and the right crops bring it back slowly.",
+      "related_kb_ids": [
+        "check_observe_vegetation",
+        "time_soil_recovery"
+      ]
+    },
+    {
+      "id": "faq_why_red",
+      "topic": "field_faq",
+      "title": "Why is the soil red?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Iron is left behind after heavy rains wash much of the rest away over a very long time. Red usually means old, leached soil with few nutrients.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Why is the soil red?",
+      "answer": "Iron is left behind after heavy rains wash much of the rest away over a very long time. Red usually means old, leached soil with few nutrients.",
+      "related_kb_ids": [
+        "cue_reddish",
+        "check_rock_lumps_ironstone"
+      ]
+    },
+    {
+      "id": "faq_why_runoff",
+      "topic": "field_faq",
+      "title": "Why does rain run off instead of soaking in?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Bare soil seals under heavy drops and the hard layer stops water going down. Slow the water with stone lines and pits, and cover the soil with mulch.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Why does rain run off instead of soaking in?",
+      "answer": "Bare soil seals under heavy drops and the hard layer stops water going down. Slow the water with stone lines and pits, and cover the soil with mulch.",
+      "related_kb_ids": [
+        "treat_stone_lines",
+        "treat_mulch_cover",
+        "treat_planting_pits"
+      ]
+    },
+    {
+      "id": "faq_what_build_first",
+      "topic": "field_faq",
+      "title": "What should I build first?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Choose a safe spot, then catch water: on a gentle slope, a low stone line across the main runoff path with a safe spill point, plus a few pits or one raised bed.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "What should I build first?",
+      "answer": "Choose a safe spot, then catch water: on a gentle slope, a low stone line across the main runoff path with a safe spill point, plus a few pits or one raised bed.",
+      "related_kb_ids": [
+        "treat_choose_growing_spot",
+        "treat_stone_lines",
+        "treat_planting_pits",
+        "treat_raised_beds"
+      ]
+    },
+    {
+      "id": "faq_where_stone_lines",
+      "topic": "field_faq",
+      "title": "How do I know where to put stone lines?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Watch runoff in a rain or pour a little water to see which way it runs. Lay a low, level line across that direction. On flat ground where water pools, do not build lines that trap water.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "How do I know where to put stone lines?",
+      "answer": "Watch runoff in a rain or pour a little water to see which way it runs. Lay a low, level line across that direction. On flat ground where water pools, do not build lines that trap water.",
+      "related_kb_ids": [
+        "check_pour_water_slope",
+        "treat_stone_lines",
+        "treat_avoid_trapping_water_flat"
+      ]
+    },
+    {
+      "id": "faq_stone_line_height",
+      "topic": "field_faq",
+      "title": "How high should stone lines be?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Start low, about ankle to shin high, and raise them only after watching how water moves. Always leave a safe overflow; never block a natural watercourse or build a dam.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "How high should stone lines be?",
+      "answer": "Start low, about ankle to shin high, and raise them only after watching how water moves. Always leave a safe overflow; never block a natural watercourse or build a dam.",
+      "related_kb_ids": [
+        "treat_stone_lines",
+        "treat_avoid_diverting_runoff"
+      ]
+    },
+    {
+      "id": "faq_keep_water",
+      "topic": "field_faq",
+      "title": "How do I keep water for dry spells?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Use clean, covered household containers fed from a roof or sheet, and thick mulch on the soil. Never use a planting pit as a pond: roots drown in water that cannot drain.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "How do I keep water for dry spells?",
+      "answer": "Use clean, covered household containers fed from a roof or sheet, and thick mulch on the soil. Never use a planting pit as a pond: roots drown in water that cannot drain.",
+      "related_kb_ids": [
+        "treat_water_storage",
+        "plant_covered_hollow_store",
+        "treat_mulch_cover"
+      ]
+    },
+    {
+      "id": "faq_how_many_pits",
+      "topic": "field_faq",
+      "title": "How many pits should I start with?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Start with a few pits or one small bed as a trial, watch how they handle rain and dry spells, then expand what works.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "How many pits should I start with?",
+      "answer": "Start with a few pits or one small bed as a trial, watch how they handle rain and dry spells, then expand what works.",
+      "related_kb_ids": [
+        "treat_trial_plot",
+        "regen_gradual_expansion"
+      ]
+    },
+    {
+      "id": "faq_pit_bottom",
+      "topic": "field_faq",
+      "title": "What goes in the bottom of a pit?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Do not rely on a thick layer of dry grass as a sponge. Mix clean soil and mature compost all through the rooting layer, and never plant in a hole that holds standing water.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "What goes in the bottom of a pit?",
+      "answer": "Do not rely on a thick layer of dry grass as a sponge. Mix clean soil and mature compost all through the rooting layer, and never plant in a hole that holds standing water.",
+      "related_kb_ids": [
+        "plant_soil_mix_layers",
+        "treat_compost_fill"
+      ]
+    },
+    {
+      "id": "faq_fill_soil",
+      "topic": "field_faq",
+      "title": "Where do I get soil to fill pits and beds?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "From fine soil collected behind stone lines, gaps between stones, dry stream-bed silt, rotted leaf litter and old empty termite mounds. Leave out stony crumbs and anything that smells of chemicals.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Where do I get soil to fill pits and beds?",
+      "answer": "From fine soil collected behind stone lines, gaps between stones, dry stream-bed silt, rotted leaf litter and old empty termite mounds. Leave out stony crumbs and anything that smells of chemicals.",
+      "related_kb_ids": [
+        "plant_soil_mix_layers"
+      ]
+    },
+    {
+      "id": "faq_bed_stays_full",
+      "topic": "field_faq",
+      "title": "My bed fills with water and stays full. Why?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The hard layer is stopping drainage. Stop sending water there, raise the bed, and cut a stable overflow notch that leads to a safe place.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "My bed fills with water and stays full. Why?",
+      "answer": "The hard layer is stopping drainage. Stop sending water there, raise the bed, and cut a stable overflow notch that leads to a safe place.",
+      "related_kb_ids": [
+        "trouble_water_stands_for_days",
+        "treat_overflow_notch",
+        "treat_raised_beds"
+      ]
+    },
+    {
+      "id": "faq_acid_suspected",
+      "topic": "field_faq",
+      "title": "What do I do if the soil seems acidic?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Treat the fizz check as a rough clue only. Grow tolerant crops and add compost. If you try clean ash or crushed shell, use a small, well-mixed trial only, and never set the amount by the fizz.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "What do I do if the soil seems acidic?",
+      "answer": "Treat the fizz check as a rough clue only. Grow tolerant crops and add compost. If you try clean ash or crushed shell, use a small, well-mixed trial only, and never set the amount by the fizz.",
+      "related_kb_ids": [
+        "check_baking_soda_fizz",
+        "treat_ash_shell_optional",
+        "stress_acidity"
+      ]
+    },
+    {
+      "id": "faq_too_much_ash",
+      "topic": "field_faq",
+      "title": "Can I use too much ash or shell?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Yes. Do not add it automatically or to chase a fizz result. Stop if plants worsen or leaves yellow between the veins.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_osu_wood_ash"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Can I use too much ash or shell?",
+      "answer": "Yes. Do not add it automatically or to chase a fizz result. Stop if plants worsen or leaves yellow between the veins.",
+      "related_kb_ids": [
+        "treat_avoid_large_ash",
+        "trouble_interveinal_yellowing"
+      ]
+    },
+    {
+      "id": "faq_no_ash",
+      "topic": "field_faq",
+      "title": "I have no ash or shell. What now?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "That is fine. Do not burn useful mulch to make ash. Add compost and organic matter and grow crops that tolerate acidic soil.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "I have no ash or shell. What now?",
+      "answer": "That is fine. Do not burn useful mulch to make ash. Add compost and organic matter and grow crops that tolerate acidic soil.",
+      "related_kb_ids": [
+        "treat_avoid_burning_residue",
+        "treat_compost_fill",
+        "crop_finger_millet",
+        "crop_cowpea"
+      ]
+    },
+    {
+      "id": "faq_no_compost",
+      "topic": "field_faq",
+      "title": "I have no mature compost. What can I use?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Start a compost heap now, and meanwhile layer leaf litter, dry grass and prunings into pits and beds. Keep raw scraps and fresh dung away from seeds and roots.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "I have no mature compost. What can I use?",
+      "answer": "Start a compost heap now, and meanwhile layer leaf litter, dry grass and prunings into pits and beds. Keep raw scraps and fresh dung away from seeds and roots.",
+      "related_kb_ids": [
+        "treat_organic_alternatives",
+        "treat_compost_heap",
+        "treat_avoid_fresh_manure_seed"
+      ]
+    },
+    {
+      "id": "faq_make_compost",
+      "topic": "field_faq",
+      "title": "How do I make compost?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Layer dry brown material and green material with a handful of soil between layers, keep it as damp as a wrung-out cloth, and turn it now and then. It is ready when dark, crumbly and earthy-smelling, usually after a couple of months in warm weather.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "How do I make compost?",
+      "answer": "Layer dry brown material and green material with a handful of soil between layers, keep it as damp as a wrung-out cloth, and turn it now and then. It is ready when dark, crumbly and earthy-smelling, usually after a couple of months in warm weather.",
+      "related_kb_ids": [
+        "treat_compost_heap",
+        "treat_compost_pit"
+      ]
+    },
+    {
+      "id": "faq_when_plant",
+      "topic": "field_faq",
+      "title": "When do I plant?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "After repeated soaking rains, not one shower, when the soil is moist down to the hard layer. Choose crops whose time to maturity plus a two-to-three-week buffer fits the wet weeks left.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "When do I plant?",
+      "answer": "After repeated soaking rains, not one shower, when the soil is moist down to the hard layer. Choose crops whose time to maturity plus a two-to-three-week buffer fits the wet weeks left.",
+      "related_kb_ids": [
+        "plant_confirm_reliable_rains",
+        "time_buffer_late_start",
+        "time_calendar_relative_to_rain"
+      ]
+    },
+    {
+      "id": "faq_rain_came_early",
+      "topic": "field_faq",
+      "title": "The rain came before I was ready. What now?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Start small: make one stable bed or a few pits where water drains, fill them with soil and compost, and sow a fast crop after the next soaking rain. Finish other works after watching the runoff.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "The rain came before I was ready. What now?",
+      "answer": "Start small: make one stable bed or a few pits where water drains, fill them with soil and compost, and sow a fast crop after the next soaking rain. Finish other works after watching the runoff.",
+      "related_kb_ids": [
+        "treat_trial_plot",
+        "crop_amaranth_greens",
+        "crop_cowpea",
+        "plant_confirm_reliable_rains"
+      ]
+    },
+    {
+      "id": "faq_rains_late",
+      "topic": "field_faq",
+      "title": "The rains are late. What do I do?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Keep seed dry, finish beds and water-capture works, and choose crops only when maturity plus buffer fits the wet weeks that remain.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "The rains are late. What do I do?",
+      "answer": "Keep seed dry, finish beds and water-capture works, and choose crops only when maturity plus buffer fits the wet weeks that remain.",
+      "related_kb_ids": [
+        "time_rule_unknown_season",
+        "time_remediation_prep",
+        "time_rule_compare"
+      ]
+    },
+    {
+      "id": "faq_first_food",
+      "topic": "field_faq",
+      "title": "How long until the first food?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Amaranth greens in about four to six weeks, cowpea in roughly two to three months, millets in about three months, groundnut in three to four months. Cassava, pigeon pea and trees take far longer.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "How long until the first food?",
+      "answer": "Amaranth greens in about four to six weeks, cowpea in roughly two to three months, millets in about three months, groundnut in three to four months. Cassava, pigeon pea and trees take far longer.",
+      "related_kb_ids": [
+        "crop_amaranth_greens",
+        "crop_cowpea",
+        "crop_pearl_millet",
+        "crop_groundnut",
+        "crop_cassava"
+      ]
+    },
+    {
+      "id": "faq_scatter_seed",
+      "topic": "field_faq",
+      "title": "Can I just scatter seed on the bare ground?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "No. It washes away, bakes or gets eaten. Sow into prepared pits or beds and mulch once seedlings show.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Can I just scatter seed on the bare ground?",
+      "answer": "No. It washes away, bakes or gets eaten. Sow into prepared pits or beds and mulch once seedlings show.",
+      "related_kb_ids": [
+        "plant_direct_sowing",
+        "plant_planting_pits"
+      ]
+    },
+    {
+      "id": "faq_seeds_per_pit",
+      "topic": "field_faq",
+      "title": "How many seeds per spot and how deep?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A pinch of four or five small seeds about one finger-joint deep, or two or three bean-sized seeds about two finger-joints deep; tiny seeds only just covered. Thin to the strongest later.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "How many seeds per spot and how deep?",
+      "answer": "A pinch of four or five small seeds about one finger-joint deep, or two or three bean-sized seeds about two finger-joints deep; tiny seeds only just covered. Thin to the strongest later.",
+      "related_kb_ids": [
+        "plant_direct_sowing",
+        "check_seed_sprout_test"
+      ]
+    },
+    {
+      "id": "faq_seedlings_died",
+      "topic": "field_faq",
+      "title": "My seedlings died after the first shower. Why?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "That was a false start: one shower is not the season. Re-sow with reserved seed after the next soaking rain.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "My seedlings died after the first shower. Why?",
+      "answer": "That was a false start: one shower is not the season. Re-sow with reserved seed after the next soaking rain.",
+      "related_kb_ids": [
+        "plant_resow_gaps",
+        "plant_confirm_reliable_rains"
+      ]
+    },
+    {
+      "id": "faq_plant_first",
+      "topic": "field_faq",
+      "title": "What should I plant first?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cowpea and millets, plus amaranth greens in the richest pit. Legumes feed the soil and millets cope with acidic, dry ground.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "What should I plant first?",
+      "answer": "Cowpea and millets, plus amaranth greens in the richest pit. Legumes feed the soil and millets cope with acidic, dry ground.",
+      "related_kb_ids": [
+        "crop_cowpea",
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_amaranth_greens"
+      ]
+    },
+    {
+      "id": "faq_tomatoes",
+      "topic": "field_faq",
+      "title": "Can I grow vegetables like tomatoes?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Not as a first crop: they need rich soil and steady water. Start with hardy crops and greens, and try demanding vegetables later in a very rich bed.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Can I grow vegetables like tomatoes?",
+      "answer": "Not as a first crop: they need rich soil and steady water. Start with hardy crops and greens, and try demanding vegetables later in a very rich bed.",
+      "related_kb_ids": [
+        "crop_amaranth_greens",
+        "treat_trial_plot"
+      ]
+    },
+    {
+      "id": "faq_trees_only",
+      "topic": "field_faq",
+      "title": "Local people say only tree crops grow here. Is that true?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Treat it as a claim to check. Plant a long-term tree such as cashew, and also test fast field crops in a few pits and one bed.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Local people say only tree crops grow here. Is that true?",
+      "answer": "Treat it as a claim to check. Plant a long-term tree such as cashew, and also test fast field crops in a few pits and one bed.",
+      "related_kb_ids": [
+        "check_ask_neighbours",
+        "treat_trial_plot",
+        "crop_cashew"
+      ]
+    },
+    {
+      "id": "faq_long_term_value",
+      "topic": "field_faq",
+      "title": "Which plants give long-term value here?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cashew, pineapple, neem and moringa cope with poor, shallow, acidic ground and give for years; grass hedges and gliricidia build the soil.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Which plants give long-term value here?",
+      "answer": "Cashew, pineapple, neem and moringa cope with poor, shallow, acidic ground and give for years; grass hedges and gliricidia build the soil.",
+      "related_kb_ids": [
+        "crop_cashew",
+        "crop_pineapple",
+        "crop_neem",
+        "crop_moringa",
+        "crop_vetiver_hedge",
+        "crop_gliricidia"
+      ]
+    },
+    {
+      "id": "faq_pests_first",
+      "topic": "field_faq",
+      "title": "What should I try first against pests?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Look under leaves, hand-pick larger pests and rinse soft ones off with clean water. Only if they keep building up, test a neem-leaf wash on one plant, off flowers and off food close to harvest.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "What should I try first against pests?",
+      "answer": "Look under leaves, hand-pick larger pests and rinse soft ones off with clean water. Only if they keep building up, test a neem-leaf wash on one plant, off flowers and off food close to harvest.",
+      "related_kb_ids": [
+        "pest_aphids",
+        "pest_leaf_caterpillars",
+        "pest_pod_borers"
+      ]
+    },
+    {
+      "id": "faq_termites",
+      "topic": "field_faq",
+      "title": "How do I deal with termites?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Keep leafy mulch on the soil (they prefer it to living plants), keep seedlings moist, protect young stems, and remove dead wood near beds. Do not dust ash on leaves you will eat.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_fao_soil_biodiversity_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "How do I deal with termites?",
+      "answer": "Keep leafy mulch on the soil (they prefer it to living plants), keep seedlings moist, protect young stems, and remove dead wood near beds. Do not dust ash on leaves you will eat.",
+      "related_kb_ids": [
+        "pest_termites",
+        "trouble_termite_damage"
+      ]
+    },
+    {
+      "id": "faq_where_seeds",
+      "topic": "field_faq",
+      "title": "Where do I get seeds?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Dry beans, cowpeas, raw groundnuts and whole grain from the kitchen or market, sweet potato pieces, a pineapple top, neighbours and farm offices. Sprout-test them first.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Where do I get seeds?",
+      "answer": "Dry beans, cowpeas, raw groundnuts and whole grain from the kitchen or market, sweet potato pieces, a pineapple top, neighbours and farm offices. Sprout-test them first.",
+      "related_kb_ids": [
+        "plant_seed_sourcing",
+        "check_seed_sprout_test"
+      ]
+    },
+    {
+      "id": "faq_after_harvest",
+      "topic": "field_faq",
+      "title": "How do I move forward after the first harvest?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Return residue, add compost and mulch, sow a cover crop where moisture remains, extend pits and stone lines, add tree pits, save seed and rotate legumes with cereals.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "How do I move forward after the first harvest?",
+      "answer": "Return residue, add compost and mulch, sow a cover crop where moisture remains, extend pits and stone lines, add tree pits, save seed and rotate legumes with cereals.",
+      "related_kb_ids": [
+        "regen_return_residue",
+        "regen_cover_crop_living_mulch",
+        "regen_extend_pits_stone_lines",
+        "regen_save_seed",
+        "regen_legume_rotation"
+      ]
+    },
+    {
+      "id": "faq_will_it_improve",
+      "topic": "field_faq",
+      "title": "Will the land get better?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "It can, slowly, over several seasons. Look for darker, crumblier soil, more soil held behind stone lines, more soil life and healthier plants. A weaker fizz is only a rough clue.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Will the land get better?",
+      "answer": "It can, slowly, over several seasons. Look for darker, crumblier soil, more soil held behind stone lines, more soil life and healthier plants. A weaker fizz is only a rough clue.",
+      "related_kb_ids": [
+        "time_soil_recovery",
+        "check_life_count",
+        "regen_preserve_beds_windbreaks"
+      ]
+    },
+    {
+      "id": "faq_hard_layer_useful",
+      "topic": "field_faq",
+      "title": "Is the hard layer good for anything?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "It can support raised beds, and a natural hollow may hold rainwater as a covered store. But a crop pit against it can waterlog, so keep roots above it and give water a safe way out.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "Is the hard layer good for anything?",
+      "answer": "It can support raised beds, and a natural hollow may hold rainwater as a covered store. But a crop pit against it can waterlog, so keep roots above it and give water a safe way out.",
+      "related_kb_ids": [
+        "treat_raised_beds",
+        "plant_covered_hollow_store",
+        "treat_overflow_notch"
+      ]
+    },
+    {
+      "id": "faq_what_avoid",
+      "topic": "field_faq",
+      "title": "What should I avoid doing?",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Do not drink unclean water, taste soil, burn treated wood, put fresh dung on food crops, use chemicals near water, dig near edges, or send runoff toward homes and paths.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Short answer; see the linked records for full steps and cautions."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "question": "What should I avoid doing?",
+      "answer": "Do not drink unclean water, taste soil, burn treated wood, put fresh dung on food crops, use chemicals near water, dig near edges, or send runoff toward homes and paths.",
+      "related_kb_ids": [
+        "treat_avoid_diverting_runoff",
+        "treat_avoid_fresh_manure_seed",
+        "treat_avoid_deep_tilling"
+      ]
+    }
+  ]
+}

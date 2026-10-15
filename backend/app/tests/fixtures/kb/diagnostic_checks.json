@@ -1,0 +1,235 @@
+{
+ "collection": "diagnostic_checks",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "check_probe_multiple_spots",
+   "topic": "diagnostic_check",
+   "title": "Probe several spots",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture check: Probe several spots.",
+   "instructions": [
+    "Fixture step for Probe several spots."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Probe several spots."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "purpose": "Fixture purpose of Probe several spots.",
+   "weak_evidence": false,
+   "gate_relevant": true,
+   "resolves_unknowns": [
+    "unknown_hardpan_continuity"
+   ],
+   "possible_outcomes": [
+    {
+     "outcome_id": "resistance_varies",
+     "label": "Outcome resistance_varies",
+     "interpretation": "Fixture: resistance_varies.",
+     "implies_tags": [
+      "hardpan_patchy",
+      "digging_shallow"
+     ]
+    },
+    {
+     "outcome_id": "resistance_everywhere",
+     "label": "Outcome resistance_everywhere",
+     "interpretation": "Fixture: resistance_everywhere.",
+     "implies_tags": [
+      "hardpan_continuous",
+      "digging_shallow"
+     ]
+    },
+    {
+     "outcome_id": "digs_deep",
+     "label": "Outcome digs_deep",
+     "interpretation": "Fixture: digs_deep.",
+     "implies_tags": [
+      "digging_deep_possible"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "check_watch_first_heavy_rain",
+   "topic": "diagnostic_check",
+   "title": "Watch where rain water goes",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture check: Watch where rain water goes.",
+   "instructions": [
+    "Fixture step for Watch where rain water goes."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Watch where rain water goes."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "purpose": "Fixture purpose of Watch where rain water goes.",
+   "weak_evidence": false,
+   "gate_relevant": true,
+   "resolves_unknowns": [
+    "unknown_slope",
+    "unknown_pooling"
+   ],
+   "possible_outcomes": [
+    {
+     "outcome_id": "runs_downhill",
+     "label": "Outcome runs_downhill",
+     "interpretation": "Fixture: runs_downhill.",
+     "implies_tags": [
+      "slope_slight",
+      "runoff_fast"
+     ]
+    },
+    {
+     "outcome_id": "pools_widely",
+     "label": "Outcome pools_widely",
+     "interpretation": "Fixture: pools_widely.",
+     "implies_tags": [
+      "pooling_widespread",
+      "slope_flat"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "check_ask_neighbours",
+   "topic": "diagnostic_check",
+   "title": "Ask neighbours",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture check: Ask neighbours.",
+   "instructions": [
+    "Fixture step for Ask neighbours."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Ask neighbours."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "purpose": "Fixture purpose of Ask neighbours.",
+   "weak_evidence": false,
+   "gate_relevant": true,
+   "resolves_unknowns": [
+    "unknown_local_experience",
+    "unknown_rain_window",
+    "unknown_season_length"
+   ],
+   "possible_outcomes": [
+    {
+     "outcome_id": "says_trees_only",
+     "label": "Outcome says_trees_only",
+     "interpretation": "Fixture: says_trees_only.",
+     "implies_tags": [
+      "local_advice_trees_only"
+     ]
+    },
+    {
+     "outcome_id": "gives_other_advice",
+     "label": "Outcome gives_other_advice",
+     "interpretation": "Fixture: gives_other_advice.",
+     "implies_tags": [
+      "local_advice_other"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "check_baking_soda_fizz",
+   "topic": "diagnostic_check",
+   "title": "Baking soda fizz check",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture check: Baking soda fizz check.",
+   "instructions": [
+    "Fixture step for Baking soda fizz check."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Baking soda fizz check."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "purpose": "Fixture purpose of Baking soda fizz check.",
+   "weak_evidence": true,
+   "gate_relevant": false,
+   "resolves_unknowns": [],
+   "possible_outcomes": [
+    {
+     "outcome_id": "fizz_seen",
+     "label": "Outcome fizz_seen",
+     "interpretation": "Fixture: fizz_seen.",
+     "implies_tags": [
+      "fizz_seen"
+     ]
+    },
+    {
+     "outcome_id": "fizz_none",
+     "label": "Outcome fizz_none",
+     "interpretation": "Fixture: fizz_none.",
+     "implies_tags": [
+      "fizz_none"
+     ]
+    }
+   ]
+  }
+ ]
+}

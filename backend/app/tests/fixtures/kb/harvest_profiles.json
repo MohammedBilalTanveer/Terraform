@@ -1,0 +1,104 @@
+{
+ "collection": "harvest_profiles",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "harvest_pearl_millet",
+   "topic": "harvest",
+   "title": "Harvest crop_pearl_millet",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture harvest.",
+   "instructions": [
+    "Fixture step for Harvest crop_pearl_millet."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Harvest crop_pearl_millet."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_id": "crop_pearl_millet",
+   "ripeness_cues_see": [
+    "Fixture see."
+   ],
+   "ripeness_cues_feel": [
+    "Fixture feel."
+   ],
+   "method": [
+    "Fixture method."
+   ],
+   "drying_storage": [
+    "Fixture dry."
+   ],
+   "do_not_store": [
+    "Fixture do not store."
+   ],
+   "residue_handling": [
+    "Fixture residue."
+   ]
+  },
+  {
+   "id": "harvest_cowpea",
+   "topic": "harvest",
+   "title": "Harvest crop_cowpea",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture harvest.",
+   "instructions": [
+    "Fixture step for Harvest crop_cowpea."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Harvest crop_cowpea."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_id": "crop_cowpea",
+   "ripeness_cues_see": [
+    "Fixture see."
+   ],
+   "ripeness_cues_feel": [
+    "Fixture feel."
+   ],
+   "method": [
+    "Fixture method."
+   ],
+   "drying_storage": [
+    "Fixture dry."
+   ],
+   "do_not_store": [
+    "Fixture do not store."
+   ],
+   "residue_handling": [
+    "Fixture residue."
+   ]
+  }
+ ]
+}

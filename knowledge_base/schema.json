@@ -1,0 +1,444 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "terraform/knowledge_base/schema.json",
+  "title": "TERRAFORM knowledge base file",
+  "description": "Envelope and common record shape shared by every knowledge_base/*.json file (CONTRACT.md section 3 and v1.1 and v1.2 additions). Collection-specific fields are allowed in addition to the common fields.",
+  "type": "object",
+  "required": [
+    "collection",
+    "version",
+    "records"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "collection": {
+      "type": "string",
+      "description": "Equals the file name without .json",
+      "enum": [
+        "scenario_catalog",
+        "scenario_05_lateritic_hardpan",
+        "observation_cues",
+        "diagnostic_checks",
+        "soil_treatments",
+        "crop_profiles",
+        "planting_methods",
+        "care_stages",
+        "pest_management",
+        "harvest_profiles",
+        "regeneration",
+        "timeframe_rules",
+        "stress_mitigation",
+        "troubleshooting",
+        "field_faq",
+        "sources"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    }
+  },
+  "$defs": {
+    "tagList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_]+$"
+      }
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "appliesWhen": {
+      "type": "object",
+      "description": "Record applies if (any_tags empty OR at least one present) AND (all all_tags present) AND (no none_tags present). All empty = always applies.",
+      "required": [
+        "any_tags",
+        "all_tags",
+        "none_tags"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "any_tags": {
+          "$ref": "#/$defs/tagList"
+        },
+        "all_tags": {
+          "$ref": "#/$defs/tagList"
+        },
+        "none_tags": {
+          "$ref": "#/$defs/tagList"
+        }
+      }
+    },
+    "task": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "task_id",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "task_id": {
+              "type": "string",
+              "pattern": "^task_[a-z0-9_]+$"
+            },
+            "label": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "record": {
+      "type": "object",
+      "required": [
+        "id",
+        "topic",
+        "title",
+        "scenario_tags",
+        "applies_when",
+        "summary",
+        "instructions",
+        "everyday_amounts",
+        "limitations",
+        "safety_notes",
+        "evidence_level",
+        "source_ids",
+        "created_by",
+        "version"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(scenario|cue|check|treat|crop|plant|care|pest|harvest|regen|time|stress|trouble|faq|src)_[a-z0-9_]+$",
+          "description": "Globally unique and stable. Exception: scenario_catalog entries reuse the scenario id they point to."
+        },
+        "topic": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenario_tags": {
+          "$ref": "#/$defs/stringList"
+        },
+        "applies_when": {
+          "$ref": "#/$defs/appliesWhen"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "instructions": {
+          "$ref": "#/$defs/stringList"
+        },
+        "everyday_amounts": {
+          "$ref": "#/$defs/stringList"
+        },
+        "limitations": {
+          "$ref": "#/$defs/stringList"
+        },
+        "safety_notes": {
+          "$ref": "#/$defs/stringList"
+        },
+        "evidence_level": {
+          "enum": [
+            "general_guidance",
+            "locally_verified",
+            "needs_local_confirmation"
+          ]
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^src_[a-z0-9_]+$"
+          }
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "task": {
+          "$ref": "#/$defs/task"
+        },
+        "category": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "priority": {
+          "enum": [
+            "do_first",
+            "do_next",
+            "avoid",
+            "optional",
+            null
+          ]
+        },
+        "method_type": {
+          "enum": [
+            "planting_pit",
+            "raised_bed",
+            "container",
+            "stone_line",
+            "half_moon",
+            "sowing",
+            "water_storage",
+            "mulching",
+            "irrigation"
+          ]
+        },
+        "stage": {
+          "enum": [
+            "germination",
+            "seedling",
+            "vegetative",
+            "flowering",
+            "pre_harvest"
+          ]
+        },
+        "weak_evidence": {
+          "type": "boolean"
+        },
+        "gate_relevant": {
+          "type": "boolean"
+        },
+        "maturity_weeks": {
+          "type": "object",
+          "required": [
+            "min",
+            "max"
+          ],
+          "properties": {
+            "min": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "buffer_weeks": {
+          "type": "object",
+          "required": [
+            "min",
+            "max"
+          ],
+          "properties": {
+            "min": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "verification": {
+          "enum": [
+            "fetched_and_read",
+            "recorded_not_fetched",
+            "team_notes_unverified"
+          ]
+        },
+        "stressor": {
+          "enum": [
+            "heat",
+            "hot_wind",
+            "dry_spell",
+            "waterlogging",
+            "heavy_rain_washout",
+            "acidity_stress",
+            "nutrient_stress"
+          ]
+        },
+        "prep_weeks": {
+          "type": "object",
+          "required": [
+            "min",
+            "max"
+          ],
+          "properties": {
+            "min": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "readiness_gate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gateItem"
+          }
+        },
+        "failure_factors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/failureFactor"
+          }
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "when",
+              "actions"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "when": {
+                "type": "string"
+              },
+              "actions": {
+                "$ref": "#/$defs/stringList"
+              }
+            }
+          }
+        },
+        "related_kb_ids": {
+          "$ref": "#/$defs/stringList"
+        },
+        "likely_causes": {
+          "$ref": "#/$defs/stringList"
+        },
+        "symptom": {
+          "type": "string"
+        },
+        "question": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    },
+    "verification": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "test",
+            "pass",
+            "fail",
+            "if_fail"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "test": {
+              "type": "string",
+              "minLength": 1
+            },
+            "pass": {
+              "type": "string",
+              "minLength": 1
+            },
+            "fail": {
+              "type": "string",
+              "minLength": 1
+            },
+            "if_fail": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "gateItem": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "detail",
+        "required",
+        "satisfied_by_tasks",
+        "applies_when",
+        "source_ids",
+        "verification"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^gate_[a-z0-9_]+$"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "satisfied_by_tasks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^task_[a-z0-9_]+$"
+          }
+        },
+        "applies_when": {
+          "$ref": "#/$defs/appliesWhen"
+        },
+        "verification": {
+          "$ref": "#/$defs/verification"
+        }
+      }
+    },
+    "failureFactor": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "explanation",
+        "what_is_missing",
+        "triggered_by_tags",
+        "always_likely",
+        "addressed_by",
+        "indirect_tags"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^factor_[a-z0-9_]+$"
+        },
+        "triggered_by_tags": {
+          "$ref": "#/$defs/tagList"
+        },
+        "always_likely": {
+          "type": "boolean"
+        },
+        "addressed_by": {
+          "$ref": "#/$defs/stringList"
+        },
+        "indirect_tags": {
+          "$ref": "#/$defs/tagList"
+        }
+      }
+    }
+  }
+}

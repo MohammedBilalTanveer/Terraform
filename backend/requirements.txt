@@ -1,0 +1,8 @@
+# Runtime dependencies (pinned to the versions tested on Python 3.12)
+fastapi==0.143.1
+uvicorn[standard]==0.54.0
+pydantic==2.14.1
+python-multipart==0.0.32
+python-dotenv==1.2.4
+httpx==0.28.1
+openai==3.31.0

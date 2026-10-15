@@ -1,0 +1,282 @@
+{
+ "collection": "care_stages",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "care_germination",
+   "topic": "care_stage",
+   "title": "germination care",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture care for germination.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for germination care."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_ids": [
+    "*"
+   ],
+   "stage": "germination",
+   "order": 1,
+   "label": "Germination stage",
+   "timing_description": "Fixture timing germination.",
+   "water": "Fixture water.",
+   "mulch": "Fixture mulch.",
+   "nutrients": "Fixture nutrients.",
+   "weeds": "Fixture weeds.",
+   "watch_for": [
+    "Fixture sign."
+   ],
+   "dry_spell": "Fixture dry spell.",
+   "actions": [
+    "Fixture action germination."
+   ]
+  },
+  {
+   "id": "care_seedling",
+   "topic": "care_stage",
+   "title": "seedling care",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture care for seedling.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for seedling care."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_ids": [
+    "*"
+   ],
+   "stage": "seedling",
+   "order": 2,
+   "label": "Seedling stage",
+   "timing_description": "Fixture timing seedling.",
+   "water": "Fixture water.",
+   "mulch": "Fixture mulch.",
+   "nutrients": "Fixture nutrients.",
+   "weeds": "Fixture weeds.",
+   "watch_for": [
+    "Fixture sign."
+   ],
+   "dry_spell": "Fixture dry spell.",
+   "actions": [
+    "Fixture action seedling."
+   ]
+  },
+  {
+   "id": "care_vegetative",
+   "topic": "care_stage",
+   "title": "vegetative care",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture care for vegetative.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for vegetative care."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_ids": [
+    "*"
+   ],
+   "stage": "vegetative",
+   "order": 3,
+   "label": "Vegetative stage",
+   "timing_description": "Fixture timing vegetative.",
+   "water": "Fixture water.",
+   "mulch": "Fixture mulch.",
+   "nutrients": "Fixture nutrients.",
+   "weeds": "Fixture weeds.",
+   "watch_for": [
+    "Fixture sign."
+   ],
+   "dry_spell": "Fixture dry spell.",
+   "actions": [
+    "Fixture action vegetative."
+   ]
+  },
+  {
+   "id": "care_flowering",
+   "topic": "care_stage",
+   "title": "flowering care",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture care for flowering.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for flowering care."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_ids": [
+    "*"
+   ],
+   "stage": "flowering",
+   "order": 4,
+   "label": "Flowering stage",
+   "timing_description": "Fixture timing flowering.",
+   "water": "Fixture water.",
+   "mulch": "Fixture mulch.",
+   "nutrients": "Fixture nutrients.",
+   "weeds": "Fixture weeds.",
+   "watch_for": [
+    "Fixture sign."
+   ],
+   "dry_spell": "Fixture dry spell.",
+   "actions": [
+    "Fixture action flowering."
+   ]
+  },
+  {
+   "id": "care_pre_harvest",
+   "topic": "care_stage",
+   "title": "pre_harvest care",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture care for pre_harvest.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for pre_harvest care."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_ids": [
+    "*"
+   ],
+   "stage": "pre_harvest",
+   "order": 5,
+   "label": "Pre_Harvest stage",
+   "timing_description": "Fixture timing pre_harvest.",
+   "water": "Fixture water.",
+   "mulch": "Fixture mulch.",
+   "nutrients": "Fixture nutrients.",
+   "weeds": "Fixture weeds.",
+   "watch_for": [
+    "Fixture sign."
+   ],
+   "dry_spell": "Fixture dry spell.",
+   "actions": [
+    "Fixture action pre_harvest."
+   ]
+  },
+  {
+   "id": "care_pearl_millet_flowering",
+   "topic": "care_stage",
+   "title": "flowering care",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture care for flowering.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for flowering care."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "crop_ids": [
+    "crop_pearl_millet"
+   ],
+   "stage": "flowering",
+   "order": 4,
+   "label": "Flowering stage",
+   "timing_description": "Fixture timing flowering.",
+   "water": "Fixture water.",
+   "mulch": "Fixture mulch.",
+   "nutrients": "Fixture nutrients.",
+   "weeds": "Fixture weeds.",
+   "watch_for": [
+    "Fixture sign."
+   ],
+   "dry_spell": "Fixture dry spell.",
+   "actions": [
+    "Fixture action flowering."
+   ]
+  }
+ ]
+}

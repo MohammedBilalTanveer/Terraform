@@ -1,0 +1,73 @@
+{
+ "collection": "scenario_catalog",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "scenario_05_lateritic_hardpan",
+   "topic": "scenario",
+   "title": "Lateritic Hardpan Plateau",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture summary for Lateritic Hardpan Plateau.",
+   "instructions": [
+    "Fixture step for Lateritic Hardpan Plateau."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Lateritic Hardpan Plateau."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tags": [
+    "laterite",
+    "hardpan"
+   ],
+   "file": "scenario_05_lateritic_hardpan.json",
+   "status": "available"
+  },
+  {
+   "id": "scenario_01",
+   "topic": "scenario",
+   "title": "Scenario 1",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture summary for Scenario 1.",
+   "instructions": [
+    "Fixture step for Scenario 1."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Scenario 1."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tags": [],
+   "file": null,
+   "status": "planned"
+  }
+ ]
+}

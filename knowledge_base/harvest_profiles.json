@@ -1,0 +1,1109 @@
+{
+  "collection": "harvest_profiles",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "harvest_finger_millet",
+      "topic": "harvest",
+      "title": "Harvesting finger millet",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pick ripe heads in two rounds, because finger millet ripens unevenly.",
+      "instructions": [
+        "Cut the brown heads first; return a week or so later to cut the rest.",
+        "Cut heads with a knife or by hand, leaving stalks standing for residue.",
+        "Dry heads before threshing by beating gently with a stick on a sheet."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Uneven ripening means some loss if you wait for every head."
+      ],
+      "safety_notes": [
+        "Use knives carefully."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_ragi"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_finger_millet",
+      "ripeness_cues_see": [
+        "Main heads turn brown and the 'fingers' look dry",
+        "Grain inside is brown to reddish and firm",
+        "Leaves begin to yellow"
+      ],
+      "ripeness_cues_feel": [
+        "Grains feel hard and do not squash when pressed with a fingernail",
+        "Heads feel dry and light"
+      ],
+      "method": [
+        "Cut the brown heads first; return a week or so later to cut the rest.",
+        "Cut heads with a knife or by hand, leaving stalks standing for residue.",
+        "Dry heads before threshing by beating gently with a stick on a sheet."
+      ],
+      "drying_storage": [
+        "Dry on a clean sheet or mat in the sun, off the bare soil, turning often; cover at night and if rain threatens.",
+        "Grain is dry enough when a grain bitten between the teeth cracks instead of squashing.",
+        "Store in clean, dry, tightly closed containers (sealed jars, tins or well-tied sacks inside containers), off the floor.",
+        "Check stored grain every week or two for insects, warmth or mould smell.",
+        "Raise stores off the ground on stones or a platform to keep out damp and rats; a few dry neem leaves in the container are a traditional extra."
+      ],
+      "do_not_store": [
+        "Damp or soft grain",
+        "Mouldy, discoloured or sour-smelling heads",
+        "Grain mixed with soil or stones",
+        "Grain from plants that showed heavy disease"
+      ],
+      "residue_handling": [
+        "Lay healthy stalks and leaves back on pits and beds as mulch, or add them to compost.",
+        "Remove and safely burn or bury far from the plot any residue with heavy disease or striga."
+      ]
+    },
+    {
+      "id": "harvest_pearl_millet",
+      "topic": "harvest",
+      "title": "Harvesting pearl millet",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cut heads when grains are hard and dry; guard ripening heads from birds.",
+      "instructions": [
+        "Cut heads with a knife; leave stalks standing for residue.",
+        "Dry heads further, then thresh by beating on a clean sheet."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Birds can take much of the crop in the last weeks."
+      ],
+      "safety_notes": [
+        "Use knives carefully."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_croptrust_pearl_millet"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_pearl_millet",
+      "ripeness_cues_see": [
+        "Heads turn from green to straw or grey-brown",
+        "A small dark spot shows at the base of grains",
+        "Leaves dry"
+      ],
+      "ripeness_cues_feel": [
+        "Grain is hard and cannot be dented with a fingernail",
+        "Grains rub out of the head easily"
+      ],
+      "method": [
+        "Cut heads with a knife; leave stalks standing for residue.",
+        "Dry heads further, then thresh by beating on a clean sheet."
+      ],
+      "drying_storage": [
+        "Dry on a clean sheet or mat in the sun, off the bare soil, turning often; cover at night and if rain threatens.",
+        "Grain is dry enough when a grain bitten between the teeth cracks instead of squashing.",
+        "Store in clean, dry, tightly closed containers (sealed jars, tins or well-tied sacks inside containers), off the floor.",
+        "Check stored grain every week or two for insects, warmth or mould smell.",
+        "Raise stores off the ground on stones or a platform to keep out damp and rats; a few dry neem leaves in the container are a traditional extra."
+      ],
+      "do_not_store": [
+        "Damp or soft grain",
+        "Mouldy, discoloured or sour-smelling heads",
+        "Grain mixed with soil or stones",
+        "Grain from plants that showed heavy disease"
+      ],
+      "residue_handling": [
+        "Lay healthy stalks and leaves back on pits and beds as mulch, or add them to compost.",
+        "Remove and safely burn or bury far from the plot any residue with heavy disease or striga."
+      ]
+    },
+    {
+      "id": "harvest_little_millet",
+      "topic": "harvest",
+      "title": "Harvesting little millet",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cut whole plants or heads when most grains are hard and the plants turn straw-coloured.",
+      "instructions": [
+        "Cut plants near the base, bundle and dry, then thresh on a sheet."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Grain shatters if left too long."
+      ],
+      "safety_notes": [
+        "Use knives carefully."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_little_millet",
+      "ripeness_cues_see": [
+        "Most heads straw-coloured",
+        "Plants drying"
+      ],
+      "ripeness_cues_feel": [
+        "Grain hard between the teeth",
+        "Heads dry and rustle"
+      ],
+      "method": [
+        "Cut plants near the base, bundle and dry, then thresh on a sheet."
+      ],
+      "drying_storage": [
+        "Dry on a clean sheet or mat in the sun, off the bare soil, turning often; cover at night and if rain threatens.",
+        "Grain is dry enough when a grain bitten between the teeth cracks instead of squashing.",
+        "Store in clean, dry, tightly closed containers (sealed jars, tins or well-tied sacks inside containers), off the floor.",
+        "Check stored grain every week or two for insects, warmth or mould smell.",
+        "Raise stores off the ground on stones or a platform to keep out damp and rats; a few dry neem leaves in the container are a traditional extra."
+      ],
+      "do_not_store": [
+        "Damp or soft grain",
+        "Mouldy, discoloured or sour-smelling heads",
+        "Grain mixed with soil or stones",
+        "Grain from plants that showed heavy disease"
+      ],
+      "residue_handling": [
+        "Lay healthy stalks and leaves back on pits and beds as mulch, or add them to compost.",
+        "Remove and safely burn or bury far from the plot any residue with heavy disease or striga."
+      ]
+    },
+    {
+      "id": "harvest_cowpea",
+      "topic": "harvest",
+      "title": "Harvesting cowpea",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pick dry pods repeatedly as they ripen; young green pods and leaves can be eaten earlier.",
+      "instructions": [
+        "Pick dry pods by hand every few days.",
+        "Dry pods further in the sun, then beat them in a sack or on a sheet to release seeds."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Pods left too long can split and drop seed."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_cowpea",
+        "src_iita_cowpea_guide"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_cowpea",
+      "ripeness_cues_see": [
+        "Pods turn from green to straw-coloured or brown",
+        "Pods look dry and slightly shrivelled"
+      ],
+      "ripeness_cues_feel": [
+        "Pods feel dry and papery and rattle when shaken",
+        "Seeds inside are hard"
+      ],
+      "method": [
+        "Pick dry pods by hand every few days.",
+        "Dry pods further in the sun, then beat them in a sack or on a sheet to release seeds."
+      ],
+      "drying_storage": [
+        "Dry on a clean sheet or mat in the sun, off the bare soil, turning often; cover at night and if rain threatens.",
+        "Grain is dry enough when a grain bitten between the teeth cracks instead of squashing.",
+        "Store in clean, dry, tightly closed containers (sealed jars, tins or well-tied sacks inside containers), off the floor.",
+        "Check stored grain every week or two for insects, warmth or mould smell.",
+        "Raise stores off the ground on stones or a platform to keep out damp and rats; a few dry neem leaves in the container are a traditional extra."
+      ],
+      "do_not_store": [
+        "Seeds with holes (weevil damage)",
+        "Damp or mouldy pods",
+        "Seed from heavily diseased plants"
+      ],
+      "residue_handling": [
+        "Pull or cut plants at the base and leave the roots in the soil; lay stalks back as mulch."
+      ]
+    },
+    {
+      "id": "harvest_horse_gram",
+      "topic": "harvest",
+      "title": "Harvesting horse gram",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Harvest whole plants when most pods are dry and brown.",
+      "instructions": [
+        "Cut or pull whole plants, dry them in the sun, then beat to thresh."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Pods shatter if left too long in the sun."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_horsegram"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_horse_gram",
+      "ripeness_cues_see": [
+        "Most pods brown and dry",
+        "Leaves yellowing and falling"
+      ],
+      "ripeness_cues_feel": [
+        "Pods feel dry and rattle",
+        "Seeds are hard"
+      ],
+      "method": [
+        "Cut or pull whole plants, dry them in the sun, then beat to thresh."
+      ],
+      "drying_storage": [
+        "Dry on a clean sheet or mat in the sun, off the bare soil, turning often; cover at night and if rain threatens.",
+        "Grain is dry enough when a grain bitten between the teeth cracks instead of squashing.",
+        "Store in clean, dry, tightly closed containers (sealed jars, tins or well-tied sacks inside containers), off the floor.",
+        "Check stored grain every week or two for insects, warmth or mould smell.",
+        "Raise stores off the ground on stones or a platform to keep out damp and rats; a few dry neem leaves in the container are a traditional extra."
+      ],
+      "do_not_store": [
+        "Damp or mouldy seed",
+        "Seed with insect holes"
+      ],
+      "residue_handling": [
+        "Leave roots in the soil; return stalks and leaves as mulch."
+      ]
+    },
+    {
+      "id": "harvest_niger",
+      "topic": "harvest",
+      "title": "Harvesting niger",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cut plants when flower heads turn brown and seeds turn dark.",
+      "instructions": [
+        "Cut plants, stack heads-up to dry, then beat on a sheet to collect the small seeds."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Seeds shatter easily if left too long."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_niger",
+      "ripeness_cues_see": [
+        "Flower heads brown",
+        "Seeds black",
+        "Leaves dry"
+      ],
+      "ripeness_cues_feel": [
+        "Heads feel dry and crisp"
+      ],
+      "method": [
+        "Cut plants, stack heads-up to dry, then beat on a sheet to collect the small seeds."
+      ],
+      "drying_storage": [
+        "Dry on a clean sheet or mat in the sun, off the bare soil, turning often; cover at night and if rain threatens.",
+        "Grain is dry enough when a grain bitten between the teeth cracks instead of squashing.",
+        "Store in clean, dry, tightly closed containers (sealed jars, tins or well-tied sacks inside containers), off the floor.",
+        "Check stored grain every week or two for insects, warmth or mould smell.",
+        "Raise stores off the ground on stones or a platform to keep out damp and rats; a few dry neem leaves in the container are a traditional extra."
+      ],
+      "do_not_store": [
+        "Damp seed (oilseeds spoil fast)",
+        "Mouldy heads"
+      ],
+      "residue_handling": [
+        "Lay healthy stalks and leaves back on pits and beds as mulch, or add them to compost.",
+        "Remove and safely burn or bury far from the plot any residue with heavy disease or striga."
+      ]
+    },
+    {
+      "id": "harvest_groundnut",
+      "topic": "harvest",
+      "title": "Harvesting groundnut",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Lift plants when most pods are mature: inner shell darkened, kernels full.",
+      "instructions": [
+        "Loosen the bed soil and pull plants by hand; shake off soil.",
+        "Dry plants with pods attached, pods upward, then pick pods off."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Pods left too long in dry ground can be lost or eaten by termites."
+      ],
+      "safety_notes": [
+        "Never eat mouldy groundnuts."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_groundnut",
+      "ripeness_cues_see": [
+        "Leaves yellowing and dropping",
+        "Inside of opened shells shows dark veining",
+        "Kernel skins coloured"
+      ],
+      "ripeness_cues_feel": [
+        "Pods feel firm and full",
+        "Kernels fill the shell"
+      ],
+      "method": [
+        "Loosen the bed soil and pull plants by hand; shake off soil.",
+        "Dry plants with pods attached, pods upward, then pick pods off."
+      ],
+      "drying_storage": [
+        "Dry pods thoroughly in the sun off the ground; store in pods in dry, aired sacks or containers."
+      ],
+      "do_not_store": [
+        "Mouldy, shrivelled or discoloured nuts (moulds can be poisonous)",
+        "Damp pods"
+      ],
+      "residue_handling": [
+        "Return haulms (stalks and leaves) as mulch or compost."
+      ]
+    },
+    {
+      "id": "harvest_pigeon_pea",
+      "topic": "harvest",
+      "title": "Harvesting pigeon pea",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pick dry pods in rounds as they ripen.",
+      "instructions": [
+        "Pick or cut pod clusters; dry and beat to thresh."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Pod borers can damage many pods."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_pigeon_pea",
+      "ripeness_cues_see": [
+        "Pods brown and dry",
+        "Leaves dropping"
+      ],
+      "ripeness_cues_feel": [
+        "Pods rattle",
+        "Seeds hard"
+      ],
+      "method": [
+        "Pick or cut pod clusters; dry and beat to thresh."
+      ],
+      "drying_storage": [
+        "Dry on a clean sheet or mat in the sun, off the bare soil, turning often; cover at night and if rain threatens.",
+        "Grain is dry enough when a grain bitten between the teeth cracks instead of squashing.",
+        "Store in clean, dry, tightly closed containers (sealed jars, tins or well-tied sacks inside containers), off the floor.",
+        "Check stored grain every week or two for insects, warmth or mould smell.",
+        "Raise stores off the ground on stones or a platform to keep out damp and rats; a few dry neem leaves in the container are a traditional extra."
+      ],
+      "do_not_store": [
+        "Seed with holes or mould"
+      ],
+      "residue_handling": [
+        "Leave stems as stakes or fuel; leaves fall as mulch."
+      ]
+    },
+    {
+      "id": "harvest_cashew",
+      "topic": "harvest",
+      "title": "Harvesting cashew",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Collect nuts after the fruits fall naturally; dry them in the sun until the kernel rattles.",
+      "instructions": [
+        "Collect fallen nuts often: at least weekly in dry weather, daily in wet weather, because they rot on the ground.",
+        "Twist the nut off the fruit by hand.",
+        "Sun-dry nuts for a few days on mats, turning them often."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "First harvests come only after several years."
+      ],
+      "safety_notes": [
+        "Never bite or crack raw nuts: the shell liquid burns skin and lips; roasting releases irritating smoke."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_cashew_minor_oil_crops",
+        "src_fao_cashew_sri_lanka"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_cashew",
+      "ripeness_cues_see": [
+        "Fruit ('apple') coloured and fallen with the nut attached",
+        "Nut shell grey-brown"
+      ],
+      "ripeness_cues_feel": [
+        "Dried nut is light and the kernel rattles inside when shaken"
+      ],
+      "method": [
+        "Collect fallen nuts often: at least weekly in dry weather, daily in wet weather, because they rot on the ground.",
+        "Twist the nut off the fruit by hand.",
+        "Sun-dry nuts for a few days on mats, turning them often."
+      ],
+      "drying_storage": [
+        "Store dried raw nuts in dry bags or containers off the floor for processing.",
+        "Processed kernels keep best in airtight containers."
+      ],
+      "do_not_store": [
+        "Damp nuts",
+        "Nuts left on wet ground for days"
+      ],
+      "residue_handling": [
+        "Leave leaf litter under trees as mulch."
+      ]
+    },
+    {
+      "id": "harvest_mango",
+      "topic": "harvest",
+      "title": "Harvesting mango",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pick mature fruits carefully; let them ripen in the shade.",
+      "instructions": [
+        "Pick by hand or with a pole and bag; leave a short stalk; avoid dropping fruit."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Years before fruiting."
+      ],
+      "safety_notes": [
+        "Sap can burn skin; wipe and wash."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_mango",
+      "ripeness_cues_see": [
+        "Fruit shoulders fill out",
+        "Skin colour starts to change near the stalk"
+      ],
+      "ripeness_cues_feel": [
+        "Fruit gives slightly when ripe"
+      ],
+      "method": [
+        "Pick by hand or with a pole and bag; leave a short stalk; avoid dropping fruit."
+      ],
+      "drying_storage": [
+        "Ripen in shade on a dry layer of leaves or straw; eat or dry slices soon after."
+      ],
+      "do_not_store": [
+        "Bruised or split fruit",
+        "Fruit with rot spots"
+      ],
+      "residue_handling": [
+        "Return fallen leaves under the tree as mulch."
+      ]
+    },
+    {
+      "id": "harvest_gliricidia",
+      "topic": "harvest",
+      "title": "Lopping gliricidia for mulch",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cut leafy branches a few times a season and lay them on beds and pits as mulch and green manure.",
+      "instructions": [
+        "Cut leafy branches with a machete above knee height, leaving the main stems to resprout.",
+        "Lay leaves on beds; use straight stems as stakes."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Lopping too often weakens the hedge."
+      ],
+      "safety_notes": [
+        "Seeds and bark are toxic; keep children away from them."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_gliricidia",
+      "ripeness_cues_see": [
+        "Branches leafy and longer than an arm"
+      ],
+      "ripeness_cues_feel": [
+        "Leaves soft and green"
+      ],
+      "method": [
+        "Cut leafy branches with a machete above knee height, leaving the main stems to resprout.",
+        "Lay leaves on beds; use straight stems as stakes."
+      ],
+      "drying_storage": [
+        "Use leaves fresh as mulch; stems can be dried for fuel."
+      ],
+      "do_not_store": [
+        "Do not store leaves as food."
+      ],
+      "residue_handling": [
+        "All loppings go back onto the soil."
+      ]
+    },
+    {
+      "id": "harvest_amaranth_greens",
+      "topic": "harvest",
+      "title": "Picking amaranth greens",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pick young leaves and tips often once plants are about a hand tall; regular picking keeps leaves coming.",
+      "instructions": [
+        "Pinch or cut the youngest leaves and tips, leaving lower leaves to keep growing.",
+        "Pick every few days; pinch off flower heads unless saving seed.",
+        "Pull whole plants when thinning and eat them."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Leaves spoil within a day once picked."
+      ],
+      "safety_notes": [
+        "Wash in clean water and cook before eating."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_amaranthus",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_amaranth_greens",
+      "ripeness_cues_see": [
+        "Plants about a hand tall with several soft leaves",
+        "Leaves bright and tender, before flower heads form"
+      ],
+      "ripeness_cues_feel": [
+        "Leaves soft and snap easily",
+        "Stems tender, not woody"
+      ],
+      "method": [
+        "Pinch or cut the youngest leaves and tips, leaving lower leaves to keep growing.",
+        "Pick every few days; pinch off flower heads unless saving seed.",
+        "Pull whole plants when thinning and eat them."
+      ],
+      "drying_storage": [
+        "Eat fresh the same day if possible.",
+        "To keep, spread leaves in a thin layer to dry in shade or light sun on a clean cloth, then store in a closed jar."
+      ],
+      "do_not_store": [
+        "Yellow, wilted or insect-damaged leaves",
+        "Leaves that are damp when stored (they mould)"
+      ],
+      "residue_handling": [
+        "Return old stalks to the pit as mulch; let a few plants flower and dry for seed."
+      ]
+    },
+    {
+      "id": "harvest_sorghum",
+      "topic": "harvest",
+      "title": "Harvesting sorghum",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cut heads when grains are hard and their colour is set; guard ripening heads from birds.",
+      "instructions": [
+        "Cut heads with a knife, leaving stalks standing for residue.",
+        "Dry heads fully, then thresh by beating on a clean sheet."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Birds can take much of the crop near harvest."
+      ],
+      "safety_notes": [
+        "Use knives carefully."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_croptrust_sorghum_staygreen",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_sorghum",
+      "ripeness_cues_see": [
+        "Grain colour fully set",
+        "Heads heavy and drooping",
+        "Lower leaves drying"
+      ],
+      "ripeness_cues_feel": [
+        "Grain hard and cannot be dented with a fingernail"
+      ],
+      "method": [
+        "Cut heads with a knife, leaving stalks standing for residue.",
+        "Dry heads fully, then thresh by beating on a clean sheet."
+      ],
+      "drying_storage": [
+        "Dry on a clean sheet or mat in the sun, off the bare soil, turning often; cover at night and if rain threatens.",
+        "Grain is dry enough when a grain bitten between the teeth cracks instead of squashing.",
+        "Store in clean, dry, tightly closed containers (sealed jars, tins or well-tied sacks inside containers), off the floor.",
+        "Check stored grain every week or two for insects, warmth or mould smell.",
+        "Raise stores off the ground on stones or a platform to keep out damp and rats; a few dry neem leaves in the container are a traditional extra."
+      ],
+      "do_not_store": [
+        "Damp or soft grain",
+        "Mouldy, discoloured or sour-smelling heads",
+        "Grain mixed with soil or stones",
+        "Grain from plants that showed heavy disease"
+      ],
+      "residue_handling": [
+        "Lay healthy stalks and leaves back on pits and beds as mulch, or add them to compost.",
+        "Remove and safely burn or bury far from the plot any residue with heavy disease or striga."
+      ]
+    },
+    {
+      "id": "harvest_sweet_potato",
+      "topic": "harvest",
+      "title": "Harvesting sweet potato",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Dig roots when vines yellow and growth slows; a test dig shows firm, full roots. Cure before storing.",
+      "instructions": [
+        "Cut back vines first, then loosen the mound with a stick or hands and lift roots gently.",
+        "Do not bruise or cut roots; damaged roots rot in store.",
+        "Dig as needed: roots left a little longer in the mound keep, but weevils increase."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Roots keep only some weeks in a simple store."
+      ],
+      "safety_notes": [
+        "Cook before eating; discard bitter, weevil-damaged parts."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_sweet_potato",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_sweet_potato",
+      "ripeness_cues_see": [
+        "Vines yellowing and growth slowing",
+        "Cracks in the mound over swelling roots"
+      ],
+      "ripeness_cues_feel": [
+        "A test root feels firm and full",
+        "Skin does not rub off easily"
+      ],
+      "method": [
+        "Cut back vines first, then loosen the mound with a stick or hands and lift roots gently.",
+        "Do not bruise or cut roots; damaged roots rot in store.",
+        "Dig as needed: roots left a little longer in the mound keep, but weevils increase."
+      ],
+      "drying_storage": [
+        "Cure roots in shade for a few days so the skin toughens.",
+        "Store cool, dark and airy, raised off the floor; check often and eat damaged ones first.",
+        "Surplus can be sliced thinly and sun-dried."
+      ],
+      "do_not_store": [
+        "Bruised, cut or weevil-tunnelled roots (eat first)",
+        "Roots with soft or rotting patches"
+      ],
+      "residue_handling": [
+        "Keep healthy vine tips in shade as cuttings for the next planting; lay the rest on beds as mulch."
+      ]
+    },
+    {
+      "id": "harvest_cassava",
+      "topic": "harvest",
+      "title": "Harvesting and safely processing cassava",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Roots can be dug from about eight months to a year on, as needed. Fresh roots spoil within days of digging and must always be processed and cooked thoroughly.",
+      "instructions": [
+        "Dig carefully around one plant at a time and lift roots without breaking them.",
+        "Leave other plants in the ground until needed: the ground is the best store.",
+        "Cut healthy stems into pieces for replanting and keep them in shade."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Bitter cassava types need longer, more careful processing."
+      ],
+      "safety_notes": [
+        "Never eat cassava raw: natural poisons are removed only by proper peeling, soaking and cooking."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_cassava_soil_notes",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_cassava",
+      "ripeness_cues_see": [
+        "Lower leaves yellowing and dropping",
+        "Plant has stood through most of a year"
+      ],
+      "ripeness_cues_feel": [
+        "A test root is thick and firm"
+      ],
+      "method": [
+        "Dig carefully around one plant at a time and lift roots without breaking them.",
+        "Leave other plants in the ground until needed: the ground is the best store.",
+        "Cut healthy stems into pieces for replanting and keep them in shade."
+      ],
+      "drying_storage": [
+        "Use fresh roots within a day or two of digging.",
+        "Peel, slice, soak and cook thoroughly following the locally known safe method; never eat raw.",
+        "Sun-dried slices of properly processed cassava keep longer in a dry, sealed container."
+      ],
+      "do_not_store": [
+        "Fresh roots older than a couple of days (they spoil and turn streaky)",
+        "Roots with rot or a sour smell"
+      ],
+      "residue_handling": [
+        "Return leaves and peel to compost, not to animals unless local practice confirms it is safe."
+      ]
+    },
+    {
+      "id": "harvest_pineapple",
+      "topic": "harvest",
+      "title": "Harvesting pineapple",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pick when the fruit changes colour from the base and smells sweet.",
+      "instructions": [
+        "Cut the fruit with a short stalk; keep the leafy top for replanting."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "First fruit takes well over a year."
+      ],
+      "safety_notes": [
+        "Leaf edges are spiny."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_pineapple",
+      "ripeness_cues_see": [
+        "Skin colour turning from the base upward",
+        "Eyes on the skin flattening"
+      ],
+      "ripeness_cues_feel": [
+        "Sweet smell at the base",
+        "Slight give when pressed"
+      ],
+      "method": [
+        "Cut the fruit with a short stalk; keep the leafy top for replanting."
+      ],
+      "drying_storage": [
+        "Eat fresh within days, or slice thinly and sun-dry on a clean surface."
+      ],
+      "do_not_store": [
+        "Bruised or leaking fruit",
+        "Fruit with soft rotten patches"
+      ],
+      "residue_handling": [
+        "Replant tops and side shoots (slips); lay old leaves as mulch."
+      ]
+    },
+    {
+      "id": "harvest_neem",
+      "topic": "harvest",
+      "title": "Gathering neem leaves and seed",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Gather leaves lightly from established trees for pest washes and grain stores; collect fallen ripe seed for sowing.",
+      "instructions": [
+        "Pick or cut a few leafy twigs at a time without stripping the tree.",
+        "Collect fallen ripe fruits, wash off the pulp and dry the seed in shade."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Young trees should not be stripped."
+      ],
+      "safety_notes": [
+        "Neem products are not food; keep away from children."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_neem",
+      "ripeness_cues_see": [
+        "Mature trees with plenty of leaves",
+        "Ripe yellow fruits falling"
+      ],
+      "ripeness_cues_feel": [
+        "Ripe fruits soft"
+      ],
+      "method": [
+        "Pick or cut a few leafy twigs at a time without stripping the tree.",
+        "Collect fallen ripe fruits, wash off the pulp and dry the seed in shade."
+      ],
+      "drying_storage": [
+        "Dry leaves in shade and keep in a closed jar.",
+        "Sow seed soon: it loses life within a few months."
+      ],
+      "do_not_store": [
+        "Mouldy leaves or seed"
+      ],
+      "residue_handling": [
+        "Leave leaf fall under the tree as mulch."
+      ]
+    },
+    {
+      "id": "harvest_moringa",
+      "topic": "harvest",
+      "title": "Picking moringa leaves and pods",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pick young leaf sprigs often and tender pods while they still snap.",
+      "instructions": [
+        "Strip young leaflets from sprigs; cut tender pods with a knife.",
+        "Prune the top after picking to keep the tree low."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Leaves are a supplement, not a staple."
+      ],
+      "safety_notes": [
+        "Cook leaves and pods before eating."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_moringa",
+      "ripeness_cues_see": [
+        "Soft young leaf sprigs at branch tips",
+        "Pods green and slim"
+      ],
+      "ripeness_cues_feel": [
+        "Pods snap cleanly when bent"
+      ],
+      "method": [
+        "Strip young leaflets from sprigs; cut tender pods with a knife.",
+        "Prune the top after picking to keep the tree low."
+      ],
+      "drying_storage": [
+        "Dry leaves in shade, crumble and keep in a closed jar.",
+        "Cook pods fresh."
+      ],
+      "do_not_store": [
+        "Tough, woody pods",
+        "Mouldy dried leaves"
+      ],
+      "residue_handling": [
+        "Prunings go on beds as mulch."
+      ]
+    },
+    {
+      "id": "harvest_sunn_hemp",
+      "topic": "harvest",
+      "title": "Cutting sunn hemp for green manure",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cut plants as the first flowers open and lay them on beds or mix them into pits.",
+      "instructions": [
+        "Cut near the base with a machete or knife.",
+        "Lay the cut plants over beds as mulch or chop and mix them into pit fill."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Left too long, stems turn woody and rot slowly."
+      ],
+      "safety_notes": [
+        "Seeds can be poisonous to people and animals."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_sunn_hemp",
+      "ripeness_cues_see": [
+        "First yellow flowers opening"
+      ],
+      "ripeness_cues_feel": [
+        "Stems still soft enough to cut easily"
+      ],
+      "method": [
+        "Cut near the base with a machete or knife.",
+        "Lay the cut plants over beds as mulch or chop and mix them into pit fill."
+      ],
+      "drying_storage": [
+        "Not stored as food; leave one small patch to set seed for next time, and keep that seed away from food stores."
+      ],
+      "do_not_store": [
+        "Never store seed with food grain"
+      ],
+      "residue_handling": [
+        "All cut material goes back onto the soil."
+      ]
+    },
+    {
+      "id": "harvest_vetiver_hedge",
+      "topic": "harvest",
+      "title": "Trimming the grass hedge",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Trim the hedge once it is dense and lay the cut leaves as mulch.",
+      "instructions": [
+        "Cut leaves back to about knee-high with a machete, leaving the clumps intact."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Trimming too often weakens the hedge."
+      ],
+      "safety_notes": [
+        "Keep dry trimmings away from fire."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_id": "crop_vetiver_hedge",
+      "ripeness_cues_see": [
+        "Hedge dense and taller than knee-high"
+      ],
+      "ripeness_cues_feel": [
+        "Leaves tough but green"
+      ],
+      "method": [
+        "Cut leaves back to about knee-high with a machete, leaving the clumps intact."
+      ],
+      "drying_storage": [
+        "Use cut leaves as mulch straight away."
+      ],
+      "do_not_store": [
+        "Not a food"
+      ],
+      "residue_handling": [
+        "All trimmings go on beds and pits as mulch."
+      ]
+    }
+  ]
+}

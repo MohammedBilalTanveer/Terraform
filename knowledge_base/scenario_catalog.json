@@ -1,0 +1,132 @@
+{
+  "collection": "scenario_catalog",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "scenario_05_lateritic_hardpan",
+      "topic": "scenario_catalog",
+      "title": "Lateritic Hardpan Plateau",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Shallow, reddish, stony soil over a hard layer with fast runoff and a short wet season.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tags": [
+        "laterite",
+        "hardpan",
+        "shallow_soil",
+        "acidic",
+        "short_wet_season",
+        "runoff"
+      ],
+      "file": "scenario_05_lateritic_hardpan.json",
+      "status": "available"
+    },
+    {
+      "id": "scenario_01",
+      "topic": "scenario_catalog",
+      "title": "Scenario 1",
+      "scenario_tags": [],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Planned scenario; content not yet written.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tags": [],
+      "file": null,
+      "status": "planned"
+    },
+    {
+      "id": "scenario_02",
+      "topic": "scenario_catalog",
+      "title": "Scenario 2",
+      "scenario_tags": [],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Planned scenario; content not yet written.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tags": [],
+      "file": null,
+      "status": "planned"
+    },
+    {
+      "id": "scenario_03",
+      "topic": "scenario_catalog",
+      "title": "Scenario 3",
+      "scenario_tags": [],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Planned scenario; content not yet written.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tags": [],
+      "file": null,
+      "status": "planned"
+    },
+    {
+      "id": "scenario_04",
+      "topic": "scenario_catalog",
+      "title": "Scenario 4",
+      "scenario_tags": [],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Planned scenario; content not yet written.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tags": [],
+      "file": null,
+      "status": "planned"
+    }
+  ]
+}

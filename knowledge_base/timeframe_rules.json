@@ -1,0 +1,348 @@
+{
+  "collection": "timeframe_rules",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "time_buffer_late_start",
+      "topic": "timeframe_rule",
+      "title": "Late-start and slow-establishment buffer",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Add two to three weeks to every crop's maturity time when comparing with the wet weeks left.",
+      "instructions": [
+        "Total weeks needed = crop maturity weeks + buffer weeks (two to three).",
+        "Compare the total with the wet weeks you expect to be left."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "The buffer is a planning margin, not a forecast."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_ragi"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "buffer_weeks": {
+        "min": 2,
+        "max": 3
+      },
+      "explanation": "On this plateau, crops rarely run to the calendar. Sowing waits for the first reliable soaking rains, which can come later than hoped; a dry gap after the first rains can kill seedlings and force re-sowing; and on poor, shallow, acidic soil seedlings establish slowly. Two to three extra weeks covers one re-sowing or a slow start without assuming the season will stretch."
+    },
+    {
+      "id": "time_rule_unknown_season",
+      "topic": "timeframe_rule",
+      "title": "When the season length is unknown",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "season_unknown"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "If nobody knows how many wet weeks are left, choose the shortest crops and stagger sowing.",
+      "instructions": [
+        "Favour short-season crops (pearl millet, little millet, cowpea).",
+        "Ask neighbours how long the rains usually last and update the plan.",
+        "Sow part of the seed first and keep the rest for re-sowing.",
+        "Treat long crops (pigeon pea, and to a lesser degree finger millet and niger) as high risk."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Without a season estimate, every season fit is marked unknown."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "explanation": "The number of wet weeks left was not given, so the crop timeframes cannot be checked against the season. Short-season crops are the safer choice; ask locals how long the rains usually last and when they settle in."
+    },
+    {
+      "id": "time_rule_compare",
+      "topic": "timeframe_rule",
+      "title": "How a crop's timeframe is compared with the season",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Each crop's total (maturity plus buffer) is compared with the wet weeks remaining to give fits, tight or high risk.",
+      "instructions": [
+        "fits: the longest total (maturity max + buffer max) is within the wet weeks left.",
+        "tight: the shortest total (maturity min + buffer min) is within the wet weeks left, but the longest is not.",
+        "high_risk: even the shortest total is longer than the wet weeks left.",
+        "unknown: the wet weeks left were not given."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Some millets and horse gram can finish on moisture left in the soil after rains stop; 'tight' is not hopeless, but plan mulch and stored water."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "fit_rules": {
+        "fits": "maturity_max + buffer_max <= weeks_remaining",
+        "tight": "maturity_min + buffer_min <= weeks_remaining < maturity_max + buffer_max",
+        "high_risk": "maturity_min + buffer_min > weeks_remaining",
+        "unknown": "weeks_remaining is null"
+      },
+      "explanation": "A crop fits when even its slowest finish, plus the buffer, falls inside the wet weeks left. It is tight when only a quick finish fits, and high risk when even the quickest finish would run into the dry season."
+    },
+    {
+      "id": "time_rule_rain_ending",
+      "topic": "timeframe_rule",
+      "title": "When the rains are ending",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "rain_ending"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "If the rains are already ending, most field crops will not finish; use the time to prepare for next season.",
+      "instructions": [
+        "Only the shortest crops on stored moisture are worth a small trial.",
+        "Build and fill pits and beds, gather mulch and organic matter, lay stone lines.",
+        "Plant tree seedlings only if water can be carried through the dry season."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Late sowings depend entirely on moisture left in the soil."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "explanation": "With the rains ending, the safest use of effort is preparing soil and water capture for the next wet season."
+    },
+    {
+      "id": "time_rule_trees",
+      "topic": "timeframe_rule",
+      "title": "Tree timeframes",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Trees are long-term options measured in years; judge them by whether they can establish before the dry season, not by harvest.",
+      "instructions": [
+        "Plant at the start of reliable rains so roots grow through the whole wet season.",
+        "Plan stored water and mulch for the first dry season."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Bearing ages vary greatly with planting material and care."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_cashew_sri_lanka"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "explanation": "Tree crops take years before any harvest; they are planned alongside, not instead of, short field crops."
+    },
+    {
+      "id": "time_remediation_prep",
+      "topic": "timeframe_rule",
+      "title": "Soil and water preparation before sowing",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Allow two to four weeks to build pits or beds, gather and mix organic matter, let the fill settle, and set up water storage, ideally finished before the first reliable rains.",
+      "instructions": [
+        "Build pits, raised beds or containers and fill them with the soil and organic-matter mix.",
+        "Gather mulch and organic matter; let the fill settle and, if possible, take one rain before sowing.",
+        "Lay stone lines or half-moons and check the overflow path.",
+        "Set up covered rainwater storage.",
+        "Run the readiness checks (drainage, squeeze test, moisture test) before sowing."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "One person working alone on very hard ground may need longer; a small trial plot keeps this short."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "prep_weeks": {
+        "min": 2,
+        "max": 4
+      },
+      "explanation": "Pits, beds and stone lines on this plateau are dug by hand into hard, stony ground, and organic matter has to be gathered from far around. Two to four weeks covers building a trial-sized plot, letting the fill settle and setting up storage. This work is best done in the dry weeks before the rains and largely overlaps the wait for the first reliable soaking rains; it only adds to the crop timeline when preparation starts after the rains have begun."
+    },
+    {
+      "id": "time_soil_recovery",
+      "topic": "timeframe_rule",
+      "title": "How long soil recovery takes",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Building deeper, richer soil on laterite is a matter of several seasons, not one.",
+      "instructions": [
+        "Return residue and keep mulch every season.",
+        "Re-use and refill the same pits and beds, and extend them gradually.",
+        "Rotate legumes and cereals, and grow hedges along stone lines."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "No promise is made about how fast the soil will change; it depends on rain, effort and materials."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_soil_biodiversity_termites",
+        "src_wocat_contour_stone_bunds"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "explanation": "The first season mostly proves which methods and crops work. Over several seasons, residue returned to the soil, refilled pits, settled beds and soil trapped behind stone lines slowly add depth and organic matter. Expect gradual change seen in darker, crumblier soil and healthier plants, not a quick fix."
+    },
+    {
+      "id": "time_calendar_relative_to_rain",
+      "topic": "timeframe_rule",
+      "title": "Season calendar relative to the first reliable rain",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A rough work calendar counted from R, the week the first reliable soaking rains arrive. It uses no calendar dates; weeks are rough guides.",
+      "instructions": [
+        "Find R with the soaking-rain check and local advice, then follow the phases below.",
+        "If the rains come early or late, shift the whole calendar with them."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Weeks are rough guides; follow how the soil and plants look.",
+        "Long crops (cassava, pigeon pea, trees) carry on well past the end of the rains."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_tnau_ragi"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "explanation": "R means the week of the first reliable soaking rains, not the first shower. Everything is planned relative to R because exact rain dates are unknown.",
+      "phases": [
+        {
+          "when": "Several weeks before the first reliable rain (R)",
+          "actions": [
+            "Watch slope, runoff and pooling; probe for the softest, deepest spots.",
+            "On gentle, stable slopes, lay a first low stone line with a safe spill point.",
+            "Build raised beds where water pools or the hard layer stops digging.",
+            "Start compost and gather clean mulch; gather and sprout-test seed."
+          ]
+        },
+        {
+          "when": "About two weeks before R",
+          "actions": [
+            "Fill pits and beds with clean soil mixed with mature compost.",
+            "Optional: try ash or crushed shell only in a small, well-mixed trial patch; never set amounts by the fizz check.",
+            "Mulch the filled pits and beds and keep seed dry.",
+            "Set up covered water storage; run the drainage and squeeze checks."
+          ]
+        },
+        {
+          "when": "R week (first reliable soaking rains)",
+          "actions": [
+            "Confirm the soil is moist down to the hard layer.",
+            "Sow cowpea, millets and amaranth greens; plant pigeon pea along line edges if the season allows.",
+            "Plant tree seedlings and hedge cuttings or slips."
+          ]
+        },
+        {
+          "when": "About two weeks after R",
+          "actions": [
+            "Thin seedlings to the strongest per spot.",
+            "Re-sow gaps with reserved seed.",
+            "Weed and mulch."
+          ]
+        },
+        {
+          "when": "About four weeks after R",
+          "actions": [
+            "Check moisture, drainage and growth; add a light mature-compost top-up only if plants look hungry.",
+            "First picking of amaranth greens.",
+            "Plant sweet potato cuttings only if enough wet weeks remain; treat cassava as a long-term crop."
+          ]
+        },
+        {
+          "when": "About eight to twelve weeks after R",
+          "actions": [
+            "Cowpea pods ripening: pick dry pods.",
+            "Millet heads forming and ripening: start bird scaring.",
+            "Watch for dry spells and use stored water on flowering plants first."
+          ]
+        },
+        {
+          "when": "About twelve to sixteen weeks after R",
+          "actions": [
+            "Harvest millets and groundnut.",
+            "Dry, store and save seed from the best plants."
+          ]
+        },
+        {
+          "when": "End of the rains",
+          "actions": [
+            "Harvest remaining crops.",
+            "Return healthy residue to pits and beds; sow a cover crop where moisture remains.",
+            "Add compost and thick mulch.",
+            "Repair stone lines and walls."
+          ]
+        },
+        {
+          "when": "Dry season",
+          "actions": [
+            "Give young trees occasional stored water at the base.",
+            "Build more pits and stone lines; extend what worked.",
+            "Keep making compost; collect clean ash and shells.",
+            "Keep seed dry and safe from weevils and rats."
+          ]
+        }
+      ]
+    }
+  ]
+}

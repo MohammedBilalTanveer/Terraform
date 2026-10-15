@@ -1,0 +1,28 @@
+{
+ "collection": "sources",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "src_fixture_soils",
+   "title": "Fixture soils source",
+   "organization": "Fixture org",
+   "url": "https://example.org/a",
+   "accessed_on": "2026-10-15",
+   "supports_kb_ids": [
+    "treat_planting_pits"
+   ],
+   "notes": "Test fixture only.",
+   "verification": "recorded_not_fetched"
+  },
+  {
+   "id": "src_fixture_water",
+   "title": "Fixture water source",
+   "organization": "Fixture org",
+   "url": "https://example.org/b",
+   "accessed_on": "2026-10-15",
+   "supports_kb_ids": [],
+   "notes": "Test fixture only.",
+   "verification": "recorded_not_fetched"
+  }
+ ]
+}

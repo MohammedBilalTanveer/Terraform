@@ -1,0 +1,988 @@
+{
+  "collection": "pest_management",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "pest_termites",
+      "topic": "pest",
+      "title": "Termites",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Termites are very common on laterite. They mostly eat dead plant material, but in dry soil they attack seedlings, stems, pods and young trees.",
+      "instructions": [
+        "Keep plenty of mulch and crop residue on the soil: termites prefer it to living plants.",
+        "Keep seedlings moist; termite damage is worst in dry spells.",
+        "Remove and destroy badly attacked plants; re-sow gaps.",
+        "Keep mulch a hand's width from young tree stems."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Termites also break down mulch and improve the soil; do not try to wipe them out.",
+        "Poisoning mounds is harmful and has a poor record."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_soil_biodiversity_termites",
+        "src_cgiar_nbdc_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_little_millet",
+        "crop_sorghum",
+        "crop_cowpea",
+        "crop_horse_gram",
+        "crop_pigeon_pea",
+        "crop_groundnut",
+        "crop_niger",
+        "crop_amaranth_greens",
+        "crop_sweet_potato",
+        "crop_cassava",
+        "crop_cashew",
+        "crop_mango",
+        "crop_gliricidia",
+        "crop_neem",
+        "crop_moringa",
+        "crop_pineapple",
+        "crop_sunn_hemp",
+        "crop_vetiver_hedge"
+      ],
+      "signs": [
+        "Mud tunnels on stems",
+        "Seedlings wilting and snapping at the base",
+        "Hollow stems or pods",
+        "Mulch disappearing fast"
+      ],
+      "actions": [
+        "Keep plenty of mulch and crop residue on the soil: termites prefer it to living plants.",
+        "Keep seedlings moist; termite damage is worst in dry spells.",
+        "Remove and destroy badly attacked plants; re-sow gaps.",
+        "Keep mulch a hand's width from young tree stems."
+      ],
+      "bio_options": [
+        {
+          "name": "Hand-picking",
+          "preparation": "No preparation: pick pests off by hand or knock them into a container of soapy water.",
+          "safe_use": [
+            "Do it early morning when insects are slow.",
+            "Check under leaves and inside flowers."
+          ],
+          "cautions": [
+            "Some caterpillars and beetles (such as blister beetles) irritate skin: use a leaf or cloth, not bare fingers."
+          ]
+        }
+      ],
+      "cautions": [
+        "Termites also break down mulch and improve the soil; do not try to wipe them out.",
+        "Poisoning mounds is harmful and has a poor record."
+      ]
+    },
+    {
+      "id": "pest_grasshoppers",
+      "topic": "pest",
+      "title": "Grasshoppers and crickets",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Grasshoppers chew leaves and can strip seedlings, especially at the start of the rains and near dry grassland.",
+      "instructions": [
+        "Hand-pick or knock into soapy water in the cool morning.",
+        "Re-sow badly damaged spots with reserved seed.",
+        "Keep chickens, if any, working the plot edges."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Swarms of locusts are beyond what a plot can manage; protect seed and re-sow later."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_little_millet",
+        "crop_sorghum",
+        "crop_cowpea",
+        "crop_horse_gram",
+        "crop_pigeon_pea",
+        "crop_groundnut",
+        "crop_niger",
+        "crop_amaranth_greens",
+        "crop_sweet_potato",
+        "crop_cassava"
+      ],
+      "signs": [
+        "Ragged holes and chewed leaf edges",
+        "Seedlings cut off",
+        "Many hoppers jumping as you walk"
+      ],
+      "actions": [
+        "Hand-pick or knock into soapy water in the cool morning.",
+        "Re-sow badly damaged spots with reserved seed.",
+        "Keep chickens, if any, working the plot edges."
+      ],
+      "bio_options": [
+        {
+          "name": "Hand-picking",
+          "preparation": "No preparation: pick pests off by hand or knock them into a container of soapy water.",
+          "safe_use": [
+            "Do it early morning when insects are slow.",
+            "Check under leaves and inside flowers."
+          ],
+          "cautions": [
+            "Some caterpillars and beetles (such as blister beetles) irritate skin: use a leaf or cloth, not bare fingers."
+          ]
+        },
+        {
+          "name": "Neem leaf or seed extract",
+          "preparation": "Crush a few handfuls of fresh neem leaves or dried, shelled neem seeds, soak overnight in a bucket of clean water, strain through cloth, and add a little plain soap so it sticks. Use the same day.",
+          "safe_use": [
+            "Spray or splash onto leaves in the late afternoon, covering undersides.",
+            "Test on a few plants first and wait a day for leaf damage before treating more.",
+            "Repeat only if pests return, about a week later.",
+            "Wash hands, face and tools afterwards."
+          ],
+          "cautions": [
+            "Neem is not harmless: keep it out of eyes and mouth, and away from drinking water.",
+            "Do not spray on open flowers when bees are active.",
+            "Use only on pests that are clearly building up, not as routine.",
+            "Strength varies a lot with seed age and preparation; old seed is weak.",
+            "Do not store the extract; it loses strength quickly."
+          ]
+        }
+      ],
+      "cautions": [
+        "Swarms of locusts are beyond what a plot can manage; protect seed and re-sow later."
+      ]
+    },
+    {
+      "id": "pest_aphids",
+      "topic": "pest",
+      "title": "Aphids",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Small soft insects clustering on shoots, flowers and young pods, often in dry spells.",
+      "instructions": [
+        "Rub clusters off by hand or wash with a splash of plain water.",
+        "Pinch off the worst affected tips.",
+        "Ladybirds and other predators often arrive; avoid killing them."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Do not spray when bees are visiting flowers."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_cowpea",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cowpea",
+        "crop_horse_gram",
+        "crop_groundnut",
+        "crop_pigeon_pea",
+        "crop_niger",
+        "crop_amaranth_greens"
+      ],
+      "signs": [
+        "Clusters of small black or green insects on tips and pods",
+        "Curled, sticky leaves",
+        "Ants running up stems"
+      ],
+      "actions": [
+        "Rub clusters off by hand or wash with a splash of plain water.",
+        "Pinch off the worst affected tips.",
+        "Ladybirds and other predators often arrive; avoid killing them."
+      ],
+      "bio_options": [
+        {
+          "name": "Hand-picking",
+          "preparation": "No preparation: pick pests off by hand or knock them into a container of soapy water.",
+          "safe_use": [
+            "Do it early morning when insects are slow.",
+            "Check under leaves and inside flowers."
+          ],
+          "cautions": [
+            "Some caterpillars and beetles (such as blister beetles) irritate skin: use a leaf or cloth, not bare fingers."
+          ]
+        },
+        {
+          "name": "Neem leaf or seed extract",
+          "preparation": "Crush a few handfuls of fresh neem leaves or dried, shelled neem seeds, soak overnight in a bucket of clean water, strain through cloth, and add a little plain soap so it sticks. Use the same day.",
+          "safe_use": [
+            "Spray or splash onto leaves in the late afternoon, covering undersides.",
+            "Test on a few plants first and wait a day for leaf damage before treating more.",
+            "Repeat only if pests return, about a week later.",
+            "Wash hands, face and tools afterwards."
+          ],
+          "cautions": [
+            "Neem is not harmless: keep it out of eyes and mouth, and away from drinking water.",
+            "Do not spray on open flowers when bees are active.",
+            "Use only on pests that are clearly building up, not as routine.",
+            "Strength varies a lot with seed age and preparation; old seed is weak.",
+            "Do not store the extract; it loses strength quickly."
+          ]
+        },
+        {
+          "name": "Light wood-ash dusting",
+          "preparation": "Sieve cool, plain wood ash and dust a very light film on leaves where aphids cluster, early morning while leaves are damp.",
+          "safe_use": [
+            "Use a pinch per plant only.",
+            "Repeat only if needed."
+          ],
+          "cautions": [
+            "Ash is caustic: protect eyes and skin; avoid windy days.",
+            "Too much ash scorches leaves and seedlings; never pile it around stems.",
+            "Evidence is mostly traditional; treat as a weak option."
+          ]
+        },
+        {
+          "name": "Sticky yellow trap",
+          "preparation": "Smear a little cooking oil or sticky plant sap on a piece of yellow cloth, card or plastic and hang it at plant height near the crop.",
+          "safe_use": [
+            "Use to watch for and catch small flying pests such as aphids and whiteflies.",
+            "Replace or re-smear when covered."
+          ],
+          "cautions": [
+            "Also catches helpful insects; use a few traps only.",
+            "Keep away from flowers where bees feed."
+          ]
+        }
+      ],
+      "cautions": [
+        "Do not spray when bees are visiting flowers."
+      ]
+    },
+    {
+      "id": "pest_pod_borers",
+      "topic": "pest",
+      "title": "Pod borers and caterpillars",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Caterpillars that feed in flowers and bore into pods.",
+      "instructions": [
+        "Check flowers and pods every few days and hand-pick caterpillars.",
+        "Remove and destroy badly bored pods.",
+        "Harvest dry pods promptly."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Neem works best on young caterpillars; large ones must be picked."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_iita_cowpea_guide"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cowpea",
+        "crop_pigeon_pea",
+        "crop_horse_gram"
+      ],
+      "signs": [
+        "Holes in pods",
+        "Caterpillars inside flowers or webbed flower clusters",
+        "Droppings on pods"
+      ],
+      "actions": [
+        "Check flowers and pods every few days and hand-pick caterpillars.",
+        "Remove and destroy badly bored pods.",
+        "Harvest dry pods promptly."
+      ],
+      "bio_options": [
+        {
+          "name": "Hand-picking",
+          "preparation": "No preparation: pick pests off by hand or knock them into a container of soapy water.",
+          "safe_use": [
+            "Do it early morning when insects are slow.",
+            "Check under leaves and inside flowers."
+          ],
+          "cautions": [
+            "Some caterpillars and beetles (such as blister beetles) irritate skin: use a leaf or cloth, not bare fingers."
+          ]
+        },
+        {
+          "name": "Neem leaf or seed extract",
+          "preparation": "Crush a few handfuls of fresh neem leaves or dried, shelled neem seeds, soak overnight in a bucket of clean water, strain through cloth, and add a little plain soap so it sticks. Use the same day.",
+          "safe_use": [
+            "Spray or splash onto leaves in the late afternoon, covering undersides.",
+            "Test on a few plants first and wait a day for leaf damage before treating more.",
+            "Repeat only if pests return, about a week later.",
+            "Wash hands, face and tools afterwards."
+          ],
+          "cautions": [
+            "Neem is not harmless: keep it out of eyes and mouth, and away from drinking water.",
+            "Do not spray on open flowers when bees are active.",
+            "Use only on pests that are clearly building up, not as routine.",
+            "Strength varies a lot with seed age and preparation; old seed is weak.",
+            "Do not store the extract; it loses strength quickly."
+          ]
+        }
+      ],
+      "cautions": [
+        "Neem works best on young caterpillars; large ones must be picked."
+      ]
+    },
+    {
+      "id": "pest_striga",
+      "topic": "pest",
+      "title": "Striga (witchweed)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A parasitic weed that attaches to millet (and a related one to cowpea) roots, stunting the crop. It has bright pink, purple or white flowers.",
+      "instructions": [
+        "Pull striga carefully by hand before it flowers or as soon as flowers appear, without breaking the stem.",
+        "Carry pulled plants out of the field in a bag; do not leave them lying, as seed can still ripen.",
+        "Burn or bury them deeply far from the plot.",
+        "Keep pulling all season and after harvest; seed lasts in soil for many years.",
+        "Rotate or mix millet with cowpea or horse gram, and add compost or manure, which reduces striga over time."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "One season of pulling is not enough; stopping lets the seed bank rebuild."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_iita_propas_striga",
+        "src_farmradio_striga"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_little_millet",
+        "crop_sorghum",
+        "crop_cowpea"
+      ],
+      "signs": [
+        "Small upright plants with bright pink-purple flowers growing among millet",
+        "Millet stunted and yellow with no other cause"
+      ],
+      "actions": [
+        "Pull striga carefully by hand before it flowers or as soon as flowers appear, without breaking the stem.",
+        "Carry pulled plants out of the field in a bag; do not leave them lying, as seed can still ripen.",
+        "Burn or bury them deeply far from the plot.",
+        "Keep pulling all season and after harvest; seed lasts in soil for many years.",
+        "Rotate or mix millet with cowpea or horse gram, and add compost or manure, which reduces striga over time."
+      ],
+      "bio_options": [],
+      "cautions": [
+        "One season of pulling is not enough; stopping lets the seed bank rebuild."
+      ]
+    },
+    {
+      "id": "pest_stored_grain_weevils",
+      "topic": "pest",
+      "title": "Stored grain and pulse weevils",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Small beetles that breed inside stored grain and pulses, leaving holes and powder.",
+      "instructions": [
+        "Dry grain fully before storing (it should crack when bitten).",
+        "Store in clean, tightly closed containers; seal well so insects cannot breathe and multiply.",
+        "Mix stored pulses with a little clean, sieved wood ash or dry neem leaves (traditional practice).",
+        "Check every week or two; sun-dry and re-clean infested lots."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Never store damp grain.",
+        "Never mix chemical pesticides into food grain."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_pics_hermetic_storage"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_little_millet",
+        "crop_sorghum",
+        "crop_cowpea",
+        "crop_horse_gram",
+        "crop_pigeon_pea",
+        "crop_groundnut",
+        "crop_niger",
+        "crop_amaranth_greens",
+        "crop_sweet_potato",
+        "crop_cassava"
+      ],
+      "signs": [
+        "Small holes in seeds",
+        "Powdery dust in the container",
+        "Tiny beetles crawling",
+        "Warm or musty grain"
+      ],
+      "actions": [
+        "Dry grain fully before storing (it should crack when bitten).",
+        "Store in clean, tightly closed containers; seal well so insects cannot breathe and multiply.",
+        "Mix stored pulses with a little clean, sieved wood ash or dry neem leaves (traditional practice).",
+        "Check every week or two; sun-dry and re-clean infested lots."
+      ],
+      "bio_options": [
+        {
+          "name": "Dry neem leaves in storage",
+          "preparation": "Dry clean neem leaves in shade and layer a handful in the container.",
+          "safe_use": [
+            "Remove leaves and wash grain before cooking."
+          ],
+          "cautions": [
+            "Traditional practice; strength varies.",
+            "Keep seed for eating separate from seed for sowing if anything else is added."
+          ]
+        },
+        {
+          "name": "Ash mixed with stored pulses",
+          "preparation": "Mix a little cool, sieved plain wood ash through dry pulses before sealing.",
+          "safe_use": [
+            "Wash pulses well before cooking."
+          ],
+          "cautions": [
+            "Use only plain wood ash.",
+            "Traditional practice; not a guarantee."
+          ]
+        }
+      ],
+      "cautions": [
+        "Never store damp grain.",
+        "Never mix chemical pesticides into food grain."
+      ]
+    },
+    {
+      "id": "pest_leaf_spot_fungal",
+      "topic": "pest",
+      "title": "Leaf spots, blast and mould",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Fungal diseases cause spots, streaks or mould on leaves and heads, worst in warm, humid, crowded conditions.",
+      "instructions": [
+        "Thin plants so air moves between them.",
+        "Remove badly affected leaves or plants and take them away from the plot.",
+        "Do not save seed from diseased plants.",
+        "Rotate crops between seasons."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "There is no reliable home cure; prevention and clean seed matter most."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_ragi"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_cowpea",
+        "crop_horse_gram",
+        "crop_groundnut",
+        "crop_pigeon_pea",
+        "crop_sorghum"
+      ],
+      "signs": [
+        "Brown or grey spots with dark edges on leaves",
+        "Eye-shaped spots on finger millet leaves and necks (blast)",
+        "Mouldy heads or pods"
+      ],
+      "actions": [
+        "Thin plants so air moves between them.",
+        "Remove badly affected leaves or plants and take them away from the plot.",
+        "Do not save seed from diseased plants.",
+        "Rotate crops between seasons."
+      ],
+      "bio_options": [],
+      "cautions": [
+        "There is no reliable home cure; prevention and clean seed matter most."
+      ]
+    },
+    {
+      "id": "pest_birds_grain",
+      "topic": "pest",
+      "title": "Birds on ripening heads",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Birds can take much of a millet crop in the last weeks before harvest.",
+      "instructions": [
+        "Scare birds in the early morning and evening, when they feed most.",
+        "Hang strips of cloth or shiny material on sticks; move them often.",
+        "Cover the best heads with cloth or old sacks once grains fill.",
+        "Harvest promptly once grain is hard.",
+        "Lay thorny branches over low heads or ripening pods.",
+        "Use nets or cloth bags over the best heads where available."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Birds get used to fixed scarers; change them often."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_little_millet",
+        "crop_sorghum",
+        "crop_niger"
+      ],
+      "signs": [
+        "Birds gathering in the plot",
+        "Empty, pecked heads"
+      ],
+      "actions": [
+        "Scare birds in the early morning and evening, when they feed most.",
+        "Hang strips of cloth or shiny material on sticks; move them often.",
+        "Cover the best heads with cloth or old sacks once grains fill.",
+        "Harvest promptly once grain is hard.",
+        "Lay thorny branches over low heads or ripening pods.",
+        "Use nets or cloth bags over the best heads where available."
+      ],
+      "bio_options": [],
+      "cautions": [
+        "Birds get used to fixed scarers; change them often."
+      ]
+    },
+    {
+      "id": "pest_tree_pests",
+      "topic": "pest",
+      "title": "Tree pests to watch (cashew and mango)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Young trees can be hit by termites, stem borers and sucking bugs on new shoots and flowers.",
+      "instructions": [
+        "Inspect young trees weekly in the first years.",
+        "Cut out and destroy dried shoots.",
+        "Keep the base clean and mulch away from the trunk.",
+        "Seek local advice early if borers are found."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Large trees are hard to treat; prevention and early checks matter."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_fao_cashew_sri_lanka"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cashew",
+        "crop_mango"
+      ],
+      "signs": [
+        "Gum or sawdust oozing from the trunk (borers)",
+        "Dried, blackened shoot tips and flowers (sucking bugs)",
+        "Mud tunnels on the trunk"
+      ],
+      "actions": [
+        "Inspect young trees weekly in the first years.",
+        "Cut out and destroy dried shoots.",
+        "Keep the base clean and mulch away from the trunk.",
+        "Seek local advice early if borers are found."
+      ],
+      "bio_options": [
+        {
+          "name": "Hand-picking",
+          "preparation": "No preparation: pick pests off by hand or knock them into a container of soapy water.",
+          "safe_use": [
+            "Do it early morning when insects are slow.",
+            "Check under leaves and inside flowers."
+          ],
+          "cautions": [
+            "Some caterpillars and beetles (such as blister beetles) irritate skin: use a leaf or cloth, not bare fingers."
+          ]
+        },
+        {
+          "name": "Neem leaf or seed extract",
+          "preparation": "Crush a few handfuls of fresh neem leaves or dried, shelled neem seeds, soak overnight in a bucket of clean water, strain through cloth, and add a little plain soap so it sticks. Use the same day.",
+          "safe_use": [
+            "Spray or splash onto leaves in the late afternoon, covering undersides.",
+            "Test on a few plants first and wait a day for leaf damage before treating more.",
+            "Repeat only if pests return, about a week later.",
+            "Wash hands, face and tools afterwards."
+          ],
+          "cautions": [
+            "Neem is not harmless: keep it out of eyes and mouth, and away from drinking water.",
+            "Do not spray on open flowers when bees are active.",
+            "Use only on pests that are clearly building up, not as routine.",
+            "Strength varies a lot with seed age and preparation; old seed is weak.",
+            "Do not store the extract; it loses strength quickly."
+          ]
+        }
+      ],
+      "cautions": [
+        "Large trees are hard to treat; prevention and early checks matter."
+      ]
+    },
+    {
+      "id": "pest_leaf_caterpillars",
+      "topic": "pest",
+      "title": "Leaf-eating caterpillars",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Caterpillars chew holes in tender leaves of greens and moringa, especially in the early rains.",
+      "instructions": [
+        "Check both sides of leaves every few days and hand-pick caterpillars in the cool morning.",
+        "Remove badly eaten leaves.",
+        "Pick greens often so few old leaves remain."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Sprays are a last resort on leaves you will eat; wash leaves well and keep any spray off food close to picking."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_amaranth_greens",
+        "crop_moringa"
+      ],
+      "signs": [
+        "Holes in young leaves",
+        "Droppings on leaves",
+        "Webbed leaf tips"
+      ],
+      "actions": [
+        "Check both sides of leaves every few days and hand-pick caterpillars in the cool morning.",
+        "Remove badly eaten leaves.",
+        "Pick greens often so few old leaves remain."
+      ],
+      "bio_options": [
+        {
+          "name": "Hand-picking",
+          "preparation": "No preparation: pick pests off by hand or knock them into a container of soapy water.",
+          "safe_use": [
+            "Do it early morning when insects are slow.",
+            "Check under leaves and inside flowers."
+          ],
+          "cautions": [
+            "Some caterpillars and beetles (such as blister beetles) irritate skin: use a leaf or cloth, not bare fingers."
+          ]
+        },
+        {
+          "name": "Neem leaf or seed extract",
+          "preparation": "Crush a few handfuls of fresh neem leaves or dried, shelled neem seeds, soak overnight in a bucket of clean water, strain through cloth, and add a little plain soap so it sticks. Use the same day.",
+          "safe_use": [
+            "Spray or splash onto leaves in the late afternoon, covering undersides.",
+            "Test on a few plants first and wait a day for leaf damage before treating more.",
+            "Repeat only if pests return, about a week later.",
+            "Wash hands, face and tools afterwards."
+          ],
+          "cautions": [
+            "Neem is not harmless: keep it out of eyes and mouth, and away from drinking water.",
+            "Do not spray on open flowers when bees are active.",
+            "Use only on pests that are clearly building up, not as routine.",
+            "Strength varies a lot with seed age and preparation; old seed is weak.",
+            "Do not store the extract; it loses strength quickly."
+          ]
+        },
+        {
+          "name": "Chilli or garlic infusion (unproven, last resort)",
+          "preparation": "Not standardised: crush a few chillies or garlic cloves into a bucket of water, steep, strain and dilute further before any use.",
+          "safe_use": [
+            "Only after hand-picking and rinsing have failed.",
+            "Test on one plant first and wait a day for leaf damage.",
+            "Apply in the evening, off flowers and off food that is close to harvest."
+          ],
+          "cautions": [
+            "Effect is uncertain; do not rely on it.",
+            "Chilli burns eyes and skin: wear something on your hands and never touch your face.",
+            "Keep away from children and drinking water.",
+            "Stop at once if leaves scorch."
+          ]
+        }
+      ],
+      "cautions": [
+        "Sprays are a last resort on leaves you will eat; wash leaves well and keep any spray off food close to picking."
+      ]
+    },
+    {
+      "id": "pest_sweet_potato_weevil",
+      "topic": "pest",
+      "title": "Sweet potato weevil",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Small weevils enter through cracks in the mound and tunnel into roots, making them bitter.",
+      "instructions": [
+        "Pile soil over cracks in the mound as roots swell.",
+        "Plant clean cuttings from vine tips.",
+        "Harvest on time; do not leave roots long in dry, cracked soil.",
+        "Rotate: do not plant sweet potato in the same bed next season."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "There is no simple home cure once roots are tunnelled; prevention is what works."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_tnau_sweet_potato"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_sweet_potato"
+      ],
+      "signs": [
+        "Tunnels and holes in roots",
+        "Bitter-tasting roots",
+        "Small ant-like beetles on vines"
+      ],
+      "actions": [
+        "Pile soil over cracks in the mound as roots swell.",
+        "Plant clean cuttings from vine tips.",
+        "Harvest on time; do not leave roots long in dry, cracked soil.",
+        "Rotate: do not plant sweet potato in the same bed next season."
+      ],
+      "bio_options": [],
+      "cautions": [
+        "There is no simple home cure once roots are tunnelled; prevention is what works."
+      ]
+    },
+    {
+      "id": "pest_cassava_mosaic",
+      "topic": "pest",
+      "title": "Cassava mosaic disease",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A virus spread by whiteflies and infected cuttings that mottles and twists cassava leaves and stunts roots.",
+      "instructions": [
+        "Plant cuttings only from healthy, unmottled plants.",
+        "Pull out and remove infected plants early, away from the plot.",
+        "Watch for whiteflies with a sticky yellow trap."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Infected plants cannot be cured."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cassava"
+      ],
+      "signs": [
+        "Yellow-green mottled, twisted leaves",
+        "Stunted plants"
+      ],
+      "actions": [
+        "Plant cuttings only from healthy, unmottled plants.",
+        "Pull out and remove infected plants early, away from the plot.",
+        "Watch for whiteflies with a sticky yellow trap."
+      ],
+      "bio_options": [
+        {
+          "name": "Sticky yellow trap",
+          "preparation": "Smear a little cooking oil or sticky plant sap on a piece of yellow cloth, card or plastic and hang it at plant height near the crop.",
+          "safe_use": [
+            "Use to watch for and catch small flying pests such as aphids and whiteflies.",
+            "Replace or re-smear when covered."
+          ],
+          "cautions": [
+            "Also catches helpful insects; use a few traps only.",
+            "Keep away from flowers where bees feed."
+          ]
+        }
+      ],
+      "cautions": [
+        "Infected plants cannot be cured."
+      ]
+    },
+    {
+      "id": "pest_rats_rodents",
+      "topic": "pest",
+      "title": "Rats and rodents",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Rats dig up seed and roots and raid grain and pulse stores.",
+      "instructions": [
+        "Store grain and pulses in sealed pots or tins raised off the ground on stones or a platform.",
+        "Keep stores and the area around them clean of spilled grain.",
+        "Keep thick mulch and brush piles away from stores.",
+        "Use simple traps where locally safe, away from children and pets."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Never use poison baits near food, water, children or animals."
+      ],
+      "safety_notes": [
+        "Never use unlabelled or improvised chemical poisons.",
+        "Keep any spray away from drinking water, children and animals."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_little_millet",
+        "crop_sorghum",
+        "crop_cowpea",
+        "crop_horse_gram",
+        "crop_groundnut",
+        "crop_sweet_potato",
+        "crop_cassava"
+      ],
+      "signs": [
+        "Gnawed roots and pods",
+        "Droppings in stores",
+        "Dug-up seed spots"
+      ],
+      "actions": [
+        "Store grain and pulses in sealed pots or tins raised off the ground on stones or a platform.",
+        "Keep stores and the area around them clean of spilled grain.",
+        "Keep thick mulch and brush piles away from stores.",
+        "Use simple traps where locally safe, away from children and pets."
+      ],
+      "bio_options": [],
+      "cautions": [
+        "Never use poison baits near food, water, children or animals."
+      ]
+    }
+  ]
+}

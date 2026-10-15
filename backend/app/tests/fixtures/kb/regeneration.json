@@ -1,0 +1,68 @@
+{
+ "collection": "regeneration",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "regen_return_residue",
+   "topic": "regeneration",
+   "title": "Return crop residue",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture regeneration.",
+   "instructions": [
+    "Fixture step for Return crop residue."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Return crop residue."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0"
+  },
+  {
+   "id": "regen_extend_pits",
+   "topic": "regeneration",
+   "title": "Extend pits next season",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": [
+     "hardpan_continuous"
+    ]
+   },
+   "summary": "Fixture.",
+   "instructions": [
+    "Fixture step for Extend pits next season."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Extend pits next season."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0"
+  }
+ ]
+}

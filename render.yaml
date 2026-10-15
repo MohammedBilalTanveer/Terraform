@@ -1,0 +1,58 @@
+# Render Blueprint — deploys TERRAFORM as two Render web services from this one repo.
+#   terraform-api : FastAPI backend (answers only from ./knowledge_base)
+#   terraform-web : Node web service serving the built React app (dashboard + 3D explorer)
+# Render dashboard → New → Blueprint → pick this repo. Then fill the "sync: false" values when asked.
+services:
+  - type: web
+    name: terraform-api
+    runtime: python
+    plan: free
+    # No rootDir: the backend reads ../knowledge_base, so the whole repo must be available.
+    buildCommand: pip install --upgrade pip && pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - backend/**
+        - knowledge_base/**
+        - render.yaml
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.5
+      # Browser origins allowed to call the API. The regex covers terraform-web's onrender.com URL,
+      # including the random suffix Render adds if the name is taken. Add a custom domain in FRONTEND_ORIGIN.
+      - key: CORS_ORIGIN_REGEX
+        value: ^https://terraform-web(-[a-z0-9]+)?\.onrender\.com$
+      - key: FRONTEND_ORIGIN
+        value: http://localhost:5173
+      # ---- Optional OpenAI layer (re-words KB text only; validated; falls back to KB text) ----
+      - key: OPENAI_API_KEY
+        sync: false            # paste your key in the Render dashboard; never commit it
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
+      - key: ENABLE_LLM_REWRITE
+        value: "true"
+      - key: ENABLE_VISION
+        value: "true"
+      - key: OPENAI_VISION_MODEL
+        value: gpt-4.1-mini
+
+  - type: web
+    name: terraform-web
+    runtime: node
+    plan: free
+    buildCommand: cd frontend && npm ci && npm run build
+    startCommand: cd frontend && npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - frontend/**
+        - render.yaml
+    envVars:
+      - key: NODE_VERSION
+        value: 22.13.0
+      # Public URL of terraform-api, e.g. https://terraform-api.onrender.com (read at runtime — no rebuild needed)
+      - key: API_BASE_URL
+        sync: false

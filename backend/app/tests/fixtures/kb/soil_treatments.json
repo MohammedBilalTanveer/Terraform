@@ -1,0 +1,671 @@
+{
+ "collection": "soil_treatments",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "treat_planting_pits",
+   "topic": "soil_treatment",
+   "title": "Dig planting pits",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": [
+     "hardpan_continuous"
+    ]
+   },
+   "summary": "Fixture treatment: Dig planting pits.",
+   "instructions": [
+    "Fixture step for Dig planting pits."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Dig planting pits."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "soil_depth",
+   "priority": "do_first",
+   "purpose": "Fixture purpose: Dig planting pits.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [
+    "res_hand_tools",
+    "res_compost"
+   ],
+   "alternatives_if_missing": [
+    "Fixture: use a stick if no tools."
+   ],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_build_pits",
+    "label": "Dig pits"
+   }
+  },
+  {
+   "id": "treat_raised_beds",
+   "topic": "soil_treatment",
+   "title": "Build raised beds",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Build raised beds.",
+   "instructions": [
+    "Fixture step for Build raised beds."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Build raised beds."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "soil_depth",
+   "priority": "do_first",
+   "purpose": "Fixture purpose: Build raised beds.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [
+    "res_compost"
+   ],
+   "alternatives_if_missing": [
+    "Fixture: fill beds with leaf litter."
+   ],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_build_raised_beds",
+    "label": "Build raised beds"
+   }
+  },
+  {
+   "id": "treat_containers",
+   "topic": "soil_treatment",
+   "title": "Use containers or sacks",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "hardpan_continuous"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Use containers or sacks.",
+   "instructions": [
+    "Fixture step for Use containers or sacks."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Use containers or sacks."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "soil_depth",
+   "priority": "do_first",
+   "purpose": "Fixture purpose: Use containers or sacks.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [],
+   "alternatives_if_missing": [],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_prepare_containers",
+    "label": "Prepare containers"
+   }
+  },
+  {
+   "id": "treat_stone_lines",
+   "topic": "soil_treatment",
+   "title": "Lay stone lines along the contour",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "slope_slight",
+     "slope_steep",
+     "slope_unknown"
+    ],
+    "all_tags": [],
+    "none_tags": [
+     "pooling_widespread"
+    ]
+   },
+   "summary": "Fixture treatment: Lay stone lines along the contour.",
+   "instructions": [
+    "Fixture step for Lay stone lines along the contour."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Lay stone lines along the contour."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "water_capture",
+   "priority": "do_first",
+   "purpose": "Fixture purpose: Lay stone lines along the contour.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [
+    "res_stones"
+   ],
+   "alternatives_if_missing": [
+    "Fixture: use brush lines."
+   ],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_build_stone_lines",
+    "label": "Lay stone lines"
+   }
+  },
+  {
+   "id": "treat_overflow_pooling",
+   "topic": "soil_treatment",
+   "title": "Plan a safe overflow path",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "pooling_some",
+     "pooling_widespread"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Plan a safe overflow path.",
+   "instructions": [
+    "Fixture step for Plan a safe overflow path."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Plan a safe overflow path."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "water_capture",
+   "priority": "do_first",
+   "purpose": "Fixture purpose: Plan a safe overflow path.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [],
+   "alternatives_if_missing": [],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_plan_overflow",
+    "label": "Plan overflow"
+   }
+  },
+  {
+   "id": "treat_compost_fill",
+   "topic": "soil_treatment",
+   "title": "Mix compost into pits and beds",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": [
+     "no_compost"
+    ]
+   },
+   "summary": "Fixture treatment: Mix compost into pits and beds.",
+   "instructions": [
+    "Fixture step for Mix compost into pits and beds."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Mix compost into pits and beds."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "fertility",
+   "priority": "do_next",
+   "purpose": "Fixture purpose: Mix compost into pits and beds.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [
+    "res_compost"
+   ],
+   "alternatives_if_missing": [
+    "Fixture: use leaf litter."
+   ],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_fill_compost",
+    "label": "Fill compost"
+   }
+  },
+  {
+   "id": "treat_organic_alternatives",
+   "topic": "soil_treatment",
+   "title": "Use leaf litter and grass instead of compost",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "no_compost"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Use leaf litter and grass instead of compost.",
+   "instructions": [
+    "Fixture step for Use leaf litter and grass instead of compost."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Use leaf litter and grass instead of compost."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "fertility",
+   "priority": "do_next",
+   "purpose": "Fixture purpose: Use leaf litter and grass instead of compost.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [],
+   "alternatives_if_missing": [],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_gather_organic_matter",
+    "label": "Gather organic matter"
+   }
+  },
+  {
+   "id": "treat_mulch_cover",
+   "topic": "soil_treatment",
+   "title": "Cover soil with mulch",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Cover soil with mulch.",
+   "instructions": [
+    "Fixture step for Cover soil with mulch."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Cover soil with mulch."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "mulch",
+   "priority": "do_next",
+   "purpose": "Fixture purpose: Cover soil with mulch.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [
+    "res_mulch"
+   ],
+   "alternatives_if_missing": [
+    "Fixture: use dry grass tufts."
+   ],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_gather_mulch",
+    "label": "Gather mulch"
+   }
+  },
+  {
+   "id": "treat_water_saving",
+   "topic": "soil_treatment",
+   "title": "Save every drop of water",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "low_water"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Save every drop of water.",
+   "instructions": [
+    "Fixture step for Save every drop of water."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Save every drop of water."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "water_capture",
+   "priority": "do_next",
+   "purpose": "Fixture purpose: Save every drop of water.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [],
+   "alternatives_if_missing": [],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": null
+  },
+  {
+   "id": "treat_trial_plot",
+   "topic": "soil_treatment",
+   "title": "Start with a small trial plot",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Start with a small trial plot.",
+   "instructions": [
+    "Fixture step for Start with a small trial plot."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Start with a small trial plot."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "safety",
+   "priority": "do_first",
+   "purpose": "Fixture purpose: Start with a small trial plot.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [
+    "res_seeds"
+   ],
+   "alternatives_if_missing": [],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_mark_trial_plot",
+    "label": "Mark trial plot"
+   }
+  },
+  {
+   "id": "treat_fizz_recheck_optional",
+   "topic": "soil_treatment",
+   "title": "Optional fizz recheck",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Optional fizz recheck.",
+   "instructions": [
+    "Fixture step for Optional fizz recheck."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Optional fizz recheck."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "acidity",
+   "priority": "optional",
+   "purpose": "Fixture purpose: Optional fizz recheck.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [],
+   "alternatives_if_missing": [],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": {
+    "task_id": "task_recheck_fizz_optional",
+    "label": "Repeat fizz check"
+   }
+  },
+  {
+   "id": "treat_avoid_deep_pits_on_sheet",
+   "topic": "soil_treatment",
+   "title": "Do not dig deep pits into a rock sheet",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "hardpan_continuous"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Do not dig deep pits into a rock sheet.",
+   "instructions": [
+    "Fixture step for Do not dig deep pits into a rock sheet."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Do not dig deep pits into a rock sheet."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "soil_depth",
+   "priority": "avoid",
+   "purpose": "Fixture purpose: Do not dig deep pits into a rock sheet.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [],
+   "alternatives_if_missing": [],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": null
+  },
+  {
+   "id": "treat_avoid_trapping_water_flat",
+   "topic": "soil_treatment",
+   "title": "Do not trap water on flat pooling ground",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "pooling_some",
+     "pooling_widespread"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Do not trap water on flat pooling ground.",
+   "instructions": [
+    "Fixture step for Do not trap water on flat pooling ground."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Do not trap water on flat pooling ground."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "water_capture",
+   "priority": "avoid",
+   "purpose": "Fixture purpose: Do not trap water on flat pooling ground.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [],
+   "alternatives_if_missing": [],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": null
+  },
+  {
+   "id": "treat_avoid_burning_residue",
+   "topic": "soil_treatment",
+   "title": "Do not burn crop residue",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture treatment: Do not burn crop residue.",
+   "instructions": [
+    "Fixture step for Do not burn crop residue."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Do not burn crop residue."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "category": "fertility",
+   "priority": "avoid",
+   "purpose": "Fixture purpose: Do not burn crop residue.",
+   "target_constraints": [
+    "shallow soil"
+   ],
+   "requires_resources": [],
+   "alternatives_if_missing": [],
+   "expected_observable_change": [
+    "Fixture change."
+   ],
+   "task": null
+  }
+ ]
+}

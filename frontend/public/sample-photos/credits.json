@@ -1,0 +1,65 @@
+{
+  "note": "Freely licensed sample land photos from Wikimedia Commons, for demo/testing. They are user INPUT examples only — never used as knowledge-base evidence.",
+  "photos": [
+    {
+      "file": "/sample-photos/flat-plateau-pooling.jpg",
+      "title": "Flat plateau after rain",
+      "alt": "Flat lateritic plateau with water standing in low patches after rain.",
+      "credit": "Rohitjahnavi",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Low-elevation_Lateritic_Plateau_IMG_20220817_115924_01.jpg",
+      "original_title": "Low-elevation Lateritic Plateau IMG 20220817 115924 01.jpg"
+    },
+    {
+      "file": "/sample-photos/plateau-rock-lumps.jpg",
+      "title": "Plateau with rock lumps",
+      "alt": "Level plateau grassland with dark lateritic rock lumps showing through.",
+      "credit": "Rohitjahnavi",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Low-elevation_Lateritic_Plateau_IMG_20220817_115924_04.jpg",
+      "original_title": "Low-elevation Lateritic Plateau IMG 20220817 115924 04.jpg"
+    },
+    {
+      "file": "/sample-photos/red-stony-laterite.jpg",
+      "title": "Red stony ground",
+      "alt": "Red laterite stones and gravel with a few hardy shrubs.",
+      "credit": "Eloquenttheory",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Laterite_stones_01.jpg",
+      "original_title": "Laterite stones 01.jpg"
+    },
+    {
+      "file": "/sample-photos/laterite-boulders-rain.jpg",
+      "title": "Laterite boulders, rainy season",
+      "alt": "Reddish laterite boulders and gravel during the rainy season.",
+      "credit": "Eloquenttheory",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Laterite_stone_during_rainy_season_03.jpg",
+      "original_title": "Laterite stone during rainy season 03.jpg"
+    },
+    {
+      "file": "/sample-photos/laterite-rock-sheet.jpg",
+      "title": "Hard laterite crust",
+      "alt": "A continuous, pitted laterite rock surface (hard crust).",
+      "credit": "This Photo was taken by Timothy A. Gonsalves.  Feel free to use my photos, but p",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Laterite_Rock_Cola_Goa_Jan19_DSC06065.jpg",
+      "original_title": "Laterite Rock Cola Goa Jan19 DSC06065.jpg"
+    },
+    {
+      "file": "/sample-photos/dry-grass-thorn-scrub.jpg",
+      "title": "Dry grass & thorn scrub",
+      "alt": "Dry tufted grass with scattered thorny trees and shrubs.",
+      "credit": "T. R. Shankar Raman",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Tropical_dry_thorn_savanna_IMG_20220322_110322.jpg",
+      "original_title": "Tropical dry thorn savanna IMG 20220322 110322.jpg"
+    }
+  ]
+}

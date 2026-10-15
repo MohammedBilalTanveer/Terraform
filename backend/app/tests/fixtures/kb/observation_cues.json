@@ -1,0 +1,1206 @@
+{
+ "collection": "observation_cues",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "cue_reddish",
+   "topic": "observation_cue",
+   "title": "reddish surface",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue reddish surface.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for reddish surface."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "colour_reddish",
+   "label": "reddish surface",
+   "keywords": [
+    "reddish",
+    "red soil",
+    "rusty",
+    "laterite"
+   ],
+   "negation_guard": [
+    "not red"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "surface_colour",
+     "values": [
+      "reddish"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of reddish surface."
+  },
+  {
+   "id": "cue_stony",
+   "topic": "observation_cue",
+   "title": "stony ground",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue stony ground.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for stony ground."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "texture_stony",
+   "label": "stony ground",
+   "keywords": [
+    "stony",
+    "stones",
+    "rocky"
+   ],
+   "negation_guard": [
+    "no stones"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "surface_texture",
+     "values": [
+      "stony"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of stony ground."
+  },
+  {
+   "id": "cue_gravelly",
+   "topic": "observation_cue",
+   "title": "gravelly ground",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue gravelly ground.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for gravelly ground."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "texture_gravelly",
+   "label": "gravelly ground",
+   "keywords": [
+    "gravel",
+    "gravelly"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "surface_texture",
+     "values": [
+      "gravelly"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of gravelly ground."
+  },
+  {
+   "id": "cue_digging_shallow",
+   "topic": "observation_cue",
+   "title": "digging stops at about a hand's depth",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue digging stops at about a hand's depth.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for digging stops at about a hand's depth."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "digging_shallow",
+   "label": "digging stops at about a hand's depth",
+   "keywords": [
+    "hand's depth",
+    "hand depth",
+    "digging stops",
+    "blocks digging"
+   ],
+   "negation_guard": [
+    "digs deep easily"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "digging_resistance",
+     "values": [
+      "hard_layer_near_surface",
+      "varies_by_spot",
+      "rock_sheet_everywhere"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of digging stops at about a hand's depth."
+  },
+  {
+   "id": "cue_digging_deep",
+   "topic": "observation_cue",
+   "title": "can dig deep",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue can dig deep.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for can dig deep."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "digging_deep_possible",
+   "label": "can dig deep",
+   "keywords": [
+    "dig deep",
+    "digs easily"
+   ],
+   "negation_guard": [
+    "can't dig deep"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "digging_resistance",
+     "values": [
+      "can_dig_deep"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of can dig deep."
+  },
+  {
+   "id": "cue_hardpan_patchy",
+   "topic": "observation_cue",
+   "title": "hard layer varies by spot",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue hard layer varies by spot.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for hard layer varies by spot."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "hardpan_patchy",
+   "label": "hard layer varies by spot",
+   "keywords": [
+    "depth varies",
+    "deeper in places"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "digging_resistance",
+     "values": [
+      "varies_by_spot"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of hard layer varies by spot."
+  },
+  {
+   "id": "cue_hardpan_continuous",
+   "topic": "observation_cue",
+   "title": "continuous rock sheet",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue continuous rock sheet.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for continuous rock sheet."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "hardpan_continuous",
+   "label": "continuous rock sheet",
+   "keywords": [
+    "continuous sheet of rock",
+    "sheet of rock",
+    "rock everywhere"
+   ],
+   "negation_guard": [
+    "some spots deeper"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "digging_resistance",
+     "values": [
+      "rock_sheet_everywhere"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of continuous rock sheet."
+  },
+  {
+   "id": "cue_runoff_fast",
+   "topic": "observation_cue",
+   "title": "rain runs off fast",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue rain runs off fast.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for rain runs off fast."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "runoff_fast",
+   "label": "rain runs off fast",
+   "keywords": [
+    "runs off",
+    "runoff"
+   ],
+   "negation_guard": [
+    "no runoff"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "rain_behavior",
+     "values": [
+      "fast_runoff"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of rain runs off fast."
+  },
+  {
+   "id": "cue_soaks_in",
+   "topic": "observation_cue",
+   "title": "rain soaks in",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue rain soaks in.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for rain soaks in."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "rain_soaks_in",
+   "label": "rain soaks in",
+   "keywords": [
+    "soaks in"
+   ],
+   "negation_guard": [
+    "runs off",
+    "barely soaks"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "rain_behavior",
+     "values": [
+      "soaks_in"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of rain soaks in."
+  },
+  {
+   "id": "cue_slope_flat",
+   "topic": "observation_cue",
+   "title": "flat ground",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue flat ground.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for flat ground."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "slope_flat",
+   "label": "flat ground",
+   "keywords": [
+    "flat ground",
+    "completely flat",
+    "level ground"
+   ],
+   "negation_guard": [
+    "not flat"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "slope",
+     "values": [
+      "flat"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of flat ground."
+  },
+  {
+   "id": "cue_slope_slight",
+   "topic": "observation_cue",
+   "title": "gentle slope",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue gentle slope.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for gentle slope."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "slope_slight",
+   "label": "gentle slope",
+   "keywords": [
+    "gentle slope",
+    "slopes"
+   ],
+   "negation_guard": [
+    "no slope"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "slope",
+     "values": [
+      "slight"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of gentle slope."
+  },
+  {
+   "id": "cue_pooling_some",
+   "topic": "observation_cue",
+   "title": "water pools in places",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue water pools in places.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for water pools in places."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "pooling_some",
+   "label": "water pools in places",
+   "keywords": [
+    "pools",
+    "puddles"
+   ],
+   "negation_guard": [
+    "no puddles"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "pooling",
+     "values": [
+      "some_areas"
+     ]
+    },
+    {
+     "field": "rain_behavior",
+     "values": [
+      "pools"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of water pools in places."
+  },
+  {
+   "id": "cue_pooling_widespread",
+   "topic": "observation_cue",
+   "title": "water pools widely",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue water pools widely.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for water pools widely."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "pooling_widespread",
+   "label": "water pools widely",
+   "keywords": [
+    "pools everywhere",
+    "waterlogged"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "pooling",
+     "values": [
+      "widespread"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of water pools widely."
+  },
+  {
+   "id": "cue_pooling_none",
+   "topic": "observation_cue",
+   "title": "no pooling seen",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue no pooling seen.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for no pooling seen."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "pooling_none",
+   "label": "no pooling seen",
+   "keywords": [
+    "no pooling",
+    "no puddles"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "pooling",
+     "values": [
+      "none_seen"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of no pooling seen."
+  },
+  {
+   "id": "cue_rain_just_started",
+   "topic": "observation_cue",
+   "title": "rains just started",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue rains just started.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for rains just started."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "rain_just_started",
+   "label": "rains just started",
+   "keywords": [
+    "rains just started",
+    "first rains"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "rain_window",
+     "values": [
+      "just_started"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of rains just started."
+  },
+  {
+   "id": "cue_rain_ending",
+   "topic": "observation_cue",
+   "title": "rains ending",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue rains ending.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for rains ending."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "rain_ending",
+   "label": "rains ending",
+   "keywords": [
+    "rains ending",
+    "last rains"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "rain_window",
+     "values": [
+      "ending"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of rains ending."
+  },
+  {
+   "id": "cue_dry_grass",
+   "topic": "observation_cue",
+   "title": "dry grass in tufts",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue dry grass in tufts.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for dry grass in tufts."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "vegetation_dry_grass",
+   "label": "dry grass in tufts",
+   "keywords": [
+    "dry grass",
+    "tufts"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "vegetation",
+     "values": [
+      "dry_grass"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of dry grass in tufts."
+  },
+  {
+   "id": "cue_local_trees_only",
+   "topic": "observation_cue",
+   "title": "neighbours say only trees grow here",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue neighbours say only trees grow here.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for neighbours say only trees grow here."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "local_advice_trees_only",
+   "label": "neighbours say only trees grow here",
+   "keywords": [
+    "only tree",
+    "only trees",
+    "trees only"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "local_advice",
+    "description"
+   ],
+   "field_matches": [],
+   "meaning": "Fixture meaning of neighbours say only trees grow here."
+  },
+  {
+   "id": "cue_local_other",
+   "topic": "observation_cue",
+   "title": "other local advice",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue other local advice.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for other local advice."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "local_advice_other",
+   "label": "other local advice",
+   "keywords": [
+    "grow",
+    "plant",
+    "sow"
+   ],
+   "negation_guard": [
+    "only tree",
+    "only trees"
+   ],
+   "text_fields": [
+    "local_advice"
+   ],
+   "field_matches": [],
+   "meaning": "Fixture meaning of other local advice."
+  },
+  {
+   "id": "cue_res_compost",
+   "topic": "observation_cue",
+   "title": "compost",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue compost.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for compost."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "res_compost",
+   "label": "compost",
+   "keywords": [
+    "compost"
+   ],
+   "negation_guard": [
+    "no compost"
+   ],
+   "text_fields": [
+    "resources_text",
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "available_resources",
+     "values": [
+      "compost"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of compost."
+  },
+  {
+   "id": "cue_res_seeds",
+   "topic": "observation_cue",
+   "title": "seeds",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue seeds.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for seeds."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "res_seeds",
+   "label": "seeds",
+   "keywords": [
+    "seeds"
+   ],
+   "negation_guard": [
+    "no seeds"
+   ],
+   "text_fields": [
+    "resources_text"
+   ],
+   "field_matches": [
+    {
+     "field": "available_resources",
+     "values": [
+      "seeds"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of seeds."
+  },
+  {
+   "id": "cue_res_hand_tools",
+   "topic": "observation_cue",
+   "title": "hand tools",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue hand tools.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for hand tools."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "res_hand_tools",
+   "label": "hand tools",
+   "keywords": [
+    "hoe"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "resources_text"
+   ],
+   "field_matches": [
+    {
+     "field": "available_resources",
+     "values": [
+      "hand_tools"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of hand tools."
+  },
+  {
+   "id": "cue_no_compost",
+   "topic": "observation_cue",
+   "title": "no compost or manure",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue no compost or manure.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for no compost or manure."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "no_compost",
+   "label": "no compost or manure",
+   "keywords": [
+    "no compost",
+    "no manure"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "resources_text",
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "available_resources",
+     "values": [
+      "none_compost"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of no compost or manure."
+  },
+  {
+   "id": "cue_low_water",
+   "topic": "observation_cue",
+   "title": "little stored water",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue little stored water.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for little stored water."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "low_water",
+   "label": "little stored water",
+   "keywords": [
+    "little water",
+    "water is scarce"
+   ],
+   "negation_guard": [],
+   "text_fields": [
+    "resources_text",
+    "description"
+   ],
+   "field_matches": [
+    {
+     "field": "available_resources",
+     "values": [
+      "little_water"
+     ]
+    }
+   ],
+   "meaning": "Fixture meaning of little stored water."
+  },
+  {
+   "id": "cue_fizz_seen",
+   "topic": "observation_cue",
+   "title": "baking soda fizzed",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture cue baking soda fizzed.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for baking soda fizzed."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "tag": "fizz_seen",
+   "label": "baking soda fizzed",
+   "keywords": [
+    "fizzed"
+   ],
+   "negation_guard": [
+    "no fizz"
+   ],
+   "text_fields": [
+    "description"
+   ],
+   "field_matches": [],
+   "meaning": "Fixture meaning of baking soda fizzed."
+  }
+ ]
+}

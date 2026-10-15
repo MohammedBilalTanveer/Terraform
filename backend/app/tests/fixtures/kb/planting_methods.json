@@ -1,0 +1,339 @@
+{
+ "collection": "planting_methods",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "plant_planting_pits",
+   "topic": "planting_method",
+   "title": "Planting pits",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": [
+     "hardpan_continuous"
+    ]
+   },
+   "summary": "Fixture method: Planting pits.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Planting pits."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "planting_pit",
+   "steps": [
+    "Fixture step 1 of Planting pits.",
+    "Fixture step 2 of Planting pits."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": null
+  },
+  {
+   "id": "plant_raised_beds",
+   "topic": "planting_method",
+   "title": "Raised beds",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture method: Raised beds.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Raised beds."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "raised_bed",
+   "steps": [
+    "Fixture step 1 of Raised beds.",
+    "Fixture step 2 of Raised beds."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": null
+  },
+  {
+   "id": "plant_containers",
+   "topic": "planting_method",
+   "title": "Containers and sacks",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "hardpan_continuous"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture method: Containers and sacks.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Containers and sacks."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "container",
+   "steps": [
+    "Fixture step 1 of Containers and sacks.",
+    "Fixture step 2 of Containers and sacks."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": null
+  },
+  {
+   "id": "plant_stone_lines",
+   "topic": "planting_method",
+   "title": "Stone lines",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "slope_slight",
+     "slope_steep",
+     "slope_unknown"
+    ],
+    "all_tags": [],
+    "none_tags": [
+     "pooling_widespread"
+    ]
+   },
+   "summary": "Fixture method: Stone lines.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Stone lines."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "stone_line",
+   "steps": [
+    "Fixture step 1 of Stone lines.",
+    "Fixture step 2 of Stone lines."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": null
+  },
+  {
+   "id": "plant_direct_sowing",
+   "topic": "planting_method",
+   "title": "Direct sowing",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture method: Direct sowing.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Direct sowing."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "sowing",
+   "steps": [
+    "Fixture step 1 of Direct sowing.",
+    "Fixture step 2 of Direct sowing."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": {
+    "task_id": "task_sow_seeds",
+    "label": "Sow seeds"
+   }
+  },
+  {
+   "id": "plant_mulch_after_sowing",
+   "topic": "planting_method",
+   "title": "Mulch after sowing",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture method: Mulch after sowing.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Mulch after sowing."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "mulching",
+   "steps": [
+    "Fixture step 1 of Mulch after sowing.",
+    "Fixture step 2 of Mulch after sowing."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": {
+    "task_id": "task_mulch_after_sowing",
+    "label": "Mulch"
+   }
+  },
+  {
+   "id": "plant_rainwater_harvest",
+   "topic": "planting_method",
+   "title": "Store rainwater",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture method: Store rainwater.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Store rainwater."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "water_storage",
+   "steps": [
+    "Fixture step 1 of Store rainwater.",
+    "Fixture step 2 of Store rainwater."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": null
+  },
+  {
+   "id": "plant_buried_clay_pot",
+   "topic": "planting_method",
+   "title": "Buried clay pot watering",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture method: Buried clay pot watering.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Buried clay pot watering."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "irrigation",
+   "steps": [
+    "Fixture step 1 of Buried clay pot watering.",
+    "Fixture step 2 of Buried clay pot watering."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": null
+  },
+  {
+   "id": "plant_bottle_drip",
+   "topic": "planting_method",
+   "title": "Bottle drip",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "low_water"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture method: Bottle drip.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Bottle drip."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "irrigation",
+   "steps": [
+    "Fixture step 1 of Bottle drip.",
+    "Fixture step 2 of Bottle drip."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": null
+  }
+ ]
+}

@@ -1,0 +1,477 @@
+{
+ "collection": "crop_profiles",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "crop_pearl_millet",
+   "topic": "crop",
+   "title": "Pearl millet",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture crop Pearl millet.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Pearl millet."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "name": "Pearl millet",
+   "local_names": [
+    "Pearl millet local"
+   ],
+   "category": "field_crop",
+   "suitability_tags": [
+    "acid_tolerant",
+    "shallow_rooting_ok",
+    "drought_tolerant",
+    "short_season",
+    "low_fertility_ok"
+   ],
+   "cautions": [
+    {
+     "when_tag": "pooling_widespread",
+     "effect": "penalize",
+     "reason": "Fixture caution: Pearl millet with pooling_widespread."
+    }
+   ],
+   "water_needs_plain": "Fixture water needs of Pearl millet.",
+   "rooting_notes": "Fixture rooting of Pearl millet.",
+   "maturity_weeks": {
+    "min": 10,
+    "max": 13
+   },
+   "maturity_description": "Fixture maturity of Pearl millet.",
+   "resource_needs": [
+    "res_seeds"
+   ],
+   "care_stage_ids": [
+    "care_pearl_millet_flowering"
+   ],
+   "pest_ids": [
+    "pest_shoot_fly"
+   ],
+   "harvest_profile_id": "harvest_pearl_millet",
+   "planting_method_ids": [
+    "plant_direct_sowing"
+   ]
+  },
+  {
+   "id": "crop_cowpea",
+   "topic": "crop",
+   "title": "Cowpea",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture crop Cowpea.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Cowpea."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "name": "Cowpea",
+   "local_names": [
+    "Cowpea local"
+   ],
+   "category": "field_crop",
+   "suitability_tags": [
+    "acid_tolerant",
+    "drought_tolerant",
+    "short_season",
+    "nitrogen_fixing",
+    "shallow_rooting_ok"
+   ],
+   "cautions": [],
+   "water_needs_plain": "Fixture water needs of Cowpea.",
+   "rooting_notes": "Fixture rooting of Cowpea.",
+   "maturity_weeks": {
+    "min": 9,
+    "max": 12
+   },
+   "maturity_description": "Fixture maturity of Cowpea.",
+   "resource_needs": [
+    "res_seeds"
+   ],
+   "care_stage_ids": [],
+   "pest_ids": [],
+   "harvest_profile_id": "harvest_cowpea",
+   "planting_method_ids": []
+  },
+  {
+   "id": "crop_finger_millet",
+   "topic": "crop",
+   "title": "Finger millet",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture crop Finger millet.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Finger millet."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "name": "Finger millet",
+   "local_names": [
+    "Finger millet local"
+   ],
+   "category": "field_crop",
+   "suitability_tags": [
+    "acid_tolerant",
+    "low_fertility_ok",
+    "shallow_rooting_ok"
+   ],
+   "cautions": [
+    {
+     "when_tag": "season_unknown",
+     "effect": "penalize",
+     "reason": "Fixture caution: Finger millet with season_unknown."
+    }
+   ],
+   "water_needs_plain": "Fixture water needs of Finger millet.",
+   "rooting_notes": "Fixture rooting of Finger millet.",
+   "maturity_weeks": {
+    "min": 14,
+    "max": 18
+   },
+   "maturity_description": "Fixture maturity of Finger millet.",
+   "resource_needs": [
+    "res_seeds"
+   ],
+   "care_stage_ids": [],
+   "pest_ids": [],
+   "harvest_profile_id": null,
+   "planting_method_ids": []
+  },
+  {
+   "id": "crop_maize",
+   "topic": "crop",
+   "title": "Maize",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture crop Maize.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Maize."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "name": "Maize",
+   "local_names": [
+    "Maize local"
+   ],
+   "category": "field_crop",
+   "suitability_tags": [
+    "high_water_demand",
+    "needs_deep_soil"
+   ],
+   "cautions": [
+    {
+     "when_tag": "hardpan_continuous",
+     "effect": "penalize",
+     "reason": "Fixture caution: Maize with hardpan_continuous."
+    }
+   ],
+   "water_needs_plain": "Fixture water needs of Maize.",
+   "rooting_notes": "Fixture rooting of Maize.",
+   "maturity_weeks": {
+    "min": 14,
+    "max": 18
+   },
+   "maturity_description": "Fixture maturity of Maize.",
+   "resource_needs": [
+    "res_seeds",
+    "res_compost"
+   ],
+   "care_stage_ids": [],
+   "pest_ids": [],
+   "harvest_profile_id": null,
+   "planting_method_ids": []
+  },
+  {
+   "id": "crop_rice",
+   "topic": "crop",
+   "title": "Upland rice",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture crop Upland rice.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Upland rice."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "name": "Upland rice",
+   "local_names": [
+    "Upland rice local"
+   ],
+   "category": "field_crop",
+   "suitability_tags": [
+    "high_water_demand"
+   ],
+   "cautions": [
+    {
+     "when_tag": "low_water",
+     "effect": "exclude",
+     "reason": "Fixture caution: Upland rice with low_water."
+    }
+   ],
+   "water_needs_plain": "Fixture water needs of Upland rice.",
+   "rooting_notes": "Fixture rooting of Upland rice.",
+   "maturity_weeks": {
+    "min": 16,
+    "max": 20
+   },
+   "maturity_description": "Fixture maturity of Upland rice.",
+   "resource_needs": [
+    "res_seeds"
+   ],
+   "care_stage_ids": [],
+   "pest_ids": [],
+   "harvest_profile_id": null,
+   "planting_method_ids": []
+  },
+  {
+   "id": "crop_horse_gram",
+   "topic": "crop",
+   "title": "Horse gram",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture crop Horse gram.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Horse gram."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "name": "Horse gram",
+   "local_names": [
+    "Horse gram local"
+   ],
+   "category": "field_crop",
+   "suitability_tags": [
+    "drought_tolerant",
+    "nitrogen_fixing",
+    "low_fertility_ok"
+   ],
+   "cautions": [
+    {
+     "when_tag": "pooling_widespread",
+     "effect": "exclude",
+     "reason": "Fixture caution: Horse gram with pooling_widespread."
+    }
+   ],
+   "water_needs_plain": "Fixture water needs of Horse gram.",
+   "rooting_notes": "Fixture rooting of Horse gram.",
+   "maturity_weeks": {
+    "min": 12,
+    "max": 16
+   },
+   "maturity_description": "Fixture maturity of Horse gram.",
+   "resource_needs": [
+    "res_seeds"
+   ],
+   "care_stage_ids": [],
+   "pest_ids": [],
+   "harvest_profile_id": null,
+   "planting_method_ids": []
+  },
+  {
+   "id": "crop_sunn_hemp",
+   "topic": "crop",
+   "title": "Sunn hemp green manure",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture crop Sunn hemp green manure.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Sunn hemp green manure."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "name": "Sunn hemp green manure",
+   "local_names": [
+    "Sunn hemp green manure local"
+   ],
+   "category": "soil_builder",
+   "suitability_tags": [
+    "nitrogen_fixing",
+    "drought_tolerant",
+    "short_season",
+    "shallow_rooting_ok",
+    "acid_tolerant",
+    "low_fertility_ok"
+   ],
+   "cautions": [],
+   "water_needs_plain": "Fixture water needs of Sunn hemp green manure.",
+   "rooting_notes": "Fixture rooting of Sunn hemp green manure.",
+   "maturity_weeks": {
+    "min": 8,
+    "max": 10
+   },
+   "maturity_description": "Fixture maturity of Sunn hemp green manure.",
+   "resource_needs": [
+    "res_seeds"
+   ],
+   "care_stage_ids": [],
+   "pest_ids": [],
+   "harvest_profile_id": null,
+   "planting_method_ids": []
+  },
+  {
+   "id": "crop_cashew",
+   "topic": "crop",
+   "title": "Cashew",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture crop Cashew.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Cashew."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "name": "Cashew",
+   "local_names": [
+    "Cashew local"
+   ],
+   "category": "tree",
+   "suitability_tags": [
+    "acid_tolerant",
+    "drought_tolerant",
+    "needs_deep_soil"
+   ],
+   "cautions": [
+    {
+     "when_tag": "hardpan_continuous",
+     "effect": "penalize",
+     "reason": "Fixture caution: Cashew with hardpan_continuous."
+    }
+   ],
+   "water_needs_plain": "Fixture water needs of Cashew.",
+   "rooting_notes": "Fixture rooting of Cashew.",
+   "maturity_weeks": {
+    "min": 156,
+    "max": 260
+   },
+   "maturity_description": "Fixture maturity of Cashew.",
+   "resource_needs": [
+    "res_hand_tools"
+   ],
+   "care_stage_ids": [],
+   "pest_ids": [],
+   "harvest_profile_id": null,
+   "planting_method_ids": []
+  }
+ ]
+}

@@ -1,0 +1,1189 @@
+{
+  "collection": "care_stages",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "care_germination",
+      "topic": "care_stage",
+      "title": "Germination",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Germination: From sowing until seedlings are up, usually the first week or two.",
+      "instructions": [
+        "Check sown spots every day or two.",
+        "Break any crust over sown spots gently with a fingertip.",
+        "Note in the journal how many spots came up."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "*"
+      ],
+      "stage": "germination",
+      "order": 1,
+      "label": "Germination",
+      "timing_description": "From sowing until seedlings are up, usually the first week or two.",
+      "water": "Soil must stay moist. If a dry gap follows sowing, give a cupful of stored water per spot every couple of days.",
+      "mulch": "Do not cover the sown spot with mulch until seedlings show; mulch the surrounding soil instead.",
+      "nutrients": "Rely on the compost or organic matter already mixed into pits and beds; add nothing on top of seeds.",
+      "weeds": "Pull weeds by hand around sowing spots so they do not compete.",
+      "watch_for": [
+        "Seeds not coming up",
+        "Crust forming over sown spots",
+        "Ants, termites or birds taking seed"
+      ],
+      "dry_spell": "If the soil dries out before seedlings appear, water sparingly from storage; if many spots fail, re-sow with reserved seed once rains return.",
+      "actions": [
+        "Check sown spots every day or two.",
+        "Break any crust over sown spots gently with a fingertip.",
+        "Note in the journal how many spots came up."
+      ]
+    },
+    {
+      "id": "care_seedling",
+      "topic": "care_stage",
+      "title": "Seedling",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Seedling: From emergence to a few weeks old, with several leaves.",
+      "instructions": [
+        "Thin to the strongest plants per spot.",
+        "Mulch.",
+        "Weed by hand.",
+        "Check for pests every few days."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief",
+        "src_fao_soil_biodiversity_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "*"
+      ],
+      "stage": "seedling",
+      "order": 2,
+      "label": "Seedling",
+      "timing_description": "From emergence to a few weeks old, with several leaves.",
+      "water": "Water only in dry spells, a cupful at the base in the morning or evening.",
+      "mulch": "Spread mulch around seedlings, a finger's width away from the stems, about a hand's depth.",
+      "nutrients": "If seedlings look pale, work a handful of compost or rotted manure into the soil around (not touching) them.",
+      "weeds": "Weed by hand regularly; weeds steal scarce water and nutrients.",
+      "watch_for": [
+        "Pale or yellow seedlings",
+        "Cut-off seedlings (crickets, cutworms)",
+        "Grasshoppers",
+        "Termites at the base"
+      ],
+      "dry_spell": "In a dry spell, thicken the mulch, shade with a few leafy twigs, and give stored water to the weakest pits first.",
+      "actions": [
+        "Thin to the strongest plants per spot.",
+        "Mulch.",
+        "Weed by hand.",
+        "Check for pests every few days."
+      ]
+    },
+    {
+      "id": "care_vegetative",
+      "topic": "care_stage",
+      "title": "Leafy growth",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Leafy growth: From a few weeks after sowing until flowering begins.",
+      "instructions": [
+        "Weed and mulch.",
+        "Top up compost if plants look hungry.",
+        "Watch for pests and striga."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "*"
+      ],
+      "stage": "vegetative",
+      "order": 3,
+      "label": "Leafy growth",
+      "timing_description": "From a few weeks after sowing until flowering begins.",
+      "water": "Rain should carry the crop; use stored water only if plants wilt and do not recover by morning.",
+      "mulch": "Keep the mulch topped up as termites and weather break it down.",
+      "nutrients": "A top-up of compost or rotted manure around plants can help if they look pale; no fixed recipe applies.",
+      "weeds": "Weed once or twice more; lay pulled weeds (without seeds) as mulch.",
+      "watch_for": [
+        "Yellowing older leaves",
+        "Aphids",
+        "Leaf spots",
+        "Striga (witchweed) on millet roots"
+      ],
+      "dry_spell": "The mid-season dry spell often comes now: thicken mulch, stop all weeding that disturbs soil, and save water for flowering.",
+      "actions": [
+        "Weed and mulch.",
+        "Top up compost if plants look hungry.",
+        "Watch for pests and striga."
+      ]
+    },
+    {
+      "id": "care_flowering",
+      "topic": "care_stage",
+      "title": "Flowering",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Flowering: When flowers or heads appear, until grain or pods start filling.",
+      "instructions": [
+        "Watch for pests daily.",
+        "Protect heads from birds.",
+        "Use stored water if plants wilt."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "*"
+      ],
+      "stage": "flowering",
+      "order": 4,
+      "label": "Flowering",
+      "timing_description": "When flowers or heads appear, until grain or pods start filling.",
+      "water": "This is the most water-sensitive stage: if a dry spell hits now, use stored water on the best plants first.",
+      "mulch": "Keep the soil fully covered.",
+      "nutrients": "Do not add fresh manure now; the plant is using what is in the soil.",
+      "weeds": "Light hand-weeding only; avoid disturbing roots.",
+      "watch_for": [
+        "Flowers dropping in dry spells",
+        "Pod borers",
+        "Birds on heads",
+        "Aphids"
+      ],
+      "dry_spell": "Prioritise stored water for flowering plants; shade is less important than moisture now.",
+      "actions": [
+        "Watch for pests daily.",
+        "Protect heads from birds.",
+        "Use stored water if plants wilt."
+      ]
+    },
+    {
+      "id": "care_pre_harvest",
+      "topic": "care_stage",
+      "title": "Ripening",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Ripening: From grain or pod filling until harvest.",
+      "instructions": [
+        "Guard against birds.",
+        "Prepare a clean, dry place and containers for drying and storage.",
+        "Choose the best plants for seed saving."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "*"
+      ],
+      "stage": "pre_harvest",
+      "order": 5,
+      "label": "Ripening",
+      "timing_description": "From grain or pod filling until harvest.",
+      "water": "Stop watering as grain or pods dry; dry weather now helps.",
+      "mulch": "Leave mulch in place; it will be the next season's organic matter.",
+      "nutrients": "No feeding needed.",
+      "weeds": "Pull any weeds before they set seed.",
+      "watch_for": [
+        "Birds and rodents",
+        "Mould on heads or pods in wet weather",
+        "Pod borers"
+      ],
+      "dry_spell": "A dry spell now usually does little harm; harvest promptly if plants are drying fast.",
+      "actions": [
+        "Guard against birds.",
+        "Prepare a clean, dry place and containers for drying and storage.",
+        "Choose the best plants for seed saving."
+      ]
+    },
+    {
+      "id": "care_millet_vegetative",
+      "topic": "care_stage",
+      "title": "Millet leafy growth and tillering",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Millet leafy growth and tillering: From about three weeks after sowing until heads begin to show.",
+      "instructions": [
+        "Pull striga before it flowers.",
+        "Weed and mulch.",
+        "Note which pits grow best."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_iita_propas_striga",
+        "src_farmradio_striga",
+        "src_tnau_ragi"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_little_millet",
+        "crop_sorghum"
+      ],
+      "stage": "vegetative",
+      "order": 3,
+      "label": "Millet leafy growth and tillering",
+      "timing_description": "From about three weeks after sowing until heads begin to show.",
+      "water": "Millets tolerate short dry spells; water only if plants roll their leaves all day and stay rolled by morning.",
+      "mulch": "Keep mulch between plants; it reduces crusting after hard rain.",
+      "nutrients": "If leaves are pale, add a handful of compost or rotted manure around each pit; a legume neighbour also helps.",
+      "weeds": "Weed by hand early; millets are slow to cover the ground.",
+      "watch_for": [
+        "Striga (witchweed) with pink or purple flowers near millet",
+        "Stem borers (dead central leaf)",
+        "Grasshoppers",
+        "Termites"
+      ],
+      "dry_spell": "Thicken mulch; millets usually recover when rain returns.",
+      "actions": [
+        "Pull striga before it flowers.",
+        "Weed and mulch.",
+        "Note which pits grow best."
+      ]
+    },
+    {
+      "id": "care_millet_flowering",
+      "topic": "care_stage",
+      "title": "Millet heading and flowering",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Millet heading and flowering: When heads emerge until grains begin to fill.",
+      "instructions": [
+        "Start bird scaring as grains fill.",
+        "Pull striga before it seeds and remove it from the field."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_ragi",
+        "src_croptrust_pearl_millet"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_finger_millet",
+        "crop_pearl_millet",
+        "crop_little_millet",
+        "crop_sorghum"
+      ],
+      "stage": "flowering",
+      "order": 4,
+      "label": "Millet heading and flowering",
+      "timing_description": "When heads emerge until grains begin to fill.",
+      "water": "Moisture now matters most; save stored water for this stage.",
+      "mulch": "Keep soil covered.",
+      "nutrients": "No feeding needed now.",
+      "weeds": "Pull striga and weeds before they set seed.",
+      "watch_for": [
+        "Birds on young heads",
+        "Leaf and head spots (blast) in humid weather",
+        "Striga flowering"
+      ],
+      "dry_spell": "If a dry spell hits now, give stored water to the best pits; heads that do not fill will not recover later.",
+      "actions": [
+        "Start bird scaring as grains fill.",
+        "Pull striga before it seeds and remove it from the field."
+      ]
+    },
+    {
+      "id": "care_legume_vegetative",
+      "topic": "care_stage",
+      "title": "Legume leafy growth",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Legume leafy growth: From a few weeks after sowing until flowering.",
+      "instructions": [
+        "Check undersides of leaves for aphids.",
+        "Open an overflow notch if water stands in pits."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_cowpea",
+        "src_tnau_horsegram"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cowpea",
+        "crop_horse_gram",
+        "crop_pigeon_pea",
+        "crop_groundnut"
+      ],
+      "stage": "vegetative",
+      "order": 3,
+      "label": "Legume leafy growth",
+      "timing_description": "From a few weeks after sowing until flowering.",
+      "water": "Legumes dislike waterlogging more than dryness: make sure water drains from pits and beds after heavy rain.",
+      "mulch": "Mulch around plants; keep it off stems.",
+      "nutrients": "Legumes make much of their own nitrogen; compost already in the pit is usually enough.",
+      "weeds": "Weed by hand early, before the vines spread.",
+      "watch_for": [
+        "Aphids on young shoots",
+        "Leaf spots",
+        "Termites",
+        "Waterlogged, yellowing plants after storms"
+      ],
+      "dry_spell": "Thicken mulch; pick only a few leaves for food during dry spells.",
+      "actions": [
+        "Check undersides of leaves for aphids.",
+        "Open an overflow notch if water stands in pits."
+      ]
+    },
+    {
+      "id": "care_legume_flowering",
+      "topic": "care_stage",
+      "title": "Legume flowering and pod set",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Legume flowering and pod set: When flowers appear until pods are filling.",
+      "instructions": [
+        "Check flowers and pods every few days; hand-pick caterpillars.",
+        "Use neem extract only if pests are building up."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_cowpea"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cowpea",
+        "crop_horse_gram",
+        "crop_pigeon_pea",
+        "crop_groundnut"
+      ],
+      "stage": "flowering",
+      "order": 4,
+      "label": "Legume flowering and pod set",
+      "timing_description": "When flowers appear until pods are filling.",
+      "water": "Flowers drop if the plant is very dry; use stored water now if a dry spell comes.",
+      "mulch": "Keep soil covered.",
+      "nutrients": "No feeding needed.",
+      "weeds": "Light hand-weeding only.",
+      "watch_for": [
+        "Pod borers (holes in pods, caterpillars inside flowers)",
+        "Aphids on flowers and pods",
+        "Blister beetles on flowers"
+      ],
+      "dry_spell": "Water the best plants first; a short dry spell can cost many flowers.",
+      "actions": [
+        "Check flowers and pods every few days; hand-pick caterpillars.",
+        "Use neem extract only if pests are building up."
+      ]
+    },
+    {
+      "id": "care_groundnut_flowering",
+      "topic": "care_stage",
+      "title": "Groundnut flowering and pegging",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Groundnut flowering and pegging: When flowers appear and pegs push into the soil.",
+      "instructions": [
+        "Gently loosen crusted soil around plants before pegging begins."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_groundnut"
+      ],
+      "stage": "flowering",
+      "order": 4,
+      "label": "Groundnut flowering and pegging",
+      "timing_description": "When flowers appear and pegs push into the soil.",
+      "water": "Pegs need moist, loose soil; water from storage if the bed surface is dry and hard.",
+      "mulch": "Keep mulch light near the plant so pegs can reach the soil; mulch the bed edges thickly.",
+      "nutrients": "No feeding needed.",
+      "weeds": "Do not disturb the soil around plants once pegging starts.",
+      "watch_for": [
+        "Pegs failing to enter hard soil",
+        "Termites in pods",
+        "Leaf spots"
+      ],
+      "dry_spell": "Keep the bed surface moist and loose; pegging fails in dry crusted soil.",
+      "actions": [
+        "Gently loosen crusted soil around plants before pegging begins."
+      ]
+    },
+    {
+      "id": "care_tree_planting",
+      "topic": "care_stage",
+      "title": "Tree planting-out",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Tree planting-out: From planting the seedling or cutting until it shows new leaves, the first weeks.",
+      "instructions": [
+        "Firm soil around the seedling after heavy rain.",
+        "Fence with thorny branches against animals."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_ccari_cashew_dss"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cashew",
+        "crop_mango",
+        "crop_gliricidia",
+        "crop_neem",
+        "crop_moringa",
+        "crop_pineapple"
+      ],
+      "stage": "germination",
+      "order": 1,
+      "label": "Tree planting-out",
+      "timing_description": "From planting the seedling or cutting until it shows new leaves, the first weeks.",
+      "water": "Keep the root zone moist: a cupful or two from storage every few days if rain stops.",
+      "mulch": "Mulch widely around the tree, a hand's width clear of the stem.",
+      "nutrients": "Compost is already in the enlarged pit; add nothing fresh against the roots.",
+      "weeds": "Keep a circle around the tree free of weeds.",
+      "watch_for": [
+        "Wilting that does not recover by morning",
+        "Termites at the stem base",
+        "Grazing animals"
+      ],
+      "dry_spell": "Shade with a few leafy branches and give stored water every few days.",
+      "actions": [
+        "Firm soil around the seedling after heavy rain.",
+        "Fence with thorny branches against animals."
+      ]
+    },
+    {
+      "id": "care_tree_seedling",
+      "topic": "care_stage",
+      "title": "Young tree, first wet season",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Young tree, first wet season: From new leaves until the end of the first wet season.",
+      "instructions": [
+        "Repair the basin or half-moon after storms.",
+        "Keep thorny protection in place."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_cashew_sri_lanka"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cashew",
+        "crop_mango",
+        "crop_gliricidia",
+        "crop_neem",
+        "crop_moringa",
+        "crop_pineapple"
+      ],
+      "stage": "seedling",
+      "order": 2,
+      "label": "Young tree, first wet season",
+      "timing_description": "From new leaves until the end of the first wet season.",
+      "water": "Rain should be enough; water only in long dry spells.",
+      "mulch": "Top up mulch before the rains end.",
+      "nutrients": "A bucketful of compost or rotted manure worked lightly around the basin edge can help.",
+      "weeds": "Keep the circle around the tree weed-free.",
+      "watch_for": [
+        "Termites",
+        "Leaf-eating insects",
+        "Animals"
+      ],
+      "dry_spell": "Shade and water from storage during long dry spells.",
+      "actions": [
+        "Repair the basin or half-moon after storms.",
+        "Keep thorny protection in place."
+      ]
+    },
+    {
+      "id": "care_tree_vegetative",
+      "topic": "care_stage",
+      "title": "Tree through its first dry seasons",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Tree through its first dry seasons: The first one or two dry seasons after planting.",
+      "instructions": [
+        "Clear a firebreak around young trees.",
+        "Extend the basin as the tree grows."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [
+        "Never burn grass near young trees."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_cashew_sri_lanka"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cashew",
+        "crop_mango",
+        "crop_gliricidia",
+        "crop_neem",
+        "crop_moringa",
+        "crop_pineapple"
+      ],
+      "stage": "vegetative",
+      "order": 3,
+      "label": "Tree through its first dry seasons",
+      "timing_description": "The first one or two dry seasons after planting.",
+      "water": "Give stored water now and then through the first dry season, more for mango than for cashew or gliricidia.",
+      "mulch": "A thick mulch ring is the most important protection in the dry season.",
+      "nutrients": "Add compost or leaf litter to the mulch ring before each wet season.",
+      "weeds": "Cut (do not dig) weeds in the ring.",
+      "watch_for": [
+        "Leaf drop and dieback in the dry season",
+        "Termites",
+        "Fire risk from dry grass nearby"
+      ],
+      "dry_spell": "Mulch, shade and occasional stored water; clear dry grass from around young trees as a firebreak.",
+      "actions": [
+        "Clear a firebreak around young trees.",
+        "Extend the basin as the tree grows."
+      ]
+    },
+    {
+      "id": "care_tree_flowering",
+      "topic": "care_stage",
+      "title": "Tree flowering and fruit set",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Tree flowering and fruit set: Once trees are old enough to flower, usually in the dry season.",
+      "instructions": [
+        "Clear the ground beneath the tree before nut fall."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_fao_cashew_minor_oil_crops"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cashew",
+        "crop_mango"
+      ],
+      "stage": "flowering",
+      "order": 4,
+      "label": "Tree flowering and fruit set",
+      "timing_description": "Once trees are old enough to flower, usually in the dry season.",
+      "water": "Mature trees need no watering; avoid watering during flowering unless trees are very stressed.",
+      "mulch": "Keep leaf litter under the canopy.",
+      "nutrients": "Add compost to the basin before the rains, not during flowering.",
+      "weeds": "Keep the area under the canopy clear for collecting fallen nuts or fruit.",
+      "watch_for": [
+        "Shoot and flower damage by sucking bugs (such as tea mosquito bug on cashew)",
+        "Flower blight in humid weather"
+      ],
+      "dry_spell": "Mature trees cope; young trees in their first flowering may be helped with stored water.",
+      "actions": [
+        "Clear the ground beneath the tree before nut fall."
+      ]
+    },
+    {
+      "id": "care_tree_pre_harvest",
+      "topic": "care_stage",
+      "title": "Tree fruit ripening",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Tree fruit ripening: From fruit set until nuts or fruit are ready.",
+      "instructions": [
+        "Collect fallen nuts often (daily in wet weather)."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_cashew_minor_oil_crops"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_cashew",
+        "crop_mango"
+      ],
+      "stage": "pre_harvest",
+      "order": 5,
+      "label": "Tree fruit ripening",
+      "timing_description": "From fruit set until nuts or fruit are ready.",
+      "water": "No watering needed for mature trees.",
+      "mulch": "Keep the ground under trees clean for collection.",
+      "nutrients": "None now.",
+      "weeds": "Keep clear under the canopy.",
+      "watch_for": [
+        "Animals and birds taking fruit",
+        "Rotting nuts on wet ground"
+      ],
+      "dry_spell": "No action needed for mature trees.",
+      "actions": [
+        "Collect fallen nuts often (daily in wet weather)."
+      ]
+    },
+    {
+      "id": "care_gliricidia_lopping",
+      "topic": "care_stage",
+      "title": "Gliricidia lopping for mulch",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Gliricidia lopping for mulch: Once the hedge is well established, usually within about a year.",
+      "instructions": [
+        "Lop leafy branches above knee height a few times per season.",
+        "Lay leaves on beds as green manure."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_gliricidia"
+      ],
+      "stage": "pre_harvest",
+      "order": 5,
+      "label": "Gliricidia lopping for mulch",
+      "timing_description": "Once the hedge is well established, usually within about a year.",
+      "water": "No watering once established.",
+      "mulch": "Its leaves are the mulch: lay them on beds and pits.",
+      "nutrients": "Leaves feed the soil as they rot.",
+      "weeds": "Keep the hedge line clear of climbing weeds.",
+      "watch_for": [
+        "Over-lopping weakening the hedge"
+      ],
+      "dry_spell": "Lop less in long dry spells so the hedge recovers.",
+      "actions": [
+        "Lop leafy branches above knee height a few times per season.",
+        "Lay leaves on beds as green manure."
+      ]
+    },
+    {
+      "id": "care_cutting_establishment",
+      "topic": "care_stage",
+      "title": "Cuttings and slips taking root",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cuttings and slips taking root: From planting cuttings, tops or slips until new leaves show, usually the first couple of weeks.",
+      "instructions": [
+        "Firm soil around cuttings after heavy rain.",
+        "Replace failed cuttings promptly."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_tnau_sweet_potato"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_sweet_potato",
+        "crop_cassava",
+        "crop_pineapple",
+        "crop_vetiver_hedge"
+      ],
+      "stage": "germination",
+      "order": 1,
+      "label": "Cuttings and slips taking root",
+      "timing_description": "From planting cuttings, tops or slips until new leaves show, usually the first couple of weeks.",
+      "water": "Keep the soil around cuttings damp: a cupful of stored water every couple of days if rain stops.",
+      "mulch": "Mulch around, not over, the cuttings.",
+      "nutrients": "Compost already in the mound or bed is enough; add nothing fresh.",
+      "weeds": "Keep weeds away from the young cuttings.",
+      "watch_for": [
+        "Cuttings drying and turning brown",
+        "Termites at the cut ends",
+        "Rot where water stands"
+      ],
+      "dry_spell": "Shade with a few leafy twigs and water from storage; replace dead cuttings while the soil is still moist.",
+      "actions": [
+        "Firm soil around cuttings after heavy rain.",
+        "Replace failed cuttings promptly."
+      ]
+    },
+    {
+      "id": "care_root_vegetative",
+      "topic": "care_stage",
+      "title": "Root crops: vine and leaf growth",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Root crops: vine and leaf growth: From rooting until roots begin to swell, roughly the middle of the season.",
+      "instructions": [
+        "Pile soil over cracks in sweet potato mounds.",
+        "Pull and remove cassava plants with mosaic signs."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_fao_cassava_soil_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_sweet_potato",
+        "crop_cassava"
+      ],
+      "stage": "vegetative",
+      "order": 3,
+      "label": "Root crops: vine and leaf growth",
+      "timing_description": "From rooting until roots begin to swell, roughly the middle of the season.",
+      "water": "Rain is usually enough once rooted; water only if leaves wilt and stay wilted.",
+      "mulch": "Keep mulch between mounds; vines of sweet potato soon cover the ground themselves.",
+      "nutrients": "Use only moderate compost: very rich soil gives leaves instead of roots.",
+      "weeds": "Weed until vines or leaves cover the ground.",
+      "watch_for": [
+        "Cracks in mounds (weevils enter there)",
+        "Yellow mottled, twisted cassava leaves (mosaic)",
+        "Rot in waterlogged mounds"
+      ],
+      "dry_spell": "Thicken mulch; established root crops ride out dry spells well.",
+      "actions": [
+        "Pile soil over cracks in sweet potato mounds.",
+        "Pull and remove cassava plants with mosaic signs."
+      ]
+    },
+    {
+      "id": "care_pineapple_growth",
+      "topic": "care_stage",
+      "title": "Pineapple growth",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pineapple growth: The long growing period before flowering, often more than a year.",
+      "instructions": [
+        "Remove side shoots (slips) for new plants once they are a hand long."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_pineapple"
+      ],
+      "stage": "vegetative",
+      "order": 3,
+      "label": "Pineapple growth",
+      "timing_description": "The long growing period before flowering, often more than a year.",
+      "water": "Rain only once rooted; it stores water in its leaves.",
+      "mulch": "Keep a mulch ring; do not let mulch pile against the base.",
+      "nutrients": "A handful of compost around the plant at the start of each wet season.",
+      "weeds": "Keep the base weed-free.",
+      "watch_for": [
+        "Rot at the base in standing water",
+        "Termites"
+      ],
+      "dry_spell": "No special action; mulch.",
+      "actions": [
+        "Remove side shoots (slips) for new plants once they are a hand long."
+      ]
+    },
+    {
+      "id": "care_pineapple_fruiting",
+      "topic": "care_stage",
+      "title": "Pineapple fruiting",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pineapple fruiting: From the appearance of the fruit until it ripens.",
+      "instructions": [
+        "Protect ripening fruit with thorny branches or a cloth cover."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_pineapple"
+      ],
+      "stage": "pre_harvest",
+      "order": 5,
+      "label": "Pineapple fruiting",
+      "timing_description": "From the appearance of the fruit until it ripens.",
+      "water": "Rain only.",
+      "mulch": "Keep mulch in place.",
+      "nutrients": "None needed.",
+      "weeds": "Keep the base weed-free.",
+      "watch_for": [
+        "Animals and birds at ripening fruit",
+        "Rot in wet weather"
+      ],
+      "dry_spell": "No special action.",
+      "actions": [
+        "Protect ripening fruit with thorny branches or a cloth cover."
+      ]
+    },
+    {
+      "id": "care_greens_picking",
+      "topic": "care_stage",
+      "title": "Greens picking period",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Greens picking period: From about four weeks after sowing for as long as leaves keep coming.",
+      "instructions": [
+        "Pick young leaves every few days.",
+        "Pinch out flower heads unless saving seed."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_amaranthus",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_amaranth_greens"
+      ],
+      "stage": "pre_harvest",
+      "order": 5,
+      "label": "Greens picking period",
+      "timing_description": "From about four weeks after sowing for as long as leaves keep coming.",
+      "water": "Keep the soil damp under mulch; water at the base in the cool of the day in dry spells.",
+      "mulch": "Keep mulch topped up around plants.",
+      "nutrients": "A handful of compost worked around plants every few weeks keeps leaves coming.",
+      "weeds": "Pull weeds by hand.",
+      "watch_for": [
+        "Caterpillars and aphids on young leaves",
+        "Plants rushing to flower in heat or dryness"
+      ],
+      "dry_spell": "Shade at midday with a few twigs and give stored water at the base.",
+      "actions": [
+        "Pick young leaves every few days.",
+        "Pinch out flower heads unless saving seed."
+      ]
+    },
+    {
+      "id": "care_green_manure_cutting",
+      "topic": "care_stage",
+      "title": "Green manure ready to cut",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Green manure ready to cut: As the first flowers open, roughly six to nine weeks after sowing.",
+      "instructions": [
+        "Cut as flowers open and lay on beds or mix into pits."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_sunn_hemp"
+      ],
+      "stage": "pre_harvest",
+      "order": 5,
+      "label": "Green manure ready to cut",
+      "timing_description": "As the first flowers open, roughly six to nine weeks after sowing.",
+      "water": "Rain only.",
+      "mulch": "The cut crop becomes the mulch.",
+      "nutrients": "The cut crop itself feeds the soil.",
+      "weeds": "None needed under a thick stand.",
+      "watch_for": [
+        "Stems turning woody if left too long"
+      ],
+      "dry_spell": "No action.",
+      "actions": [
+        "Cut as flowers open and lay on beds or mix into pits."
+      ]
+    },
+    {
+      "id": "care_hedge_maintenance",
+      "topic": "care_stage",
+      "title": "Grass hedge upkeep",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Grass hedge upkeep: Through each season once the slips have rooted.",
+      "instructions": [
+        "Fill gaps with new slips.",
+        "Trim to about knee-high and use the cuttings as mulch."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Timings are approximate; follow how the plants look."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "crop_ids": [
+        "crop_vetiver_hedge"
+      ],
+      "stage": "vegetative",
+      "order": 3,
+      "label": "Grass hedge upkeep",
+      "timing_description": "Through each season once the slips have rooted.",
+      "water": "Rain only once rooted.",
+      "mulch": "Trimmings are mulch for nearby beds.",
+      "nutrients": "None needed.",
+      "weeds": "Keep spreading weeds out of the hedge line.",
+      "watch_for": [
+        "Gaps in the hedge where water cuts through"
+      ],
+      "dry_spell": "No action; established hedges cope.",
+      "actions": [
+        "Fill gaps with new slips.",
+        "Trim to about knee-high and use the cuttings as mulch."
+      ]
+    }
+  ]
+}

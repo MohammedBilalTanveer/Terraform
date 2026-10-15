@@ -1,0 +1,90 @@
+{
+ "collection": "troubleshooting",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "trouble_seedlings_wilt",
+   "topic": "troubleshooting",
+   "title": "Seedlings wilt at midday",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture trouble: Seedlings wilt at midday.",
+   "instructions": [
+    "Fixture step for Seedlings wilt at midday."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Seedlings wilt at midday."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "symptom": "Seedlings wilt at midday",
+   "likely_causes": [
+    "Fixture cause of Seedlings wilt at midday."
+   ],
+   "actions": [
+    "Fixture action for Seedlings wilt at midday."
+   ],
+   "related_kb_ids": [
+    "treat_mulch_cover",
+    "stress_dry_spell_mulch"
+   ]
+  },
+  {
+   "id": "trouble_water_stands_in_bed",
+   "topic": "troubleshooting",
+   "title": "Water stands in the bed",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "pooling_some",
+     "pooling_widespread"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture trouble: Water stands in the bed.",
+   "instructions": [
+    "Fixture step for Water stands in the bed."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Water stands in the bed."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "symptom": "Water stands in the bed for days",
+   "likely_causes": [
+    "Fixture cause of Water stands in the bed."
+   ],
+   "actions": [
+    "Fixture action for Water stands in the bed."
+   ],
+   "related_kb_ids": [
+    "treat_overflow_pooling"
+   ]
+  }
+ ]
+}

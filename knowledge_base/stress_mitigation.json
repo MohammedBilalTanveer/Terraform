@@ -1,0 +1,443 @@
+{
+  "collection": "stress_mitigation",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "stress_heat",
+      "topic": "stress_mitigation",
+      "title": "Heat stress on seedlings and young plants",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Bare laterite gets very hot in strong sun. Shade young plants, keep the soil covered and move watering to cool hours.",
+      "instructions": [
+        "Keep mulch about a hand's depth over pits and beds so the soil stays cool.",
+        "Shade new seedlings on the afternoon side with leafy twigs, palm fronds or a propped cloth for the first couple of weeks.",
+        "Water only early morning or late afternoon, at the base, from stored water.",
+        "Sow at the start of reliable rains, when cloud and moisture protect young plants.",
+        "Plant along the shaded side of hedges, stone lines or shrubs where possible."
+      ],
+      "everyday_amounts": [
+        "mulch about a hand's depth",
+        "shade for the first couple of weeks after emergence"
+      ],
+      "limitations": [
+        "Shade that is too heavy or left too long makes plants weak and leggy; remove it once plants are established."
+      ],
+      "safety_notes": [
+        "Work in the cool of the day; drink water and rest in shade yourself."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief",
+        "src_fao_windbreaks"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "stressor": "heat",
+      "signs": [
+        "Seedlings wilting at midday and not recovering by evening",
+        "Leaf edges scorched or bleached",
+        "Soil surface too hot to keep your palm on",
+        "Seedlings dying at the soil line on bare ground"
+      ],
+      "actions": [
+        "Keep mulch about a hand's depth over pits and beds so the soil stays cool.",
+        "Shade new seedlings on the afternoon side with leafy twigs, palm fronds or a propped cloth for the first couple of weeks.",
+        "Water only early morning or late afternoon, at the base, from stored water.",
+        "Sow at the start of reliable rains, when cloud and moisture protect young plants.",
+        "Plant along the shaded side of hedges, stone lines or shrubs where possible."
+      ],
+      "task": null,
+      "priority": null,
+      "category": "stress_mitigation",
+      "related_kb_ids": [
+        "treat_mulch_cover",
+        "plant_water_at_base_cool_times"
+      ]
+    },
+    {
+      "id": "stress_hot_wind",
+      "topic": "stress_mitigation",
+      "title": "Hot, drying wind: windbreaks and shelter",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Wind across the open plateau dries soil and seedlings fast. Build a low, partly open windbreak on the windward side and grow a living hedge.",
+      "instructions": [
+        "Find the direction the drying wind usually comes from (watch dust and grass bending).",
+        "Dead hedge: pile thorny shrub prunings and dry brush into a low barrier, about knee- to waist-high, along the windward side of the plot.",
+        "Stone or brush windbreak: on very windy edges, stack stones and brush together into a low wall, leaving it partly open so wind is slowed, not forced over the top.",
+        "Live hedge: plant gliricidia cuttings or local hardy shrubs along the windward edge and along stone lines at the start of the rains.",
+        "Keep windbreaks partly open (roughly as much gap as solid): solid walls cause swirling behind them.",
+        "Weight mulch with a few stones on windy sites."
+      ],
+      "everyday_amounts": [
+        "dead hedge about knee- to waist-high",
+        "a windbreak shelters a strip a few times its own height downwind",
+        "live-hedge cuttings about a pace apart"
+      ],
+      "limitations": [
+        "A windbreak shelters only a limited strip behind it; keep planting close to it.",
+        "Live hedges compete for water near them; keep crops a pace or so away from hedge roots."
+      ],
+      "safety_notes": [
+        "Wear something on your hands when handling thorny brush.",
+        "Do not cut shrubs that hold an edge or slope in place."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_windbreaks"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "stressor": "hot_wind",
+      "signs": [
+        "Soil and mulch blown away",
+        "Seedlings leaning, torn or sand-blasted",
+        "Plants drying out on one side of the plot first",
+        "Dust or loose red soil carried off on windy days"
+      ],
+      "actions": [
+        "Find the direction the drying wind usually comes from (watch dust and grass bending).",
+        "Dead hedge: pile thorny shrub prunings and dry brush into a low barrier, about knee- to waist-high, along the windward side of the plot.",
+        "Stone or brush windbreak: on very windy edges, stack stones and brush together into a low wall, leaving it partly open so wind is slowed, not forced over the top.",
+        "Live hedge: plant gliricidia cuttings or local hardy shrubs along the windward edge and along stone lines at the start of the rains.",
+        "Keep windbreaks partly open (roughly as much gap as solid): solid walls cause swirling behind them.",
+        "Weight mulch with a few stones on windy sites."
+      ],
+      "task": null,
+      "priority": null,
+      "category": "stress_mitigation",
+      "related_kb_ids": [
+        "regen_hedges_trees",
+        "crop_gliricidia",
+        "regen_preserve_beds_windbreaks"
+      ]
+    },
+    {
+      "id": "stress_dry_spell",
+      "topic": "stress_mitigation",
+      "title": "Dry spell during the wet season",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Dry gaps of a week or more are common after the first rains and mid-season. Save moisture, rescue seedlings and flowering plants first, and re-sow if needed.",
+      "instructions": [
+        "Thicken mulch to about a hand's depth or more; stop any weeding that disturbs the soil.",
+        "Use stored water in this order: newly sown and seedling spots, then flowering plants, then the rest.",
+        "Give water at the base or into the mulched basin, early morning or evening; use bottle drips or a clay pot where set up.",
+        "Do not add manure or compost on top now; it will not help a dry plant.",
+        "If seedlings die, re-sow the gaps with reserved seed once soil is moist again, choosing the quickest crop if time is short.",
+        "Note the dates of the dry spell in the journal for next season's planning."
+      ],
+      "everyday_amounts": [
+        "a cupful of stored water per seedling",
+        "mulch a hand's depth or more",
+        "check a finger deep under the mulch"
+      ],
+      "limitations": [
+        "Stored water rarely covers a long dry spell; mulch and timing do most of the work."
+      ],
+      "safety_notes": [
+        "Keep drinking water separate from garden water."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief",
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "stressor": "dry_spell",
+      "signs": [
+        "Leaves rolling or drooping all day and still rolled in the morning",
+        "Soil dry a finger deep under the mulch",
+        "Seedlings dying in patches",
+        "Flowers dropping"
+      ],
+      "actions": [
+        "Thicken mulch to about a hand's depth or more; stop any weeding that disturbs the soil.",
+        "Use stored water in this order: newly sown and seedling spots, then flowering plants, then the rest.",
+        "Give water at the base or into the mulched basin, early morning or evening; use bottle drips or a clay pot where set up.",
+        "Do not add manure or compost on top now; it will not help a dry plant.",
+        "If seedlings die, re-sow the gaps with reserved seed once soil is moist again, choosing the quickest crop if time is short.",
+        "Note the dates of the dry spell in the journal for next season's planning."
+      ],
+      "task": null,
+      "priority": null,
+      "category": "stress_mitigation",
+      "related_kb_ids": [
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_resow_gaps"
+      ]
+    },
+    {
+      "id": "stress_waterlogging",
+      "topic": "stress_mitigation",
+      "title": "Waterlogging on flat or pooling ground",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "pooling_some",
+          "pooling_widespread",
+          "drains_slow",
+          "slope_flat"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Heavy rain can sit on top of the hard layer and drown seeds and roots. Let water out, raise planting, and keep off wet beds.",
+      "instructions": [
+        "Cut an overflow notch on the downhill side of pits that hold water.",
+        "Open shallow drains, a hand deep or less, from pooling spots to a safe low point.",
+        "Raise beds or mounds higher in spots that flood; move the next sowing off the lowest ground.",
+        "Do not walk on or work wet beds; it packs the soil.",
+        "Re-sow drowned spots once the soil drains, with a crop that copes better with wet feet (finger millet or niger rather than horse gram or groundnut)."
+      ],
+      "everyday_amounts": [
+        "drains a hand deep or less",
+        "beds or mounds about knee-high in flood spots"
+      ],
+      "limitations": [
+        "Drains can start gullies if too deep or steep; keep them shallow and line with stones where they cut."
+      ],
+      "safety_notes": [
+        "Never send drained water toward homes, paths or neighbours.",
+        "Stay out of moving water in storms."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_ccardesa_half_moon"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "stressor": "waterlogging",
+      "signs": [
+        "Water still standing in pits or around plants by the next morning",
+        "Yellowing, wilting plants in wet soil",
+        "Sour smell from the soil",
+        "Seeds rotting instead of sprouting"
+      ],
+      "actions": [
+        "Cut an overflow notch on the downhill side of pits that hold water.",
+        "Open shallow drains, a hand deep or less, from pooling spots to a safe low point.",
+        "Raise beds or mounds higher in spots that flood; move the next sowing off the lowest ground.",
+        "Do not walk on or work wet beds; it packs the soil.",
+        "Re-sow drowned spots once the soil drains, with a crop that copes better with wet feet (finger millet or niger rather than horse gram or groundnut)."
+      ],
+      "task": null,
+      "priority": null,
+      "category": "stress_mitigation",
+      "related_kb_ids": [
+        "treat_overflow_pooling",
+        "treat_raised_beds"
+      ]
+    },
+    {
+      "id": "stress_heavy_rain_washout",
+      "topic": "stress_mitigation",
+      "title": "Heavy rain washout: repair after each storm",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Short, heavy storms wash mulch, seed and soil away. Walk the plot after every storm and repair quickly.",
+      "instructions": [
+        "After each heavy rain, walk the plot once the rain stops.",
+        "Re-spread and re-firm mulch over pits and beds; pin it with a few stones.",
+        "Re-cover exposed seed and seedling roots with soil from the same pit or bed; firm gently.",
+        "Rebuild broken pit lips, basin rings and bed edges.",
+        "Close gaps in stone lines and half-moon banks; extend line ends if water went around them.",
+        "Top up washed-out beds with compost or organic matter.",
+        "Check that overflow still ends on safe ground."
+      ],
+      "everyday_amounts": [
+        "a few stones to pin mulch on each pit or bed"
+      ],
+      "limitations": [
+        "Repeated washouts mean the catchment above is too big: add more stone lines uphill."
+      ],
+      "safety_notes": [
+        "Wait until the storm and lightning have passed before going out.",
+        "Stay out of flowing channels."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_wocat_contour_stone_bunds",
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "stressor": "heavy_rain_washout",
+      "signs": [
+        "Mulch washed into heaps or off the plot",
+        "Seeds or seedling roots exposed",
+        "Pit rims or bed edges broken",
+        "Gaps or new channels through stone lines",
+        "Red, muddy water leaving the plot"
+      ],
+      "actions": [
+        "After each heavy rain, walk the plot once the rain stops.",
+        "Re-spread and re-firm mulch over pits and beds; pin it with a few stones.",
+        "Re-cover exposed seed and seedling roots with soil from the same pit or bed; firm gently.",
+        "Rebuild broken pit lips, basin rings and bed edges.",
+        "Close gaps in stone lines and half-moon banks; extend line ends if water went around them.",
+        "Top up washed-out beds with compost or organic matter.",
+        "Check that overflow still ends on safe ground."
+      ],
+      "task": null,
+      "priority": null,
+      "category": "stress_mitigation",
+      "related_kb_ids": [
+        "treat_stone_lines",
+        "treat_mulch_cover",
+        "treat_half_moons"
+      ]
+    },
+    {
+      "id": "stress_acidity",
+      "topic": "stress_mitigation",
+      "title": "Signs of acidity stress (unconfirmed without a lab)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "If plants grow poorly even with water and organic matter, acidic soil may be part of the reason. Respond only with gentle, reversible steps.",
+      "instructions": [
+        "Add more compost or well-rotted organic matter to the pits and beds for the next sowing.",
+        "Favour tolerant crops in the next sowing: finger millet, cowpea, niger, cashew for the long term.",
+        "If you have it, the optional small handful of wood ash per pit may be tried in a few pits only, and compared with untreated pits.",
+        "Record which pits did better and expand only what works.",
+        "Do not keep adding more ash or shell: more is not better."
+      ],
+      "everyday_amounts": [
+        "at most a small handful of ash per pit, in a few trial pits only"
+      ],
+      "limitations": [
+        "These signs also come from hunger, drought, heat or pests; acidity cannot be confirmed without a lab.",
+        "No home test, including the fizz check, measures acidity."
+      ],
+      "safety_notes": [
+        "Wood ash is caustic: protect eyes and skin."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_osu_wood_ash"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "stressor": "acidity_stress",
+      "signs": [
+        "Plants stay small and pale even when soil is moist and mulched",
+        "Short, stubby roots when a thinned seedling is pulled",
+        "Purplish tints on older leaves",
+        "Acid-sensitive crops failing while finger millet or cowpea nearby do better"
+      ],
+      "actions": [
+        "Add more compost or well-rotted organic matter to the pits and beds for the next sowing.",
+        "Favour tolerant crops in the next sowing: finger millet, cowpea, niger, cashew for the long term.",
+        "If you have it, the optional small handful of wood ash per pit may be tried in a few pits only, and compared with untreated pits.",
+        "Record which pits did better and expand only what works.",
+        "Do not keep adding more ash or shell: more is not better."
+      ],
+      "task": null,
+      "priority": null,
+      "category": "stress_mitigation",
+      "related_kb_ids": [
+        "treat_ash_shell_optional",
+        "treat_avoid_large_ash",
+        "treat_avoid_compost_claims",
+        "check_watch_trial_plants"
+      ]
+    },
+    {
+      "id": "stress_nutrient",
+      "topic": "stress_mitigation",
+      "title": "Signs of hunger (nutrient stress)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pale, yellowing or slow plants on poor laterite usually need more organic matter. Feed gently with compost, rotted manure and legume leaves; no recipes or fixed doses.",
+      "instructions": [
+        "Work a handful or two of well-rotted compost or manure into the soil around (not touching) each plant, then re-cover with mulch.",
+        "Lay fresh gliricidia or legume leaves on beds as mulch that rots into food for the soil.",
+        "Grow cowpea or horse gram next to or after millet.",
+        "Note which pits are greener and put more organic matter in the weaker ones next season.",
+        "Avoid feeding during a dry spell; wait until the soil is moist again."
+      ],
+      "everyday_amounts": [
+        "a handful or two of rotted compost or manure around each plant",
+        "an armful of fresh legume leaves per bed"
+      ],
+      "limitations": [
+        "Yellowing can also come from waterlogging, drought or pests; check those first.",
+        "Organic top-ups act slowly; expect changes over weeks."
+      ],
+      "safety_notes": [
+        "Wash hands after handling manure; never use fresh manure on leaves you will eat."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief",
+        "src_iita_propas_striga"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "stressor": "nutrient_stress",
+      "signs": [
+        "Older, lower leaves turning pale yellow first",
+        "Thin, weak stems and few tillers in millet",
+        "Small heads or few pods",
+        "Plants in pits with more compost clearly greener"
+      ],
+      "actions": [
+        "Work a handful or two of well-rotted compost or manure into the soil around (not touching) each plant, then re-cover with mulch.",
+        "Lay fresh gliricidia or legume leaves on beds as mulch that rots into food for the soil.",
+        "Grow cowpea or horse gram next to or after millet.",
+        "Note which pits are greener and put more organic matter in the weaker ones next season.",
+        "Avoid feeding during a dry spell; wait until the soil is moist again."
+      ],
+      "task": null,
+      "priority": null,
+      "category": "stress_mitigation",
+      "related_kb_ids": [
+        "treat_compost_fill",
+        "treat_legume_rotation",
+        "regen_legume_rotation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,940 @@
+{
+  "collection": "diagnostic_checks",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "check_probe_multiple_spots",
+      "topic": "diagnostic_check",
+      "title": "Probe several spots with a stick or stone",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Push a strong stick, a pointed stone or a hand tool into the ground at several spots to see whether the hard layer is the same everywhere or has softer, deeper pockets.",
+      "instructions": [
+        "Pick at least five to ten spots spread across the area you might plant: high points, low points, near shrubs and near any trees.",
+        "At each spot, scrape away loose stones and dig or push down with a stick or pointed stone until it will not go further.",
+        "Measure each depth against your hand or forearm (for example: 'a hand deep', 'past my wrist', 'up to my elbow').",
+        "Mark the deepest spots with a stone or stick; these are the best places for planting pits.",
+        "Note whether the bottom feels like loose gravel you can scrape out or like a solid board of rock."
+      ],
+      "everyday_amounts": [
+        "five to ten spots",
+        "depth judged in hand-depths or forearm-lengths"
+      ],
+      "limitations": [
+        "A few holes cannot map the whole plateau; depth can change within a few paces.",
+        "A big stone can stop the stick even where soil is deeper beside it: try again a little to one side."
+      ],
+      "safety_notes": [
+        "Do not force a tool through rock or jump on it; tools slip and break.",
+        "Do not dig near edges, drop-offs or under overhanging rock.",
+        "Wear something on your feet and keep hands clear of the stick tip."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols",
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Find out whether the hard layer is patchy (some spots can be deepened into pits) or one continuous sheet (build soil upward instead).",
+      "weak_evidence": false,
+      "gate_relevant": true,
+      "resolves_unknowns": [
+        "unknown_hardpan_continuity"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "resistance_varies",
+          "label": "Depth changes from spot to spot",
+          "interpretation": "The hard layer is patchy. Use the deeper spots for planting pits and build beds where it is shallow.",
+          "implies_tags": [
+            "hardpan_patchy",
+            "digging_shallow"
+          ]
+        },
+        {
+          "outcome_id": "resistance_everywhere",
+          "label": "Stops at about the same shallow depth everywhere",
+          "interpretation": "The hard layer is probably continuous. Do not keep digging; build soil upward with raised beds or containers and start with a small trial.",
+          "implies_tags": [
+            "hardpan_continuous",
+            "digging_shallow"
+          ]
+        },
+        {
+          "outcome_id": "digs_deep",
+          "label": "The stick goes down easily past the elbow in several spots",
+          "interpretation": "Soil is deeper here than the typical plateau; pits will work well and roots have more room.",
+          "implies_tags": [
+            "digging_deep_possible"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_water_hole_drainage",
+      "topic": "diagnostic_check",
+      "title": "Hand-deep water-hole drainage check",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Dig a hole about a hand deep, fill it with water, and watch whether it drains away or just sits on the hard layer.",
+      "instructions": [
+        "Dig a hole about a hand deep and a hand wide at a spot where you might plant.",
+        "Pour in water until it is full (half a bucket is usually plenty). Let it drain once to wet the sides.",
+        "Fill it again and watch. Check while you do other work, and again by evening.",
+        "Time the second filling in everyday terms: gone before you could sing a short song, gone within a few hours, or still there by morning.",
+        "If water is still standing the next morning, drainage is slow.",
+        "After a real rain, also look into any pits you dug: water still standing in them days later means slow drainage."
+      ],
+      "everyday_amounts": [
+        "a hole about a hand deep and a hand wide",
+        "about half a bucket of water"
+      ],
+      "limitations": [
+        "One hole only tells you about that spot; repeat in two or three places if you can spare the water.",
+        "In the dry season the ground is very thirsty; the second filling is the one that counts."
+      ],
+      "safety_notes": [
+        "If water is scarce, use dish or wash water rather than drinking water, or wait and look at pits after a rain.",
+        "Fill the hole back in or mark it so no one trips."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Learn whether water sinks away or sits on the hard layer, which decides between plain pits and raised beds or drained pits.",
+      "weak_evidence": false,
+      "gate_relevant": true,
+      "resolves_unknowns": [
+        "unknown_drainage"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "drains_very_fast",
+          "label": "Second filling gone almost at once (before a short song ends)",
+          "interpretation": "Very gravelly, leaky soil: water runs straight through. Hold moisture with plenty of compost, leaf litter and thick mulch.",
+          "implies_tags": [
+            "drains_fast"
+          ]
+        },
+        {
+          "outcome_id": "drains_fast",
+          "label": "Water is gone within a short while",
+          "interpretation": "Water does not sit on the hard layer here. Pits are fine; mulch and organic matter are needed to hold moisture.",
+          "implies_tags": [
+            "drains_fast"
+          ]
+        },
+        {
+          "outcome_id": "drains_slow",
+          "label": "Water is still standing by evening or next morning",
+          "interpretation": "Water sits on the hard layer. Prefer raised beds, or give pits an overflow notch and do not dig them where water collects.",
+          "implies_tags": [
+            "drains_slow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_watch_first_heavy_rain",
+      "topic": "diagnostic_check",
+      "title": "Watch where the first heavy rain goes",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "During or just after a heavy rain, watch from safe ground where water runs, where it pools and where it leaves the plateau.",
+      "instructions": [
+        "From a safe spot, watch which way the water runs and mark the paths with sticks or stones afterwards.",
+        "Note low spots where water stands, and come back the next morning to see if it is still there.",
+        "Follow where the water leaves the plateau: never plan works that push it toward homes, paths, neighbours or crumbling edges.",
+        "Look for red streams, small channels and washed-out patches: these show where soil is being lost."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "One storm can behave differently from the next; watch a second rain if you can."
+      ],
+      "safety_notes": [
+        "Stay out of flowing water and away from channels and edges during storms.",
+        "Shelter from lightning; watch from cover or check the marks after the storm.",
+        "Never block or divert water toward homes, paths or neighbours' land."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_wocat_contour_stone_bunds",
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Find the slope direction, the low spots where water pools, and the safe path for overflow before building stone lines or bunds.",
+      "weak_evidence": false,
+      "gate_relevant": true,
+      "resolves_unknowns": [
+        "unknown_slope_water_path",
+        "unknown_pooling"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "runs_downhill",
+          "label": "Water runs off in one direction",
+          "interpretation": "The ground slopes. Stone lines across the slope and half-moons can slow and catch this water.",
+          "implies_tags": [
+            "slope_slight",
+            "runoff_fast"
+          ]
+        },
+        {
+          "outcome_id": "pools_in_low_spots",
+          "label": "Water stands in a few low spots",
+          "interpretation": "Some pooling. Avoid planting in those spots or raise the planting there, and give water a safe way out.",
+          "implies_tags": [
+            "pooling_some"
+          ]
+        },
+        {
+          "outcome_id": "pools_widely",
+          "label": "Water stands over much of the area",
+          "interpretation": "Widespread pooling on flat ground. Plant on raised beds and lead water away safely; do not build bunds that trap more water.",
+          "implies_tags": [
+            "pooling_widespread",
+            "slope_flat"
+          ]
+        },
+        {
+          "outcome_id": "spreads_evenly",
+          "label": "Water spreads thinly and does not stand anywhere",
+          "interpretation": "No pooling seen. Mulch and small catchments around plants help more of it soak in.",
+          "implies_tags": [
+            "pooling_none"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_pour_water_slope",
+      "topic": "diagnostic_check",
+      "title": "Pour water to see the slope (dry-season check)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Before the rains, pour a little water or roll a small round stone on bare ground to see which way the land falls.",
+      "instructions": [
+        "Choose a bare, smooth patch. Pour a cup or two of water slowly and watch which way it trickles.",
+        "Repeat in a few places across the planting area.",
+        "Lay a stick in the direction the water ran: stone lines go across this direction, not along it.",
+        "If the water spreads in a puddle with no direction, the spot is flat and may pool in heavy rain."
+      ],
+      "everyday_amounts": [
+        "a cup or two of water per spot"
+      ],
+      "limitations": [
+        "Small trickles show local slope only; watching a real rain is more reliable."
+      ],
+      "safety_notes": [
+        "Do not do this near edges or drop-offs."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Find the direction of the slope without waiting for rain, so stone lines can be laid across it.",
+      "weak_evidence": false,
+      "gate_relevant": true,
+      "resolves_unknowns": [
+        "unknown_slope_water_path"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "flows_one_way",
+          "label": "Water trickles one way",
+          "interpretation": "There is a gentle slope; lay stone lines across it.",
+          "implies_tags": [
+            "slope_slight"
+          ]
+        },
+        {
+          "outcome_id": "flows_fast",
+          "label": "Water runs off quickly and the ground clearly drops away",
+          "interpretation": "Steep ground: keep works small, keep away from edges.",
+          "implies_tags": [
+            "slope_steep"
+          ]
+        },
+        {
+          "outcome_id": "spreads_no_direction",
+          "label": "Water spreads and stays",
+          "interpretation": "Flat spot: water may pool here in heavy rain.",
+          "implies_tags": [
+            "slope_flat"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_baking_soda_fizz",
+      "topic": "diagnostic_check",
+      "title": "Baking-soda fizz check (weak clue only)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Mix a pinch of baking soda into a spoonful of wet soil and look for fizzing. This is a weak hint, not a soil test.",
+      "instructions": [
+        "Take a spoonful of soil from the root zone, remove stones, and wet it into a mud with clean water.",
+        "Sprinkle a pinch of baking soda on top and watch and listen closely.",
+        "Note whether you see any fizzing or bubbles.",
+        "Whatever happens, keep planning for acidic, poor soil: add organic matter and choose tolerant crops."
+      ],
+      "everyday_amounts": [
+        "a spoonful of soil",
+        "a pinch of baking soda"
+      ],
+      "limitations": [
+        "Weak evidence only: not a measurement and not a substitute for a soil test.",
+        "No fizz does not prove the soil is not acidic.",
+        "Results depend on water, soil moisture and how fresh the baking soda is.",
+        "Never required before planting; repeating it after treatment is an optional clue only."
+      ],
+      "safety_notes": [
+        "Keep baking soda and soil out of eyes and mouth; wash hands after."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Give a rough, optional hint about acidity when nothing else is available. It never decides the plan.",
+      "weak_evidence": true,
+      "gate_relevant": false,
+      "resolves_unknowns": [
+        "unknown_acidity_nutrients"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "fizz_seen",
+          "label": "Some fizzing or bubbles",
+          "interpretation": "A weak hint that the soil may be acidic. It does not tell you how acidic, and it does not change the basic plan.",
+          "implies_tags": [
+            "fizz_seen"
+          ]
+        },
+        {
+          "outcome_id": "fizz_none",
+          "label": "No fizzing",
+          "interpretation": "Proves nothing: many acidic soils show no fizz with this check. Keep treating the soil as likely acidic and poor.",
+          "implies_tags": [
+            "fizz_none"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_rock_lumps_ironstone",
+      "topic": "diagnostic_check",
+      "title": "Look for rusty rock lumps and ironstone gravel",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Look at the surface and at the soil you dug out: heavy, rusty lumps and pea-sized gravel are hardened iron-rich material typical of laterite.",
+      "instructions": [
+        "Pick up a few stones: laterite pieces are often rusty-red to dark brown, heavy for their size, and sometimes full of small holes.",
+        "In each dug hole, scrape the bottom: does it come away as loose gravel, or is it one welded hard surface?",
+        "Look at edges of channels or cuttings where the layer may show in side view.",
+        "Collect loose lumps for stone lines and half-moon edges."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Colour and weight are clues; they do not show how thick the layer is."
+      ],
+      "safety_notes": [
+        "Lift stones with bent knees; watch for snakes and scorpions under them."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Recognise laterite and judge whether the hard layer is loose gravel you can scrape out or a welded sheet.",
+      "weak_evidence": false,
+      "gate_relevant": true,
+      "resolves_unknowns": [
+        "unknown_hardpan_continuity"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "loose_gravel",
+          "label": "Bottom scrapes out as loose gravel",
+          "interpretation": "The hard layer is broken or gravelly here; with effort, pits can be deepened a little in these spots.",
+          "implies_tags": [
+            "texture_gravelly",
+            "hardpan_patchy"
+          ]
+        },
+        {
+          "outcome_id": "welded_sheet",
+          "label": "Bottom is one welded rock surface wherever you dig",
+          "interpretation": "A continuous sheet. Do not try to break it; build upward.",
+          "implies_tags": [
+            "hardpan_continuous",
+            "texture_rock_lumps"
+          ]
+        },
+        {
+          "outcome_id": "scattered_lumps",
+          "label": "Rusty lumps scattered on the surface",
+          "interpretation": "Confirms laterite-type ground and gives you stone for lines.",
+          "implies_tags": [
+            "texture_rock_lumps"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_ask_neighbours",
+      "topic": "diagnostic_check",
+      "title": "Ask neighbours what survives and when rains reliably start",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Ask anyone who has lived here what grows through the dry season, when the soaking rains usually begin, and how long they last.",
+      "instructions": [
+        "Ask: which plants survive the long dry season here, and which crops have people tried?",
+        "Ask: when do the rains usually become reliable (not just the first storm), and roughly how many weeks do they last?",
+        "Ask: has anyone tried pits, beds or stone lines here, and what happened?",
+        "Write down what you hear. Treat each claim as something to test with a small trial, not as a fact.",
+        "If local advice says 'only trees grow here', ask why: is it the hard layer, the water, animals, or that nobody tried?"
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Memories of rain timing are rough and seasons vary year to year.",
+        "Local advice can be right for reasons you cannot see, or outdated; it is weighed, not obeyed."
+      ],
+      "safety_notes": [
+        "Respect other people's land and water sources."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Gather local knowledge as a clue to verify: crop experience, rain timing and season length.",
+      "weak_evidence": false,
+      "gate_relevant": true,
+      "resolves_unknowns": [
+        "unknown_local_experience",
+        "unknown_rain_window",
+        "unknown_season_length"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "says_trees_only",
+          "label": "Locals say only tree crops grow here",
+          "interpretation": "A claim to check. It may reflect the hard layer; a small trial of pits or beds with short-season crops can test it while tree options are planned too.",
+          "implies_tags": [
+            "local_advice_trees_only"
+          ]
+        },
+        {
+          "outcome_id": "gives_other_advice",
+          "label": "Locals give other advice (crops, timing, methods)",
+          "interpretation": "Useful clues; compare them with your own observations and test on a small plot.",
+          "implies_tags": [
+            "local_advice_other"
+          ]
+        },
+        {
+          "outcome_id": "no_one_to_ask",
+          "label": "No one to ask",
+          "interpretation": "No local advice; rely on careful observation, short-season crops and a small trial.",
+          "implies_tags": [
+            "local_advice_none"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_inventory_resources",
+      "topic": "diagnostic_check",
+      "title": "Inventory what you have",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Walk around and list what can be gathered or used: organic matter, mulch, stones, ash, shells, containers, seeds and tools.",
+      "instructions": [
+        "Count buckets or containers that can hold water, and any sheet, tarp or roof that could catch rain.",
+        "Look for organic matter: compost, manure, fallen leaves, dry grass, shrub prunings, crop residues, kitchen scraps.",
+        "Look for loose stones you can carry for stone lines.",
+        "Check for wood ash from cooking fires and any shells (egg, snail).",
+        "Check seeds: what kinds, how many handfuls, and whether they look healthy and dry.",
+        "List tools: stick, hoe, spade, machete, bucket."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Gathering takes time; plan the work around the weeks left before the rains."
+      ],
+      "safety_notes": [
+        "Do not take materials from other people's land or fields without asking."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Match the plan to real resources and choose alternatives where something is missing.",
+      "weak_evidence": false,
+      "gate_relevant": true,
+      "resolves_unknowns": [
+        "unknown_resources"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "has_compost_material",
+          "label": "Compost or manure available",
+          "interpretation": "Use it to fill pits and beds.",
+          "implies_tags": [
+            "res_compost"
+          ]
+        },
+        {
+          "outcome_id": "no_compost_material",
+          "label": "No compost or manure",
+          "interpretation": "Use leaf litter, dry grass, prunings and residues instead; start sheet composting.",
+          "implies_tags": [
+            "no_compost"
+          ]
+        },
+        {
+          "outcome_id": "has_water_containers",
+          "label": "Water containers available",
+          "interpretation": "Set them up to catch rain before the season.",
+          "implies_tags": [
+            "res_water_containers"
+          ]
+        },
+        {
+          "outcome_id": "little_water",
+          "label": "Little or no stored water",
+          "interpretation": "Favour drought-hardy crops, mulch heavily and capture rain.",
+          "implies_tags": [
+            "low_water"
+          ]
+        },
+        {
+          "outcome_id": "has_stones",
+          "label": "Plenty of loose stones",
+          "interpretation": "Build stone lines across the slope.",
+          "implies_tags": [
+            "res_stones"
+          ]
+        },
+        {
+          "outcome_id": "has_ash",
+          "label": "Wood ash available",
+          "interpretation": "Optional small handful per pit only, with care.",
+          "implies_tags": [
+            "res_wood_ash"
+          ]
+        },
+        {
+          "outcome_id": "has_seeds",
+          "label": "Seeds available",
+          "interpretation": "Choose crops from what you have that suit the soil and season.",
+          "implies_tags": [
+            "res_seeds"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_observe_vegetation",
+      "topic": "diagnostic_check",
+      "title": "Read the plants that already grow here",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Look at what grows naturally and where: tufted dry grass, thorny shrubs, trees, greener patches. Plants are clues, not proof.",
+      "instructions": [
+        "Note where shrubs or trees grow: they often mark cracks or pockets of deeper soil.",
+        "Look for greener patches in dips after rain: water may collect there.",
+        "Look at grass: dry tufts with bare ground between suggest shallow, droughty soil.",
+        "Mark promising spots for pits or a trial plot."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Wild plants tolerate conditions crops may not; grazing and fire also shape what grows."
+      ],
+      "safety_notes": [
+        "Beware of thorns, snakes and stinging insects in shrubs."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Spot deeper or moister pockets and get a rough idea of how harsh the ground is.",
+      "weak_evidence": false,
+      "gate_relevant": false,
+      "resolves_unknowns": [
+        "unknown_acidity_nutrients",
+        "unknown_hardpan_continuity"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "dry_tufts_thorny",
+          "label": "Dry tufts and thorny shrubs only",
+          "interpretation": "Typical of shallow, droughty laterite: plan for very poor soil and short-season crops.",
+          "implies_tags": [
+            "vegetation_dry_grass",
+            "vegetation_thorny_shrubs"
+          ]
+        },
+        {
+          "outcome_id": "trees_survive",
+          "label": "Some trees survive the dry season",
+          "interpretation": "There may be deeper pockets near them; tree crops might be possible in enlarged pits there.",
+          "implies_tags": [
+            "vegetation_trees_nearby"
+          ]
+        },
+        {
+          "outcome_id": "green_in_dips",
+          "label": "Greener patches in low spots",
+          "interpretation": "Water collects there. Good for moisture but watch for waterlogging after heavy rain.",
+          "implies_tags": [
+            "pooling_some"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_soaking_rain_depth",
+      "topic": "diagnostic_check",
+      "title": "Check how deep the rain has soaked",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "After a rain, dig a small hole beside a planting spot with a stick to see whether the soil is moist all the way down to the hard layer.",
+      "instructions": [
+        "The day after a rain, dig a small hole with a stick or fingers beside a pit or bed.",
+        "Feel the soil: is it moist and darker all the way down to the hard layer, or only a thin wet skin over dry soil?",
+        "Squeeze a pinch: moist soil holds together briefly; dry soil runs through your fingers.",
+        "Sow only after this has happened after more than one rain, with no long dry gap in between."
+      ],
+      "everyday_amounts": [
+        "a pinch of soil squeezed between fingers"
+      ],
+      "limitations": [
+        "Rain can still stop for a while after it starts; watching neighbours' timing helps."
+      ],
+      "safety_notes": [
+        "Refill the small hole after checking."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_ragi"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Decide whether the rains are reliable enough to sow (soil moist down to the hard layer after more than one soaking rain).",
+      "weak_evidence": false,
+      "gate_relevant": true,
+      "resolves_unknowns": [
+        "unknown_rain_window"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "moist_to_hard_layer",
+          "label": "Moist all the way down to the hard layer",
+          "interpretation": "Soil is soaked. If this has happened after more than one rain, conditions are right to sow.",
+          "implies_tags": []
+        },
+        {
+          "outcome_id": "dry_below_surface",
+          "label": "Only a thin wet skin; dry below",
+          "interpretation": "Most of the rain ran off. Wait for more rain, and improve catchment (mulch, half-moons, stone lines).",
+          "implies_tags": [
+            "runoff_fast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "check_watch_trial_plants",
+      "topic": "diagnostic_check",
+      "title": "Watch how trial plants grow",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Compare plants in the trial plot over the first weeks: colour, size, and how they cope with dry days.",
+      "instructions": [
+        "Every few days, look at leaf colour, plant size and how many seedlings survive in each pit or bed.",
+        "Pale or yellowing older leaves, purplish tints or stunted plants can point to hungry, acidic soil.",
+        "Compare spots with more compost or mulch against spots with less.",
+        "Write down what you see in the journal and adjust: more organic matter, more mulch, different crop."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Pests, heat and dry spells also cause yellowing or stunting; look at the whole picture."
+      ],
+      "safety_notes": [
+        "Wash hands after handling plants with signs of disease."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Use the crop itself as the best available sign of soil fertility and acidity stress, since there is no lab.",
+      "weak_evidence": false,
+      "gate_relevant": false,
+      "resolves_unknowns": [
+        "unknown_acidity_nutrients"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "healthy_even",
+          "label": "Plants green and growing evenly",
+          "interpretation": "The pit or bed fill is working; expand gradually.",
+          "implies_tags": []
+        },
+        {
+          "outcome_id": "pale_stunted",
+          "label": "Pale, yellowing or stunted plants",
+          "interpretation": "Likely hunger and acidity stress. Add compost or manure top-ups and more mulch; consider tougher crops.",
+          "implies_tags": []
+        },
+        {
+          "outcome_id": "wilt_quickly",
+          "label": "Plants wilt fast in dry spells",
+          "interpretation": "Soil holds little water: deepen mulch, use stored water, shade seedlings.",
+          "implies_tags": []
+        }
+      ]
+    },
+    {
+      "id": "check_seed_sprout_test",
+      "topic": "diagnostic_check",
+      "title": "Seed sprout test",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Before sowing, sprout a few seeds of each kind on a damp cloth to see how many are alive, then decide how many seeds to sow per spot.",
+      "instructions": [
+        "Count out ten seeds of one kind.",
+        "Lay them on a damp cloth or paper, fold it over, and keep it damp and warm in the shade.",
+        "Look each day for a few days (small seeds sprout faster than big ones).",
+        "Count how many have put out a little root.",
+        "Repeat for each kind of seed you plan to sow."
+      ],
+      "everyday_amounts": [
+        "ten seeds per test",
+        "a damp cloth"
+      ],
+      "limitations": [
+        "Seed in the soil faces heat, dryness and pests, so field sprouting is usually lower than on the cloth."
+      ],
+      "safety_notes": [
+        "Never eat seed that has been chemically treated (often coloured)."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Avoid wasting a sowing on dead seed, and set the number of seeds per spot from what actually sprouts.",
+      "weak_evidence": false,
+      "gate_relevant": false,
+      "resolves_unknowns": [],
+      "possible_outcomes": [
+        {
+          "outcome_id": "sprout_most",
+          "label": "Most sprout (about seven or more of ten)",
+          "interpretation": "Seed is good: sow the usual pinch per spot.",
+          "implies_tags": []
+        },
+        {
+          "outcome_id": "sprout_half",
+          "label": "About half sprout",
+          "interpretation": "Seed is weak: sow about twice as many seeds per spot and keep extra back for re-sowing.",
+          "implies_tags": []
+        },
+        {
+          "outcome_id": "sprout_few",
+          "label": "Few or none sprout",
+          "interpretation": "Do not rely on this seed. Find fresher seed from neighbours or a market; eat the rest if it is safe food grain.",
+          "implies_tags": []
+        }
+      ]
+    },
+    {
+      "id": "check_float_seed_test",
+      "topic": "diagnostic_check",
+      "title": "Float seed test (weak clue)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Drop seeds into a bowl of water: seeds that float are often empty or old. A quick weak clue; the sprout test is more reliable.",
+      "instructions": [
+        "Drop a handful of seed into a bowl of clean water and stir.",
+        "Wait a short while and skim off the seeds that float.",
+        "Dry the sinkers in shade before sowing or storing again."
+      ],
+      "everyday_amounts": [
+        "a handful of seed",
+        "a bowl of water"
+      ],
+      "limitations": [
+        "Weak clue only: some good seeds float and some dead seeds sink; it does not work well for very light seeds."
+      ],
+      "safety_notes": [
+        "Do not soak treated seed in water you will drink or cook with."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Quickly sort out obviously empty seed before sowing.",
+      "weak_evidence": true,
+      "gate_relevant": false,
+      "resolves_unknowns": [],
+      "possible_outcomes": [
+        {
+          "outcome_id": "most_sink",
+          "label": "Most seeds sink",
+          "interpretation": "Probably filled seed; confirm with the sprout test if unsure.",
+          "implies_tags": []
+        },
+        {
+          "outcome_id": "many_float",
+          "label": "Many seeds float",
+          "interpretation": "Much of the seed may be empty or old; do a sprout test and find better seed if possible.",
+          "implies_tags": []
+        }
+      ]
+    },
+    {
+      "id": "check_life_count",
+      "topic": "diagnostic_check",
+      "title": "Life count: worms and small creatures in a handful",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Dig out a few handfuls of soil, spread them on a cloth, and count the worms, beetles and other small creatures you see.",
+      "instructions": [
+        "Dig a small hole about a hand deep and spread the soil on a cloth or sack.",
+        "Sift through it with your fingers for a short while and count worms, beetles, ants and grubs.",
+        "Do the same in a mulched, composted pit after some weeks of rain and compare."
+      ],
+      "everyday_amounts": [
+        "a few handfuls of soil",
+        "a hole about a hand deep"
+      ],
+      "limitations": [
+        "Dry-season soil shows little life even when it is recovering; compare at similar moisture."
+      ],
+      "safety_notes": [
+        "Watch for scorpions and stinging ants; use a stick to spread the soil."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_fao_soil_biodiversity_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Get a rough sign of soil life before and after adding organic matter and mulch.",
+      "weak_evidence": false,
+      "gate_relevant": false,
+      "resolves_unknowns": [
+        "unknown_acidity_nutrients"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "none_seen",
+          "label": "Almost nothing living",
+          "interpretation": "Soil life is very low: add compost or organic matter and keep it covered with mulch.",
+          "implies_tags": []
+        },
+        {
+          "outcome_id": "some_life",
+          "label": "Several worms or creatures",
+          "interpretation": "Soil life is present; the organic matter and mulch are working.",
+          "implies_tags": []
+        }
+      ]
+    }
+  ]
+}

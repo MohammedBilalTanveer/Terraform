@@ -1,0 +1,2768 @@
+{
+  "collection": "observation_cues",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "cue_reddish",
+      "topic": "observation_cue",
+      "title": "Reddish surface",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Reddish or rusty colour usually means iron-rich, heavily weathered soil typical of laterite.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "colour_reddish",
+      "label": "reddish surface",
+      "keywords": [
+        "reddish",
+        "red",
+        "red soil",
+        "red ground",
+        "red earth",
+        "red dust",
+        "red-brown",
+        "red brown",
+        "reddish-brown",
+        "rusty",
+        "rust-coloured",
+        "rust-colored",
+        "rust coloured",
+        "rust colored",
+        "laterite",
+        "lateritic",
+        "brick-red",
+        "brick red",
+        "ochre",
+        "red gravel",
+        "red stony",
+        "red rock",
+        "red clay",
+        "red surface",
+        "red colour",
+        "red color",
+        "is red",
+        "looks red",
+        "bright red",
+        "deep red",
+        "dark red",
+        "red and stony",
+        "red, stony",
+        "red streams",
+        "red water",
+        "red mud",
+        "orange-red",
+        "murram"
+      ],
+      "negation_guard": [
+        "not red",
+        "no red",
+        "isn't red",
+        "is not red",
+        "never red"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "surface_colour",
+          "values": [
+            "reddish"
+          ]
+        }
+      ],
+      "meaning": "Reddish or rusty colour usually means iron-rich, heavily weathered soil typical of laterite."
+    },
+    {
+      "id": "cue_dark",
+      "topic": "observation_cue",
+      "title": "Dark surface",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Dark soil often holds more organic matter; unusual on bare laterite and may mark a better patch.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "colour_dark",
+      "label": "dark surface",
+      "keywords": [
+        "dark soil",
+        "black soil",
+        "dark brown",
+        "dark earth",
+        "blackish",
+        "dark ground",
+        "black earth",
+        "dark topsoil"
+      ],
+      "negation_guard": [
+        "not dark",
+        "no dark"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "surface_colour",
+          "values": [
+            "dark"
+          ]
+        }
+      ],
+      "meaning": "Dark soil often holds more organic matter; unusual on bare laterite and may mark a better patch."
+    },
+    {
+      "id": "cue_pale",
+      "topic": "observation_cue",
+      "title": "Pale surface",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pale or bleached soil suggests washed-out, low-organic material.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "colour_pale",
+      "label": "pale surface",
+      "keywords": [
+        "pale",
+        "whitish",
+        "grey soil",
+        "gray soil",
+        "light coloured",
+        "light colored",
+        "bleached",
+        "yellowish",
+        "white sand",
+        "ash-grey",
+        "ash-gray"
+      ],
+      "negation_guard": [
+        "not pale"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "surface_colour",
+          "values": [
+            "pale"
+          ]
+        }
+      ],
+      "meaning": "Pale or bleached soil suggests washed-out, low-organic material."
+    },
+    {
+      "id": "cue_stony",
+      "topic": "observation_cue",
+      "title": "Stony ground",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Many stones on or in the soil reduce the soil volume for roots, but stones are useful for stone lines.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "texture_stony",
+      "label": "stony ground",
+      "keywords": [
+        "stony",
+        "stones",
+        "rocky",
+        "pebbles",
+        "stone-covered",
+        "covered in stones",
+        "loose stones",
+        "rocks on the surface"
+      ],
+      "negation_guard": [
+        "not stony",
+        "no stones",
+        "stone-free",
+        "without stones"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "surface_texture",
+          "values": [
+            "stony"
+          ]
+        }
+      ],
+      "meaning": "Many stones on or in the soil reduce the soil volume for roots, but stones are useful for stone lines."
+    },
+    {
+      "id": "cue_gravelly",
+      "topic": "observation_cue",
+      "title": "Gravelly ground",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Gravelly soil drains fast and holds little water; common in laterite where iron nodules form gravel.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "texture_gravelly",
+      "label": "gravelly ground",
+      "keywords": [
+        "gravel",
+        "gravelly",
+        "pebbly",
+        "grit",
+        "gritty",
+        "small stones",
+        "pea-sized",
+        "pea sized",
+        "nodules",
+        "pellets",
+        "ironstone gravel",
+        "murram",
+        "loose gravel"
+      ],
+      "negation_guard": [
+        "not gravelly",
+        "no gravel"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "surface_texture",
+          "values": [
+            "gravelly"
+          ]
+        }
+      ],
+      "meaning": "Gravelly soil drains fast and holds little water; common in laterite where iron nodules form gravel."
+    },
+    {
+      "id": "cue_rock_lumps",
+      "topic": "observation_cue",
+      "title": "Rusty rock lumps / ironstone pieces",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Heavy rusty lumps are hardened iron-rich material, a sign of laterite and of a hard layer nearby.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "texture_rock_lumps",
+      "label": "rusty rock lumps / ironstone pieces",
+      "keywords": [
+        "rock lumps",
+        "lumps of rock",
+        "ironstone",
+        "boulders",
+        "rock chunks",
+        "slabs",
+        "rusty lumps",
+        "laterite blocks",
+        "heavy rusty stones",
+        "iron stone",
+        "chunks of rock",
+        "rock pieces"
+      ],
+      "negation_guard": [
+        "no rock lumps",
+        "no ironstone"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "surface_texture",
+          "values": [
+            "rock_lumps"
+          ]
+        }
+      ],
+      "meaning": "Heavy rusty lumps are hardened iron-rich material, a sign of laterite and of a hard layer nearby."
+    },
+    {
+      "id": "cue_crusted",
+      "topic": "observation_cue",
+      "title": "Hard crust on the surface",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A surface crust sheds rain instead of letting it in, adding to runoff.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "texture_crusted",
+      "label": "hard crust on the surface",
+      "keywords": [
+        "crust",
+        "crusted",
+        "crusty",
+        "hard surface",
+        "sealed surface",
+        "baked hard",
+        "baked surface",
+        "surface crust",
+        "capped",
+        "hard skin",
+        "cracked crust",
+        "hard top layer"
+      ],
+      "negation_guard": [
+        "no crust",
+        "not crusted"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "surface_texture",
+          "values": [
+            "crusted"
+          ]
+        }
+      ],
+      "meaning": "A surface crust sheds rain instead of letting it in, adding to runoff."
+    },
+    {
+      "id": "cue_digging_shallow",
+      "topic": "observation_cue",
+      "title": "Digging stops at a hard layer near the surface",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Digging stops at a hard layer close to the surface, leaving little soil depth for roots.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "digging_shallow",
+      "label": "digging stops at a hard layer near the surface",
+      "keywords": [
+        "hand's depth",
+        "hand depth",
+        "a hand deep",
+        "hand-deep",
+        "stops after",
+        "hits a board",
+        "like a board",
+        "like hitting a board",
+        "can't dig past",
+        "cannot dig past",
+        "can't dig deeper",
+        "cannot dig deeper",
+        "can't dig deep",
+        "cannot dig deep",
+        "unable to dig",
+        "shallow",
+        "hard layer",
+        "hardpan",
+        "hard pan",
+        "hit rock",
+        "hits rock",
+        "hitting rock",
+        "digging stops",
+        "stick won't go",
+        "spade bounces",
+        "hoe bounces",
+        "rock just below",
+        "rock underneath",
+        "rock under the soil",
+        "can't dig anywhere",
+        "cannot dig anywhere",
+        "rock sheet",
+        "sheet of rock",
+        "solid rock",
+        "bedrock",
+        "can't dig",
+        "cannot dig"
+      ],
+      "negation_guard": [
+        "not shallow",
+        "digs deep easily"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "digging_resistance",
+          "values": [
+            "hard_layer_near_surface",
+            "varies_by_spot",
+            "rock_sheet_everywhere"
+          ]
+        }
+      ],
+      "meaning": "Digging stops at a hard layer close to the surface, leaving little soil depth for roots."
+    },
+    {
+      "id": "cue_digging_deep",
+      "topic": "observation_cue",
+      "title": "Digging goes deep",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Digging can go deeper in at least some spots, so roots and pits have more room there.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "digging_deep_possible",
+      "label": "digging goes deep",
+      "keywords": [
+        "dig deep",
+        "digs easily",
+        "soft soil",
+        "deep soil",
+        "can dig down",
+        "digging is easy",
+        "spade goes in",
+        "dig down easily",
+        "deep pockets",
+        "goes down deep",
+        "soil is deep"
+      ],
+      "negation_guard": [
+        "can't dig deep",
+        "cannot dig deep",
+        "not deep",
+        "unable to dig deep",
+        "couldn't dig deep",
+        "could not dig deep",
+        "not soft",
+        "no deep soil"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "digging_resistance",
+          "values": [
+            "can_dig_deep"
+          ]
+        }
+      ],
+      "meaning": "Digging can go deeper in at least some spots, so roots and pits have more room there."
+    },
+    {
+      "id": "cue_hardpan_patchy_text",
+      "topic": "observation_cue",
+      "title": "Hard layer varies from spot to spot",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The hard layer is broken or uneven, so some spots can be deepened into planting pits.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "hardpan_patchy",
+      "label": "hard layer varies from spot to spot",
+      "keywords": [
+        "loose gravel",
+        "some spots deeper",
+        "deeper in places",
+        "deeper in some places",
+        "depth varies",
+        "varies by spot",
+        "varies from spot",
+        "hardness varies",
+        "patchy",
+        "pockets",
+        "softer spots",
+        "some places deeper",
+        "deeper spots",
+        "uneven depth",
+        "broken layer",
+        "cracks in the rock",
+        "gaps in the rock",
+        "gravel layer"
+      ],
+      "negation_guard": [
+        "not patchy",
+        "everywhere the same"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "digging_resistance",
+          "values": [
+            "varies_by_spot"
+          ]
+        }
+      ],
+      "meaning": "The hard layer is broken or uneven, so some spots can be deepened into planting pits."
+    },
+    {
+      "id": "cue_hardpan_continuous_text",
+      "topic": "observation_cue",
+      "title": "Hard rock-like sheet everywhere",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A continuous hard sheet: pits cannot be deepened, so soil must be built upward (raised beds, containers).",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "hardpan_continuous",
+      "label": "hard rock-like sheet everywhere",
+      "keywords": [
+        "sheet of rock",
+        "rock sheet",
+        "solid rock",
+        "continuous rock",
+        "bedrock",
+        "rock everywhere",
+        "can't dig anywhere",
+        "cannot dig anywhere",
+        "crust everywhere",
+        "solid crust",
+        "solid sheet",
+        "one sheet",
+        "rock slab",
+        "solid layer",
+        "same everywhere",
+        "everywhere i dig",
+        "every spot is hard",
+        "hard everywhere",
+        "continuous crust",
+        "ironstone sheet",
+        "pavement",
+        "like concrete"
+      ],
+      "negation_guard": [
+        "not everywhere",
+        "not solid",
+        "some spots deeper"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "digging_resistance",
+          "values": [
+            "rock_sheet_everywhere"
+          ]
+        }
+      ],
+      "meaning": "A continuous hard sheet: pits cannot be deepened, so soil must be built upward (raised beds, containers)."
+    },
+    {
+      "id": "cue_runoff_fast",
+      "topic": "observation_cue",
+      "title": "Rain runs off fast instead of soaking in",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Hard rain runs across the surface and leaves the plot, taking water and soil with it.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_wocat_contour_stone_bunds"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "runoff_fast",
+      "label": "rain runs off fast instead of soaking in",
+      "keywords": [
+        "runs off",
+        "run off",
+        "runoff",
+        "run-off",
+        "rushes",
+        "rushes off",
+        "doesn't soak",
+        "does not soak",
+        "won't soak",
+        "never soaks",
+        "without soaking",
+        "red streams",
+        "flows away",
+        "flows off",
+        "washes away",
+        "sheets off",
+        "streams of water",
+        "pours off",
+        "rain runs",
+        "water runs"
+      ],
+      "negation_guard": [
+        "no runoff",
+        "doesn't run off",
+        "does not run off"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "rain_behavior",
+          "values": [
+            "fast_runoff",
+            "red_streams"
+          ]
+        }
+      ],
+      "meaning": "Hard rain runs across the surface and leaves the plot, taking water and soil with it."
+    },
+    {
+      "id": "cue_soaks_in",
+      "topic": "observation_cue",
+      "title": "Rain soaks into the soil",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Rain soaks in rather than running off, at least in places.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "rain_soaks_in",
+      "label": "rain soaks into the soil",
+      "keywords": [
+        "soaks in",
+        "soaks in quickly",
+        "soaks in well",
+        "water sinks in",
+        "absorbs",
+        "absorbed",
+        "drinks the rain",
+        "rain sinks"
+      ],
+      "negation_guard": [
+        "doesn't soak",
+        "does not soak",
+        "without soaking",
+        "not soak",
+        "won't soak",
+        "never soaks",
+        "runs off",
+        "barely soaks"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "rain_behavior",
+          "values": [
+            "soaks_in"
+          ]
+        }
+      ],
+      "meaning": "Rain soaks in rather than running off, at least in places."
+    },
+    {
+      "id": "cue_erosion_marks",
+      "topic": "observation_cue",
+      "title": "Red streams, channels or washed patches",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Signs that runoff is carrying soil away, so slowing water also saves soil.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_wocat_contour_stone_bunds"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "erosion_marks",
+      "label": "red streams, channels or washed patches",
+      "keywords": [
+        "red streams",
+        "gullies",
+        "gully",
+        "rills",
+        "little channels",
+        "channels",
+        "washed out",
+        "erosion",
+        "eroded",
+        "bare patches",
+        "exposed roots",
+        "soil washed",
+        "washed away",
+        "cut into the ground",
+        "muddy red water",
+        "red water"
+      ],
+      "negation_guard": [
+        "no erosion"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "rain_behavior",
+          "values": [
+            "red_streams"
+          ]
+        }
+      ],
+      "meaning": "Signs that runoff is carrying soil away, so slowing water also saves soil."
+    },
+    {
+      "id": "cue_slope_flat",
+      "topic": "observation_cue",
+      "title": "Flat ground",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The planting area is level, so water tends to pool rather than run one way. ('Flat-topped rise' alone does not count: the edges of a rise still slope.)",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "slope_flat",
+      "label": "flat ground",
+      "keywords": [
+        "flat plateau",
+        "level ground",
+        "flat ground",
+        "completely flat",
+        "dead flat",
+        "perfectly flat",
+        "flat land",
+        "no slope",
+        "totally flat",
+        "very flat",
+        "flat field",
+        "level field",
+        "flat as a table",
+        "flat area",
+        "level hilltop",
+        "flat hilltop",
+        "level hill top",
+        "level top",
+        "level plateau",
+        "level surface",
+        "ground is level",
+        "it is level",
+        "it's level"
+      ],
+      "negation_guard": [
+        "not flat",
+        "not level"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "slope",
+          "values": [
+            "flat"
+          ]
+        }
+      ],
+      "meaning": "The planting area is level, so water tends to pool rather than run one way. ('Flat-topped rise' alone does not count: the edges of a rise still slope.)"
+    },
+    {
+      "id": "cue_slope_slight",
+      "topic": "observation_cue",
+      "title": "Gentle slope",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The ground slopes gently, so stone lines across the slope and half-moons can catch runoff.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "slope_slight",
+      "label": "gentle slope",
+      "keywords": [
+        "gentle slope",
+        "slightly sloping",
+        "slight slope",
+        "slopes",
+        "sloping",
+        "downhill",
+        "slopes gently",
+        "gradual slope",
+        "tilts",
+        "tilted",
+        "runs downhill",
+        "slope down",
+        "slopes down",
+        "falls away gently",
+        "side of the rise"
+      ],
+      "negation_guard": [
+        "no slope",
+        "not sloping",
+        "doesn't slope",
+        "does not slope"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "slope",
+          "values": [
+            "slight"
+          ]
+        }
+      ],
+      "meaning": "The ground slopes gently, so stone lines across the slope and half-moons can catch runoff."
+    },
+    {
+      "id": "cue_slope_steep",
+      "topic": "observation_cue",
+      "title": "Steep slope",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Steep ground: runoff is strong, edges may be unstable, and only small, careful works are advised.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "slope_steep",
+      "label": "steep slope",
+      "keywords": [
+        "steep",
+        "steep slope",
+        "hillside",
+        "sharp drop",
+        "cliff",
+        "drops away",
+        "steep edge",
+        "very sloped",
+        "steeply"
+      ],
+      "negation_guard": [
+        "not steep"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "slope",
+          "values": [
+            "steep"
+          ]
+        }
+      ],
+      "meaning": "Steep ground: runoff is strong, edges may be unstable, and only small, careful works are advised."
+    },
+    {
+      "id": "cue_slope_unknown_form",
+      "topic": "observation_cue",
+      "title": "Slope not known",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The user does not know whether the ground slopes.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "slope_unknown",
+      "label": "slope not known",
+      "keywords": [],
+      "negation_guard": [],
+      "text_fields": [],
+      "field_matches": [
+        {
+          "field": "slope",
+          "values": [
+            "unknown"
+          ]
+        }
+      ],
+      "meaning": "The user does not know whether the ground slopes."
+    },
+    {
+      "id": "cue_pooling_some",
+      "topic": "observation_cue",
+      "title": "Rain pools in some spots",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Water stands in some low spots on top of the hard layer after rain.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "pooling_some",
+      "label": "rain pools in some spots",
+      "keywords": [
+        "pools",
+        "pooling",
+        "puddle",
+        "puddles",
+        "standing water",
+        "stays in low",
+        "low spots",
+        "collects in",
+        "water collects",
+        "water sits",
+        "water stands",
+        "ponding"
+      ],
+      "negation_guard": [
+        "no pooling",
+        "doesn't pool",
+        "does not pool",
+        "never pools",
+        "no puddles",
+        "no standing water",
+        "nowhere pools"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "pooling",
+          "values": [
+            "some_areas"
+          ]
+        },
+        {
+          "field": "rain_behavior",
+          "values": [
+            "pools"
+          ]
+        }
+      ],
+      "meaning": "Water stands in some low spots on top of the hard layer after rain."
+    },
+    {
+      "id": "cue_pooling_widespread",
+      "topic": "observation_cue",
+      "title": "Rain pools widely",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Much of the area holds standing water after heavy rain: plant on raised ground and lead water away safely.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "pooling_widespread",
+      "label": "rain pools widely",
+      "keywords": [
+        "pools everywhere",
+        "water everywhere",
+        "whole area floods",
+        "flooded",
+        "waterlogged",
+        "water-logged",
+        "standing water everywhere",
+        "large puddles",
+        "like a lake",
+        "stays for days",
+        "big pools",
+        "sheet of water",
+        "whole plateau pools"
+      ],
+      "negation_guard": [
+        "never floods",
+        "no flooding",
+        "doesn't flood"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "pooling",
+          "values": [
+            "widespread"
+          ]
+        }
+      ],
+      "meaning": "Much of the area holds standing water after heavy rain: plant on raised ground and lead water away safely."
+    },
+    {
+      "id": "cue_pooling_none",
+      "topic": "observation_cue",
+      "title": "No pooling seen",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "No standing water seen after rain.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "pooling_none",
+      "label": "no pooling seen",
+      "keywords": [
+        "no pooling",
+        "doesn't pool",
+        "does not pool",
+        "never pools",
+        "no puddles",
+        "no standing water"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "pooling",
+          "values": [
+            "none_seen"
+          ]
+        }
+      ],
+      "meaning": "No standing water seen after rain."
+    },
+    {
+      "id": "cue_pooling_unknown_form",
+      "topic": "observation_cue",
+      "title": "Pooling not known",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The user has not seen what happens to water after rain.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "pooling_unknown",
+      "label": "pooling not known",
+      "keywords": [],
+      "negation_guard": [],
+      "text_fields": [],
+      "field_matches": [
+        {
+          "field": "pooling",
+          "values": [
+            "unknown"
+          ]
+        }
+      ],
+      "meaning": "The user has not seen what happens to water after rain."
+    },
+    {
+      "id": "cue_rain_not_started",
+      "topic": "observation_cue",
+      "title": "Rains have not started",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The wet season has not begun: time to build pits, beds and stone lines and set up water storage.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "rain_not_started",
+      "label": "rains have not started",
+      "keywords": [
+        "rains haven't started",
+        "rains have not started",
+        "before the rains",
+        "waiting for rain",
+        "no rain yet",
+        "rains not started",
+        "rain has not come",
+        "rain hasn't come",
+        "still dry season",
+        "dry season now",
+        "it is dry now",
+        "it's dry now",
+        "hasn't rained"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "rain_window",
+          "values": [
+            "not_started"
+          ]
+        }
+      ],
+      "meaning": "The wet season has not begun: time to build pits, beds and stone lines and set up water storage."
+    },
+    {
+      "id": "cue_rain_just_started",
+      "topic": "observation_cue",
+      "title": "Rains have just started",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The first rains have come; confirm they are reliable before sowing.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "rain_just_started",
+      "label": "rains have just started",
+      "keywords": [
+        "first rains",
+        "rains just started",
+        "just started raining",
+        "first storm",
+        "started to rain",
+        "rains have begun",
+        "rain has started",
+        "rains started",
+        "first heavy rain",
+        "first shower"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "rain_window",
+          "values": [
+            "just_started"
+          ]
+        }
+      ],
+      "meaning": "The first rains have come; confirm they are reliable before sowing."
+    },
+    {
+      "id": "cue_rain_ongoing",
+      "topic": "observation_cue",
+      "title": "Rains are ongoing",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The wet season is under way; only short crops may still fit.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "rain_ongoing",
+      "label": "rains are ongoing",
+      "keywords": [
+        "raining every",
+        "middle of the rains",
+        "rains ongoing",
+        "rains are ongoing",
+        "it rains most days",
+        "it rains often now",
+        "deep in the rainy season",
+        "mid-season",
+        "rains have been going"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "rain_window",
+          "values": [
+            "ongoing"
+          ]
+        }
+      ],
+      "meaning": "The wet season is under way; only short crops may still fit."
+    },
+    {
+      "id": "cue_rain_ending",
+      "topic": "observation_cue",
+      "title": "Rains are ending",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The wet season is ending: field crops are high risk now; prepare pits, beds and mulch for next season.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "rain_ending",
+      "label": "rains are ending",
+      "keywords": [
+        "rains ending",
+        "end of the rains",
+        "rains are stopping",
+        "last rains",
+        "rains tailing off",
+        "rain is ending",
+        "rains are ending",
+        "rains are almost over",
+        "rains finishing",
+        "season is ending"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "rain_window",
+          "values": [
+            "ending"
+          ]
+        }
+      ],
+      "meaning": "The wet season is ending: field crops are high risk now; prepare pits, beds and mulch for next season."
+    },
+    {
+      "id": "cue_rain_unknown_form",
+      "topic": "observation_cue",
+      "title": "Rain timing not known",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The user does not know where the season stands.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "rain_unknown",
+      "label": "rain timing not known",
+      "keywords": [],
+      "negation_guard": [],
+      "text_fields": [],
+      "field_matches": [
+        {
+          "field": "rain_window",
+          "values": [
+            "unknown"
+          ]
+        }
+      ],
+      "meaning": "The user does not know where the season stands."
+    },
+    {
+      "id": "cue_season_known_text",
+      "topic": "observation_cue",
+      "title": "User gave the weeks of rain remaining",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The user has an estimate of the wet weeks left. Normally set by the backend when wet_season_weeks_remaining is a number; this keyword cue is only a fallback hint.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A number is still needed for timeframe maths; text alone is only a hint."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "season_known",
+      "label": "user gave the weeks of rain remaining",
+      "keywords": [
+        "weeks of rain left",
+        "weeks of rain remaining",
+        "weeks left in the rains",
+        "weeks of rains left"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [],
+      "meaning": "The user has an estimate of the wet weeks left. Normally set by the backend when wet_season_weeks_remaining is a number; this keyword cue is only a fallback hint."
+    },
+    {
+      "id": "cue_dry_grass",
+      "topic": "observation_cue",
+      "title": "Dry grass in tufts",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Tufted dry grass is typical of shallow, droughty laterite. It is also a mulch source.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "vegetation_dry_grass",
+      "label": "dry grass in tufts",
+      "keywords": [
+        "dry grass",
+        "tufts",
+        "tufted grass",
+        "tussock",
+        "tussocks",
+        "clumps of grass",
+        "sparse grass",
+        "brown grass",
+        "wiry grass",
+        "grass grows in",
+        "patchy grass",
+        "dried grass"
+      ],
+      "negation_guard": [
+        "no grass"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "vegetation",
+          "values": [
+            "dry_grass"
+          ]
+        }
+      ],
+      "meaning": "Tufted dry grass is typical of shallow, droughty laterite. It is also a mulch source."
+    },
+    {
+      "id": "cue_thorny_shrubs",
+      "topic": "observation_cue",
+      "title": "A few thorny shrubs",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Thorny shrubs survive droughty, poor ground; their prunings and leaf fall are organic matter.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "vegetation_thorny_shrubs",
+      "label": "a few thorny shrubs",
+      "keywords": [
+        "thorny",
+        "thorn",
+        "thorns",
+        "spiny",
+        "acacia",
+        "scrub",
+        "shrubs",
+        "bushes",
+        "thornbush",
+        "thorn bush"
+      ],
+      "negation_guard": [
+        "no shrubs",
+        "no bushes"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "vegetation",
+          "values": [
+            "thorny_shrubs"
+          ]
+        }
+      ],
+      "meaning": "Thorny shrubs survive droughty, poor ground; their prunings and leaf fall are organic matter."
+    },
+    {
+      "id": "cue_trees_nearby",
+      "topic": "observation_cue",
+      "title": "Trees nearby",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Trees growing nearby suggest deeper pockets or cracks in the hard layer, and are a leaf-litter source.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "vegetation_trees_nearby",
+      "label": "trees nearby",
+      "keywords": [
+        "trees nearby",
+        "trees around",
+        "some trees",
+        "few trees",
+        "a few trees",
+        "tree line",
+        "cashew tree",
+        "cashew trees",
+        "mango tree",
+        "mango trees",
+        "woodland",
+        "forest edge",
+        "grove",
+        "trees growing",
+        "big tree",
+        "tall trees"
+      ],
+      "negation_guard": [
+        "only tree",
+        "only trees",
+        "trees only",
+        "no trees"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "vegetation",
+          "values": [
+            "trees_nearby"
+          ]
+        }
+      ],
+      "meaning": "Trees growing nearby suggest deeper pockets or cracks in the hard layer, and are a leaf-litter source."
+    },
+    {
+      "id": "cue_local_trees_only",
+      "topic": "observation_cue",
+      "title": "Local advice: only tree crops grow here",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Local people say only tree crops succeed. Treated as a claim to check with a small trial, not as fact.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "local_advice_trees_only",
+      "label": "local advice: only tree crops grow here",
+      "keywords": [
+        "only tree",
+        "trees only",
+        "only trees",
+        "only tree crops",
+        "nothing but trees",
+        "only cashew",
+        "only orchards",
+        "only plantation",
+        "field crops fail",
+        "crops don't grow",
+        "crops do not grow",
+        "nothing else grows",
+        "nothing grows but",
+        "grains fail here",
+        "only grow trees",
+        "just trees"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "local_advice",
+        "description"
+      ],
+      "field_matches": [],
+      "meaning": "Local people say only tree crops succeed. Treated as a claim to check with a small trial, not as fact."
+    },
+    {
+      "id": "cue_local_other",
+      "topic": "observation_cue",
+      "title": "Other local advice given",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Some local advice other than 'trees only' was given; it is weighed as a clue to verify.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "local_advice_other",
+      "label": "other local advice given",
+      "keywords": [
+        "grow",
+        "plant",
+        "millet",
+        "sow",
+        "they say",
+        "neighbour",
+        "neighbor",
+        "locals",
+        "elders",
+        "told me",
+        "advice",
+        "advised",
+        "people here",
+        "farmers here",
+        "villagers",
+        "recommend",
+        "works here",
+        "do well"
+      ],
+      "negation_guard": [
+        "only tree",
+        "trees only",
+        "only trees",
+        "only tree crops",
+        "nothing but trees",
+        "nothing else grows"
+      ],
+      "text_fields": [
+        "local_advice"
+      ],
+      "field_matches": [],
+      "meaning": "Some local advice other than 'trees only' was given; it is weighed as a clue to verify."
+    },
+    {
+      "id": "cue_res_compost",
+      "topic": "observation_cue",
+      "title": "Compost available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Compost or rotted material is available for filling pits and beds.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_compost",
+      "label": "compost available",
+      "keywords": [
+        "compost",
+        "rotted manure",
+        "rotted leaves",
+        "compost heap",
+        "kitchen scraps",
+        "food scraps"
+      ],
+      "negation_guard": [
+        "no compost",
+        "without compost",
+        "don't have compost",
+        "do not have compost",
+        "lack compost",
+        "no kitchen scraps"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "compost"
+          ]
+        }
+      ],
+      "meaning": "Compost or rotted material is available for filling pits and beds."
+    },
+    {
+      "id": "cue_res_manure",
+      "topic": "observation_cue",
+      "title": "Manure available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Animal manure is available (best used well rotted).",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_manure",
+      "label": "manure available",
+      "keywords": [
+        "manure",
+        "dung",
+        "droppings",
+        "cow pats",
+        "goat pellets",
+        "animal waste"
+      ],
+      "negation_guard": [
+        "no manure",
+        "without manure",
+        "don't have manure",
+        "do not have manure",
+        "no dung"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "manure"
+          ]
+        }
+      ],
+      "meaning": "Animal manure is available (best used well rotted)."
+    },
+    {
+      "id": "cue_res_mulch",
+      "topic": "observation_cue",
+      "title": "Mulch material available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Material to cover the soil surface is available.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_mulch",
+      "label": "mulch material available",
+      "keywords": [
+        "mulch",
+        "straw",
+        "cut grass",
+        "grass cuttings",
+        "crop stalks",
+        "stalks",
+        "husks",
+        "dry grass to cover",
+        "stubble",
+        "chaff"
+      ],
+      "negation_guard": [
+        "no mulch",
+        "nothing for mulch"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "mulch"
+          ]
+        }
+      ],
+      "meaning": "Material to cover the soil surface is available."
+    },
+    {
+      "id": "cue_res_leaf_litter",
+      "topic": "observation_cue",
+      "title": "Leaf litter available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Fallen leaves are available for mulch and for mixing into pit fill.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_leaf_litter",
+      "label": "leaf litter available",
+      "keywords": [
+        "leaf litter",
+        "fallen leaves",
+        "dead leaves",
+        "dry leaves",
+        "leaf fall",
+        "pile of leaves",
+        "leaves under the trees"
+      ],
+      "negation_guard": [
+        "no leaves",
+        "no leaf litter"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "leaf_litter"
+          ]
+        }
+      ],
+      "meaning": "Fallen leaves are available for mulch and for mixing into pit fill."
+    },
+    {
+      "id": "cue_res_stones",
+      "topic": "observation_cue",
+      "title": "Stones available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Loose stones are available for stone lines and half-moon edges.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_stones",
+      "label": "stones available",
+      "keywords": [
+        "stones",
+        "loose stones",
+        "pile of stones",
+        "rocks to move",
+        "plenty of stones",
+        "stone lumps",
+        "loose rocks"
+      ],
+      "negation_guard": [
+        "no stones",
+        "no loose stones"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "stones"
+          ]
+        }
+      ],
+      "meaning": "Loose stones are available for stone lines and half-moon edges."
+    },
+    {
+      "id": "cue_res_wood_ash",
+      "topic": "observation_cue",
+      "title": "Wood ash available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Wood ash from cooking fires is available (use only in small handfuls).",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_wood_ash",
+      "label": "wood ash available",
+      "keywords": [
+        "wood ash",
+        "wood ashes",
+        "fire ash",
+        "fire ashes",
+        "cooking ash",
+        "hearth ash",
+        "ash from the fire",
+        "ash from cooking",
+        "ash pile",
+        "ash heap"
+      ],
+      "negation_guard": [
+        "no ash",
+        "no ashes",
+        "no wood ash"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "wood_ash"
+          ]
+        }
+      ],
+      "meaning": "Wood ash from cooking fires is available (use only in small handfuls)."
+    },
+    {
+      "id": "cue_res_crushed_shells",
+      "topic": "observation_cue",
+      "title": "Crushed shells available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Shells that can be crushed are available (a slow, small addition at best).",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_crushed_shells",
+      "label": "crushed shells available",
+      "keywords": [
+        "shells",
+        "crushed shell",
+        "crushed shells",
+        "eggshell",
+        "eggshells",
+        "egg shells",
+        "snail shells",
+        "sea shells",
+        "seashells"
+      ],
+      "negation_guard": [
+        "no shells"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "crushed_shells"
+          ]
+        }
+      ],
+      "meaning": "Shells that can be crushed are available (a slow, small addition at best)."
+    },
+    {
+      "id": "cue_res_water_containers",
+      "topic": "observation_cue",
+      "title": "Water containers available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Containers or sheets are available to catch and store rainwater.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_water_containers",
+      "label": "water containers available",
+      "keywords": [
+        "jerrycan",
+        "jerry can",
+        "jerrycans",
+        "drum",
+        "drums",
+        "barrel",
+        "barrels",
+        "containers",
+        "water containers",
+        "clay pots",
+        "cooking pots",
+        "tank",
+        "tarp",
+        "tarpaulin",
+        "plastic sheet",
+        "water basin",
+        "bottles",
+        "clay pot"
+      ],
+      "negation_guard": [
+        "no containers",
+        "no water containers"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "water_containers"
+          ]
+        }
+      ],
+      "meaning": "Containers or sheets are available to catch and store rainwater."
+    },
+    {
+      "id": "cue_res_seeds",
+      "topic": "observation_cue",
+      "title": "Seeds available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Seeds are on hand.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_seeds",
+      "label": "seeds available",
+      "keywords": [
+        "seeds",
+        "seed",
+        "grain to sow",
+        "saved seed",
+        "seed packet",
+        "millet seed",
+        "cowpea seed",
+        "bean seeds"
+      ],
+      "negation_guard": [
+        "no seeds",
+        "no seed",
+        "without seeds"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "seeds"
+          ]
+        }
+      ],
+      "meaning": "Seeds are on hand."
+    },
+    {
+      "id": "cue_res_hand_tools",
+      "topic": "observation_cue",
+      "title": "Hand tools available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Some hand tools are available.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_hand_tools",
+      "label": "hand tools available",
+      "keywords": [
+        "hoe",
+        "spade",
+        "shovel",
+        "machete",
+        "pickaxe",
+        "pick axe",
+        "digging stick",
+        "crowbar",
+        "trowel",
+        "knife",
+        "rake",
+        "mattock",
+        "iron bar",
+        "tools"
+      ],
+      "negation_guard": [
+        "no tools",
+        "without tools"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "hand_tools"
+          ]
+        }
+      ],
+      "meaning": "Some hand tools are available."
+    },
+    {
+      "id": "cue_res_bucket",
+      "topic": "observation_cue",
+      "title": "Bucket available",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A bucket (or similar) is available for carrying and for everyday measuring.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "res_bucket",
+      "label": "bucket available",
+      "keywords": [
+        "bucket",
+        "buckets",
+        "pail",
+        "basin to carry",
+        "carrying basket"
+      ],
+      "negation_guard": [
+        "no bucket"
+      ],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "bucket"
+          ]
+        }
+      ],
+      "meaning": "A bucket (or similar) is available for carrying and for everyday measuring."
+    },
+    {
+      "id": "cue_no_compost",
+      "topic": "observation_cue",
+      "title": "No compost or manure",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "There is no compost or manure; the plan swaps in leaf litter, dry grass, prunings and residues.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "no_compost",
+      "label": "no compost or manure",
+      "keywords": [
+        "no compost",
+        "without compost",
+        "no manure",
+        "nothing to compost",
+        "don't have compost",
+        "do not have compost",
+        "lack compost",
+        "no organic matter",
+        "no dung",
+        "don't have manure",
+        "do not have manure"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "none_compost"
+          ]
+        }
+      ],
+      "meaning": "There is no compost or manure; the plan swaps in leaf litter, dry grass, prunings and residues."
+    },
+    {
+      "id": "cue_low_water",
+      "topic": "observation_cue",
+      "title": "Little or no stored water",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Little water is stored, so crops must cope with dry spells and rain capture matters more.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "low_water",
+      "label": "little or no stored water",
+      "keywords": [
+        "little water",
+        "no water stored",
+        "no stored water",
+        "water is scarce",
+        "short of water",
+        "not much water",
+        "scarce water",
+        "limited water",
+        "hardly any water",
+        "no well",
+        "water is far",
+        "no spare water",
+        "very little water"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "resources_text",
+        "description"
+      ],
+      "field_matches": [
+        {
+          "field": "available_resources",
+          "values": [
+            "little_water"
+          ]
+        }
+      ],
+      "meaning": "Little water is stored, so crops must cope with dry spells and rain capture matters more."
+    },
+    {
+      "id": "cue_fizz_seen",
+      "topic": "observation_cue",
+      "title": "Baking soda fizzed on wet soil (weak clue)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A fizz with baking soda is only a weak hint that the soil may be acidic; it is not a soil test.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Weak clue only: it cannot show how acidic the soil is, and other things can affect it."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "fizz_seen",
+      "label": "baking soda fizzed on wet soil (weak clue)",
+      "keywords": [
+        "fizzes",
+        "fizzed",
+        "fizzing",
+        "it fizzed",
+        "bubbles",
+        "bubbled",
+        "foams",
+        "foamed"
+      ],
+      "negation_guard": [
+        "no fizz",
+        "didn't fizz",
+        "did not fizz",
+        "no bubbles",
+        "not fizz"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [],
+      "meaning": "A fizz with baking soda is only a weak hint that the soil may be acidic; it is not a soil test."
+    },
+    {
+      "id": "cue_fizz_none",
+      "topic": "observation_cue",
+      "title": "No fizz with baking soda (weak clue)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "No fizz does NOT prove the soil is not acidic; it is a weak clue only.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Weak clue only: absence of fizz proves nothing about acidity."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "fizz_none",
+      "label": "no fizz with baking soda (weak clue)",
+      "keywords": [
+        "no fizz",
+        "didn't fizz",
+        "did not fizz",
+        "no bubbles",
+        "nothing happened with baking soda"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [],
+      "meaning": "No fizz does NOT prove the soil is not acidic; it is a weak clue only."
+    },
+    {
+      "id": "cue_drains_fast",
+      "topic": "observation_cue",
+      "title": "Water drains away quickly from a hand-deep hole",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Water does not sit on the hard layer here; pits are less likely to waterlog.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "drains_fast",
+      "label": "water drains away quickly from a hand-deep hole",
+      "keywords": [
+        "drained quickly",
+        "drains fast",
+        "drains quickly",
+        "water disappears quickly",
+        "emptied quickly",
+        "drained fast",
+        "soaked away quickly"
+      ],
+      "negation_guard": [
+        "drains slowly",
+        "not quickly"
+      ],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [],
+      "meaning": "Water does not sit on the hard layer here; pits are less likely to waterlog."
+    },
+    {
+      "id": "cue_drains_slow",
+      "topic": "observation_cue",
+      "title": "Water stays in a hand-deep hole",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Water sits on the hard layer: favour raised beds and give pits an overflow.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "A keyword match is a clue from the user's words, not a measurement."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "tag": "drains_slow",
+      "label": "water stays in a hand-deep hole",
+      "keywords": [
+        "drains slowly",
+        "water stays in the hole",
+        "still full",
+        "drained slowly",
+        "takes hours to drain",
+        "stays in the hole",
+        "water just sits",
+        "hole stays full",
+        "didn't drain",
+        "did not drain"
+      ],
+      "negation_guard": [],
+      "text_fields": [
+        "description"
+      ],
+      "field_matches": [],
+      "meaning": "Water sits on the hard layer: favour raised beds and give pits an overflow."
+    }
+  ]
+}

@@ -1,0 +1,371 @@
+{
+ "collection": "scenario_05_lateritic_hardpan",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "scenario_05_lateritic_hardpan",
+   "topic": "scenario",
+   "title": "Lateritic Hardpan Plateau",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture scenario.",
+   "instructions": [
+    "Fixture step for Lateritic Hardpan Plateau."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Lateritic Hardpan Plateau."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "soil_archetype": "shallow acidic lateritic soil over a hard layer (hardpan)",
+   "climate": "Fixture climate.",
+   "main_constraints": [
+    "shallow soil",
+    "fast runoff"
+   ],
+   "signals": [
+    {
+     "tag": "colour_reddish",
+     "label": "reddish surface",
+     "weight": 2
+    },
+    {
+     "tag": "texture_stony",
+     "label": "stony ground",
+     "weight": 1
+    },
+    {
+     "tag": "digging_shallow",
+     "label": "digging stops at about a hand's depth",
+     "weight": 3
+    },
+    {
+     "tag": "hardpan_patchy",
+     "label": "hard layer varies",
+     "weight": 2
+    },
+    {
+     "tag": "hardpan_continuous",
+     "label": "rock sheet everywhere",
+     "weight": 2
+    },
+    {
+     "tag": "runoff_fast",
+     "label": "rain runs off fast",
+     "weight": 2
+    }
+   ],
+   "match_thresholds": {
+    "strong": 6,
+    "partial": 3
+   },
+   "unknowns": [
+    {
+     "id": "unknown_hardpan_continuity",
+     "label": "How continuous the hard layer is",
+     "why_it_matters": "Fixture: decides pits versus raised beds.",
+     "resolved_by_tags": [
+      "hardpan_patchy",
+      "hardpan_continuous",
+      "digging_deep_possible"
+     ],
+     "check_ids": [
+      "check_probe_multiple_spots"
+     ]
+    },
+    {
+     "id": "unknown_slope",
+     "label": "Which way water flows",
+     "why_it_matters": "Fixture: decides stone lines.",
+     "resolved_by_tags": [
+      "slope_flat",
+      "slope_slight",
+      "slope_steep"
+     ],
+     "check_ids": [
+      "check_watch_first_heavy_rain"
+     ]
+    },
+    {
+     "id": "unknown_pooling",
+     "label": "Where water pools",
+     "why_it_matters": "Fixture: decides overflow paths.",
+     "resolved_by_tags": [
+      "pooling_none",
+      "pooling_some",
+      "pooling_widespread"
+     ],
+     "check_ids": [
+      "check_watch_first_heavy_rain"
+     ]
+    },
+    {
+     "id": "unknown_rain_window",
+     "label": "Where you are in the rains",
+     "why_it_matters": "Fixture: timing.",
+     "resolved_by_tags": [
+      "rain_not_started",
+      "rain_just_started",
+      "rain_ongoing",
+      "rain_ending"
+     ],
+     "check_ids": [
+      "check_ask_neighbours"
+     ]
+    },
+    {
+     "id": "unknown_season_length",
+     "label": "How many weeks of rain remain",
+     "why_it_matters": "Fixture: crop fit.",
+     "resolved_by_tags": [
+      "season_known"
+     ],
+     "check_ids": [
+      "check_ask_neighbours"
+     ]
+    },
+    {
+     "id": "unknown_resources",
+     "label": "What materials you have",
+     "why_it_matters": "Fixture: alternatives.",
+     "resolved_by_tags": [
+      "res_compost",
+      "res_manure",
+      "res_mulch",
+      "res_seeds",
+      "res_hand_tools",
+      "no_compost",
+      "low_water"
+     ],
+     "check_ids": []
+    },
+    {
+     "id": "unknown_local_experience",
+     "label": "What neighbours have seen grow",
+     "why_it_matters": "Fixture: local knowledge.",
+     "resolved_by_tags": [
+      "local_advice_trees_only",
+      "local_advice_other"
+     ],
+     "check_ids": [
+      "check_ask_neighbours"
+     ]
+    }
+   ],
+   "readiness_gate": [
+    {
+     "id": "gate_beds_or_pits_ready",
+     "label": "Pits or beds ready",
+     "detail": "Fixture detail.",
+     "required": true,
+     "satisfied_by_tasks": [
+      "task_build_pits",
+      "task_build_raised_beds",
+      "task_prepare_containers"
+     ],
+     "applies_when": {
+      "any_tags": [],
+      "all_tags": [],
+      "none_tags": []
+     },
+     "source_ids": [
+      "src_fixture_soils"
+     ],
+     "verification": {
+      "test": "Fixture test: pour a bucket of water into one bed.",
+      "pass": "Fixture pass: no water standing by the next morning.",
+      "fail": "Fixture fail: water still standing next morning.",
+      "if_fail": "Fixture if_fail: loosen the fill and add an overflow notch."
+     }
+    },
+    {
+     "id": "gate_runoff_slowed",
+     "label": "Runoff slowed",
+     "detail": "Fixture detail.",
+     "required": true,
+     "satisfied_by_tasks": [
+      "task_build_stone_lines"
+     ],
+     "applies_when": {
+      "any_tags": [
+       "slope_slight",
+       "slope_steep",
+       "slope_unknown"
+      ],
+      "all_tags": [],
+      "none_tags": [
+       "pooling_widespread"
+      ]
+     },
+     "source_ids": [
+      "src_fixture_water"
+     ],
+     "verification": {
+      "test": "Fixture test: watch the next rain.",
+      "pass": "Fixture pass: water slows.",
+      "fail": "Fixture fail: water rushes past.",
+      "if_fail": "Fixture if_fail: close gaps."
+     }
+    },
+    {
+     "id": "gate_pooling_handled",
+     "label": "Overflow planned",
+     "detail": "Fixture detail.",
+     "required": true,
+     "satisfied_by_tasks": [
+      "task_plan_overflow"
+     ],
+     "applies_when": {
+      "any_tags": [
+       "pooling_some",
+       "pooling_widespread"
+      ],
+      "all_tags": [],
+      "none_tags": []
+     },
+     "source_ids": [
+      "src_fixture_water"
+     ],
+     "verification": {
+      "test": "Fixture test: watch overflow.",
+      "pass": "Fixture pass: water leaves safely.",
+      "fail": "Fixture fail: water stays.",
+      "if_fail": "Fixture if_fail: deepen the path."
+     }
+    },
+    {
+     "id": "gate_trial_plot_marked",
+     "label": "Trial plot marked",
+     "detail": "Fixture detail.",
+     "required": true,
+     "satisfied_by_tasks": [
+      "task_mark_trial_plot"
+     ],
+     "applies_when": {
+      "any_tags": [
+       "hardpan_continuous",
+       "local_advice_trees_only"
+      ],
+      "all_tags": [],
+      "none_tags": []
+     },
+     "source_ids": [],
+     "verification": null
+    },
+    {
+     "id": "gate_fizz_recheck_optional",
+     "label": "Fizz recheck (optional)",
+     "detail": "Fixture detail.",
+     "required": true,
+     "satisfied_by_tasks": [
+      "task_recheck_fizz_optional"
+     ],
+     "applies_when": {
+      "any_tags": [],
+      "all_tags": [],
+      "none_tags": []
+     },
+     "source_ids": [],
+     "verification": null
+    }
+   ],
+   "failure_factors": [
+    {
+     "id": "factor_shallow_rooting",
+     "label": "Too little rooting depth",
+     "explanation": "Fixture: roots stop early.",
+     "what_is_missing": "rooting depth",
+     "triggered_by_tags": [
+      "digging_shallow",
+      "hardpan_continuous",
+      "hardpan_patchy"
+     ],
+     "always_likely": false,
+     "addressed_by": [
+      "treat_raised_beds",
+      "treat_planting_pits"
+     ]
+    },
+    {
+     "id": "factor_water_capture",
+     "label": "Rain runs away",
+     "explanation": "Fixture: runoff.",
+     "what_is_missing": "water capture",
+     "triggered_by_tags": [
+      "runoff_fast"
+     ],
+     "always_likely": false,
+     "addressed_by": [
+      "treat_stone_lines"
+     ]
+    },
+    {
+     "id": "factor_waterlogging",
+     "label": "Water sits on the hard layer",
+     "explanation": "Fixture: pooling.",
+     "what_is_missing": "drainage",
+     "triggered_by_tags": [
+      "pooling_some",
+      "pooling_widespread"
+     ],
+     "indirect_tags": [
+      "pooling_unknown"
+     ],
+     "always_likely": false,
+     "addressed_by": [
+      "treat_overflow_pooling"
+     ]
+    },
+    {
+     "id": "factor_organic_matter",
+     "label": "Little organic matter",
+     "explanation": "Fixture: poor soil.",
+     "what_is_missing": "organic matter",
+     "triggered_by_tags": [
+      "no_compost"
+     ],
+     "indirect_tags": [
+      "colour_reddish"
+     ],
+     "always_likely": true,
+     "addressed_by": [
+      "treat_compost_fill",
+      "treat_organic_alternatives"
+     ]
+    },
+    {
+     "id": "factor_likely_acidity",
+     "label": "Soil is probably acidic",
+     "explanation": "Fixture: acidity.",
+     "what_is_missing": "acidity balance",
+     "triggered_by_tags": [
+      "fizz_seen",
+      "pooling_unknown"
+     ],
+     "indirect_tags": [
+      "colour_reddish",
+      "slope_unknown"
+     ],
+     "always_likely": false,
+     "addressed_by": [
+      "treat_fizz_recheck_optional"
+     ]
+    }
+   ]
+  }
+ ]
+}

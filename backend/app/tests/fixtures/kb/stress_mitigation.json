@@ -1,0 +1,123 @@
+{
+ "collection": "stress_mitigation",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "stress_hot_wind_windbreak",
+   "topic": "stress_mitigation",
+   "title": "Windbreak against hot wind",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture stress: Windbreak against hot wind.",
+   "instructions": [
+    "Fixture step for Windbreak against hot wind."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Windbreak against hot wind."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "stressor": "hot_wind",
+   "signs": [
+    "Fixture sign of hot_wind."
+   ],
+   "actions": [
+    "Fixture action for hot_wind."
+   ],
+   "task": null
+  },
+  {
+   "id": "stress_dry_spell_mulch",
+   "topic": "stress_mitigation",
+   "title": "Dry spell protection",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture stress: Dry spell protection.",
+   "instructions": [
+    "Fixture step for Dry spell protection."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Dry spell protection."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "stressor": "dry_spell",
+   "signs": [
+    "Fixture sign of dry_spell."
+   ],
+   "actions": [
+    "Fixture action for dry_spell."
+   ],
+   "task": null
+  },
+  {
+   "id": "stress_waterlogging_drain",
+   "topic": "stress_mitigation",
+   "title": "Drain waterlogged beds",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [
+     "pooling_some",
+     "pooling_widespread"
+    ],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture stress: Drain waterlogged beds.",
+   "instructions": [
+    "Fixture step for Drain waterlogged beds."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Drain waterlogged beds."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "stressor": "waterlogging",
+   "signs": [
+    "Fixture sign of waterlogging."
+   ],
+   "actions": [
+    "Fixture action for waterlogging."
+   ],
+   "task": null
+  }
+ ]
+}

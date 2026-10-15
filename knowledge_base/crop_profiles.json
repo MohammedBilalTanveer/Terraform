@@ -1,0 +1,2073 @@
+{
+  "collection": "crop_profiles",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "crop_finger_millet",
+      "topic": "crop",
+      "title": "Finger millet (ragi)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A hardy small-grained cereal traditionally grown on poor red and lateritic soils; tolerates acidic, low-fertility ground and stores very well.",
+      "instructions": [
+        "Sow in pits or beds after reliable rains; thin to the strongest few plants per spot.",
+        "Good partner with a legume such as cowpea or horse gram in alternate rows or pits."
+      ],
+      "everyday_amounts": [
+        "a pinch of a few seeds per planting spot",
+        "sow about one finger-joint deep"
+      ],
+      "limitations": [
+        "No yield is promised; poor soil and short rains limit harvests.",
+        "Ripens unevenly; needs two pickings."
+      ],
+      "safety_notes": [
+        "Check seed is not chemically treated before eating any of it."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_ragi"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Finger millet",
+      "local_names": [
+        "ragi",
+        "nachni",
+        "mandua"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "acid_tolerant",
+        "low_fertility_ok",
+        "shallow_rooting_ok",
+        "drought_tolerant"
+      ],
+      "cautions": [
+        {
+          "when_tag": "rain_ending",
+          "effect": "exclude",
+          "reason": "Needs roughly three to four months; too long to finish if the rains are already ending."
+        },
+        {
+          "when_tag": "season_unknown",
+          "effect": "penalize",
+          "reason": "Longer than the other millets; risky if the season length is not known."
+        },
+        {
+          "when_tag": "rain_ongoing",
+          "effect": "penalize",
+          "reason": "If rains are well under way, a long crop may run into the dry period."
+        }
+      ],
+      "water_needs_plain": "Moderate. Copes with short dry spells once established but needs moist soil at sowing and at flowering.",
+      "rooting_notes": "Dense, shallow, fibrous roots: well suited to a hand's depth of soil in pits and beds.",
+      "maturity_weeks": {
+        "min": 13,
+        "max": 17
+      },
+      "maturity_description": "About three to four months from sowing; quicker local types finish sooner. Heads ripen unevenly.",
+      "resource_needs": [
+        "res_seeds"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_millet_vegetative",
+        "care_millet_flowering",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_grasshoppers",
+        "pest_striga",
+        "pest_leaf_spot_fungal",
+        "pest_birds_grain",
+        "pest_stored_grain_weevils"
+      ],
+      "harvest_profile_id": "harvest_finger_millet",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation"
+      ],
+      "why_it_may_fit": [
+        "Traditionally grown on lateritic and red soils",
+        "Tolerates acidic, poor soil",
+        "Fibrous roots fit shallow soil",
+        "Grain stores for a long time"
+      ]
+    },
+    {
+      "id": "crop_pearl_millet",
+      "topic": "crop",
+      "title": "Pearl millet (bajra)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A very drought- and heat-hardy cereal that grows on poor, shallow, sandy or gravelly soils with low rainfall.",
+      "instructions": [
+        "Sow a few seeds per pit after reliable rains; thin to the two or three strongest.",
+        "Birds attack ripening heads: plan to guard or cover heads near harvest."
+      ],
+      "everyday_amounts": [
+        "a pinch of a few seeds per planting spot",
+        "sow about one finger-joint deep"
+      ],
+      "limitations": [
+        "Less tolerant of strong acidity than finger millet; watch trial plants for pale, stunted growth.",
+        "No yield is promised."
+      ],
+      "safety_notes": [
+        "Check seed is not chemically treated before eating any of it."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_croptrust_pearl_millet",
+        "src_icrisat_pearl_millet_drought"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Pearl millet",
+      "local_names": [
+        "bajra",
+        "sajje"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "drought_tolerant",
+        "short_season",
+        "low_fertility_ok",
+        "shallow_rooting_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "penalize",
+          "reason": "Does not like waterlogged ground; plant only on raised beds where water pools."
+        },
+        {
+          "when_tag": "drains_slow",
+          "effect": "penalize",
+          "reason": "Water sitting on the hard layer can rot roots; prefer raised beds."
+        },
+        {
+          "when_tag": "rain_ending",
+          "effect": "penalize",
+          "reason": "Even a short crop is risky if the rains are already ending."
+        }
+      ],
+      "water_needs_plain": "Low. Among the most drought-tolerant cereals, but sensitive to drought at flowering and grain filling.",
+      "rooting_notes": "Roots grow fast and spread widely; tolerates shallow soils better than maize or sorghum.",
+      "maturity_weeks": {
+        "min": 10,
+        "max": 13
+      },
+      "maturity_description": "About ten to thirteen weeks from sowing for early types.",
+      "resource_needs": [
+        "res_seeds"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_millet_vegetative",
+        "care_millet_flowering",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_grasshoppers",
+        "pest_striga",
+        "pest_birds_grain",
+        "pest_leaf_spot_fungal",
+        "pest_stored_grain_weevils"
+      ],
+      "harvest_profile_id": "harvest_pearl_millet",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation"
+      ],
+      "why_it_may_fit": [
+        "Very drought- and heat-tolerant",
+        "Short season fits a short wet season",
+        "Copes with low fertility and shallow soil"
+      ]
+    },
+    {
+      "id": "crop_little_millet",
+      "topic": "crop",
+      "title": "Little millet (samai)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A small, quick millet grown by hill and tribal farmers on poor, gravelly soils; one of the fastest grains to finish.",
+      "instructions": [
+        "Broadcast thinly or sow a pinch per spot in beds; thin to avoid crowding."
+      ],
+      "everyday_amounts": [
+        "a pinch of a few seeds per planting spot",
+        "sow about one finger-joint deep"
+      ],
+      "limitations": [
+        "Seed can be hard to find; ask locally.",
+        "Small grain needs patient threshing and cleaning.",
+        "Suitability on this exact soil needs a local trial."
+      ],
+      "safety_notes": [
+        "Check seed is not chemically treated before eating any of it."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Little millet",
+      "local_names": [
+        "samai",
+        "kutki",
+        "suan"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "drought_tolerant",
+        "short_season",
+        "low_fertility_ok",
+        "shallow_rooting_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "penalize",
+          "reason": "Prefers drained ground; use raised beds where water pools."
+        }
+      ],
+      "water_needs_plain": "Low to moderate. Tolerates dry spells and short seasons.",
+      "rooting_notes": "Fine, shallow roots: suits thin soil in pits and beds.",
+      "maturity_weeks": {
+        "min": 10,
+        "max": 13
+      },
+      "maturity_description": "Roughly ten to thirteen weeks from sowing for most local types.",
+      "resource_needs": [
+        "res_seeds"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_millet_vegetative",
+        "care_millet_flowering",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_grasshoppers",
+        "pest_striga",
+        "pest_birds_grain",
+        "pest_stored_grain_weevils"
+      ],
+      "harvest_profile_id": "harvest_little_millet",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation"
+      ],
+      "why_it_may_fit": [
+        "Very short season",
+        "Grows on poor, gravelly ground",
+        "Useful when the rain window is uncertain"
+      ]
+    },
+    {
+      "id": "crop_cowpea",
+      "topic": "crop",
+      "title": "Cowpea (lobia)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A fast, drought-hardy legume that copes with acidic, poor soils, feeds the soil with nitrogen, and gives leaves and pods as food.",
+      "instructions": [
+        "Sow two or three seeds per spot after reliable rains; thin to the strongest one or two.",
+        "Pick young leaves sparingly for food once plants are well established."
+      ],
+      "everyday_amounts": [
+        "a pinch of a few seeds per planting spot",
+        "sow about one finger-joint deep"
+      ],
+      "limitations": [
+        "Aphids and pod borers are common; check plants often.",
+        "No yield is promised."
+      ],
+      "safety_notes": [
+        "Cook dry beans thoroughly.",
+        "Check seed is not chemically treated before eating any of it."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_cowpea",
+        "src_iita_cowpea_guide"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Cowpea",
+      "local_names": [
+        "lobia",
+        "black-eyed pea",
+        "chawli"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "acid_tolerant",
+        "drought_tolerant",
+        "short_season",
+        "nitrogen_fixing",
+        "low_fertility_ok",
+        "shallow_rooting_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "penalize",
+          "reason": "Sensitive to waterlogging; use raised beds where water pools."
+        },
+        {
+          "when_tag": "drains_slow",
+          "effect": "penalize",
+          "reason": "Roots rot if water sits on the hard layer."
+        }
+      ],
+      "water_needs_plain": "Low to moderate. Tolerates dry spells; needs moisture at flowering and pod filling.",
+      "rooting_notes": "Taproot with spreading side roots; manages in shallow beds and pits.",
+      "maturity_weeks": {
+        "min": 9,
+        "max": 13
+      },
+      "maturity_description": "About nine to thirteen weeks for grain from early types; young leaves can be picked earlier.",
+      "resource_needs": [
+        "res_seeds"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_legume_vegetative",
+        "care_legume_flowering",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_aphids",
+        "pest_pod_borers",
+        "pest_leaf_spot_fungal",
+        "pest_grasshoppers",
+        "pest_stored_grain_weevils"
+      ],
+      "harvest_profile_id": "harvest_cowpea",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation",
+        "plant_intercrop_cereal_legume"
+      ],
+      "why_it_may_fit": [
+        "Copes with acidic, poor soil",
+        "Adds nitrogen to the soil",
+        "Short season and drought-hardy",
+        "Leaves and pods both edible"
+      ]
+    },
+    {
+      "id": "crop_horse_gram",
+      "topic": "crop",
+      "title": "Horse gram (kulthi)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A very hardy legume traditionally grown on poor lateritic and gravelly soils with little rain; often sown later in the season.",
+      "instructions": [
+        "Sow in pits or beds; it is often sown later in the rains to finish on the moisture left in the soil.",
+        "Keep weeds down in the first weeks."
+      ],
+      "everyday_amounts": [
+        "a pinch of a few seeds per planting spot",
+        "sow about one finger-joint deep"
+      ],
+      "limitations": [
+        "Heavy rain early can harm young plants.",
+        "No yield is promised."
+      ],
+      "safety_notes": [
+        "Cook seed thoroughly before eating."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_horsegram",
+        "src_vikaspedia_horse_gram"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Horse gram",
+      "local_names": [
+        "kulthi",
+        "kollu",
+        "hurali"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "drought_tolerant",
+        "low_fertility_ok",
+        "nitrogen_fixing",
+        "shallow_rooting_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "exclude",
+          "reason": "Does not tolerate waterlogging; flooded ground will kill it."
+        },
+        {
+          "when_tag": "pooling_some",
+          "effect": "penalize",
+          "reason": "Keep it out of spots where water stands; use raised spots."
+        },
+        {
+          "when_tag": "drains_slow",
+          "effect": "penalize",
+          "reason": "Heavy rain on poorly drained ground harms young plants."
+        }
+      ],
+      "water_needs_plain": "Very low. One of the most drought-tolerant pulses; can finish on stored soil moisture.",
+      "rooting_notes": "Deep taproot where soil allows, but it is widely grown on shallow gravelly ground.",
+      "maturity_weeks": {
+        "min": 12,
+        "max": 16
+      },
+      "maturity_description": "Roughly three to four months from sowing; early types are quicker.",
+      "resource_needs": [
+        "res_seeds"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_legume_vegetative",
+        "care_legume_flowering",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_aphids",
+        "pest_pod_borers",
+        "pest_leaf_spot_fungal",
+        "pest_stored_grain_weevils"
+      ],
+      "harvest_profile_id": "harvest_horse_gram",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation",
+        "plant_intercrop_cereal_legume"
+      ],
+      "why_it_may_fit": [
+        "Traditionally grown on poor lateritic soils",
+        "Extremely drought-tolerant",
+        "Adds nitrogen to the soil"
+      ]
+    },
+    {
+      "id": "crop_niger",
+      "topic": "crop",
+      "title": "Niger (ramtil)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "An oilseed grown by hill farmers on poor, acidic, shallow soils with little care; flowers attract bees.",
+      "instructions": [
+        "Sow thinly in beds or along the edges of pits; seed is tiny, cover very lightly."
+      ],
+      "everyday_amounts": [
+        "a pinch of seed per spot, barely covered"
+      ],
+      "limitations": [
+        "Seed may be hard to find; oil extraction needs crushing.",
+        "Suitability needs a local trial."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Niger",
+      "local_names": [
+        "ramtil",
+        "gurellu",
+        "noog"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "acid_tolerant",
+        "low_fertility_ok",
+        "shallow_rooting_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "rain_ending",
+          "effect": "penalize",
+          "reason": "Needs about three to four months; risky late in the rains."
+        },
+        {
+          "when_tag": "season_unknown",
+          "effect": "penalize",
+          "reason": "Not a short crop; risky when the season length is unknown."
+        }
+      ],
+      "water_needs_plain": "Moderate. Copes with poor soil but needs moisture until flowering.",
+      "rooting_notes": "Fairly shallow roots; suits thin soils.",
+      "maturity_weeks": {
+        "min": 13,
+        "max": 16
+      },
+      "maturity_description": "About three to four months from sowing.",
+      "resource_needs": [
+        "res_seeds"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_vegetative",
+        "care_flowering",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_grasshoppers",
+        "pest_aphids",
+        "pest_birds_grain",
+        "pest_stored_grain_weevils"
+      ],
+      "harvest_profile_id": "harvest_niger",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation"
+      ],
+      "why_it_may_fit": [
+        "Grown on poor, acidic hill soils",
+        "Needs little care",
+        "Adds oil to the diet"
+      ]
+    },
+    {
+      "id": "crop_groundnut",
+      "topic": "crop",
+      "title": "Groundnut (peanut)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A legume that tolerates mildly acidic soil, but needs loose, crumbly soil for its pods to form underground. Suits raised beds better than hard ground.",
+      "instructions": [
+        "Grow only in loose, well-filled raised beds or containers; sow shelled seeds a finger-joint deep."
+      ],
+      "everyday_amounts": [
+        "one or two shelled seeds per spot",
+        "about one finger-joint deep"
+      ],
+      "limitations": [
+        "Termites damage pods in dry soil.",
+        "Needs loose soil; gravel and crust stop pod formation.",
+        "No yield is promised."
+      ],
+      "safety_notes": [
+        "Never eat mouldy groundnuts: moulds can be poisonous."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Groundnut",
+      "local_names": [
+        "peanut",
+        "moongphali"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "nitrogen_fixing",
+        "acid_tolerant"
+      ],
+      "cautions": [
+        {
+          "when_tag": "texture_crusted",
+          "effect": "penalize",
+          "reason": "Pegs cannot push into a hard crust; grow only in loose raised beds."
+        },
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "penalize",
+          "reason": "Needs loose soil depth for pods; only possible in well-filled raised beds."
+        },
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "exclude",
+          "reason": "Pods rot in waterlogged soil."
+        },
+        {
+          "when_tag": "low_water",
+          "effect": "penalize",
+          "reason": "Needs steady moisture while flowering and filling pods."
+        },
+        {
+          "when_tag": "no_compost",
+          "effect": "penalize",
+          "reason": "Without organic matter, bed soil will be too hard and poor for pods."
+        }
+      ],
+      "water_needs_plain": "Moderate. Needs moisture at flowering and pod filling.",
+      "rooting_notes": "Pods develop underground on pegs; needs loose, crumbly soil, not gravel or crust.",
+      "maturity_weeks": {
+        "min": 13,
+        "max": 17
+      },
+      "maturity_description": "About three to four months from sowing for bunch types.",
+      "resource_needs": [
+        "res_seeds",
+        "res_compost"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_legume_vegetative",
+        "care_groundnut_flowering",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_aphids",
+        "pest_leaf_spot_fungal",
+        "pest_stored_grain_weevils"
+      ],
+      "harvest_profile_id": "harvest_groundnut",
+      "planting_method_ids": [
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation"
+      ],
+      "why_it_may_fit": [
+        "Adds nitrogen and protein",
+        "Tolerates mildly acidic soil"
+      ]
+    },
+    {
+      "id": "crop_pigeon_pea",
+      "topic": "crop",
+      "title": "Pigeon pea (tur)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A long-season, deep-rooted shrubby legume. Drought-hardy once established, but slow and needs deeper soil than most of this plateau offers.",
+      "instructions": [
+        "Sow only in the deepest pits, early in the rains; it can also act as a hedge and give stakes and fuel."
+      ],
+      "everyday_amounts": [
+        "two or three seeds per pit"
+      ],
+      "limitations": [
+        "Usually too long for a short wet season on shallow soil; a trial only.",
+        "Pod borers are a major pest."
+      ],
+      "safety_notes": [
+        "Cook dry seed thoroughly."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Pigeon pea",
+      "local_names": [
+        "tur",
+        "arhar",
+        "toor"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "drought_tolerant",
+        "nitrogen_fixing",
+        "needs_deep_soil"
+      ],
+      "cautions": [
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "exclude",
+          "reason": "Deep taproot cannot develop on a continuous rock sheet."
+        },
+        {
+          "when_tag": "digging_shallow",
+          "effect": "penalize",
+          "reason": "Needs deeper soil than a hand's depth; only the deepest pits."
+        },
+        {
+          "when_tag": "rain_ending",
+          "effect": "exclude",
+          "reason": "Far too long to finish if rains are ending."
+        },
+        {
+          "when_tag": "rain_ongoing",
+          "effect": "penalize",
+          "reason": "Long crop; likely to run into the dry period."
+        },
+        {
+          "when_tag": "season_unknown",
+          "effect": "penalize",
+          "reason": "Long crop; very risky without knowing the season length."
+        },
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "exclude",
+          "reason": "Does not tolerate waterlogging."
+        }
+      ],
+      "water_needs_plain": "Low once established; deep roots use moisture after rains end, where soil depth allows.",
+      "rooting_notes": "Deep taproot; needs the deepest pockets or enlarged pits.",
+      "maturity_weeks": {
+        "min": 18,
+        "max": 30
+      },
+      "maturity_description": "Short-duration types take around four to five months; local types much longer.",
+      "resource_needs": [
+        "res_seeds"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_legume_vegetative",
+        "care_legume_flowering",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_pod_borers",
+        "pest_aphids",
+        "pest_leaf_spot_fungal",
+        "pest_stored_grain_weevils"
+      ],
+      "harvest_profile_id": "harvest_pigeon_pea",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_intercrop_cereal_legume",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation"
+      ],
+      "why_it_may_fit": [
+        "Very drought-hardy once rooted",
+        "Adds nitrogen; leaves feed the soil"
+      ]
+    },
+    {
+      "id": "crop_cashew",
+      "topic": "crop",
+      "title": "Cashew (kaju)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The classic tree crop of lateritic plateaus: tolerates acidic, poor, gravelly soil and long dry seasons, but needs a pocket of deeper soil for its roots.",
+      "instructions": [
+        "Plant at the start of the rains in the deepest pocket or an enlarged pit filled with soil and compost.",
+        "Mulch widely and help with stored water in the first dry season.",
+        "Field crops can be grown between young trees for the first years."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Years before any harvest; does not solve this season's food needs.",
+        "Needs a pocket of deeper soil."
+      ],
+      "safety_notes": [
+        "The raw nut shell contains a caustic liquid: never bite or crack raw nuts; they must be roasted or processed carefully."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_cashew_minor_oil_crops",
+        "src_fao_cashew_sri_lanka",
+        "src_ccari_cashew_dss"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Cashew",
+      "local_names": [
+        "kaju",
+        "godambi"
+      ],
+      "category": "tree",
+      "suitability_tags": [
+        "acid_tolerant",
+        "drought_tolerant",
+        "low_fertility_ok",
+        "needs_deep_soil"
+      ],
+      "cautions": [
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "penalize",
+          "reason": "Needs an enlarged pit in a crack or softer pocket; on solid rock it struggles."
+        },
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "penalize",
+          "reason": "Waterlogging kills cashew; plant only on raised, well-drained spots."
+        },
+        {
+          "when_tag": "low_water",
+          "effect": "penalize",
+          "reason": "Young trees need watering in their first dry season."
+        }
+      ],
+      "water_needs_plain": "Low once established; young trees need help through the first dry season.",
+      "rooting_notes": "Deep taproot plus spreading roots; must have a pocket or enlarged pit of deeper soil.",
+      "maturity_weeks": {
+        "min": 156,
+        "max": 260
+      },
+      "maturity_description": "Long-term: grafted trees may bear from about the third year; seedlings later. Full bearing takes several more years.",
+      "resource_needs": [
+        "res_hand_tools",
+        "res_compost",
+        "res_water_containers"
+      ],
+      "care_stage_ids": [
+        "care_tree_planting",
+        "care_tree_seedling",
+        "care_tree_vegetative",
+        "care_tree_flowering",
+        "care_tree_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_tree_pests"
+      ],
+      "harvest_profile_id": "harvest_cashew",
+      "planting_method_ids": [
+        "plant_tree_seedling_pits",
+        "plant_half_moons",
+        "plant_mulch_after_sowing",
+        "plant_rainwater_harvest",
+        "plant_clay_pot_irrigation",
+        "plant_mulched_basin",
+        "plant_bottle_drip",
+        "plant_water_at_base_cool_times"
+      ],
+      "why_it_may_fit": [
+        "Classic crop on lateritic, acidic ground",
+        "Very drought-hardy once established",
+        "Answers the local 'trees only' advice"
+      ]
+    },
+    {
+      "id": "crop_mango",
+      "topic": "crop",
+      "title": "Mango (aam)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A long-lived fruit tree that can grow on lateritic ground with an enlarged, well-filled pit, but needs more soil depth and early care than cashew.",
+      "instructions": [
+        "Plant only where probing found a deep pocket; enlarge and fill the pit well before the rains."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Riskier than cashew on shallow laterite.",
+        "Years before fruit."
+      ],
+      "safety_notes": [
+        "Mango sap can irritate skin; wash after handling cut stems."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Mango",
+      "local_names": [
+        "aam"
+      ],
+      "category": "tree",
+      "suitability_tags": [
+        "drought_tolerant",
+        "needs_deep_soil"
+      ],
+      "cautions": [
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "exclude",
+          "reason": "Needs real soil depth; a continuous rock sheet will not support it."
+        },
+        {
+          "when_tag": "digging_shallow",
+          "effect": "penalize",
+          "reason": "Only in an enlarged pit in the deepest pocket."
+        },
+        {
+          "when_tag": "low_water",
+          "effect": "penalize",
+          "reason": "Young trees need watering through the first dry seasons."
+        },
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "penalize",
+          "reason": "Waterlogging harms roots."
+        }
+      ],
+      "water_needs_plain": "Moderate while young; tolerant of dry seasons once deep-rooted.",
+      "rooting_notes": "Deep taproot; needs the deepest pocket available.",
+      "maturity_weeks": {
+        "min": 156,
+        "max": 312
+      },
+      "maturity_description": "Long-term: grafted trees may fruit after a few years; seedlings take longer.",
+      "resource_needs": [
+        "res_hand_tools",
+        "res_compost",
+        "res_water_containers"
+      ],
+      "care_stage_ids": [
+        "care_tree_planting",
+        "care_tree_seedling",
+        "care_tree_vegetative",
+        "care_tree_flowering",
+        "care_tree_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_tree_pests"
+      ],
+      "harvest_profile_id": "harvest_mango",
+      "planting_method_ids": [
+        "plant_tree_seedling_pits",
+        "plant_half_moons",
+        "plant_mulch_after_sowing",
+        "plant_rainwater_harvest",
+        "plant_clay_pot_irrigation",
+        "plant_mulched_basin",
+        "plant_bottle_drip",
+        "plant_water_at_base_cool_times"
+      ],
+      "why_it_may_fit": [
+        "Long-lived food tree",
+        "Tolerates a long dry season once established"
+      ]
+    },
+    {
+      "id": "crop_gliricidia",
+      "topic": "crop",
+      "title": "Gliricidia (soil-building hedge)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A fast nitrogen-fixing hedge tree grown from cuttings; its loppings are leafy mulch and green manure for pits and beds. Not a food crop.",
+      "instructions": [
+        "Plant thick cuttings at the start of the rains along stone lines or bed edges.",
+        "Lop leafy branches and lay them on beds as mulch and green manure."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Not food: its value is soil-building, stakes and shade."
+      ],
+      "safety_notes": [
+        "Do not eat any part. Seeds and bark are toxic; keep leaves as limited fodder only where local practice confirms."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Gliricidia",
+      "local_names": [
+        "soil-building hedge",
+        "madre de cacao"
+      ],
+      "category": "tree",
+      "suitability_tags": [
+        "nitrogen_fixing",
+        "drought_tolerant",
+        "low_fertility_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "penalize",
+          "reason": "Grows slower on solid rock; plant cuttings in cracks or at bed edges."
+        }
+      ],
+      "water_needs_plain": "Low once rooted; cuttings need moist soil at planting.",
+      "rooting_notes": "Roots find cracks in the hard layer; fairly tolerant of shallow soil.",
+      "maturity_weeks": {
+        "min": 40,
+        "max": 60
+      },
+      "maturity_description": "Leaves can usually be lopped for mulch within about a year of planting cuttings.",
+      "resource_needs": [
+        "res_hand_tools"
+      ],
+      "care_stage_ids": [
+        "care_tree_planting",
+        "care_tree_seedling",
+        "care_tree_vegetative",
+        "care_gliricidia_lopping"
+      ],
+      "pest_ids": [
+        "pest_termites"
+      ],
+      "harvest_profile_id": "harvest_gliricidia",
+      "planting_method_ids": [
+        "plant_tree_seedling_pits",
+        "plant_half_moons",
+        "plant_mulch_after_sowing",
+        "plant_rainwater_harvest",
+        "plant_clay_pot_irrigation",
+        "plant_mulched_basin",
+        "plant_bottle_drip",
+        "plant_water_at_base_cool_times",
+        "plant_stone_lines"
+      ],
+      "why_it_may_fit": [
+        "Builds soil fertility with its leaves",
+        "Strengthens stone lines as a living hedge",
+        "Hardy on poor soil"
+      ]
+    },
+    {
+      "id": "crop_amaranth_greens",
+      "topic": "crop",
+      "title": "Amaranth greens (chaulai)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The fastest food option: leafy amaranth grown in the richest pit or a small bed gives young leaves to pick within about a month, then keeps giving if picked often.",
+      "instructions": [
+        "Mix the tiny seed with a few pinches of fine soil or sand so it scatters thinly, sprinkle it on a rich pit or bed and press it in; barely cover.",
+        "Thin to about a hand-span apart and eat the thinnings.",
+        "Pick the youngest leaves and tips often; pinch out flower heads to keep leaves coming."
+      ],
+      "everyday_amounts": [
+        "a pinch of tiny seed mixed with fine soil per pit",
+        "thin to about a hand-span apart"
+      ],
+      "limitations": [
+        "Needs rich, fed soil; it is not a crop for bare laterite.",
+        "Leaves only; it does not store like grain unless dried.",
+        "No yield is promised."
+      ],
+      "safety_notes": [
+        "Wash leaves in clean water and cook them; do not eat leaves sprayed with anything."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_amaranthus",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Amaranth greens",
+      "local_names": [
+        "chaulai",
+        "keerai",
+        "thotakura"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "acid_tolerant",
+        "short_season",
+        "shallow_rooting_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "no_compost",
+          "effect": "penalize",
+          "reason": "Needs the richest pit or bed; on unfed laterite leaves stay small and tough."
+        },
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "penalize",
+          "reason": "Rots in waterlogged ground; use a raised bed."
+        },
+        {
+          "when_tag": "low_water",
+          "effect": "penalize",
+          "reason": "Seedlings need the soil kept damp; plan only a small patch near stored water."
+        }
+      ],
+      "water_needs_plain": "Moderate while small: keep the soil damp until plants are a hand tall, then rain and mulch are usually enough.",
+      "rooting_notes": "Shallow, fine roots: well suited to a rich pit or a shallow bed.",
+      "maturity_weeks": {
+        "min": 4,
+        "max": 6
+      },
+      "maturity_description": "First young leaves can usually be picked about four to six weeks after sowing; picking can continue for several weeks if flowering is delayed.",
+      "resource_needs": [
+        "res_seeds",
+        "res_compost"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_vegetative",
+        "care_greens_picking"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_grasshoppers",
+        "pest_aphids",
+        "pest_leaf_caterpillars"
+      ],
+      "harvest_profile_id": "harvest_amaranth_greens",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation",
+        "plant_soil_mix_layers"
+      ],
+      "why_it_may_fit": [
+        "Fastest food: first leaves in about a month",
+        "Very useful when the season length is unknown or short",
+        "Tolerates acidic soil better than many vegetables",
+        "Needs only a small rich pit or bed"
+      ]
+    },
+    {
+      "id": "crop_sorghum",
+      "topic": "crop",
+      "title": "Sorghum (jowar)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A drought-tough grain that can stay green through dry spells when other cereals fail. Less tolerant of strong acidity than finger millet, so treat it as a trial crop here.",
+      "instructions": [
+        "Sow a pinch of seeds about one finger-joint deep in each pit early in the reliable rains; thin to the strongest two or three plants.",
+        "Do not crowd: crowded sorghum suffers most in dry spells."
+      ],
+      "everyday_amounts": [
+        "a pinch of a few seeds per planting spot",
+        "sow about one finger-joint deep"
+      ],
+      "limitations": [
+        "Less suited to strong acidity than finger millet; compare in a trial.",
+        "Birds and striga are serious problems.",
+        "No yield is promised."
+      ],
+      "safety_notes": [
+        "Check seed is not chemically treated before eating any of it."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_croptrust_sorghum_staygreen",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Sorghum",
+      "local_names": [
+        "jowar",
+        "cholam",
+        "jola"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "drought_tolerant",
+        "low_fertility_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "rain_ending",
+          "effect": "exclude",
+          "reason": "Needs roughly three to four and a half months; too long if rains are ending."
+        },
+        {
+          "when_tag": "season_unknown",
+          "effect": "penalize",
+          "reason": "Longer than pearl millet; risky when the season length is not known."
+        },
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "penalize",
+          "reason": "Roots want more depth than a rock sheet allows; only in well-filled raised beds."
+        },
+        {
+          "when_tag": "fizz_seen",
+          "effect": "penalize",
+          "reason": "A weak hint of acidity: sorghum copes less well with acidic soil than finger millet."
+        }
+      ],
+      "water_needs_plain": "Low once established; tolerates dry spells well, especially after flowering.",
+      "rooting_notes": "Strong, fairly deep roots; does best in the deeper pits and beds.",
+      "maturity_weeks": {
+        "min": 13,
+        "max": 19
+      },
+      "maturity_description": "About three to four and a half months from sowing, depending on the type.",
+      "resource_needs": [
+        "res_seeds"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_millet_vegetative",
+        "care_millet_flowering",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_grasshoppers",
+        "pest_striga",
+        "pest_birds_grain",
+        "pest_leaf_spot_fungal",
+        "pest_stored_grain_weevils",
+        "pest_rats_rodents"
+      ],
+      "harvest_profile_id": "harvest_sorghum",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "plant_mulch_after_sowing",
+        "plant_resow_gaps",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation"
+      ],
+      "why_it_may_fit": [
+        "Stays green through dry spells",
+        "Copes with low fertility",
+        "Grain stores well"
+      ]
+    },
+    {
+      "id": "crop_sweet_potato",
+      "topic": "crop",
+      "title": "Sweet potato (shakarkand)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Grown from vine cuttings on mounds or raised beds; tolerates acidic soil, covers the ground like a living mulch, and gives storable roots.",
+      "instructions": [
+        "Plant cuttings about a forearm long, burying a few leaf joints in a mound or raised bed with the tip out.",
+        "Use only moderate compost: very rich soil gives vines and few roots.",
+        "Pile soil over any cracks around the mound as roots swell, to keep weevils out."
+      ],
+      "everyday_amounts": [
+        "cuttings about a forearm long",
+        "a few leaf joints buried per cutting"
+      ],
+      "limitations": [
+        "Needs loose soil depth in a mound or bed.",
+        "Weevils and rats damage roots.",
+        "No yield is promised."
+      ],
+      "safety_notes": [
+        "Cook roots before eating."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_tnau_sweet_potato",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Sweet potato",
+      "local_names": [
+        "shakarkand",
+        "genasu"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "acid_tolerant",
+        "drought_tolerant"
+      ],
+      "cautions": [
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "penalize",
+          "reason": "Roots need loose soil depth; only in tall, well-filled raised beds or mounds."
+        },
+        {
+          "when_tag": "digging_shallow",
+          "effect": "penalize",
+          "reason": "Needs a mound or raised bed; flat shallow ground gives vines but few roots."
+        },
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "exclude",
+          "reason": "Roots rot in waterlogged soil."
+        },
+        {
+          "when_tag": "drains_slow",
+          "effect": "penalize",
+          "reason": "Water sitting on the hard layer rots roots; raise mounds higher."
+        },
+        {
+          "when_tag": "low_water",
+          "effect": "penalize",
+          "reason": "Cuttings need damp soil for their first weeks."
+        },
+        {
+          "when_tag": "rain_ending",
+          "effect": "exclude",
+          "reason": "Needs several wet weeks to root and bulk up."
+        }
+      ],
+      "water_needs_plain": "Needs damp soil for the first few weeks while cuttings root; fairly drought-tolerant once established.",
+      "rooting_notes": "Storage roots form in loose soil above the hard layer; needs a mound or raised bed.",
+      "maturity_weeks": {
+        "min": 14,
+        "max": 20
+      },
+      "maturity_description": "Roughly three and a half to five months from planting cuttings.",
+      "resource_needs": [
+        "res_hand_tools",
+        "res_compost"
+      ],
+      "care_stage_ids": [
+        "care_cutting_establishment",
+        "care_seedling",
+        "care_root_vegetative",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_sweet_potato_weevil",
+        "pest_rats_rodents"
+      ],
+      "harvest_profile_id": "harvest_sweet_potato",
+      "planting_method_ids": [
+        "plant_raised_beds",
+        "plant_containers",
+        "plant_cuttings_and_slips",
+        "plant_confirm_reliable_rains",
+        "plant_mulch_after_sowing",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation"
+      ],
+      "why_it_may_fit": [
+        "Tolerates acidic soil",
+        "Vines cover and shade the ground",
+        "Roots store for some weeks",
+        "Leaves are also edible"
+      ]
+    },
+    {
+      "id": "crop_cassava",
+      "topic": "crop",
+      "title": "Cassava (tapioca)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A very long-season root that is highly tolerant of acidic, infertile soil and survives the dry season in the ground; it needs loose mounds or pockets and careful processing before eating.",
+      "instructions": [
+        "Plant stem pieces about a forearm long from healthy plants, about two-thirds buried at a slant in a tall mound, buds pointing up.",
+        "Plant early in the reliable rains so roots establish before the dry season.",
+        "Mulch the mound and keep weeds down while plants are small; on slopes, plant behind stone lines because young cassava leaves soil bare."
+      ],
+      "everyday_amounts": [
+        "stem pieces about a forearm long",
+        "about two-thirds buried"
+      ],
+      "limitations": [
+        "Far longer than one wet season; it does not feed you this season.",
+        "Needs loose pockets or mounds.",
+        "Leaves little ground cover when young, so soil can wash on slopes.",
+        "No yield is promised."
+      ],
+      "safety_notes": [
+        "Never eat cassava raw. Roots and leaves contain natural poisons: peel, soak and cook thoroughly using the locally known safe method.",
+        "Use only cuttings from healthy plants to avoid spreading mosaic disease."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_cassava_soil_notes",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Cassava",
+      "local_names": [
+        "tapioca",
+        "kappa",
+        "maragenasu"
+      ],
+      "category": "field_crop",
+      "suitability_tags": [
+        "acid_tolerant",
+        "drought_tolerant",
+        "low_fertility_ok",
+        "needs_deep_soil"
+      ],
+      "cautions": [
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "penalize",
+          "reason": "Roots need loose pockets or tall mounds; on a continuous rock sheet they stay small or rot."
+        },
+        {
+          "when_tag": "digging_shallow",
+          "effect": "penalize",
+          "reason": "Only in tall mounds or the deepest pits."
+        },
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "exclude",
+          "reason": "Roots rot in waterlogged soil."
+        },
+        {
+          "when_tag": "drains_slow",
+          "effect": "penalize",
+          "reason": "Water sitting on the hard layer rots roots."
+        },
+        {
+          "when_tag": "rain_ending",
+          "effect": "penalize",
+          "reason": "Cuttings need several wet weeks to root before the dry season."
+        }
+      ],
+      "water_needs_plain": "Low once established; survives the long dry season in the ground.",
+      "rooting_notes": "Thick storage roots need loose soil; plant in tall mounds or enlarged pits.",
+      "maturity_weeks": {
+        "min": 35,
+        "max": 52
+      },
+      "maturity_description": "Long-term: roughly eight months to a year before roots are worth digging; they can then be left in the ground and dug as needed.",
+      "resource_needs": [
+        "res_hand_tools",
+        "res_compost"
+      ],
+      "care_stage_ids": [
+        "care_cutting_establishment",
+        "care_seedling",
+        "care_root_vegetative",
+        "care_pre_harvest"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_cassava_mosaic",
+        "pest_rats_rodents"
+      ],
+      "harvest_profile_id": "harvest_cassava",
+      "planting_method_ids": [
+        "plant_raised_beds",
+        "plant_planting_pits",
+        "plant_cuttings_and_slips",
+        "plant_confirm_reliable_rains",
+        "plant_mulch_after_sowing",
+        "plant_rainwater_harvest",
+        "plant_mulched_basin",
+        "plant_water_at_base_cool_times",
+        "plant_water_priority_rules",
+        "plant_bottle_drip",
+        "plant_clay_pot_irrigation"
+      ],
+      "why_it_may_fit": [
+        "Highly tolerant of acidic, infertile soil",
+        "Survives the dry season and stores in the ground",
+        "A food reserve between seasons"
+      ]
+    },
+    {
+      "id": "crop_pineapple",
+      "topic": "crop",
+      "title": "Pineapple (long-term perennial) (ananas)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "An optional long-term perennial with shallow roots that tolerates acidic soil and dry months; grown from leafy tops or slips in rich pits or stone-edged beds. Fruit takes well over a year.",
+      "instructions": [
+        "Twist the leafy top off a ripe fruit, let the cut end dry for a few days, then push it into a rich pit or bed early in the rains.",
+        "Mulch around it and keep the base free of standing water."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Very slow: a long-term option only.",
+        "Optional; not a staple food."
+      ],
+      "safety_notes": [
+        "Leaves are spiny at the edges; wear something on your hands."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Pineapple (long-term perennial)",
+      "local_names": [
+        "ananas"
+      ],
+      "category": "tree",
+      "suitability_tags": [
+        "acid_tolerant",
+        "drought_tolerant",
+        "shallow_rooting_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "exclude",
+          "reason": "Rots in standing water."
+        },
+        {
+          "when_tag": "drains_slow",
+          "effect": "penalize",
+          "reason": "Plant only on raised, well-drained spots."
+        },
+        {
+          "when_tag": "no_compost",
+          "effect": "penalize",
+          "reason": "Needs a rich planting pocket to grow at a useful pace."
+        }
+      ],
+      "water_needs_plain": "Low once rooted; stores water in its leaves.",
+      "rooting_notes": "Shallow roots: suits a hand's depth of rich soil in pits or stone beds.",
+      "maturity_weeks": {
+        "min": 78,
+        "max": 104
+      },
+      "maturity_description": "Long-term: usually around one and a half to two years from planting a top or slip to the first fruit.",
+      "resource_needs": [
+        "res_compost"
+      ],
+      "care_stage_ids": [
+        "care_cutting_establishment",
+        "care_pineapple_growth",
+        "care_pineapple_fruiting"
+      ],
+      "pest_ids": [
+        "pest_termites"
+      ],
+      "harvest_profile_id": "harvest_pineapple",
+      "planting_method_ids": [
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_cuttings_and_slips",
+        "plant_mulch_after_sowing",
+        "plant_mulched_basin"
+      ],
+      "why_it_may_fit": [
+        "Shallow roots fit shallow soil",
+        "Tolerates acidic soil",
+        "Planting material comes from a fruit top"
+      ]
+    },
+    {
+      "id": "crop_neem",
+      "topic": "crop",
+      "title": "Neem tree (neem)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A hardy shade tree for poor, dry ground whose leaves are used for a mild pest wash and dry-store protection; long-term, not a food crop.",
+      "instructions": [
+        "Plant a seedling early in the reliable rains in an enlarged pit with a basin and mulch ring.",
+        "Protect it from goats and other browsing animals with thorny branches."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Not food.",
+        "Slow to give much shade."
+      ],
+      "safety_notes": [
+        "Neem oil and seed are not food: keep extracts away from children and never swallow them."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Neem tree",
+      "local_names": [
+        "neem",
+        "vepa",
+        "bevu"
+      ],
+      "category": "tree",
+      "suitability_tags": [
+        "drought_tolerant",
+        "low_fertility_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "penalize",
+          "reason": "Plant in a crack or the deepest pocket; growth is slow on solid rock."
+        },
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "penalize",
+          "reason": "Dislikes waterlogged ground."
+        }
+      ],
+      "water_needs_plain": "Low after the first dry season.",
+      "rooting_notes": "Deep roots find cracks in the hard layer over time.",
+      "maturity_weeks": {
+        "min": 52,
+        "max": 260
+      },
+      "maturity_description": "Long-term: leaves can be gathered lightly within about a year; shade and seed take several years.",
+      "resource_needs": [
+        "res_hand_tools",
+        "res_compost"
+      ],
+      "care_stage_ids": [
+        "care_tree_planting",
+        "care_tree_seedling",
+        "care_tree_vegetative"
+      ],
+      "pest_ids": [
+        "pest_termites"
+      ],
+      "harvest_profile_id": "harvest_neem",
+      "planting_method_ids": [
+        "plant_tree_seedling_pits",
+        "plant_half_moons",
+        "plant_mulch_after_sowing",
+        "plant_rainwater_harvest",
+        "plant_clay_pot_irrigation",
+        "plant_mulched_basin",
+        "plant_bottle_drip",
+        "plant_water_at_base_cool_times"
+      ],
+      "why_it_may_fit": [
+        "Grows on poor, dry ground",
+        "Leaves for pest washes and grain stores",
+        "Shade and fuel in later years"
+      ]
+    },
+    {
+      "id": "crop_moringa",
+      "topic": "crop",
+      "title": "Moringa (drumstick tree)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A fast tree grown from cuttings or seed whose young leaves and tender pods are eaten; copes with dry, poor soil but hates waterlogging.",
+      "instructions": [
+        "Push a thick cutting about a forearm long into a filled pit early in the rains, or sow seed in a rich pit.",
+        "Prune the top often so leaves stay within reach."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Hates waterlogging.",
+        "Leaves are a supplement, not a staple."
+      ],
+      "safety_notes": [
+        "Eat only leaves, flowers and pods; cook pods and leaves."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Moringa",
+      "local_names": [
+        "drumstick tree",
+        "murungai",
+        "nugge"
+      ],
+      "category": "tree",
+      "suitability_tags": [
+        "drought_tolerant",
+        "low_fertility_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "exclude",
+          "reason": "Roots rot in waterlogged ground."
+        },
+        {
+          "when_tag": "drains_slow",
+          "effect": "penalize",
+          "reason": "Plant only where water drains away."
+        },
+        {
+          "when_tag": "hardpan_continuous",
+          "effect": "penalize",
+          "reason": "Needs a pocket of deeper soil; stays small on solid rock."
+        }
+      ],
+      "water_needs_plain": "Low after establishment; water young plants in the first dry season.",
+      "rooting_notes": "Thick taproot; plant in the deepest well-drained pocket.",
+      "maturity_weeks": {
+        "min": 24,
+        "max": 30
+      },
+      "maturity_description": "Leaves can usually be picked from about six months after planting; pods later.",
+      "resource_needs": [
+        "res_hand_tools",
+        "res_compost"
+      ],
+      "care_stage_ids": [
+        "care_tree_planting",
+        "care_tree_seedling",
+        "care_tree_vegetative"
+      ],
+      "pest_ids": [
+        "pest_termites",
+        "pest_leaf_caterpillars"
+      ],
+      "harvest_profile_id": "harvest_moringa",
+      "planting_method_ids": [
+        "plant_tree_seedling_pits",
+        "plant_half_moons",
+        "plant_mulch_after_sowing",
+        "plant_rainwater_harvest",
+        "plant_clay_pot_irrigation",
+        "plant_mulched_basin",
+        "plant_bottle_drip",
+        "plant_water_at_base_cool_times",
+        "plant_cuttings_and_slips"
+      ],
+      "why_it_may_fit": [
+        "Edible leaves within months",
+        "Tolerates dry, poor soil",
+        "Easy from cuttings"
+      ]
+    },
+    {
+      "id": "crop_sunn_hemp",
+      "topic": "crop",
+      "title": "Sunn hemp (green manure) (san)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A fast nitrogen-fixing green manure sown in spare beds or between stone lines and cut at flowering to feed the soil. Not food.",
+      "instructions": [
+        "Scatter seed thickly in spare beds or between stone lines early in the rains and cover lightly.",
+        "Cut as flowers appear and lay the cut plants on beds or mix them into pits."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Not food: it uses space and water that a food crop could use; grow it in spare beds."
+      ],
+      "safety_notes": [
+        "Do not eat the seeds or feed them to animals; they can be poisonous."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Sunn hemp (green manure)",
+      "local_names": [
+        "san",
+        "sanai"
+      ],
+      "category": "soil_builder",
+      "suitability_tags": [
+        "nitrogen_fixing",
+        "drought_tolerant",
+        "acid_tolerant",
+        "short_season",
+        "shallow_rooting_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "pooling_widespread",
+          "effect": "penalize",
+          "reason": "Grows poorly in standing water."
+        }
+      ],
+      "water_needs_plain": "Rain only.",
+      "rooting_notes": "Taproot; grows in shallow beds.",
+      "maturity_weeks": {
+        "min": 6,
+        "max": 9
+      },
+      "maturity_description": "Usually ready to cut for green manure about six to nine weeks after sowing, as the first flowers open.",
+      "resource_needs": [
+        "res_seeds"
+      ],
+      "care_stage_ids": [
+        "care_germination",
+        "care_seedling",
+        "care_green_manure_cutting"
+      ],
+      "pest_ids": [
+        "pest_termites"
+      ],
+      "harvest_profile_id": "harvest_sunn_hemp",
+      "planting_method_ids": [
+        "plant_raised_beds",
+        "plant_planting_pits",
+        "plant_direct_sowing",
+        "plant_confirm_reliable_rains",
+        "plant_stone_lines"
+      ],
+      "why_it_may_fit": [
+        "Adds nitrogen and green matter quickly",
+        "Copes with acidic, dry ground",
+        "Smothers weeds in spare beds"
+      ]
+    },
+    {
+      "id": "crop_vetiver_hedge",
+      "topic": "crop",
+      "title": "Grass hedge (vetiver or local clump grass) (khus)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A tight line of clump grass planted along the uphill side of stone lines to hold soil and slow runoff; trimmed for mulch. Not food.",
+      "instructions": [
+        "Split clumps into slips and plant them about a hand-span apart in a tight line along the uphill side of a stone line.",
+        "Fill any gap in the line; water finds gaps."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Not food.",
+        "Use a non-spreading clump grass known locally; avoid grasses that spread into beds."
+      ],
+      "safety_notes": [
+        "Do not burn the hedge; dry grass fires spread fast."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "name": "Grass hedge (vetiver or local clump grass)",
+      "local_names": [
+        "khus",
+        "vetiver"
+      ],
+      "category": "soil_builder",
+      "suitability_tags": [
+        "drought_tolerant",
+        "acid_tolerant",
+        "shallow_rooting_ok"
+      ],
+      "cautions": [
+        {
+          "when_tag": "slope_flat",
+          "effect": "penalize",
+          "reason": "On flat ground there is little runoff to slow; use it only along bed edges or drains."
+        }
+      ],
+      "water_needs_plain": "Rain only once rooted.",
+      "rooting_notes": "Dense roots bind the soil of stone lines and bed edges.",
+      "maturity_weeks": {
+        "min": 26,
+        "max": 52
+      },
+      "maturity_description": "Forms a useful hedge over roughly half a year to a year; trim for mulch once it is dense.",
+      "resource_needs": [
+        "res_hand_tools"
+      ],
+      "care_stage_ids": [
+        "care_cutting_establishment",
+        "care_hedge_maintenance"
+      ],
+      "pest_ids": [
+        "pest_termites"
+      ],
+      "harvest_profile_id": "harvest_vetiver_hedge",
+      "planting_method_ids": [
+        "plant_stone_lines",
+        "plant_cuttings_and_slips"
+      ],
+      "why_it_may_fit": [
+        "Holds stone lines and soil",
+        "Slows runoff",
+        "Gives mulch when trimmed"
+      ]
+    }
+  ]
+}

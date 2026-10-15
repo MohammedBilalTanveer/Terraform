@@ -1,0 +1,1215 @@
+{
+  "collection": "sources",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "src_fao_swc_case_studies",
+      "topic": "source",
+      "title": "Soil and water conservation case studies, Part three: Technical section (Burkina Faso and Kenya)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Describes zai planting pits dug before the rains and filled with compost or manure so they collect runoff, suited to dry areas with shallow soils on gentle slopes; stone lines built along contours with large stones downhill; and compost pits. Numbers in the source were converted to everyday measures in the KB.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "FAO",
+      "url": "https://www.fao.org/4/x5301e/x5301e0a.htm",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "check_pour_water_slope",
+        "check_probe_multiple_spots",
+        "check_watch_first_heavy_rain",
+        "plant_containers",
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_soil_mix_layers",
+        "plant_stone_lines",
+        "regen_compost_healthy_residue",
+        "regen_extend_pits_stone_lines",
+        "scenario_05_lateritic_hardpan",
+        "stress_waterlogging",
+        "time_remediation_prep",
+        "treat_avoid_diverting_runoff",
+        "treat_avoid_trapping_water_flat",
+        "treat_choose_growing_spot",
+        "treat_compost_fill",
+        "treat_compost_heap",
+        "treat_compost_pit",
+        "treat_containers_sacks",
+        "treat_mulch_cover",
+        "treat_organic_alternatives",
+        "treat_overflow_notch",
+        "treat_overflow_pooling",
+        "treat_pit_chain",
+        "treat_planting_pits",
+        "treat_raised_beds",
+        "treat_sheet_compost_next_season",
+        "treat_stone_lines"
+      ],
+      "notes": "Describes zai planting pits dug before the rains and filled with compost or manure so they collect runoff, suited to dry areas with shallow soils on gentle slopes; stone lines built along contours with large stones downhill; and compost pits. Numbers in the source were converted to everyday measures in the KB.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_fao_agrovoc_plinthosols",
+      "topic": "source",
+      "title": "AGROVOC concept: Plinthosols (plinthite, petroplinthite)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Defines plinthite as iron-rich, humus-poor material that hardens irreversibly into concretions or a hardpan with repeated wetting and drying, and petroplinthite as a continuous or fractured cemented sheet. Basis for the lateritic hardpan archetype and the patchy vs continuous distinction.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "FAO AGROVOC",
+      "url": "https://agrovoc.fao.org/browse/agrovoc/en/page/c_309e7c25",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "check_probe_multiple_spots",
+        "check_rock_lumps_ironstone",
+        "cue_digging_shallow",
+        "cue_gravelly",
+        "cue_hardpan_continuous_text",
+        "cue_hardpan_patchy_text",
+        "cue_reddish",
+        "cue_rock_lumps",
+        "faq_why_red",
+        "faq_why_shallow",
+        "scenario_05_lateritic_hardpan",
+        "treat_avoid_deep_pits_on_sheet",
+        "treat_avoid_deep_tilling"
+      ],
+      "notes": "Defines plinthite as iron-rich, humus-poor material that hardens irreversibly into concretions or a hardpan with repeated wetting and drying, and petroplinthite as a continuous or fractured cemented sheet. Basis for the lateritic hardpan archetype and the patchy vs continuous distinction.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_unccd_microcatchment",
+      "topic": "source",
+      "title": "Microcatchment rainwater harvesting (SLM toolbox)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Explains zai pits and half-moon bunds as hand-built structures that concentrate runoff around plants, best combined with organic amendments; notes the heavy labour and ongoing maintenance needed.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "UNCCD",
+      "url": "https://www.unccd.int/land-and-life/sds/toolbox/microcatchment-rainwater-harvesting",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "plant_covered_hollow_store",
+        "plant_half_moons",
+        "plant_mulched_basin",
+        "plant_planting_pits",
+        "plant_rainwater_harvest",
+        "plant_water_priority_rules",
+        "scenario_05_lateritic_hardpan",
+        "stress_dry_spell",
+        "time_remediation_prep",
+        "treat_compost_fill",
+        "treat_half_moons",
+        "treat_pit_chain",
+        "treat_planting_pits",
+        "treat_water_storage"
+      ],
+      "notes": "Explains zai pits and half-moon bunds as hand-built structures that concentrate runoff around plants, best combined with organic amendments; notes the heavy labour and ongoing maintenance needed.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_wocat_contour_stone_bunds",
+      "topic": "source",
+      "title": "Contour stone bunds (Niger) - WOCAT technology entry",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Seen only as a search summary (page fetch failed). Stone bunds laid along the contour slow and spread runoff, trap sediment, work best combined with vegetation, organic fertiliser and mulch, and need stones replaced after storms.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "WOCAT",
+      "url": "https://qcat.wocat.net/en/wocat/technologies/view/permalink/5014/",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "check_watch_first_heavy_rain",
+        "cue_erosion_marks",
+        "cue_runoff_fast",
+        "plant_stone_lines",
+        "regen_extend_pits_stone_lines",
+        "regen_hedges_trees",
+        "regen_preserve_beds_windbreaks",
+        "scenario_05_lateritic_hardpan",
+        "stress_heavy_rain_washout",
+        "time_soil_recovery",
+        "treat_avoid_diverting_runoff",
+        "treat_stone_lines"
+      ],
+      "notes": "Seen only as a search summary (page fetch failed). Stone bunds laid along the contour slow and spread runoff, trap sediment, work best combined with vegetation, organic fertiliser and mulch, and need stones replaced after storms.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_cgiar_csa_stone_bunds",
+      "topic": "source",
+      "title": "Contour stone bunds for soil erosion control in the Sahel of West Africa",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Seen only as a search summary (certificate error on fetch). Bunds improve water retention in dry years and protect against erosion in wet years; often combined with zai pits on crusted soils; labour-intensive to build.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "CGIAR Climate-Smart Agriculture Guide",
+      "url": "https://csaguide.cgiar.org/csa/contour-stone-bunds-for-soil-erosion-control-in-the-sahel-of-west-africa",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "plant_stone_lines",
+        "treat_stone_lines"
+      ],
+      "notes": "Seen only as a search summary (certificate error on fetch). Bunds improve water retention in dry years and protect against erosion in wet years; often combined with zai pits on crusted soils; labour-intensive to build.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_ccardesa_half_moon",
+      "topic": "source",
+      "title": "Half-moon pits practical guide",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Seen only as a search summary (fetch reset). Half-moons open upslope with soil piled on the curved side and stones reinforcing it, compost spread inside; not suited to high-rainfall areas because of waterlogging.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "CCARDESA",
+      "url": "https://ccardesa.org/half-moon-pits",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "plant_half_moons",
+        "stress_waterlogging",
+        "treat_avoid_trapping_water_flat",
+        "treat_half_moons"
+      ],
+      "notes": "Seen only as a search summary (fetch reset). Half-moons open upslope with soil piled on the curved side and stones reinforcing it, compost spread inside; not suited to high-rainfall areas because of waterlogging.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_fao_reosa_ca_brief",
+      "topic": "source",
+      "title": "Conservation Agriculture technical brief 1 (planting basins, soil cover)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "PDF could not be read; content known only from search summary: minimum soil disturbance, permanent soil cover and rotation; planting basins dug across the slope before the season and reused.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "FAO REOSA",
+      "url": "https://www.fao.org/fileadmin/user_upload/emergencies/docs/FAO_REOSA_Technical_Brief_1__July_2010_.pdf",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_flowering",
+        "care_germination",
+        "care_seedling",
+        "care_vegetative",
+        "plant_mulch_after_sowing",
+        "plant_mulched_basin",
+        "plant_planting_pits",
+        "plant_raised_beds",
+        "plant_water_at_base_cool_times",
+        "regen_keep_mulch_dry_season",
+        "regen_return_residue",
+        "stress_dry_spell",
+        "stress_heat",
+        "stress_heavy_rain_washout",
+        "stress_nutrient",
+        "treat_avoid_burning_residue",
+        "treat_moisture_retention_test",
+        "treat_mulch_cover",
+        "treat_planting_pits",
+        "treat_raised_beds"
+      ],
+      "notes": "PDF could not be read; content known only from search summary: minimum soil disturbance, permanent soil cover and rotation; planting basins dug across the slope before the season and reused.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_fao_soil_biodiversity_termites",
+      "topic": "source",
+      "title": "Annex 4: Matrix of case studies on soil biodiversity and ecosystem management",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Burkina Faso case: organic mulch on severely crusted soil stimulated termite activity, which restored structure, infiltration and drainage. Supports mulching and the advice not to eradicate termites.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "FAO",
+      "url": "https://www.fao.org/4/y4810e/y4810e0c.htm",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_seedling",
+        "check_life_count",
+        "faq_termites",
+        "pest_termites",
+        "plant_mulch_after_sowing",
+        "regen_return_residue",
+        "time_soil_recovery",
+        "treat_avoid_burning_residue",
+        "treat_moisture_retention_test",
+        "treat_mulch_cover",
+        "treat_organic_alternatives",
+        "trouble_termite_damage"
+      ],
+      "notes": "Burkina Faso case: organic mulch on severely crusted soil stimulated termite activity, which restored structure, infiltration and drainage. Supports mulching and the advice not to eradicate termites.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_cgiar_nbdc_termites",
+      "topic": "source",
+      "title": "Integrated termite management notes (Nile Basin Development Challenge workshop)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Search summary only: manure and crop residues raised organic matter and reduced termite damage; termites prefer litter and stover to living plants; mound poisoning was harmful and largely ineffective.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "CGIAR / ILRI",
+      "url": "https://assets.publishing.service.gov.uk/media/57a09dd5ed915d622c001be9/nbdcdonetaljuly2013-130709092.pdf",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "pest_termites"
+      ],
+      "notes": "Search summary only: manure and crop residues raised organic matter and reduced termite damage; termites prefer litter and stover to living plants; mound poisoning was harmful and largely ineffective.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_tnau_ragi",
+      "topic": "source",
+      "title": "Finger millet (ragi) crop production guide",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Lists rainfed sowing windows tied to the monsoon, durations of common varieties of roughly thirteen to seventeen weeks, and two-stage harvest because heads ripen unevenly. Search summary adds that ragi predominates on lateritic and red soils. Chemical recommendations in the source were deliberately not used.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "TNAU Agritech Portal (Tamil Nadu Agricultural University)",
+      "url": "https://agritech.tnau.ac.in/agriculture/millets_ragi.html",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_millet_flowering",
+        "care_millet_vegetative",
+        "check_soaking_rain_depth",
+        "crop_finger_millet",
+        "harvest_finger_millet",
+        "pest_leaf_spot_fungal",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing",
+        "time_buffer_late_start",
+        "time_calendar_relative_to_rain"
+      ],
+      "notes": "Lists rainfed sowing windows tied to the monsoon, durations of common varieties of roughly thirteen to seventeen weeks, and two-stage harvest because heads ripen unevenly. Search summary adds that ragi predominates on lateritic and red soils. Chemical recommendations in the source were deliberately not used.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_tnau_cowpea",
+      "topic": "source",
+      "title": "Cowpea crop production guide",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Gives sowing seasons and variety durations of roughly eight to thirteen weeks, and notes flowering and pod formation are the stages most sensitive to water shortage.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "TNAU Agritech Portal",
+      "url": "https://agritech.tnau.ac.in/agriculture/pulses_cowpea.html",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_legume_flowering",
+        "care_legume_vegetative",
+        "crop_cowpea",
+        "harvest_cowpea",
+        "pest_aphids",
+        "plant_direct_sowing",
+        "treat_legume_rotation"
+      ],
+      "notes": "Gives sowing seasons and variety durations of roughly eight to thirteen weeks, and notes flowering and pod formation are the stages most sensitive to water shortage.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_tnau_horsegram",
+      "topic": "source",
+      "title": "Horse gram crop production guide",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Rainfed late-season sowing, durations of roughly fourteen to sixteen weeks for listed varieties, one weeding early, whole-plant harvest when mature.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "TNAU Agritech Portal",
+      "url": "https://agritech.tnau.ac.in/agriculture/pulses_horsegram.html",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_legume_vegetative",
+        "crop_horse_gram",
+        "harvest_horse_gram",
+        "plant_direct_sowing",
+        "regen_cover_crop_living_mulch"
+      ],
+      "notes": "Rainfed late-season sowing, durations of roughly fourteen to sixteen weeks for listed varieties, one weeding early, whole-plant harvest when mature.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_vikaspedia_horse_gram",
+      "topic": "source",
+      "title": "Horse gram package of practices",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Search summary only: grown on poor lateritic soils in south India, performs under low rainfall, does not tolerate waterlogging; heavy early rain harms nodulation.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "Vikaspedia (Government of India portal)",
+      "url": "https://en.vikaspedia.in/viewcontent/agriculture/crop-production/package-of-practices/pulses/horse-gram",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "crop_horse_gram"
+      ],
+      "notes": "Search summary only: grown on poor lateritic soils in south India, performs under low rainfall, does not tolerate waterlogging; heavy early rain harms nodulation.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_croptrust_pearl_millet",
+      "topic": "source",
+      "title": "Pearl millet crop profile",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pearl millet prefers sandy or loamy soils, tolerates low fertility, and grows where rainfall is too low for maize or sorghum; highly heat- and drought-tolerant.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "Crop Trust",
+      "url": "https://www.croptrust.org/knowledge-hub/crops/pearl-millet/",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_millet_flowering",
+        "crop_pearl_millet",
+        "harvest_pearl_millet"
+      ],
+      "notes": "Pearl millet prefers sandy or loamy soils, tolerates low fertility, and grows where rainfall is too low for maize or sorghum; highly heat- and drought-tolerant.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_icrisat_pearl_millet_drought",
+      "topic": "source",
+      "title": "Pearl millet drought adaptation (book chapter, Yadav, Rai and Gupta 2012)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Search summary only: pearl millet is grown on shallow or sandy soils with erratic rainfall; yield loss is greatest when drought hits at grain filling.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "ICRISAT",
+      "url": "https://oar.icrisat.org/6195/1/ch12_2012.pdf",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "crop_pearl_millet"
+      ],
+      "notes": "Search summary only: pearl millet is grown on shallow or sandy soils with erratic rainfall; yield loss is greatest when drought hits at grain filling.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_iita_cowpea_guide",
+      "topic": "source",
+      "title": "Guide to Cowpea Production in Northern Nigeria",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Not read (PDF). Search summaries indicate cowpea adapts to a wide range of soils including acidic ones but is sensitive to waterlogging; pests such as pod borers and aphids are major constraints.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "IITA",
+      "url": "https://www.iita.org/wp-content/uploads/2020/07/Guide-to-Cowpea-production-in-Northern-Nigeria.pdf",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "crop_cowpea",
+        "harvest_cowpea",
+        "pest_pod_borers"
+      ],
+      "notes": "Not read (PDF). Search summaries indicate cowpea adapts to a wide range of soils including acidic ones but is sensitive to waterlogging; pests such as pod borers and aphids are major constraints.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_fao_cashew_minor_oil_crops",
+      "topic": "source",
+      "title": "Minor oil crops: individual monographs - Cashew nut",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Let nuts fall before collecting so none are unripe; collect at least weekly in fine weather and daily in wet weather because nuts rot; twist off the apple and sun-dry nuts on mats until the kernel rattles; processed kernels keep in airtight containers.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "FAO",
+      "url": "https://www.fao.org/4/x5043e/x5043e06.htm",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_tree_flowering",
+        "care_tree_pre_harvest",
+        "crop_cashew",
+        "harvest_cashew"
+      ],
+      "notes": "Let nuts fall before collecting so none are unripe; collect at least weekly in fine weather and daily in wet weather because nuts rot; twist off the apple and sun-dry nuts on mats until the kernel rattles; processed kernels keep in airtight containers.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_fao_cashew_sri_lanka",
+      "topic": "source",
+      "title": "Integrated production practices of cashew in Sri Lanka",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cashew grown on red-yellow latosols and similar soils; nuts collected from the ground and sun-dried about three days; trees begin bearing around the third year with peak bearing later.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "FAO (RAP publication)",
+      "url": "https://www.fao.org/4/ac451e/ac451e08.htm",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_tree_seedling",
+        "care_tree_vegetative",
+        "crop_cashew",
+        "harvest_cashew",
+        "pest_tree_pests",
+        "plant_tree_seedling_pits",
+        "regen_hedges_trees",
+        "time_rule_trees"
+      ],
+      "notes": "Cashew grown on red-yellow latosols and similar soils; nuts collected from the ground and sun-dried about three days; trees begin bearing around the third year with peak bearing later.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_ccari_cashew_dss",
+      "topic": "source",
+      "title": "Crop: Cashew (decision support page)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Host not reachable at fetch time; search summary: pits opened weeks before planting, larger pits where a hard laterite layer lies beneath, filled with topsoil and compost, grafts planted at monsoon onset.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "ICAR Central Coastal Agricultural Research Institute, Goa",
+      "url": "https://ccari.icar.gov.in/dss/cashew.html",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_tree_planting",
+        "crop_cashew",
+        "plant_tree_seedling_pits"
+      ],
+      "notes": "Host not reachable at fetch time; search summary: pits opened weeks before planting, larger pits where a hard laterite layer lies beneath, filled with topsoil and compost, grafts planted at monsoon onset.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_osu_wood_ash",
+      "topic": "source",
+      "title": "Use fireplace ash sparingly to boost garden soil",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Wood ash acts like lime and adds some potassium, but 'the dose makes the poison': use sparingly, not at seeding (salts burn seedlings), never in piles, never from trash or treated wood; caustic, so protect eyes and skin. Supports the small-handful, optional-only ash guidance.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "Oregon State University Extension Service",
+      "url": "https://extension.oregonstate.edu/news/sweep-wood-ash-fireplace-garden-0",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "faq_too_much_ash",
+        "stress_acidity",
+        "treat_ash_shell_optional",
+        "treat_avoid_compost_claims",
+        "treat_avoid_fresh_manure_seed",
+        "treat_avoid_large_ash"
+      ],
+      "notes": "Wood ash acts like lime and adds some potassium, but 'the dose makes the poison': use sparingly, not at seeding (salts burn seedlings), never in piles, never from trash or treated wood; caustic, so protect eyes and skin. Supports the small-handful, optional-only ash guidance.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_iita_propas_striga",
+      "topic": "source",
+      "title": "Proactive management of Striga infestation",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Striga seed persists in soil for many years; rotation or intercropping with legumes such as cowpea and groundnut, plus manure, compost and residues, reduces striga; hand pulling is labour-intensive.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "IITA PROPAS",
+      "url": "https://propas.iita.org/en/solutions/proactive-management-of-striga-infestation/117/details",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_millet_vegetative",
+        "pest_striga",
+        "plant_intercrop_cereal_legume",
+        "regen_legume_rotation",
+        "regen_remove_diseased_residue",
+        "stress_nutrient",
+        "treat_legume_rotation"
+      ],
+      "notes": "Striga seed persists in soil for many years; rotation or intercropping with legumes such as cowpea and groundnut, plus manure, compost and residues, reduces striga; hand pulling is labour-intensive.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_farmradio_striga",
+      "topic": "source",
+      "title": "Remove Striga weeds carefully from your field (radio script)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pull striga when flowers appear, before seed forms, without snapping the stem; bag pulled plants, take them out of the field and burn them; keep pulling every season.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "Farm Radio International",
+      "url": "https://scripts.farmradio.fm/radio-script/remove-striga-weeds-carefully-from-your-field/",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_millet_vegetative",
+        "pest_striga",
+        "regen_remove_diseased_residue",
+        "trouble_purple_weed_on_millet"
+      ],
+      "notes": "Pull striga when flowers appear, before seed forms, without snapping the stem; bag pulled plants, take them out of the field and burn them; keep pulling every season.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_pics_hermetic_storage",
+      "topic": "source",
+      "title": "Hermetic storage research for smallholder grain (PICS network)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Search summary only: sealed, airtight storage of dry grain suppresses weevils because insects use up the oxygen; grain must be dry first.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "Purdue University PICS network",
+      "url": "https://ag.purdue.edu/department/entm/extension/pics-network/insects-14-00954.pdf",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "pest_stored_grain_weevils"
+      ],
+      "notes": "Search summary only: sealed, airtight storage of dry grain suppresses weevils because insects use up the oxygen; grain must be dry first.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_fao_windbreaks",
+      "topic": "source",
+      "title": "Arid zone forestry, Chapter V: Special forest plantations (windbreaks and shelterbelts)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Windbreaks and shelterbelts slow wind, cutting soil evaporation, plant water loss and wind erosion, and moderating temperature extremes. Moderately open barriers shelter a longer strip than dense ones; they should run across the prevailing wind, avoid gaps, and need upkeep. Supports the partly open dead hedge, brush windbreak and live hedge guidance.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "FAO",
+      "url": "https://www.fao.org/4/t0122e/t0122e0a.htm",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "regen_preserve_beds_windbreaks",
+        "stress_heat",
+        "stress_hot_wind"
+      ],
+      "notes": "Windbreaks and shelterbelts slow wind, cutting soil evaporation, plant water loss and wind erosion, and moderating temperature extremes. Moderately open barriers shelter a longer strip than dense ones; they should run across the prevailing wind, avoid gaps, and need upkeep. Supports the partly open dead hedge, brush windbreak and live hedge guidance.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_sare_cowpea_cover",
+      "topic": "source",
+      "title": "Managing Cover Crops Profitably: Cowpeas",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cowpea as a cover crop: strong drought and heat tolerance, tolerates low fertility and acid soils, shades the ground quickly to smother weeds, fixes nitrogen, but does not survive waterlogging. Supports the post-harvest cover crop / living mulch record.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "SARE (Sustainable Agriculture Research and Education)",
+      "url": "https://sare.org/publications/managing-cover-crops-profitably/legume-cover-crops/cowpeas",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "regen_cover_crop_living_mulch"
+      ],
+      "notes": "Cowpea as a cover crop: strong drought and heat tolerance, tolerates low fertility and acid soils, shades the ground quickly to smother weeds, fixes nitrogen, but does not survive waterlogging. Supports the post-harvest cover crop / living mulch record.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_fao_pitcher_irrigation",
+      "topic": "source",
+      "title": "Pitcher irrigation (family farming knowledge platform entry)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Search summary only (page returned an access error): round porous clay pots buried near crops and filled with water seep slowly through the walls to the roots, releasing more as plants draw it down.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Recorded from search results; the page itself was not read."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "FAO Family Farming Knowledge Platform",
+      "url": "https://www.fao.org/family-farming/detail/es/c/1401660/",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "plant_clay_pot_irrigation"
+      ],
+      "notes": "Search summary only (page returned an access error): round porous clay pots buried near crops and filled with water seep slowly through the walls to the roots, releasing more as plants draw it down.",
+      "verification": "recorded_not_fetched"
+    },
+    {
+      "id": "src_team_field_notes",
+      "topic": "source",
+      "title": "TERRAFORM teammate field notes (unsourced synthesis)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A teammate's practical Scenario 5 notes (crop guides, troubleshooting, Q&A, calendar, tests, compost and storage tips) written without citations. Merged content was rewritten in our own words and checked against our safety rules; records that rely on it alone are marked needs_local_confirmation. It is not an external source.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [
+        "Unsourced team notes: content must be confirmed locally."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "Team",
+      "url": "",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_cutting_establishment",
+        "care_green_manure_cutting",
+        "care_greens_picking",
+        "care_hedge_maintenance",
+        "care_pineapple_fruiting",
+        "care_pineapple_growth",
+        "care_root_vegetative",
+        "check_float_seed_test",
+        "check_life_count",
+        "check_seed_sprout_test",
+        "check_water_hole_drainage",
+        "crop_amaranth_greens",
+        "crop_cassava",
+        "crop_moringa",
+        "crop_neem",
+        "crop_pineapple",
+        "crop_sorghum",
+        "crop_sunn_hemp",
+        "crop_sweet_potato",
+        "crop_vetiver_hedge",
+        "faq_acid_suspected",
+        "faq_after_harvest",
+        "faq_bed_stays_full",
+        "faq_break_hard_layer",
+        "faq_fill_soil",
+        "faq_first_food",
+        "faq_first_steps",
+        "faq_hard_layer_useful",
+        "faq_how_many_pits",
+        "faq_keep_water",
+        "faq_long_term_value",
+        "faq_make_compost",
+        "faq_no_ash",
+        "faq_no_compost",
+        "faq_pests_first",
+        "faq_pit_bottom",
+        "faq_plant_first",
+        "faq_rain_came_early",
+        "faq_rains_late",
+        "faq_scatter_seed",
+        "faq_seedlings_died",
+        "faq_seeds_per_pit",
+        "faq_soil_dead",
+        "faq_stone_line_height",
+        "faq_termites",
+        "faq_tomatoes",
+        "faq_too_much_ash",
+        "faq_trees_only",
+        "faq_what_avoid",
+        "faq_what_build_first",
+        "faq_when_plant",
+        "faq_where_seeds",
+        "faq_where_stone_lines",
+        "faq_why_red",
+        "faq_why_runoff",
+        "faq_why_shallow",
+        "faq_will_it_improve",
+        "harvest_amaranth_greens",
+        "harvest_cassava",
+        "harvest_moringa",
+        "harvest_neem",
+        "harvest_pineapple",
+        "harvest_sorghum",
+        "harvest_sunn_hemp",
+        "harvest_sweet_potato",
+        "harvest_vetiver_hedge",
+        "pest_aphids",
+        "pest_birds_grain",
+        "pest_cassava_mosaic",
+        "pest_leaf_caterpillars",
+        "pest_rats_rodents",
+        "pest_sweet_potato_weevil",
+        "plant_covered_hollow_store",
+        "plant_cuttings_and_slips",
+        "plant_seed_sourcing",
+        "plant_soil_mix_layers",
+        "time_calendar_relative_to_rain",
+        "treat_compost_heap",
+        "treat_compost_pit",
+        "treat_overflow_notch",
+        "treat_pit_chain",
+        "trouble_birds_on_heads",
+        "trouble_crust_over_seedbed",
+        "trouble_fizz_unchanged",
+        "trouble_interveinal_yellowing",
+        "trouble_midday_wilt",
+        "trouble_pale_yellow",
+        "trouble_purple_stunting",
+        "trouble_purple_weed_on_millet",
+        "trouble_root_rot",
+        "trouble_seeds_not_up",
+        "trouble_stone_line_undercut",
+        "trouble_termite_damage",
+        "trouble_vines_no_roots",
+        "trouble_walls_washed_out",
+        "trouble_water_stands_for_days",
+        "trouble_wilt_no_recovery"
+      ],
+      "notes": "A teammate's practical Scenario 5 notes (crop guides, troubleshooting, Q&A, calendar, tests, compost and storage tips) written without citations. Merged content was rewritten in our own words and checked against our safety rules; records that rely on it alone are marked needs_local_confirmation. It is not an external source.",
+      "verification": "team_notes_unverified"
+    },
+    {
+      "id": "src_tnau_amaranthus",
+      "topic": "source",
+      "title": "Amaranthus (vegetables) crop production page",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Leafy amaranth suits well-drained, slightly acidic loams; tiny seed is mixed with sand and scattered; first leaf harvest from roughly four to six weeks after sowing depending on type; clipping types are cut repeatedly.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "TNAU Agritech Portal",
+      "url": "https://agritech.tnau.ac.in/horticulture/horti_vegetables_amaranthus.html",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_greens_picking",
+        "crop_amaranth_greens",
+        "harvest_amaranth_greens"
+      ],
+      "notes": "Leafy amaranth suits well-drained, slightly acidic loams; tiny seed is mixed with sand and scattered; first leaf harvest from roughly four to six weeks after sowing depending on type; clipping types are cut repeatedly.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_tnau_sweet_potato",
+      "topic": "source",
+      "title": "Sweet potato crop production page",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Sweet potato is planted from terminal vine cuttings on ridges or beds and is ready in roughly sixteen to seventeen weeks. Tillage and chemical details in the source were not used.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "TNAU Agritech Portal",
+      "url": "https://agritech.tnau.ac.in/horticulture/horti_vegetables_sweet%20potato.html",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_cutting_establishment",
+        "crop_sweet_potato",
+        "harvest_sweet_potato",
+        "pest_sweet_potato_weevil",
+        "plant_cuttings_and_slips"
+      ],
+      "notes": "Sweet potato is planted from terminal vine cuttings on ridges or beds and is ready in roughly sixteen to seventeen weeks. Tillage and chemical details in the source were not used.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_fao_cassava_soil_notes",
+      "topic": "source",
+      "title": "Cassava Technical Advisory Notes: soil and crop management",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cassava is highly tolerant of soil acidity and infertile soils and seldom responds to lime; continuous cropping without manure depletes soil; it leaves soil bare for its first months, so erosion on slopes needs contour hedges, mulch or intercrops.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "FAO",
+      "url": "https://www.fao.org/4/y2413e/y2413e0i.htm",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "care_root_vegetative",
+        "crop_cassava",
+        "harvest_cassava",
+        "plant_cuttings_and_slips"
+      ],
+      "notes": "Cassava is highly tolerant of soil acidity and infertile soils and seldom responds to lime; continuous cropping without manure depletes soil; it leaves soil bare for its first months, so erosion on slopes needs contour hedges, mulch or intercrops.",
+      "verification": "fetched_and_read"
+    },
+    {
+      "id": "src_croptrust_sorghum_staygreen",
+      "topic": "source",
+      "title": "Stay-green sorghum to the rescue",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Describes sorghum's drought tolerance and the 'stay-green' trait that keeps leaves alive through drought after flowering; some landraces performed strongly under water stress.",
+      "instructions": [],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "organization": "Crop Trust",
+      "url": "https://www.croptrust.org/blog/stay-green-sorghum-to-the-rescue/",
+      "accessed_on": "2026-10-15",
+      "supports_kb_ids": [
+        "crop_sorghum",
+        "harvest_sorghum"
+      ],
+      "notes": "Describes sorghum's drought tolerance and the 'stay-green' trait that keeps leaves alive through drought after flowering; some landraces performed strongly under water stress.",
+      "verification": "fetched_and_read"
+    }
+  ]
+}

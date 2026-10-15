@@ -1,0 +1,70 @@
+{
+ "collection": "field_faq",
+ "version": "1.0.0-fixture",
+ "records": [
+  {
+   "id": "faq_seed_depth",
+   "topic": "field_faq",
+   "title": "How deep should I sow millet seed?",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture FAQ: How deep should I sow millet seed?",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for How deep should I sow millet seed?."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "question": "How deep should I sow millet seed?",
+   "answer": "Fixture answer: sow about one finger-joint deep and cover lightly.",
+   "related_kb_ids": [
+    "plant_direct_sowing"
+   ]
+  },
+  {
+   "id": "faq_seed_sprout_test",
+   "topic": "field_faq",
+   "title": "How do I test if my seeds will sprout?",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture FAQ: How do I test if my seeds will sprout?",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for How do I test if my seeds will sprout?."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "question": "How do I test if my seeds will sprout?",
+   "answer": "Fixture answer: wrap ten seeds in a damp cloth and count how many sprout.",
+   "related_kb_ids": []
+  }
+ ]
+}

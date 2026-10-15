@@ -1,0 +1,745 @@
+{
+  "collection": "troubleshooting",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "trouble_water_stands_for_days",
+      "topic": "troubleshooting",
+      "title": "Water stands in a pit or bed for days",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "drains_slow",
+          "pooling_some",
+          "pooling_widespread",
+          "hardpan_continuous"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Water stands in a pit or bed for days: likely the hard layer below stops water draining",
+      "instructions": [
+        "Stop sending runoff into that pit or bed.",
+        "Raise the rooting area: build the bed higher or fill the pit above ground level.",
+        "Cut an overflow notch to a safe, stable place (not automatically into another planting pit).",
+        "Move the next sowing off the lowest ground."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Water stands in a pit or bed for days",
+      "likely_causes": [
+        "The hard layer below stops water draining",
+        "The pit sits in a low spot that collects runoff"
+      ],
+      "actions": [
+        "Stop sending runoff into that pit or bed.",
+        "Raise the rooting area: build the bed higher or fill the pit above ground level.",
+        "Cut an overflow notch to a safe, stable place (not automatically into another planting pit).",
+        "Move the next sowing off the lowest ground."
+      ],
+      "related_kb_ids": [
+        "treat_overflow_notch",
+        "treat_raised_beds",
+        "treat_overflow_pooling",
+        "stress_waterlogging",
+        "check_water_hole_drainage"
+      ],
+      "stage_hint": "any"
+    },
+    {
+      "id": "trouble_walls_washed_out",
+      "topic": "troubleshooting",
+      "title": "Bed or pit walls washed out",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Bed or pit walls washed out: likely weak border with small stones",
+      "instructions": [
+        "Rebuild with bigger stones at the base and smaller ones packed behind.",
+        "Add a stone line uphill to slow the water.",
+        "Mulch the surface and add an overflow notch."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Bed or pit walls washed out",
+      "likely_causes": [
+        "Weak border with small stones",
+        "No stone line uphill to slow runoff"
+      ],
+      "actions": [
+        "Rebuild with bigger stones at the base and smaller ones packed behind.",
+        "Add a stone line uphill to slow the water.",
+        "Mulch the surface and add an overflow notch."
+      ],
+      "related_kb_ids": [
+        "stress_heavy_rain_washout",
+        "treat_stone_lines",
+        "treat_overflow_notch"
+      ],
+      "stage_hint": "any"
+    },
+    {
+      "id": "trouble_stone_line_undercut",
+      "topic": "troubleshooting",
+      "title": "Stone line undercut or burst",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "slope_slight",
+          "slope_steep",
+          "slope_unknown",
+          "runoff_fast"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Stone line undercut or burst: likely the line is not level, so water runs along it to a low point",
+      "instructions": [
+        "Re-lay it level across the slope with big stones at the base.",
+        "Pack soil and small stones on the uphill side.",
+        "Leave a stone-lined spill gap at one end that leads to safe ground.",
+        "Keep it low; raise it only after watching rains."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Stone line undercut or burst",
+      "likely_causes": [
+        "The line is not level, so water runs along it to a low point",
+        "The line is too high with no spill point"
+      ],
+      "actions": [
+        "Re-lay it level across the slope with big stones at the base.",
+        "Pack soil and small stones on the uphill side.",
+        "Leave a stone-lined spill gap at one end that leads to safe ground.",
+        "Keep it low; raise it only after watching rains."
+      ],
+      "related_kb_ids": [
+        "treat_stone_lines",
+        "check_watch_first_heavy_rain",
+        "treat_avoid_diverting_runoff"
+      ],
+      "stage_hint": "any"
+    },
+    {
+      "id": "trouble_seeds_not_up",
+      "topic": "troubleshooting",
+      "title": "Seeds did not come up",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Seeds did not come up: likely a false start: one shower then a dry gap",
+      "instructions": [
+        "Run the seed sprout test on the remaining seed.",
+        "Re-sow shallower after the next soaking rain.",
+        "Cover sown spots lightly with mulch once seedlings show, and scare birds."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Seeds did not come up",
+      "likely_causes": [
+        "A false start: one shower then a dry gap",
+        "Old or dead seed",
+        "Sown too deep",
+        "Birds or ants took the seed"
+      ],
+      "actions": [
+        "Run the seed sprout test on the remaining seed.",
+        "Re-sow shallower after the next soaking rain.",
+        "Cover sown spots lightly with mulch once seedlings show, and scare birds."
+      ],
+      "related_kb_ids": [
+        "check_seed_sprout_test",
+        "plant_resow_gaps",
+        "plant_confirm_reliable_rains",
+        "plant_direct_sowing"
+      ],
+      "stage_hint": "germination"
+    },
+    {
+      "id": "trouble_purple_stunting",
+      "topic": "troubleshooting",
+      "title": "Stunted plants with purplish leaves",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Stunted plants with purplish leaves: likely hungry, acidic soil that holds back plant food",
+      "instructions": [
+        "Check moisture and drainage first.",
+        "Work mature compost or rotted manure around the plants and mulch.",
+        "For the next sowing, add more organic matter and favour tolerant crops."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Stunted plants with purplish leaves",
+      "likely_causes": [
+        "Hungry, acidic soil that holds back plant food",
+        "Cold, dry or waterlogged roots"
+      ],
+      "actions": [
+        "Check moisture and drainage first.",
+        "Work mature compost or rotted manure around the plants and mulch.",
+        "For the next sowing, add more organic matter and favour tolerant crops."
+      ],
+      "related_kb_ids": [
+        "stress_acidity",
+        "stress_nutrient",
+        "treat_compost_fill"
+      ],
+      "stage_hint": "seedling"
+    },
+    {
+      "id": "trouble_pale_yellow",
+      "topic": "troubleshooting",
+      "title": "Stunted, pale yellow plants",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Stunted, pale yellow plants: likely possible shortage of plant food",
+      "instructions": [
+        "Check the soil a finger deep, drainage and pests first.",
+        "If those are fine, add a light top-up of mature compost around plants and watch for a week or two.",
+        "Grow legumes next to or after cereals."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Stunted, pale yellow plants",
+      "likely_causes": [
+        "Possible shortage of plant food",
+        "Dry roots, waterlogging, pests or disease can look the same"
+      ],
+      "actions": [
+        "Check the soil a finger deep, drainage and pests first.",
+        "If those are fine, add a light top-up of mature compost around plants and watch for a week or two.",
+        "Grow legumes next to or after cereals."
+      ],
+      "related_kb_ids": [
+        "stress_nutrient",
+        "treat_legume_rotation",
+        "check_watch_trial_plants"
+      ],
+      "stage_hint": "vegetative"
+    },
+    {
+      "id": "trouble_interveinal_yellowing",
+      "topic": "troubleshooting",
+      "title": "Leaves yellow between green veins",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Leaves yellow between green veins: likely too much ash, shell or other liming material added",
+      "instructions": [
+        "Stop adding ash or shell.",
+        "Add mature compost and let the rains wash through.",
+        "Keep an untreated comparison pit."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Leaves yellow between green veins",
+      "likely_causes": [
+        "Too much ash, shell or other liming material added"
+      ],
+      "actions": [
+        "Stop adding ash or shell.",
+        "Add mature compost and let the rains wash through.",
+        "Keep an untreated comparison pit."
+      ],
+      "related_kb_ids": [
+        "treat_avoid_large_ash",
+        "treat_ash_shell_optional",
+        "stress_acidity"
+      ],
+      "stage_hint": "vegetative"
+    },
+    {
+      "id": "trouble_fizz_unchanged",
+      "topic": "troubleshooting",
+      "title": "The baking-soda fizz seems unchanged after a trial",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "The baking-soda fizz seems unchanged after a trial: likely the fizz check is not a reliable measure and may not show any change",
+      "instructions": [
+        "Do not keep adding ash to chase a change in fizz.",
+        "Judge by plant health against an untreated pit.",
+        "Seek local advice before adding more of anything."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "The baking-soda fizz seems unchanged after a trial",
+      "likely_causes": [
+        "The fizz check is not a reliable measure and may not show any change"
+      ],
+      "actions": [
+        "Do not keep adding ash to chase a change in fizz.",
+        "Judge by plant health against an untreated pit.",
+        "Seek local advice before adding more of anything."
+      ],
+      "related_kb_ids": [
+        "check_baking_soda_fizz",
+        "treat_fizz_recheck_optional",
+        "treat_avoid_compost_claims"
+      ],
+      "stage_hint": "any"
+    },
+    {
+      "id": "trouble_crust_over_seedbed",
+      "topic": "troubleshooting",
+      "title": "A crust forms over the seedbed",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A crust forms over the seedbed: likely hard raindrops seal bare soil",
+      "instructions": [
+        "Break the crust gently with a stick or fingertip after rain.",
+        "Mulch lightly around sown spots once seedlings show.",
+        "Mix more organic matter into the top of pits and beds next time."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "A crust forms over the seedbed",
+      "likely_causes": [
+        "Hard raindrops seal bare soil"
+      ],
+      "actions": [
+        "Break the crust gently with a stick or fingertip after rain.",
+        "Mulch lightly around sown spots once seedlings show.",
+        "Mix more organic matter into the top of pits and beds next time."
+      ],
+      "related_kb_ids": [
+        "treat_mulch_cover",
+        "care_germination"
+      ],
+      "stage_hint": "germination"
+    },
+    {
+      "id": "trouble_midday_wilt",
+      "topic": "troubleshooting",
+      "title": "Plants wilt at midday but recover by evening",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Plants wilt at midday but recover by evening: likely normal heat stress on hot days",
+      "instructions": [
+        "Mulch thickly and shade young plants at midday.",
+        "Check the soil is damp a finger deep; water at the base only if it is dry."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Plants wilt at midday but recover by evening",
+      "likely_causes": [
+        "Normal heat stress on hot days"
+      ],
+      "actions": [
+        "Mulch thickly and shade young plants at midday.",
+        "Check the soil is damp a finger deep; water at the base only if it is dry."
+      ],
+      "related_kb_ids": [
+        "stress_heat",
+        "plant_water_at_base_cool_times"
+      ],
+      "stage_hint": "seedling"
+    },
+    {
+      "id": "trouble_wilt_no_recovery",
+      "topic": "troubleshooting",
+      "title": "Plants wilt and do not recover by morning",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Plants wilt and do not recover by morning: likely a dry spell",
+      "instructions": [
+        "Water at the base early in the morning from storage.",
+        "Thin crowded plants so fewer share the water.",
+        "Thicken mulch; check the stem base for termites or rot."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Plants wilt and do not recover by morning",
+      "likely_causes": [
+        "A dry spell",
+        "Root damage from termites or rot"
+      ],
+      "actions": [
+        "Water at the base early in the morning from storage.",
+        "Thin crowded plants so fewer share the water.",
+        "Thicken mulch; check the stem base for termites or rot."
+      ],
+      "related_kb_ids": [
+        "stress_dry_spell",
+        "plant_water_priority_rules",
+        "pest_termites"
+      ],
+      "stage_hint": "vegetative"
+    },
+    {
+      "id": "trouble_termite_damage",
+      "topic": "troubleshooting",
+      "title": "Termite tunnels on stems or plants cut at the base",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Termite tunnels on stems or plants cut at the base: likely termites seeking food in dry weather",
+      "instructions": [
+        "Keep plenty of leafy mulch on the soil, a hand's width from stems.",
+        "Remove dead wood near beds.",
+        "Keep seedlings moist; re-sow lost spots.",
+        "Seek local advice before disturbing a large mound."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_fao_soil_biodiversity_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Termite tunnels on stems or plants cut at the base",
+      "likely_causes": [
+        "Termites seeking food in dry weather"
+      ],
+      "actions": [
+        "Keep plenty of leafy mulch on the soil, a hand's width from stems.",
+        "Remove dead wood near beds.",
+        "Keep seedlings moist; re-sow lost spots.",
+        "Seek local advice before disturbing a large mound."
+      ],
+      "related_kb_ids": [
+        "pest_termites"
+      ],
+      "stage_hint": "any"
+    },
+    {
+      "id": "trouble_root_rot",
+      "topic": "troubleshooting",
+      "title": "Cassava or other roots rotting",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cassava or other roots rotting: likely too wet over the hard layer",
+      "instructions": [
+        "Raise mounds higher and add an overflow notch.",
+        "Plant root crops only where water drains away by morning."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Cassava or other roots rotting",
+      "likely_causes": [
+        "Too wet over the hard layer"
+      ],
+      "actions": [
+        "Raise mounds higher and add an overflow notch.",
+        "Plant root crops only where water drains away by morning."
+      ],
+      "related_kb_ids": [
+        "crop_cassava",
+        "crop_sweet_potato",
+        "treat_overflow_notch",
+        "stress_waterlogging"
+      ],
+      "stage_hint": "vegetative"
+    },
+    {
+      "id": "trouble_vines_no_roots",
+      "topic": "troubleshooting",
+      "title": "Sweet potato makes vines but few roots",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Sweet potato makes vines but few roots: likely bed or mound too shallow",
+      "instructions": [
+        "Build taller, looser mounds next time.",
+        "Use only moderate compost.",
+        "Mulch, and pile soil over cracks."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Sweet potato makes vines but few roots",
+      "likely_causes": [
+        "Bed or mound too shallow",
+        "Soil too rich"
+      ],
+      "actions": [
+        "Build taller, looser mounds next time.",
+        "Use only moderate compost.",
+        "Mulch, and pile soil over cracks."
+      ],
+      "related_kb_ids": [
+        "crop_sweet_potato",
+        "care_root_vegetative"
+      ],
+      "stage_hint": "vegetative"
+    },
+    {
+      "id": "trouble_birds_on_heads",
+      "topic": "troubleshooting",
+      "title": "Grain heads eaten by birds",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Grain heads eaten by birds: likely birds feeding as grain ripens",
+      "instructions": [
+        "Cover the best heads with cloth or old sacks.",
+        "Use moving shiny strips and change them often.",
+        "Harvest promptly once grain is hard."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "Grain heads eaten by birds",
+      "likely_causes": [
+        "Birds feeding as grain ripens"
+      ],
+      "actions": [
+        "Cover the best heads with cloth or old sacks.",
+        "Use moving shiny strips and change them often.",
+        "Harvest promptly once grain is hard."
+      ],
+      "related_kb_ids": [
+        "pest_birds_grain"
+      ],
+      "stage_hint": "pre_harvest"
+    },
+    {
+      "id": "trouble_purple_weed_on_millet",
+      "topic": "troubleshooting",
+      "title": "A small purple-flowered weed grows among millet",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "A small purple-flowered weed grows among millet: likely striga (witchweed), a parasitic weed of cereals on poor soil",
+      "instructions": [
+        "Pull it carefully by hand before it seeds; bag it and burn or bury it away from the plot.",
+        "Rotate with cowpea next season and feed the soil with compost."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Several causes can look alike; check the simple ones (water, drainage, pests) first."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_farmradio_striga"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "symptom": "A small purple-flowered weed grows among millet",
+      "likely_causes": [
+        "Striga (witchweed), a parasitic weed of cereals on poor soil"
+      ],
+      "actions": [
+        "Pull it carefully by hand before it seeds; bag it and burn or bury it away from the plot.",
+        "Rotate with cowpea next season and feed the soil with compost."
+      ],
+      "related_kb_ids": [
+        "pest_striga",
+        "treat_legume_rotation",
+        "regen_remove_diseased_residue"
+      ],
+      "stage_hint": "vegetative"
+    }
+  ]
+}

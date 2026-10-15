@@ -1,0 +1,1661 @@
+{
+  "collection": "soil_treatments",
+  "version": "1.2.0",
+  "records": [
+    {
+      "id": "treat_choose_growing_spot",
+      "topic": "soil_treatment",
+      "title": "Choose a safe growing spot with the best soil",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Pick a small area on safe ground where digging went deepest, water does not rush through, and overflow cannot harm anyone.",
+      "instructions": [
+        "Use the spots you marked during the probing check: the deepest, softest patches are best for pits.",
+        "Avoid the edges of the rise, drop-offs, and the main channels where red streams run.",
+        "Avoid low spots where water stands for days, unless you will build raised beds there.",
+        "Stay close to where you will store water, so carrying it is short.",
+        "Look downhill: if overflow from your plot would run toward a home, path or neighbour's land, choose another spot."
+      ],
+      "everyday_amounts": [
+        "start with an area of a few paces by a few paces"
+      ],
+      "limitations": [
+        "The best spot can still have a hard layer close below; it only reduces the problem."
+      ],
+      "safety_notes": [
+        "Keep away from edges, overhangs and unstable ground.",
+        "Never plan works that send water toward homes, paths or neighbours."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "safety",
+      "priority": "do_first",
+      "purpose": "Put limited effort and organic matter where it has the best chance, and keep people and homes safe from runoff.",
+      "target_constraints": [
+        "very shallow rooting depth",
+        "fast runoff"
+      ],
+      "requires_resources": [
+        "res_hand_tools"
+      ],
+      "alternatives_if_missing": [
+        "If you have no tools, use a strong stick and a flat stone to probe and mark spots."
+      ],
+      "expected_observable_change": [
+        "A marked plot with the best spots flagged",
+        "Clear idea of where water will go when it overflows"
+      ],
+      "task": {
+        "task_id": "task_choose_growing_spot",
+        "label": "Choose and mark the growing spot"
+      }
+    },
+    {
+      "id": "treat_planting_pits",
+      "topic": "soil_treatment",
+      "title": "Planting pits (where the hard layer allows)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": [
+          "hardpan_continuous"
+        ]
+      },
+      "summary": "Dig planting pits about a forearm wide and as close to a forearm deep as the ground allows, in the softer spots, and fill them with soil mixed with organic matter.",
+      "instructions": [
+        "Dig pits before the rains, at the spots you marked as softest or deepest.",
+        "Aim for about a forearm wide and a forearm deep. Where you hit the hard layer sooner, stop: do not force it.",
+        "Pile the dug soil on the downhill side of each pit as a small lip to catch runoff.",
+        "Space pits about a long pace apart in staggered rows across the slope.",
+        "Fill each pit with a mix of the dug soil, compost or manure, and leaf litter or chopped dry grass.",
+        "Leave the top of the filling a little below ground level so the pit collects water.",
+        "If water stood in your drainage check, cut a small notch on the downhill side so heavy rain can overflow."
+      ],
+      "everyday_amounts": [
+        "about a forearm wide",
+        "about a forearm deep where the ground allows",
+        "about a long pace between pits",
+        "one to two bucketfuls of compost or manure per pit, mixed with the dug soil",
+        "a few handfuls of leaf litter or chopped dry grass per pit"
+      ],
+      "limitations": [
+        "Where the hard layer is continuous, pits stay shallow and can fill with water; raised beds are better there.",
+        "Digging pits is heavy work; build a few for a trial first."
+      ],
+      "safety_notes": [
+        "Do not force tools through rock or jump on them.",
+        "Do not dig near edges or under overhangs.",
+        "Fill or mark open pits so people and animals do not fall in."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_unccd_microcatchment",
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "soil_depth",
+      "priority": "do_first",
+      "purpose": "Create pockets of deeper, richer soil that also catch runoff, so roots have room and water around each plant.",
+      "target_constraints": [
+        "very shallow rooting depth",
+        "fast runoff",
+        "low nutrients",
+        "poor water holding"
+      ],
+      "requires_resources": [
+        "res_hand_tools",
+        "res_compost",
+        "res_bucket"
+      ],
+      "alternatives_if_missing": [
+        "No compost: use leaf litter, chopped dry grass, shrub prunings and any crop residue, layered in the pit.",
+        "No hoe: use a pointed stick and a flat stone to loosen and scoop gravel.",
+        "No bucket: carry fill in a cloth, basket or old sack and count loads."
+      ],
+      "expected_observable_change": [
+        "Water collects in the pits after rain instead of running away",
+        "Soil in the pit stays darker and moist for longer after rain than the bare ground around it",
+        "Seedlings in pits grow taller and greener than any sown on bare ground"
+      ],
+      "task": {
+        "task_id": "task_build_pits",
+        "label": "Dig and fill planting pits"
+      }
+    },
+    {
+      "id": "treat_raised_beds",
+      "topic": "soil_treatment",
+      "title": "Knee-high raised beds",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Build soil upward instead of downward: heap soil, gravel-free fill and organic matter into beds about knee-high, edged with stones.",
+      "instructions": [
+        "Mark beds about one arm-span wide (so you can reach the middle from both sides) and as long as you can fill.",
+        "Edge the bed with a low wall of stones or lumps of laterite.",
+        "Scrape loose topsoil from paths and bare ground nearby (not from slopes that will then erode) into the bed.",
+        "Layer in organic matter as you build: compost or manure, leaf litter, dry grass, small prunings.",
+        "Finish about knee-high, slightly domed, and cover the top with mulch.",
+        "On a slope, run beds across the slope; on flat ground with pooling, leave paths between beds as drainage lanes."
+      ],
+      "everyday_amounts": [
+        "about knee-high",
+        "about one arm-span wide",
+        "several bucketfuls of compost or manure per pace of bed length",
+        "a thick layer of mulch, about a hand's depth when fresh"
+      ],
+      "limitations": [
+        "Gathering enough soil and organic matter is the main limit; start with one bed.",
+        "Beds dry out faster in the dry season; mulch is essential."
+      ],
+      "safety_notes": [
+        "Lift stones with bent knees; watch for snakes and scorpions under them.",
+        "Do not strip soil from slopes or edges to fill beds."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_fao_reosa_ca_brief"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "soil_depth",
+      "priority": "do_first",
+      "purpose": "Give roots more depth above the hard layer and keep them out of water that pools on it.",
+      "target_constraints": [
+        "very shallow rooting depth",
+        "waterlogging on the hard layer",
+        "low nutrients"
+      ],
+      "requires_resources": [
+        "res_stones",
+        "res_compost",
+        "res_bucket",
+        "res_hand_tools"
+      ],
+      "alternatives_if_missing": [
+        "No stones: edge beds with logs, thick bundles of thorny prunings or packed earth ridges.",
+        "No compost: build in layers of leaf litter, dry grass and soil, letting them settle through the first rains.",
+        "Not enough soil: make shorter beds, or one bed only, rather than thin beds."
+      ],
+      "expected_observable_change": [
+        "Beds stay above standing water after heavy rain",
+        "Roots grow down into the bed rather than sideways",
+        "The bed settles a little after rain; top it up with more organic matter"
+      ],
+      "task": {
+        "task_id": "task_build_raised_beds",
+        "label": "Build and fill knee-high raised beds"
+      }
+    },
+    {
+      "id": "treat_containers_sacks",
+      "topic": "soil_treatment",
+      "title": "Containers and soil sacks",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "hardpan_continuous"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Where the ground is one continuous rock sheet, grow a few plants in filled sacks, old containers or stone rings set on the surface.",
+      "instructions": [
+        "Use old sacks, broken containers, or a ring of stones about a forearm across.",
+        "Make a few holes or gaps at the bottom so water can drain; set on a few flat stones.",
+        "Fill with a mix of scraped soil and organic matter, as for raised beds.",
+        "Place them close to stored water and in a spot sheltered from strong wind.",
+        "Mulch the top and water sparingly in dry spells."
+      ],
+      "everyday_amounts": [
+        "each container or sack about knee-high when filled",
+        "about half soil and half organic matter by bucketfuls"
+      ],
+      "limitations": [
+        "Containers dry out fast and hold only a few plants; this is a trial or stop-gap, not a field."
+      ],
+      "safety_notes": [
+        "Never use containers that held fuel, poisons or chemicals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "soil_depth",
+      "priority": "do_first",
+      "purpose": "Provide rooting depth when the ground gives none, for a small trial or a few high-value plants.",
+      "target_constraints": [
+        "no rooting depth on a continuous hard layer"
+      ],
+      "requires_resources": [
+        "res_water_containers",
+        "res_compost",
+        "res_bucket"
+      ],
+      "alternatives_if_missing": [
+        "No sacks: build a ring of stones a forearm high and fill it.",
+        "No compost: layer leaf litter and dry grass with soil."
+      ],
+      "expected_observable_change": [
+        "Plants in containers establish while bare rock nearby supports nothing"
+      ],
+      "task": {
+        "task_id": "task_prepare_containers",
+        "label": "Prepare and fill containers or sacks"
+      }
+    },
+    {
+      "id": "treat_stone_lines",
+      "topic": "soil_treatment",
+      "title": "Stone lines across the slope",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "slope_slight",
+          "slope_steep",
+          "slope_unknown"
+        ],
+        "all_tags": [],
+        "none_tags": [
+          "pooling_widespread"
+        ]
+      },
+      "summary": "Lay lines of stones along the contour, across the slope, a few paces apart, to slow runoff so water soaks in and soil settles behind them.",
+      "instructions": [
+        "Find the slope direction from the pour-water or first-rain check.",
+        "Mark a line across the slope that stays at the same level: walk across, checking water would not run along it.",
+        "Dig a shallow groove along the mark and set larger stones on the downhill side, packing smaller stones and gravel behind them.",
+        "Make lines about ankle to shin high, with no gaps where water can cut through.",
+        "Space lines a few paces apart; closer on steeper parts.",
+        "Before rains, decide where overflow will go and make sure it ends somewhere safe.",
+        "After each heavy rain, walk the lines: replace moved stones and fix any spot where water broke through."
+      ],
+      "everyday_amounts": [
+        "lines about ankle to shin high",
+        "a few paces between lines, closer where steeper"
+      ],
+      "limitations": [
+        "Lines that are not level make water run along them and cut through at the low end.",
+        "Stone lines alone do not feed the soil; combine with organic matter and pits.",
+        "On flat ground where water pools, lines can trap water: use drainage and raised beds instead."
+      ],
+      "safety_notes": [
+        "Never direct runoff toward homes, paths, neighbours' land or crumbling edges.",
+        "Lift stones carefully; check for snakes and scorpions.",
+        "Do not build near the edge of the rise or on unstable ground."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_wocat_contour_stone_bunds",
+        "src_cgiar_csa_stone_bunds",
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "water_capture",
+      "priority": "do_first",
+      "purpose": "Capture the short season's hard rain on the plot and stop soil washing away in red streams.",
+      "target_constraints": [
+        "fast runoff",
+        "erosion",
+        "poor water holding"
+      ],
+      "requires_resources": [
+        "res_stones"
+      ],
+      "alternatives_if_missing": [
+        "Few stones: use lines of thorny prunings, bundled dry grass or crop stalks, or plant a grass strip along the line.",
+        "Work in stages: protect the planting area first, extend later."
+      ],
+      "expected_observable_change": [
+        "Fine soil and leaves build up on the uphill side of the lines",
+        "Less red water leaves the plot after storms",
+        "Ground just above the lines stays moist longer after rain"
+      ],
+      "task": {
+        "task_id": "task_build_stone_lines",
+        "label": "Lay stone lines across the slope and check the overflow path"
+      }
+    },
+    {
+      "id": "treat_overflow_pooling",
+      "topic": "soil_treatment",
+      "title": "Handle pooling: raised planting and a safe overflow path",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "pooling_some",
+          "pooling_widespread"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Where water pools on flat ground, raise the planting areas and lead extra water along shallow drains to a safe place, instead of trapping it.",
+      "instructions": [
+        "During or after heavy rain, mark where water stands and which way it slowly moves.",
+        "Build raised beds or mounds in pooling areas, and keep pits out of the lowest spots.",
+        "Scrape shallow drains, a hand deep or less, from the pools toward a safe low point away from homes and paths.",
+        "Where water collects safely, a covered container or a lined hollow can store some of it.",
+        "Check after each heavy rain that water drains within a day or two and drains have not cut deeper."
+      ],
+      "everyday_amounts": [
+        "drains a hand deep or less",
+        "beds or mounds about knee-high in pooling spots"
+      ],
+      "limitations": [
+        "Drains must not start new gullies; keep them shallow and gently sloped."
+      ],
+      "safety_notes": [
+        "Never send water toward homes, paths, neighbours or edges.",
+        "Stay out of moving water during storms."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "water_capture",
+      "priority": "do_first",
+      "purpose": "Stop roots and seeds drowning on top of the hard layer while still using the water.",
+      "target_constraints": [
+        "waterlogging on the hard layer",
+        "flat plateau with pooling"
+      ],
+      "requires_resources": [
+        "res_hand_tools"
+      ],
+      "alternatives_if_missing": [
+        "No tools: use a stick to scratch shallow drains and move gravel by hand.",
+        "If there is nowhere safe for water to go, raise planting higher rather than draining."
+      ],
+      "expected_observable_change": [
+        "Standing water clears within a day or two after rain",
+        "Seedlings on raised spots stay upright and green"
+      ],
+      "task": {
+        "task_id": "task_plan_overflow",
+        "label": "Mark pooling spots and plan a safe overflow path"
+      }
+    },
+    {
+      "id": "treat_mulch_cover",
+      "topic": "soil_treatment",
+      "title": "Mulch: keep the soil covered",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Gather dry grass, leaf litter, crop stalks and prunings and keep a layer over pits, beds and between plants.",
+      "instructions": [
+        "Start gathering before the rains: cut dry grass tufts (leave the roots), collect fallen leaves and shrub prunings.",
+        "Store it dry under a tree or weighted with stones so wind does not take it.",
+        "After sowing, spread mulch around (not on top of) seedlings once they are up.",
+        "Keep a layer about a hand's depth when fresh; top it up as it breaks down.",
+        "Keep mulch a finger's width away from stems to avoid rot and hiding pests."
+      ],
+      "everyday_amounts": [
+        "a layer about a hand's depth when fresh",
+        "an armful per pit, several armfuls per pace of bed"
+      ],
+      "limitations": [
+        "Termites will eat mulch; that is part of how it improves the soil, but top it up often.",
+        "Mulch can hide pests and harbour rodents near stored grain; keep it in the field."
+      ],
+      "safety_notes": [
+        "Do not gather grass from where snakes shelter without a stick to check first.",
+        "Keep mulch stores away from cooking fires."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief",
+        "src_fao_soil_biodiversity_termites",
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "mulch",
+      "priority": "do_first",
+      "purpose": "Shield bare soil from hard rain, reduce crusting and runoff, keep moisture in through dry spells, and feed soil life.",
+      "target_constraints": [
+        "fast runoff",
+        "crusting",
+        "poor water holding",
+        "long dry season",
+        "low organic matter"
+      ],
+      "requires_resources": [
+        "res_mulch",
+        "res_leaf_litter"
+      ],
+      "alternatives_if_missing": [
+        "No dry grass: use crop stalks, thorny prunings chopped small, or a scatter of gravel as a last resort.",
+        "Little material: mulch the planting pits and beds first, not the paths."
+      ],
+      "expected_observable_change": [
+        "Soil under mulch is cooler and moist when bare soil is dry",
+        "Less crust forms after rain",
+        "Termites and other soil life work under the mulch, breaking it down"
+      ],
+      "task": {
+        "task_id": "task_gather_mulch",
+        "label": "Gather and store mulch material"
+      }
+    },
+    {
+      "id": "treat_compost_fill",
+      "topic": "soil_treatment",
+      "title": "Compost or manure for pits and beds",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": [
+          "no_compost"
+        ]
+      },
+      "summary": "Mix compost or well-rotted manure into every pit and bed before sowing, measured in bucketfuls.",
+      "instructions": [
+        "Use only well-rotted compost or manure: dark, crumbly and without a strong smell.",
+        "Mix it through the pit or bed fill, not in a layer on top.",
+        "Put more into pits where seedlings will be thinned to the strongest few."
+      ],
+      "everyday_amounts": [
+        "one to two bucketfuls per pit",
+        "several bucketfuls per pace of raised bed"
+      ],
+      "limitations": [
+        "Compost improves fertility but does not by itself correct strong acidity.",
+        "There is no fixed recipe; watch how plants respond and adjust."
+      ],
+      "safety_notes": [
+        "Wash hands after handling manure; keep it away from drinking water.",
+        "Fresh manure can burn seedlings and carry disease; let it rot first."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "fertility",
+      "priority": "do_first",
+      "purpose": "Supply nutrients and organic matter the poor, leached soil lacks, and help it hold water.",
+      "target_constraints": [
+        "low nutrients",
+        "low organic matter",
+        "poor water holding"
+      ],
+      "requires_resources": [
+        "res_compost",
+        "res_manure",
+        "res_bucket"
+      ],
+      "alternatives_if_missing": [
+        "Not enough for all pits: fill fewer pits fully rather than all pits thinly.",
+        "No compost or manure: see the organic-matter alternatives."
+      ],
+      "expected_observable_change": [
+        "Darker, crumblier soil in pits and beds",
+        "Greener, more even seedlings than in unfed spots"
+      ],
+      "task": {
+        "task_id": "task_fill_compost",
+        "label": "Mix compost or manure into pits and beds"
+      }
+    },
+    {
+      "id": "treat_trial_plot",
+      "topic": "soil_treatment",
+      "title": "Start with a small marked trial plot",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Mark a few pits or one bed as a trial, keep notes, and expand only after it shows results.",
+      "instructions": [
+        "Mark the trial with stones or sticks: a few pits and, if possible, one raised bed.",
+        "Sow two or three different crops so you learn which suits the ground best.",
+        "If local advice says only trees grow here, include both a field-crop trial and a tree planting.",
+        "Keep a simple journal: date sown, rains, when seedlings came up, how they look each week.",
+        "Expand next season to the methods and crops that did best."
+      ],
+      "everyday_amounts": [
+        "a few pits or one bed",
+        "two or three crops side by side"
+      ],
+      "limitations": [
+        "One season's trial can be thrown off by an unusual year."
+      ],
+      "safety_notes": [
+        "Keep enough seed in reserve to re-sow if the first sowing fails."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "safety",
+      "priority": "do_first",
+      "purpose": "Test what works on this ground (and test local claims) without spending all your seed, water and labour at once.",
+      "target_constraints": [
+        "uncertain hard layer",
+        "untested local advice",
+        "scarce water and seed"
+      ],
+      "requires_resources": [
+        "res_seeds"
+      ],
+      "alternatives_if_missing": [
+        "Few seeds: sow a few seeds of each kind and keep the rest back for re-sowing."
+      ],
+      "expected_observable_change": [
+        "You can compare crops and methods on the same ground",
+        "Clear evidence for or against local advice"
+      ],
+      "task": {
+        "task_id": "task_mark_trial_plot",
+        "label": "Mark a small trial plot and start a journal"
+      }
+    },
+    {
+      "id": "treat_half_moons",
+      "topic": "soil_treatment",
+      "title": "Half-moon catchments on gentle slopes",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "slope_slight"
+        ],
+        "all_tags": [],
+        "none_tags": [
+          "slope_steep",
+          "pooling_widespread"
+        ]
+      },
+      "summary": "On gently sloping ground, dig half-moon shaped basins with the open side facing uphill and the soil piled into a curved bank downhill.",
+      "instructions": [
+        "Mark a half circle a couple of paces across, with the open side facing uphill.",
+        "Scrape out the inside as deep as the ground allows (often less than a hand deep on laterite) and pile the soil on the curved downhill edge.",
+        "Line the curved bank with stones so it does not wash away.",
+        "Mix compost or organic matter into the inside and plant in the lower part of the basin.",
+        "Stagger half-moons so overflow from one is caught by the next below."
+      ],
+      "everyday_amounts": [
+        "a couple of paces across",
+        "a bucketful or two of compost or organic matter inside each"
+      ],
+      "limitations": [
+        "Not for flat ground where water pools, or for steep slopes.",
+        "Too much rain can waterlog the basin; give it an overflow notch."
+      ],
+      "safety_notes": [
+        "Never point overflow toward homes, paths or neighbours."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_ccardesa_half_moon",
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "water_capture",
+      "priority": "do_next",
+      "purpose": "Collect runoff from the ground above into a basin where crops or a tree are planted.",
+      "target_constraints": [
+        "fast runoff",
+        "poor water holding"
+      ],
+      "requires_resources": [
+        "res_hand_tools",
+        "res_stones"
+      ],
+      "alternatives_if_missing": [
+        "No stones: compact the bank well and plant tufted grass on it."
+      ],
+      "expected_observable_change": [
+        "Water stands briefly in the basin after rain, then soaks in",
+        "Plants in half-moons stay green longer in dry spells"
+      ],
+      "task": {
+        "task_id": "task_build_half_moons",
+        "label": "Build half-moon catchments"
+      }
+    },
+    {
+      "id": "treat_organic_alternatives",
+      "topic": "soil_treatment",
+      "title": "Organic matter when there is no compost",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "no_compost"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Without compost or manure, use leaf litter, dry grass, shrub prunings and crop residues, layered into pits and beds and left to rot in place.",
+      "instructions": [
+        "Collect fallen leaves under trees and shrubs, cut dry grass, and chop prunings small.",
+        "Layer them into pits and beds with soil, wetting each layer if any water can be spared.",
+        "Dig in kitchen scraps (not meat or bones) and ash-free hearth sweepings.",
+        "Start a sheet-compost patch: pile residues in a shallow pit, cover with soil, and let the rains work on it.",
+        "If any animals are kept nearby, collect their droppings and let them rot."
+      ],
+      "everyday_amounts": [
+        "several armfuls of leaves or grass per pit",
+        "a layer about a hand's depth through a bed"
+      ],
+      "limitations": [
+        "Raw material feeds the soil more slowly than compost; expect slower early growth.",
+        "Fresh green material can tie up nutrients for a while; mix it with soil."
+      ],
+      "safety_notes": [
+        "Wear something on your hands when gathering thorny prunings."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_fao_soil_biodiversity_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "fertility",
+      "priority": "do_next",
+      "purpose": "Still add organic matter to poor soil when no compost is available, and start making some for later.",
+      "target_constraints": [
+        "low nutrients",
+        "low organic matter"
+      ],
+      "requires_resources": [
+        "res_leaf_litter",
+        "res_mulch"
+      ],
+      "alternatives_if_missing": [
+        "Very little material: concentrate it in a few pits for the trial."
+      ],
+      "expected_observable_change": [
+        "Layers settle and darken over the first weeks of rain",
+        "Soil life (worms, termites) appears in the fill"
+      ],
+      "task": {
+        "task_id": "task_gather_organic_matter",
+        "label": "Gather leaf litter, grass and prunings for pit and bed fill"
+      }
+    },
+    {
+      "id": "treat_water_storage",
+      "topic": "soil_treatment",
+      "title": "Store rainwater in household containers",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Set clean, covered containers to catch rain from a roof, sheet or tarp so seedlings can be helped through dry spells.",
+      "instructions": [
+        "Before the rains, clean every container that can hold water and find lids or covers.",
+        "Rig a sheet, tarp or roof edge so rain runs into the containers; weight the edges with stones.",
+        "Let the first rain wash dust off the roof or sheet before collecting.",
+        "Keep containers covered and in shade to stop mosquitoes breeding and to slow evaporation.",
+        "Use stored water sparingly: a cupful at the base of each seedling, early morning or evening, only in dry spells."
+      ],
+      "everyday_amounts": [
+        "a cupful per seedling in dry spells",
+        "count how many buckets you have stored"
+      ],
+      "limitations": [
+        "Stored water is limited; it is for rescuing seedlings, not regular irrigation."
+      ],
+      "safety_notes": [
+        "Never use containers that held fuel, poisons or chemicals.",
+        "Keep drinking water separate and covered.",
+        "Cover containers so children and animals cannot fall in."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_unccd_microcatchment"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "water_capture",
+      "priority": "do_next",
+      "purpose": "Bridge the dry gaps that often follow the first rains and the dry spell mid-season.",
+      "target_constraints": [
+        "long dry season",
+        "dry spells",
+        "low water"
+      ],
+      "requires_resources": [
+        "res_water_containers",
+        "res_bucket"
+      ],
+      "alternatives_if_missing": [
+        "No containers: dig a small hollow, line it with plastic sheet or packed clay, and cover it.",
+        "No sheet: collect from the lowest point where runoff gathers, after it has settled."
+      ],
+      "expected_observable_change": [
+        "Containers fill during storms",
+        "Seedlings survive dry gaps that kill unwatered ones"
+      ],
+      "task": {
+        "task_id": "task_set_up_water_storage",
+        "label": "Set up covered rainwater storage"
+      }
+    },
+    {
+      "id": "treat_legume_rotation",
+      "topic": "soil_treatment",
+      "title": "Grow legumes in rotation or between cereals",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Include a legume such as cowpea or horse gram each season, between or after millet rows.",
+      "instructions": [
+        "Sow cowpea or horse gram in some pits or between millet rows.",
+        "Next season, sow millet where the legume grew.",
+        "Return legume stalks and leaves to the soil after harvest."
+      ],
+      "everyday_amounts": [
+        "alternate rows or alternate pits of cereal and legume"
+      ],
+      "limitations": [
+        "Benefits build slowly over seasons; one crop will not transform poor soil."
+      ],
+      "safety_notes": [
+        "Do not eat seed that has been treated with chemicals."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_iita_propas_striga",
+        "src_tnau_cowpea"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "fertility",
+      "priority": "do_next",
+      "purpose": "Legumes can add nitrogen through their roots and help reduce striga on cereals.",
+      "target_constraints": [
+        "low nutrients",
+        "striga"
+      ],
+      "requires_resources": [
+        "res_seeds"
+      ],
+      "alternatives_if_missing": [
+        "No legume seed: ask neighbours for a handful to start a trial."
+      ],
+      "expected_observable_change": [
+        "Cereals after legumes look greener",
+        "Fewer striga plants over seasons"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_sheet_compost_next_season",
+      "topic": "soil_treatment",
+      "title": "Start a compost heap for next season",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Begin a compost pile or pit now from residues, leaves and scraps so next season starts with compost.",
+      "instructions": [
+        "Dig a shallow pit or pile on level ground near the plot.",
+        "Lay coarse stalks at the bottom, then layers of leaves, grass, scraps and a little soil.",
+        "Keep it damp in the rains and covered with grass in the dry season.",
+        "Turn it when you can; it is ready when dark and crumbly."
+      ],
+      "everyday_amounts": [
+        "a pile about knee-high"
+      ],
+      "limitations": [
+        "Composting slows in the dry season without moisture."
+      ],
+      "safety_notes": [
+        "Keep it away from wells and drinking water."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "fertility",
+      "priority": "do_next",
+      "purpose": "Build a supply of compost, which is the main fertility input on this soil.",
+      "target_constraints": [
+        "low nutrients",
+        "low organic matter"
+      ],
+      "requires_resources": [
+        "res_leaf_litter",
+        "res_mulch"
+      ],
+      "alternatives_if_missing": [
+        "Little material: start small and add over the season."
+      ],
+      "expected_observable_change": [
+        "Material shrinks, darkens and turns crumbly over the season"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_ash_shell_optional",
+      "topic": "soil_treatment",
+      "title": "Optional: a small handful of wood ash or crushed shell per pit",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "If you have it, a small handful of wood ash or finely crushed shell mixed into each pit fill may ease acidity a little. It is optional and must be used sparingly.",
+      "instructions": [
+        "Use only ash from plain wood fires (not from plastic, painted or treated wood, charcoal briquettes or rubbish).",
+        "Mix a small handful into the whole pit fill, a couple of weeks before sowing if you can, not in a pile.",
+        "Crushed shell (egg or snail) must be crushed as finely as possible; it acts slowly.",
+        "Do it once per season at most, and watch how plants respond.",
+        "Skip it entirely if you have none: compost and tolerant crops matter far more."
+      ],
+      "everyday_amounts": [
+        "a small handful per pit, mixed through",
+        "at most once per season"
+      ],
+      "limitations": [
+        "This is not a measured liming treatment; nobody can say how much acidity it corrects without a test.",
+        "Too much ash can harm seedlings and lock up nutrients.",
+        "Ash left in the rain loses much of its effect."
+      ],
+      "safety_notes": [
+        "Wood ash is caustic: keep it out of eyes and off skin; avoid windy days.",
+        "Do not put ash directly against seeds or seedling roots.",
+        "Never use ash from burned rubbish, plastic, or treated wood."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_osu_wood_ash"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "acidity",
+      "priority": "optional",
+      "purpose": "Give a cautious, small nudge against likely acidity using household materials.",
+      "target_constraints": [
+        "likely acidity"
+      ],
+      "requires_resources": [
+        "res_wood_ash",
+        "res_crushed_shells"
+      ],
+      "alternatives_if_missing": [
+        "None available: skip this step; rely on organic matter and acid-tolerant crops."
+      ],
+      "expected_observable_change": [
+        "No reliable change can be seen directly; plant response over weeks is the only clue"
+      ],
+      "task": {
+        "task_id": "task_add_ash_or_shell_optional",
+        "label": "Optional: mix a small handful of ash or crushed shell into each pit"
+      }
+    },
+    {
+      "id": "treat_fizz_recheck_optional",
+      "topic": "soil_treatment",
+      "title": "Optional weak re-check: baking-soda fizz after treatment",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "After pits are filled and a few weeks of rain have passed, you may repeat the fizz check. A weaker fizz is a weak clue only.",
+      "instructions": [
+        "Repeat the baking-soda check on soil from a filled pit, the same way as before.",
+        "Note the result in the journal. Do not delay planting for it."
+      ],
+      "everyday_amounts": [
+        "a spoonful of soil",
+        "a pinch of baking soda"
+      ],
+      "limitations": [
+        "Weak evidence only; never a reason to plant or not plant."
+      ],
+      "safety_notes": [
+        "Keep baking soda and soil out of eyes and mouth."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "acidity",
+      "priority": "optional",
+      "purpose": "Give curious users an optional before-and-after clue, without making it a requirement.",
+      "target_constraints": [
+        "likely acidity"
+      ],
+      "requires_resources": [],
+      "alternatives_if_missing": [
+        "No baking soda: skip it; watch the plants instead."
+      ],
+      "expected_observable_change": [
+        "Possibly less fizz than before (weak clue only)"
+      ],
+      "task": {
+        "task_id": "task_recheck_fizz_optional",
+        "label": "Optional: repeat the fizz check on filled pit soil"
+      }
+    },
+    {
+      "id": "treat_avoid_deep_tilling",
+      "topic": "soil_treatment",
+      "title": "Avoid: digging deep or trying to till or break the hardpan",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Do not try to dig deep, plough, or break up the hard layer across the plot.",
+      "instructions": [
+        "Work with the shallow soil: build pits in soft spots, raised beds or containers.",
+        "If a tool bounces, stop and move a little to the side rather than forcing it."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Breaking a laterite sheet by hand is rarely possible, and broken pieces can re-harden after drying."
+      ],
+      "safety_notes": [
+        "Forcing tools through rock causes injuries and broken tools."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "safety",
+      "priority": "avoid",
+      "purpose": "Prevent wasted effort, broken tools, injuries and loss of the thin topsoil.",
+      "target_constraints": [
+        "very shallow rooting depth"
+      ],
+      "requires_resources": [],
+      "alternatives_if_missing": [],
+      "expected_observable_change": [
+        "Less wasted effort; topsoil stays in place"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_avoid_deep_pits_on_sheet",
+      "topic": "soil_treatment",
+      "title": "Avoid: deep pits on a continuous rock sheet",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "hardpan_continuous"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Where the hard layer is continuous, do not keep digging pits deeper; they will hold water like a bowl and can drown roots.",
+      "instructions": [
+        "Build upward instead: raised beds, stone rings or containers.",
+        "If you already dug shallow pits, give them an overflow notch and fill them higher than the ground."
+      ],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [
+        "Do not force tools through rock."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_agrovoc_plinthosols"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "soil_depth",
+      "priority": "avoid",
+      "purpose": "Prevent waterlogged pits on solid rock.",
+      "target_constraints": [
+        "waterlogging on the hard layer"
+      ],
+      "requires_resources": [],
+      "alternatives_if_missing": [],
+      "expected_observable_change": [
+        "No bowls of standing water around seedlings"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_avoid_trapping_water_flat",
+      "topic": "soil_treatment",
+      "title": "Avoid: bunds or stone lines that trap water on flat ground that pools",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "pooling_some",
+          "pooling_widespread"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Where water already pools, do not build closed bunds, solid stone lines or deep basins that hold even more water.",
+      "instructions": [
+        "Raise planting spots and give water a shallow, safe way out instead.",
+        "If stone lines are used at all, leave gaps and an overflow path."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Gentle slopes that also have some pooling need careful, permeable lines with an overflow."
+      ],
+      "safety_notes": [
+        "Never send water toward homes, paths or neighbours."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_ccardesa_half_moon"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "water_capture",
+      "priority": "avoid",
+      "purpose": "Prevent drowning seedlings and rotting roots on top of the hard layer.",
+      "target_constraints": [
+        "waterlogging on the hard layer"
+      ],
+      "requires_resources": [],
+      "alternatives_if_missing": [],
+      "expected_observable_change": [
+        "Water clears from planting spots within a day or two"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_avoid_diverting_runoff",
+      "topic": "soil_treatment",
+      "title": "Avoid: sending runoff toward homes, paths, neighbours or edges",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Never build lines, drains or bunds that push water toward homes, paths, other people's land or crumbling edges.",
+      "instructions": [
+        "Before building any water work, follow where the overflow will end up.",
+        "End drains on safe, stable ground and spread the water out rather than concentrating it."
+      ],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [
+        "Concentrated runoff can undercut edges and cause collapses.",
+        "Stay away from channels during storms."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_wocat_contour_stone_bunds",
+        "src_fao_swc_case_studies"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "safety",
+      "priority": "avoid",
+      "purpose": "Protect people, property and neighbours, and avoid starting new gullies.",
+      "target_constraints": [
+        "fast runoff",
+        "erosion"
+      ],
+      "requires_resources": [],
+      "alternatives_if_missing": [],
+      "expected_observable_change": [
+        "No new gullies; no water damage downhill"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_avoid_large_ash",
+      "topic": "soil_treatment",
+      "title": "Avoid: large amounts of ash",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Do not pile ash onto beds or pits or use it as a main fertiliser.",
+      "instructions": [
+        "If you use ash at all, keep to a small handful per pit, mixed through, at most once per season."
+      ],
+      "everyday_amounts": [
+        "never more than a small handful per pit"
+      ],
+      "limitations": [
+        "Without a soil test, more ash is a guess that can do harm."
+      ],
+      "safety_notes": [
+        "Ash is caustic; protect eyes and skin."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_osu_wood_ash"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "acidity",
+      "priority": "avoid",
+      "purpose": "Prevent seedling damage and nutrient lock-up from too much ash.",
+      "target_constraints": [
+        "likely acidity"
+      ],
+      "requires_resources": [],
+      "alternatives_if_missing": [],
+      "expected_observable_change": [
+        "Seedlings are not scorched by ash"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_avoid_compost_claims",
+      "topic": "soil_treatment",
+      "title": "Avoid: assuming compost or ash fixes strong acidity",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Do not assume compost, ash or shells have corrected the soil's acidity; nobody can tell without a test.",
+      "instructions": [
+        "Keep choosing crops that tolerate acidic, poor soil.",
+        "Judge progress by how plants grow, not by assuming the soil is fixed."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Organic matter helps plants cope with acidic soil but does not neutralise strong acidity on its own."
+      ],
+      "safety_notes": [],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_osu_wood_ash"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "acidity",
+      "priority": "avoid",
+      "purpose": "Keep expectations honest so crop choice still favours acid-tolerant crops.",
+      "target_constraints": [
+        "likely acidity"
+      ],
+      "requires_resources": [],
+      "alternatives_if_missing": [],
+      "expected_observable_change": [],
+      "task": null
+    },
+    {
+      "id": "treat_avoid_burning_residue",
+      "topic": "soil_treatment",
+      "title": "Avoid: burning grass and crop residue",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Do not burn dry grass or crop residues to clear the plot; keep them as mulch and organic matter.",
+      "instructions": [
+        "Cut and lay residues as mulch, or add them to compost.",
+        "Only diseased residue should be removed; see regeneration guidance."
+      ],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [
+        "Fires on dry grassland spread fast and endanger people and homes."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief",
+        "src_fao_soil_biodiversity_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "fertility",
+      "priority": "avoid",
+      "purpose": "Keep scarce organic matter on the soil and avoid bare, crusted ground.",
+      "target_constraints": [
+        "low organic matter",
+        "crusting"
+      ],
+      "requires_resources": [],
+      "alternatives_if_missing": [],
+      "expected_observable_change": [
+        "More mulch and soil cover on the plot"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_avoid_fresh_manure_seed",
+      "topic": "soil_treatment",
+      "title": "Avoid: fresh manure or ash right against seeds",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Do not place fresh manure or ash directly where seeds go; it can burn seedlings.",
+      "instructions": [
+        "Mix rotted material through the fill some time before sowing."
+      ],
+      "everyday_amounts": [],
+      "limitations": [],
+      "safety_notes": [
+        "Wash hands after handling manure."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_osu_wood_ash"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "fertility",
+      "priority": "avoid",
+      "purpose": "Protect germinating seeds.",
+      "target_constraints": [
+        "low nutrients"
+      ],
+      "requires_resources": [],
+      "alternatives_if_missing": [],
+      "expected_observable_change": [
+        "Even germination"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_moisture_retention_test",
+      "topic": "soil_treatment",
+      "title": "Test that mulched fill holds moisture",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Before sowing, check that a mulched pit or bed stays damp a finger deep a couple of days after rain or a bucketful of water, compared with bare ground.",
+      "instructions": [
+        "Pick one finished pit or bed and one bare spot next to it.",
+        "After a rain (or after pouring a bucketful on each), cover the pit or bed with mulch about a hand's depth; leave the bare spot uncovered.",
+        "A couple of days later, lift the mulch and push a finger into the soil; do the same on the bare spot.",
+        "PASS: soil under the mulch is still damp and cool a finger deep while the bare spot is dry.",
+        "FAIL: both are equally dry: thicken the mulch, mix in more organic matter, and test again."
+      ],
+      "everyday_amounts": [
+        "a bucketful of water per test spot",
+        "mulch about a hand's depth",
+        "feel a finger deep"
+      ],
+      "limitations": [
+        "A hot, windy spell can dry even mulched soil; repeat the test if the first one fails in extreme weather."
+      ],
+      "safety_notes": [
+        "Check under mulch with a stick first in case of scorpions or snakes."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_reosa_ca_brief",
+        "src_fao_soil_biodiversity_termites"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "mulch",
+      "priority": "do_next",
+      "purpose": "Confirm with your own hands that the fill and mulch will carry seedlings through short dry gaps, before seed is committed.",
+      "target_constraints": [
+        "poor water holding",
+        "long dry season"
+      ],
+      "requires_resources": [
+        "res_mulch",
+        "res_bucket"
+      ],
+      "alternatives_if_missing": [
+        "No spare water: wait for the next rain and test then.",
+        "No mulch yet: use leaf litter or a few stones laid flat as a temporary cover."
+      ],
+      "expected_observable_change": [
+        "Soil under mulch stays damp for days longer than bare ground"
+      ],
+      "task": {
+        "task_id": "task_test_moisture_retention",
+        "label": "Test that mulched pit or bed soil stays damp"
+      }
+    },
+    {
+      "id": "treat_compost_heap",
+      "topic": "soil_treatment",
+      "title": "Make a layered compost heap",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Build a heap of alternating dry brown material and green scraps with a little soil between layers, keep it damp like a wrung-out cloth, and turn it now and then until it is dark and crumbly.",
+      "instructions": [
+        "Pick a shaded, level spot near the plot, away from wells and drinking water.",
+        "Lay coarse stalks or twigs at the bottom so air can get in.",
+        "Add layers: a layer of dry leaves or grass, then green weeds, fresh leaves or kitchen scraps, then a handful or two of soil; repeat.",
+        "Add aged animal droppings if you have them.",
+        "Keep it as damp as a wrung-out cloth: sprinkle used wash water in dry weather, cover with grass in hard sun.",
+        "Turn it with a stick every week or two, moving the outside to the middle.",
+        "Ready signs: dark, crumbly, smells of earth, and you can no longer recognise the scraps. In warm weather this usually takes a couple of months."
+      ],
+      "everyday_amounts": [
+        "a heap about knee-high",
+        "a handful or two of soil between layers",
+        "damp as a wrung-out cloth"
+      ],
+      "limitations": [
+        "Slows almost to a stop when dry; plan it for the wet weeks.",
+        "Only well-rotted compost goes against seeds and roots."
+      ],
+      "safety_notes": [
+        "Keep meat, bones, fat and human waste out of the heap.",
+        "Keep it away from wells and drinking water."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "fertility",
+      "priority": "do_next",
+      "purpose": "Produce mature compost, the main fertility input for pits and beds on this soil.",
+      "target_constraints": [
+        "low nutrients",
+        "low organic matter"
+      ],
+      "requires_resources": [
+        "res_leaf_litter",
+        "res_mulch"
+      ],
+      "alternatives_if_missing": [
+        "No green scraps: use fresh weeds and shrub leaves.",
+        "No water to spare: build it at the start of the rains and let rain keep it damp."
+      ],
+      "expected_observable_change": [
+        "The heap warms and shrinks in the first weeks",
+        "Material darkens and crumbles",
+        "It smells earthy, not sour"
+      ],
+      "task": {
+        "task_id": "task_start_compost",
+        "label": "Start a layered compost heap"
+      }
+    },
+    {
+      "id": "treat_compost_pit",
+      "topic": "soil_treatment",
+      "title": "Pit or trench compost",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Compost in a shallow pit or trench: fill it with layers of leaves, residues and scraps, cover with soil, and let the rains rot it in place.",
+      "instructions": [
+        "Dig a pit or trench about a forearm deep where the ground allows (stop at the hard layer).",
+        "Fill with layers of dry leaves, green material, scraps and a little soil; cover with soil and grass.",
+        "Leave it through a rainy season; it is ready when dark and crumbly.",
+        "Trench option: bury scraps in a shallow trench beside a bed and plant above it after a few weeks."
+      ],
+      "everyday_amounts": [
+        "about a forearm deep where possible"
+      ],
+      "limitations": [
+        "Slower than a turned heap; usually ready only after a rainy season."
+      ],
+      "safety_notes": [
+        "Mark or cover open pits so no one falls in."
+      ],
+      "evidence_level": "general_guidance",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "fertility",
+      "priority": "do_next",
+      "purpose": "Make compost with less watering and less work than a heap, and enrich the spot it is buried in.",
+      "target_constraints": [
+        "low nutrients",
+        "low organic matter"
+      ],
+      "requires_resources": [
+        "res_hand_tools",
+        "res_leaf_litter"
+      ],
+      "alternatives_if_missing": [
+        "Shallow ground: make a covered pile instead."
+      ],
+      "expected_observable_change": [
+        "Darker, softer soil where the pit or trench was"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_overflow_notch",
+      "topic": "soil_treatment",
+      "title": "Overflow notch in pit lips and bed walls",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "drains_slow",
+          "pooling_some",
+          "pooling_widespread",
+          "hardpan_continuous",
+          "runoff_fast"
+        ],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Cut a small, stone-lined notch in the downhill side of each pit lip or bed wall so heavy rain spills out at one safe point instead of drowning roots or bursting the wall.",
+      "instructions": [
+        "Find the lowest point of the pit lip or bed wall on the downhill side.",
+        "Cut a small notch there, about a finger-joint lower than the rest of the rim.",
+        "Line the notch and the ground just below it with flat stones so spilling water does not dig a hole.",
+        "Make sure the spill leads to a safe, stable place, never toward homes, paths, neighbours or edges.",
+        "After a heavy rain, check that water left through the notch and no wall broke."
+      ],
+      "everyday_amounts": [
+        "a notch about a finger-joint lower than the rim"
+      ],
+      "limitations": [
+        "A notch cannot fix a pit dug into a basin that floods; move or raise that planting spot."
+      ],
+      "safety_notes": [
+        "Never point overflow toward homes, paths, neighbours or edges."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_fao_swc_case_studies",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "water_capture",
+      "priority": "do_first",
+      "purpose": "Keep roots out of standing water over the sealed hard layer and stop walls washing out.",
+      "target_constraints": [
+        "waterlogging on the hard layer",
+        "fast runoff"
+      ],
+      "requires_resources": [
+        "res_stones"
+      ],
+      "alternatives_if_missing": [
+        "No stones: pack the notch with tough grass clumps or crop stalks."
+      ],
+      "expected_observable_change": [
+        "Pits and beds empty of standing water by the next morning",
+        "Walls stay intact after storms"
+      ],
+      "task": null
+    },
+    {
+      "id": "treat_pit_chain",
+      "topic": "soil_treatment",
+      "title": "Pit chains on gentle slopes (build one section at a time)",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [
+          "slope_slight",
+          "runoff_fast"
+        ],
+        "all_tags": [],
+        "none_tags": [
+          "slope_steep",
+          "pooling_widespread",
+          "slope_flat"
+        ]
+      },
+      "summary": "On a gentle, stable slope, set a few planting pits in a staggered chain so overflow from one is caught by the next, building and testing one short section before adding more.",
+      "instructions": [
+        "Start with one short section of three or four pits in a staggered line across the slope.",
+        "Give each pit an overflow notch on its downhill side, offset so the spill reaches the next pit's catchment, not straight downhill.",
+        "Watch the section in a heavy rain: water should spread and soak, with no pit left full of standing water by morning.",
+        "Only if that works, extend the chain; never let the last pit spill toward homes, paths, neighbours or edges.",
+        "Do not chain pits on flat ground where water pools, or on steep slopes."
+      ],
+      "everyday_amounts": [
+        "three or four pits per test section",
+        "pits about a long pace apart"
+      ],
+      "limitations": [
+        "A chain concentrates water toward its lower end; the last pit needs a safe spill."
+      ],
+      "safety_notes": [
+        "Never build pit chains above homes or paths or near edges.",
+        "Stop and redesign if any pit stays flooded."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_unccd_microcatchment",
+        "src_fao_swc_case_studies",
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "category": "water_capture",
+      "priority": "do_next",
+      "purpose": "Spread runoff across several planting pits instead of letting it gather into a red stream.",
+      "target_constraints": [
+        "fast runoff",
+        "poor water holding"
+      ],
+      "requires_resources": [
+        "res_hand_tools",
+        "res_stones"
+      ],
+      "alternatives_if_missing": [
+        "No stones for notches: pack them with grass clumps."
+      ],
+      "expected_observable_change": [
+        "Runoff spreads between pits instead of forming streams",
+        "Pits dry out within a day after rain"
+      ],
+      "task": null
+    }
+  ]
+}

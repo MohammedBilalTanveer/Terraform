@@ -1,0 +1,24 @@
+# secrets — never commit (backend/.env holds the OpenAI key)
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node / build
+node_modules/
+dist/
+
+# runtime data (recreated automatically)
+backend/uploads/
+backend/data/
+
+# misc
+*.log
+.DS_Store
+Thumbs.db
+_demo_ids.json
