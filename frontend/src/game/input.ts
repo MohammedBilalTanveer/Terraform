@@ -1,4 +1,5 @@
 // Keyboard state shared by the Explorer and intro. Keys are ignored while the user types in a field.
+import { joystick } from "./gameStore";
 const pressed = new Set<string>();
 
 export function isTypingTarget(t: EventTarget | null): boolean {
@@ -48,5 +49,5 @@ export function readMoveInput(): { x: number; z: number; sprint: boolean } {
   if (keyDown("KeyS", "ArrowDown")) z += 1;
   if (keyDown("KeyA", "ArrowLeft")) x -= 1;
   if (keyDown("KeyD", "ArrowRight")) x += 1;
-  return { x, z, sprint: keyDown("ShiftLeft", "ShiftRight") };
+  return { x, z, sprint: keyDown("ShiftLeft", "ShiftRight") || joystick.sprint };
 }

@@ -41,7 +41,7 @@ export default function StepFrame({ step, status, children }: { step: StepId; st
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-coral/15 text-coral">
               <Lock className="h-5 w-5" aria-hidden />
             </span>
-            <div className="min-w-0 flex-1">
+            <div className="min-w-[12rem] flex-1">
               <div className="font-heading font-semibold text-rose-100">This step is blocked</div>
               {meta?.summary && <p className="mt-1 text-sm leading-relaxed text-ivory/80">{meta.summary}</p>}
               {arr(meta?.warnings).length > 0 && <BulletList items={meta!.warnings} tone="coral" className="mt-2" />}

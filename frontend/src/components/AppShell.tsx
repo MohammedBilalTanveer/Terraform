@@ -4,6 +4,7 @@ import Background from "./Background";
 import EvidenceDrawer from "./EvidenceDrawer";
 import ModeSwitcher from "./ModeSwitcher";
 import RestartButton from "./RestartButton";
+import HeaderMenu from "./HeaderMenu";
 import { BackendPill, GenerationModePill, KbOnlyPill, KbPill, SavePill } from "./StatusPills";
 import Toasts from "./Toasts";
 
@@ -27,7 +28,7 @@ export default function AppShell({ children, showStatus = true }: { children: Re
   const setMode = useTerraform((s) => s.setMode);
   const reduce = useTerraform((s) => s.reduceMotion);
   return (
-    <div className={reduce ? "reduce-motion relative isolate min-h-screen" : "relative isolate min-h-screen"}>
+    <div className={reduce ? "tap-scope reduce-motion relative isolate min-h-screen" : "tap-scope relative isolate min-h-screen"}>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-cyan focus:px-3 focus:py-2 focus:text-midnight">
         Skip to content
       </a>
@@ -37,7 +38,7 @@ export default function AppShell({ children, showStatus = true }: { children: Re
           <button type="button" onClick={() => setMode("landing")} className="shrink-0 rounded-lg" aria-label="TERRAFORM home">
             <Logo />
           </button>
-          <div className="hidden min-w-0 border-l border-white/10 pl-4 md:block">
+          <div className="hidden min-w-0 border-l border-white/10 pl-4 sm:block">
             <div className="eyebrow !text-[0.68rem]">The System Awakens</div>
             <div className="truncate font-heading text-sm font-semibold text-ivory">Scenario 5 · Lateritic Hardpan Plateau</div>
           </div>
@@ -50,12 +51,15 @@ export default function AppShell({ children, showStatus = true }: { children: Re
               <SavePill />
             </div>
           )}
-          <RestartButton className="ml-auto shrink-0 xl:ml-2" />
-          <ModeSwitcher className="shrink-0" />
+          <div className="ml-auto hidden shrink-0 lg:block xl:ml-2">
+            <RestartButton />
+          </div>
+          <ModeSwitcher className="hidden shrink-0 lg:flex" />
+          <HeaderMenu className="ml-auto shrink-0 lg:hidden" />
         </div>
         {showStatus && (
           <div className="no-scrollbar flex gap-1.5 overflow-x-auto border-t border-white/5 px-4 py-2 xl:hidden" aria-label="System status">
-            <span className="shrink-0 font-heading text-xs text-mist md:hidden">Scenario 5 · Lateritic Hardpan</span>
+            <span className="shrink-0 font-heading text-xs text-mist sm:hidden">Scenario 5 · Lateritic Hardpan</span>
             <BackendPill />
             <KbPill />
             <KbOnlyPill />

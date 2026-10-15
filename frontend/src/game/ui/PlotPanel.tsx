@@ -1,5 +1,5 @@
 // "Unknown Land" cultivation plot — steps 5–9: readiness gate, crop choice, timeframe, planting, care.
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AlertTriangle, CheckCircle2, Circle, Lock, Navigation, ShieldAlert, Sprout, TimerReset } from "lucide-react";
 import type { CropCard, StepId } from "../../types/terraform";
 import { useTerraform } from "../../store/terraformStore";
@@ -7,7 +7,7 @@ import { farmFor, useGame } from "../gameStore";
 import { GROUP_STATION, collectPlanItems, guidance, worldView } from "../planData";
 import { stationById } from "../worldConfig";
 import RecCard from "./RecCard";
-import { Bullets, Busy, Card, Chips, DetailsButton, ErrorNote, GhostButton, GlassPanel, Pill, PrimaryButton, Section, cx } from "./kit";
+import { Bullets, Busy, Card, Chips, DetailsButton, ErrorNote, GhostButton, GlassPanel, Pill, PrimaryButton, Section, ThisOneBadge, cx, humanize, useAutoFocusItem } from "./kit";
 
 type Tab = "gate" | "crops" | "time" | "plant" | "care";
 const TABS: { id: Tab; label: string; step: StepId }[] = [
@@ -28,6 +28,7 @@ function CropCardView({ c }: { c: CropCard }) {
   const [open, setOpen] = useState(false);
   const isSel = selected === c.crop_id;
   return (
+    <div data-incomplete={!selected && c.category !== "tree" && c.fit_label !== "excluded" ? "true" : undefined} className="rounded-xl transition-shadow">
     <Card className={cx(isSel && "border-emerald-300/50 bg-emerald-400/[0.06]")}>
       <div className="flex items-start gap-2">
         <div className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white/5 font-display text-[11px] text-amber-200">#{c.rank}</div>
@@ -82,6 +83,7 @@ function CropCardView({ c }: { c: CropCard }) {
         </button>
       </div>
     </Card>
+    </div>
   );
 }
 
@@ -107,9 +109,34 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
   const setOverlay = useGame((s) => s.setOverlay);
   const items = useMemo(() => collectPlanItems(plan), [plan]);
   const g = guidance({ backendOnline, analysis, plan, completed, selectedCropId: crop, farm });
-  const initial: Tab = (TABS.find((t) => t.step === g.step)?.id ?? "gate") as Tab;
-  const [tab, setTab] = useState<Tab>(initial);
+  const focusTaskId = useGame((s) => s.focusTaskId);
+  const lastTab = useGame((s) => s.lastTab.plot) as Tab | undefined;
+  const setLastTab = useGame((s) => s.setLastTab);
+  const setFocusTask = useGame((s) => s.setFocusTask);
+  const say = useGame((s) => s.say);
+  // Resume where you left: the focused quest task's tab, else the first tab with unfinished work.
+  const initial: Tab = (() => {
+    if (!plan) return "gate";
+    const fi = focusTaskId ? items.find((i) => i.rec.task_id === focusTaskId && i.group === "plot") : undefined;
+    if (fi) return fi.action === "sow" || fi.section === "sowing" ? "plant" : "gate";
+    const v = worldView(analysis, plan, completed, crop, farm);
+    if (plan.workflow.next_action.planting_readiness === "not_ready") return "gate";
+    if (!crop) return "crops";
+    if (!v.sown) return "plant";
+    if (v.stage !== "harvest_ready") return "care";
+    return lastTab ?? "care";
+  })();
+  const [tab, setTabState] = useState<Tab>(initial);
+  const setTab = (t: Tab) => {
+    setTabState(t);
+    setLastTab("plot", t);
+  };
   const [confirmRisk, setConfirmRisk] = useState<string | null>(null);
+  useAutoFocusItem([tab, plan?.plan_id], focusTaskId, reduceMotion);
+  useEffect(() => {
+    setLastTab("plot", initial);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!plan) {
     return (
@@ -216,56 +243,90 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
           </Section>
           <Section title="Readiness gate">
             {na.readiness_gate.map((gt) => {
+              // every task that satisfies this gate (gate_tasks from v1.3 are merged into `items`)
               const tasks = items.filter((i) => i.rec.task_id && gt.satisfied_by_tasks.includes(i.rec.task_id));
+              const unknownIds = gt.satisfied_by_tasks.filter((id) => !tasks.some((t) => t.rec.task_id === id));
+              const taskDone = gt.task_done ?? gt.satisfied_by_tasks.some((id) => completed.includes(id));
+              const testResult = gateResults[gt.id] ?? gt.test_result ?? null;
+              const canAccept = gt.can_accept_risk ?? (taskDone && testResult !== "pass" && !gt.accepted_risk && !!gt.verification);
+              const blocking = gt.blocking_reason ?? (!taskDone ? "task_not_done" : gt.satisfied ? null : testResult === "fail" ? "test_failed" : "test_not_run");
+              const open = gt.required && !gt.satisfied;
               return (
                 <Card key={gt.id} className={gt.satisfied ? "border-emerald-300/25" : gt.accepted_risk ? "border-amber-300/30" : ""}>
-                  <div className="flex items-start gap-2">
+                  <div className="flex items-start gap-2" data-incomplete={open ? "true" : undefined}>
                     {gt.satisfied ? <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-300" /> : gt.accepted_risk ? <AlertTriangle className="mt-0.5 h-4 w-4 text-amber-300" /> : <Circle className="mt-0.5 h-4 w-4 text-ivory/40" />}
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-1.5">
                         <span className="text-[13px] font-medium">{gt.label}</span>
                         {gt.required && <Pill tone="violet">required</Pill>}
                         {gt.accepted_risk && <Pill tone="amber">risk accepted</Pill>}
+                        {open && blocking === "task_not_done" && <Pill tone="coral">task not done</Pill>}
+                        {open && blocking === "test_not_run" && <Pill tone="amber">test not run</Pill>}
+                        {open && blocking === "test_failed" && <Pill tone="coral">test failed</Pill>}
                       </div>
                       {gt.detail && <p className="text-[12.5px] text-ivory/70">{gt.detail}</p>}
-                      {tasks.length > 0 && (
-                        <div className="mt-1.5 flex flex-wrap gap-1.5">
+                      {(tasks.length > 0 || unknownIds.length > 0) && (
+                        <ul className="mt-2 space-y-1.5">
                           {tasks.map((t) => {
                             const done = completed.includes(t.rec.task_id!);
                             const st = GROUP_STATION[t.group];
+                            const focused = focusTaskId === t.rec.task_id && !done;
                             return (
-                              <button
-                                key={t.rec.task_id}
-                                type="button"
-                                onClick={() => {
-                                  if (st === "plot") setTab("gate");
-                                  else {
-                                    setTargetOverride(st);
-                                    setOverlay(null);
-                                  }
-                                }}
-                                className={cx("rounded-md border px-1.5 py-0.5 text-[11px]", done ? "border-emerald-300/40 text-emerald-100" : "border-white/15 text-ivory/80 hover:border-cyan-300/50")}
-                              >
-                                {done ? "✓ " : ""}
-                                {t.rec.task_label ?? t.rec.title} · {stationById(st).name}
-                              </button>
+                              <li key={t.rec.task_id} className={cx("flex flex-wrap items-center gap-2 rounded-lg border px-2 py-1.5", done ? "border-emerald-300/25 bg-emerald-400/[0.04]" : "border-white/10 bg-white/[0.03]", focused && "ring-2 ring-cyan-300/50")}>
+                                {done ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-300" /> : <Circle className="h-3.5 w-3.5 shrink-0 text-ivory/40" />}
+                                <div className="min-w-0 flex-1">
+                                  <div className={cx("text-[12.5px]", done && "text-ivory/55 line-through")}>{t.rec.task_label ?? t.rec.title}</div>
+                                  <div className="text-[10.5px] text-ivory/50">Done at: {stationById(st).name}</div>
+                                </div>
+                                {focused && <ThisOneBadge />}
+                                {!done && (
+                                  <GhostButton
+                                    onClick={() => {
+                                      setFocusTask(t.rec.task_id);
+                                      if (st === "plot") {
+                                        setTab("gate");
+                                        window.setTimeout(() => document.querySelector(`[data-panel-scroll] [data-task-id="${t.rec.task_id}"]`)?.scrollIntoView({ block: "center", behavior: "smooth" }), 60);
+                                      } else {
+                                        setTargetOverride(st);
+                                        say(`Head to ${stationById(st).name} — ${t.rec.task_label ?? t.rec.title}`);
+                                        setOverlay(null);
+                                      }
+                                    }}
+                                  >
+                                    <Navigation className="h-3.5 w-3.5" /> {st === "plot" ? "Do it here" : "Go there"}
+                                  </GhostButton>
+                                )}
+                              </li>
                             );
                           })}
-                        </div>
+                          {unknownIds.map((id) => (
+                            <li key={id} className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-2 py-1.5 text-[12.5px]">
+                              {completed.includes(id) ? <CheckCircle2 className="h-3.5 w-3.5 text-emerald-300" /> : <Circle className="h-3.5 w-3.5 text-ivory/40" />}
+                              <span className="flex-1">{humanize(id)}</span>
+                              <span className="text-[10.5px] text-ivory/50">see the Research Outpost terminal</span>
+                            </li>
+                          ))}
+                        </ul>
                       )}
-                      {!gt.satisfied && !gt.accepted_risk && gt.required && (
+                      {open && !gt.accepted_risk && (
                         <div className="mt-2">
-                          {confirmRisk === gt.id ? (
-                            <div className="flex flex-wrap items-center gap-2 text-[12px] text-amber-100">
-                              Plant anyway and record this as an open risk?
-                              <GhostButton onClick={() => void acceptRisk(gt.id).then(() => setConfirmRisk(null))}>Yes, accept risk</GhostButton>
-                              <GhostButton onClick={() => setConfirmRisk(null)}>Cancel</GhostButton>
-                            </div>
-                          ) : (
-                            <button type="button" className="text-[11.5px] text-amber-200 underline" onClick={() => setConfirmRisk(gt.id)}>
-                              Accept risk…
-                            </button>
-                          )}
+                          {canAccept ? (
+                            confirmRisk === gt.id ? (
+                              <div className="flex flex-wrap items-center gap-2 text-[12px] text-amber-100">
+                                Skip the verification test and record this as an open risk?
+                                <GhostButton onClick={() => void acceptRisk(gt.id).then(() => setConfirmRisk(null))}>Yes, accept risk</GhostButton>
+                                <GhostButton onClick={() => setConfirmRisk(null)}>Cancel</GhostButton>
+                              </div>
+                            ) : (
+                              <button type="button" className="min-h-9 text-[11.5px] text-amber-200 underline" onClick={() => setConfirmRisk(gt.id)}>
+                                Accept risk (skip the test)…
+                              </button>
+                            )
+                          ) : blocking === "task_not_done" ? (
+                            <p className="text-[11.5px] text-ivory/65">Complete one of the tasks above first — accepting a risk can only skip the test, never the task.</p>
+                          ) : blocking === "test_not_run" ? (
+                            <p className="text-[11.5px] text-ivory/65">Task done — now run the verification test below and record the result.</p>
+                          ) : null}
                         </div>
                       )}
                       {gt.verification?.test && (
@@ -482,6 +543,7 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
           <Section title="Care stages">
             {stages.map((s, i) => (
               <Card key={s.id} className={cx(view.sown && i === view.careIdx && "border-cyan-300/40")}>
+                {view.sown && i === view.careIdx && <span data-incomplete="true" className="sr-only">Current stage</span>}
                 <div className="flex flex-wrap items-center gap-1.5">
                   <span className="font-medium text-[13px]">{s.label}</span>
                   <Pill tone="muted">{s.stage.replace(/_/g, " ")}</Pill>

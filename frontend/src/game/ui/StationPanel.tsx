@@ -7,7 +7,7 @@ import { useGame, farmFor } from "../gameStore";
 import { GROUP_STATION, collectPlanItems, guidance, itemsForStation, taskItems } from "../planData";
 import { stationById, type StationId } from "../worldConfig";
 import RecCard from "./RecCard";
-import { Card, Chips, DetailsButton, GlassPanel, PrimaryButton, Pill, Section } from "./kit";
+import { Card, Chips, DetailsButton, GlassPanel, PrimaryButton, Pill, Section, useAutoFocusItem } from "./kit";
 
 const KICKER: Partial<Record<StationId, string>> = {
   terraces: "WATER CAPTURE · STONE LINES",
@@ -57,6 +57,10 @@ export default function StationPanel({ station, onClose }: { station: StationId;
   const setTargetOverride = useGame((s) => s.setTargetOverride);
   const setOverlay = useGame((s) => s.setOverlay);
   const items = useMemo(() => collectPlanItems(plan), [plan]);
+  const focusTaskId = useGame((s) => s.focusTaskId);
+  const reduceMotion = useTerraform((s) => s.reduceMotion);
+  // resume where you left: scroll to the task picked in the quest list, else the first open task here
+  useAutoFocusItem([station, plan?.plan_id], focusTaskId, reduceMotion);
   if (!plan) return <NoPlan station={station} onClose={onClose} />;
   const st = stationById(station);
 
@@ -101,9 +105,11 @@ export default function StationPanel({ station, onClose }: { station: StationId;
                     <button
                       type="button"
                       aria-label={`Guide me to ${stationById(target).name}`}
-                      className="rounded-md p-1 text-cyan-200 hover:bg-white/10"
+                      className="grid min-h-11 min-w-11 place-items-center rounded-md p-1 text-cyan-200 hover:bg-white/10 sm:min-h-8 sm:min-w-8"
                       onClick={() => {
                         setTargetOverride(target);
+                        useGame.getState().setFocusTask(t.rec.task_id);
+                        useGame.getState().say(`Head to ${stationById(target).name} — ${t.rec.task_label ?? t.rec.title}`);
                         setOverlay(null);
                       }}
                     >

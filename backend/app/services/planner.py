@@ -20,8 +20,10 @@ ADAPTATIONS ("why this plan differs")
 NEXT ACTION (05)
   Scenario readiness_gate items that apply. task_done = any satisfied_by_tasks completed;
   test_result = the user's recorded PASS/FAIL for the gate's KB `verification` test;
-  satisfied = task_done AND (verification is null OR test_result == "pass"); a FAIL keeps the gate open
-  and the KB `if_fail` text is added to the step warnings. accepted_risk = gate id in accepted_risks. The baking-soda fizz check is never required.
+  satisfied = task_done AND (verification is null OR test passed OR risk accepted); accepting a risk
+  waives only the test, never the task (v1.3). A FAIL keeps the gate open and the KB `if_fail` text is
+  added to the step warnings. blocking_reason: task_not_done / test_not_run / test_failed / null.
+  next_action.gate_tasks = applicable task records for every task referenced by an applicable gate. The baking-soda fizz check is never required.
   planting_readiness: ready (all required satisfied) / ready_with_accepted_risk (the rest accepted) /
   not_ready. blocked_until = labels of unsatisfied, unaccepted required gates.
 
@@ -194,8 +196,14 @@ def verification_of(g: dict) -> Optional[dict]:
     return out if any(out.values()) else None
 
 
+def gate_task_done(g: dict, completed: List[str]) -> bool:
+    return any(t in completed for t in g.get("satisfied_by_tasks") or [])
+
+
 def compute_gates(kb: KnowledgeBase, scenario: dict, tags: Set[str], completed: List[str], accepted: List[str],
                   gate_results: Optional[Dict[str, str]] = None):
+    """v1.3: accepting a risk waives only the empirical test, never the task.
+    satisfied = task_done AND (verification is null OR test passed OR risk accepted)."""
     results = {k: v for k, v in (gate_results or {}).items() if v in ("pass", "fail")}
     items = []
     for g in scenario.get("readiness_gate") or []:
@@ -206,43 +214,69 @@ def compute_gates(kb: KnowledgeBase, scenario: dict, tags: Set[str], completed: 
         verification = verification_of(g)
         task_done = any(t in completed for t in tasks)
         test_result = results.get(g.get("id"))
+        accepted_risk = g.get("id") in accepted and task_done
+        test_ok = verification is None or test_result == "pass"
+        if not task_done:
+            reason = "task_not_done"
+        elif test_ok or accepted_risk:
+            reason = None
+        else:
+            reason = "test_failed" if test_result == "fail" else "test_not_run"
         items.append({
             "id": g.get("id", ""),
             "label": text(g.get("label")),
             "detail": text(g.get("detail")),
             "required": bool(g.get("required")) and not is_fizz_gate(g),
             "satisfied_by_tasks": tasks,
-            "satisfied": task_done and (verification is None or test_result == "pass"),
-            "accepted_risk": g.get("id") in accepted,
+            "satisfied": task_done and (test_ok or accepted_risk),
+            "accepted_risk": accepted_risk,
             "verification": verification,
             "test_result": test_result,
             "task_done": task_done,
+            "can_accept_risk": bool(task_done and verification is not None and test_result != "pass" and not accepted_risk),
+            "blocking_reason": reason,
             "evidence": make_evidence(kb, [scenario["id"], *owners], g.get("source_ids") or []),
         })
     required = [g for g in items if g["required"]]
-    open_req = [g for g in required if not g["satisfied"]]
-    if not open_req:
-        readiness = "ready"
-    elif all(g["accepted_risk"] for g in open_req):
+    blocked = [g for g in required if not g["satisfied"]]
+    if blocked:
+        readiness = "not_ready"
+    elif any(g["accepted_risk"] and not (g["verification"] is None or g["test_result"] == "pass") for g in required):
         readiness = "ready_with_accepted_risk"
     else:
-        readiness = "not_ready"
-    blocked = [g for g in open_req if not g["accepted_risk"]]
+        readiness = "ready"
     blocked_until = [g["label"] for g in blocked]
     if blocked:
         b = blocked[0]
         v = b.get("verification") or {}
-        if b["task_done"] and b["test_result"] == "fail" and v.get("if_fail"):
+        if b["blocking_reason"] == "test_failed" and v.get("if_fail"):
             nba = f"{b['label']}: {v['if_fail']}"
-        elif b["task_done"] and v.get("test"):
+        elif b["blocking_reason"] == "test_not_run" and v.get("test"):
             nba = f"{b['label']}: {v['test']}"
         else:
             nba = b["label"] + (f": {b['detail']}" if b["detail"] else "")
     elif readiness == "ready_with_accepted_risk":
-        nba = "All remaining readiness items were accepted as a risk. You can move on to planting."
+        nba = "All readiness items are done; some tests were skipped as an accepted risk. You can move on to planting."
     else:
         nba = "All readiness items are done. You can move on to planting."
     return items, readiness, blocked_until, nba
+
+
+def gate_task_cards(kb: KnowledgeBase, gates: List[dict], tr: TagResult) -> List[dict]:
+    """Completable task records (treatments / planting methods) for every task referenced by an applicable gate."""
+    out, seen = [], set()
+    for g in gates:
+        for t in g["satisfied_by_tasks"]:
+            for rid in kb.task_owner.get(t, []):
+                rec = kb.get(rid)
+                coll = kb.collection_of(rid)
+                if rid in seen or not rec or coll not in ("soil_treatments", "planting_methods"):
+                    continue
+                if not applies(rec, tr.tag_set):
+                    continue
+                seen.add(rid)
+                out.append(resource_aware_rec(kb, rec, tr, "soil"))
+    return out
 
 
 # ------------------------------------------------------------------ crops
@@ -631,7 +665,8 @@ def build_plan(kb: KnowledgeBase, scenario: dict, tr: TagResult, obs: dict, sele
                    questions=[], warnings=gate_warn,
                    evidence=merge_evidence(*[g["evidence"] for g in gates]))
     na_step.update({"readiness_gate": gates, "blocked_until": blocked_until,
-                    "planting_readiness": readiness, "next_best_action": nba})
+                    "planting_readiness": readiness, "next_best_action": nba,
+                    "gate_tasks": gate_task_cards(kb, gates, tr)})
 
     for c in cards:
         c.pop("_total", None)

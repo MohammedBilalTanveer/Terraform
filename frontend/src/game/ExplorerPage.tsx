@@ -122,6 +122,13 @@ export default function ExplorerPage() {
   const override = useGame((s) => s.targetOverride);
   const setTargetOverride = useGame((s) => s.setTargetOverride);
   const pulse = useGame((s) => s.interactPulse);
+  const bubble = useGame((s) => s.bubble);
+  // TERRA's temporary line (e.g. "Head to <station> — <task>") expires on its own
+  useEffect(() => {
+    if (!bubble) return;
+    const t = window.setTimeout(() => useGame.setState({ bubble: null }), Math.max(0, bubble.until - Date.now()));
+    return () => window.clearTimeout(t);
+  }, [bubble]);
 
   // input guard: ignore HUD clicks + E/Enter/Esc for a moment after entering the Explorer
   const [armed, setArmed] = useState(false);
@@ -218,6 +225,7 @@ export default function ExplorerPage() {
   return (
     <div className="fixed inset-0 overflow-hidden bg-[#2a1610] font-sans text-ivory">
       <Canvas
+        style={{ touchAction: "none" }}
         shadows
         dpr={[1, 1.5]}
         gl={{ antialias: true, powerPreference: "high-performance" }}
@@ -232,7 +240,7 @@ export default function ExplorerPage() {
         <Suspense fallback={null}>
           <WorldScene follow={playerState} reduceMotion={reduceMotion} />
           <PlayerController enabled={!overlay} />
-          <RobotGuide target={target} line={g.lines[0] ?? ""} reduceMotion={reduceMotion} showBubble={!overlay} />
+          <RobotGuide target={target} line={bubble && bubble.until > Date.now() ? bubble.text : g.lines[0] ?? ""} reduceMotion={reduceMotion} showBubble={!overlay} />
         </Suspense>
         <FollowCamera />
       </Canvas>

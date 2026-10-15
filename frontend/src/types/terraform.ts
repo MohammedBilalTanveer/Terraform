@@ -226,6 +226,9 @@ export type GateItem = {
   verification?: GateVerification | null;
   test_result?: GateTestResult | null;
   task_done?: boolean;
+  /** v1.3: accept-risk only waives the test, and only after the task is done */
+  can_accept_risk?: boolean;
+  blocking_reason?: "task_not_done" | "test_not_run" | "test_failed" | null;
 };
 
 export type PlantingReadiness = "ready" | "not_ready" | "ready_with_accepted_risk";
@@ -258,6 +261,8 @@ export type PlanResponse = {
       blocked_until: string[];
       planting_readiness: PlantingReadiness;
       next_best_action: string;
+      /** v1.3: Recommendations for every applicable gate's tasks (so each gate is completable on the gate page) */
+      gate_tasks?: Recommendation[];
     };
     crop_suggestions: StepMeta & {
       field_crops: CropCard[];

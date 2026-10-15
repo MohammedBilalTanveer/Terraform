@@ -167,3 +167,46 @@ def answer(kb: KnowledgeBase, question: str, prefer_ids: Set[str], step_id: Opti
                         "snippet": snippet[:240], "collection": r["collection"]})
         parts.append(record_answer_text(rec))
     return {"answer": "\n\n".join(parts), "refused": False, "matched": matched, "kb_ids": [m["kb_id"] for m in matched]}
+
+
+# ---------------------------------------------------------------- v1.3 "what next?" intent
+NEXT_STEP_PATTERN = re.compile(
+    r"\b(what(?:'s|s| is)? next|what now|what do i do( now| next)?|what should i do|what (?:do|should) i do next|"
+    r"where (?:do|should) i go|what(?:'s|s| is) left|what remains|what is remaining|next step|next steps|"
+    r"what(?:'s|s| is) the next)\b")
+
+
+def is_next_step_question(question: str) -> bool:
+    q = (question or "").lower().replace("\u2019", "'")
+    return bool(NEXT_STEP_PATTERN.search(q))
+
+
+def next_step_answer(kb: KnowledgeBase, plan: dict) -> dict:
+    """Answer from the stored plan: next_best_action + each unsatisfied required gate and its first
+    not-done task (all KB text)."""
+    na = (plan.get("workflow") or {}).get("next_action") or {}
+    completed = set(plan.get("completed_tasks") or [])
+    lines = [na.get("next_best_action") or ""]
+    matched, ids = [], [plan.get("scenario_id") or ""]
+    open_gates = [g for g in na.get("readiness_gate") or [] if g.get("required") and not g.get("satisfied")]
+    for g in open_gates:
+        task = next((t for t in g.get("satisfied_by_tasks") or [] if t not in completed and t in kb.task_ids), None)
+        line = f"- {g.get('label')}"
+        if g.get("blocking_reason") == "task_not_done" and task:
+            line += f": {kb.task_ids[task]}"
+        elif g.get("blocking_reason") in ("test_not_run", "test_failed") and (g.get("verification") or {}).get("test"):
+            line += f": {g['verification']['test']}"
+        lines.append(line)
+        matched.append({"kb_id": g.get("id"), "title": g.get("label") or g.get("id"),
+                        "snippet": (g.get("detail") or "")[:240], "collection": "scenarios.readiness_gate"})
+        if task:
+            for rid in kb.task_owner.get(task, [])[:1]:
+                rec = kb.get(rid)
+                if rec and rid not in [m["kb_id"] for m in matched]:
+                    matched.append({"kb_id": rid, "title": text(rec.get("title")) or rid,
+                                    "snippet": record_snippet(rec)[:240], "collection": kb.collection_of(rid) or ""})
+                    ids.append(rid)
+    if open_gates:
+        lines.insert(1, "Still open before planting:")
+    return {"answer": "\n".join(l for l in lines if l), "refused": False, "matched": matched,
+            "kb_ids": [i for i in ids if i]}

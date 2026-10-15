@@ -6,7 +6,7 @@ import { useTerraform } from "../../store/terraformStore";
 import { useGame, type ActionKind } from "../gameStore";
 import { GROUP_STATION, SECTION_LABEL, type PlanItem } from "../planData";
 import { stationById, type StationId } from "../worldConfig";
-import { Bullets, Card, Chips, GhostButton, Pill, PrimaryButton, cx, humanize } from "./kit";
+import { Bullets, Card, Chips, GhostButton, Pill, PrimaryButton, ThisOneBadge, cx, humanize } from "./kit";
 
 const VERB: Record<ActionKind, string> = {
   inspect: "Check",
@@ -52,6 +52,8 @@ export function TaskButton({ item, here }: { item: PlanItem; here: StationId }) 
       <GhostButton
         onClick={() => {
           setTargetOverride(station);
+          useGame.getState().setFocusTask(taskId);
+          useGame.getState().say(`Head to ${stationById(station).name} — ${item.rec.task_label ?? item.rec.title}`);
           setOverlay(null);
         }}
       >
@@ -64,7 +66,10 @@ export function TaskButton({ item, here }: { item: PlanItem; here: StationId }) 
       tone="sprout"
       disabled={loading === "progress"}
       onClick={() =>
-        runAction({ kind: item.action, label: item.rec.task_label ?? item.rec.title, station: here, fast: reduceMotion }, () => toggleTask(taskId))
+        runAction({ kind: item.action, label: item.rec.task_label ?? item.rec.title, station: here, fast: reduceMotion }, async () => {
+          await toggleTask(taskId);
+          if (useGame.getState().focusTaskId === taskId) useGame.getState().setFocusTask(null);
+        })
       }
     >
       <Hammer className="h-3.5 w-3.5" /> {VERB[item.action]} — mark complete
@@ -76,8 +81,11 @@ export default function RecCard({ rec, item, here, defaultOpen = false }: { rec:
   const [open, setOpen] = useState(defaultOpen);
   const completed = useTerraform((s) => s.completedTasks);
   const done = !!rec.task_id && completed.includes(rec.task_id);
+  const focusTaskId = useGame((s) => s.focusTaskId);
+  const focused = !!rec.task_id && focusTaskId === rec.task_id && !done;
   return (
-    <Card className={cx(done && "border-emerald-300/25 bg-emerald-400/[0.04]", rec.priority === "avoid" && "border-rose-300/25 bg-rose-500/[0.05]")}>
+    <div data-task-id={rec.task_id ?? undefined} data-incomplete={rec.task_id && !done && item && here ? "true" : undefined} className="scroll-mt-4 rounded-xl transition-shadow">
+    <Card className={cx(done && "border-emerald-300/25 bg-emerald-400/[0.04]", rec.priority === "avoid" && "border-rose-300/25 bg-rose-500/[0.05]", focused && "border-cyan-300/70 ring-2 ring-cyan-300/50")}>
       <div className="flex items-start gap-2">
         {rec.task_id ? (
           done ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-300" /> : <Circle className="mt-0.5 h-4 w-4 shrink-0 text-ivory/40" />
@@ -85,6 +93,7 @@ export default function RecCard({ rec, item, here, defaultOpen = false }: { rec:
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-1.5">
             <h4 className="font-heading text-[14px] font-semibold leading-snug">{rec.title}</h4>
+            {focused && <ThisOneBadge />}
           </div>
           <div className="mt-1 flex flex-wrap gap-1">
             {item && <Pill tone="violet">{SECTION_LABEL[item.section]}</Pill>}
@@ -141,5 +150,6 @@ export default function RecCard({ rec, item, here, defaultOpen = false }: { rec:
         </div>
       )}
     </Card>
+    </div>
   );
 }

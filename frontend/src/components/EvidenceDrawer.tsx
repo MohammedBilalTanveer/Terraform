@@ -103,7 +103,7 @@ export default function EvidenceDrawer() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="evidence-title"
-            className="glass-strong absolute right-0 top-0 flex h-full w-full max-w-xl flex-col rounded-l-2xl"
+            className="glass-strong absolute right-0 top-0 flex h-full w-full flex-col sm:max-w-xl sm:rounded-l-2xl"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}

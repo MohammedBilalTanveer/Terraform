@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { create } from "zustand";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, CircleHelp, Compass, Database, SearchX, Send, TriangleAlert, X } from "lucide-react";
+import { ArrowRight, CircleHelp, Compass, Database, RefreshCw, SearchX, Send, ServerOff, TriangleAlert, X } from "lucide-react";
 import { api, ApiError } from "../api/terraformApi";
 import type { AskResponse, StepId } from "../types/terraform";
 import { useTerraform } from "../store/terraformStore";
@@ -12,7 +12,7 @@ import RobotAvatar from "./RobotAvatar";
 import { Badge, BulletList, StatusBadge, cx } from "./ui";
 import { getStepMeta, stepInfo, useStepStatuses } from "./workflow";
 
-type Exchange = { id: number; question: string; step_id: StepId; response?: AskResponse; error?: string };
+type Exchange = { id: number; question: string; step_id: StepId; response?: AskResponse; error?: string; offline?: boolean };
 
 // Local (non-shared) conversation log so desktop + mobile panels show the same history.
 const useAskLog = create<{ log: Exchange[]; push: (e: Exchange) => void; patch: (id: number, p: Partial<Exchange>) => void; clear: () => void }>((set) => ({
@@ -23,6 +23,9 @@ const useAskLog = create<{ log: Exchange[]; push: (e: Exchange) => void; patch: 
 }));
 let seq = 1;
 
+// UI copy only — the answers come from the knowledge base via /api/assistant/ask.
+const QUICK_QUESTIONS = ["What should I do next?", "How do I store rainwater?", "When is it ready to harvest?"];
+
 export default function AssistantPanel({ className, onClose }: { className?: string; onClose?: () => void }) {
   const step = useTerraform((s) => s.currentStep);
   const analysis = useTerraform((s) => s.analysis);
@@ -30,6 +33,8 @@ export default function AssistantPanel({ className, onClose }: { className?: str
   const sessionId = useTerraform((s) => s.sessionId);
   const openEvidence = useTerraform((s) => s.openEvidence);
   const backendOnline = useTerraform((s) => s.backendOnline);
+  const checkHealth = useTerraform((s) => s.checkHealth);
+  const [checking, setChecking] = useState(false);
   const statuses = useStepStatuses();
   const { log, push, patch, clear } = useAskLog();
   const [q, setQ] = useState("");
@@ -40,22 +45,40 @@ export default function AssistantPanel({ className, onClose }: { className?: str
   const info = stepInfo(step);
   const nba = plan?.workflow?.next_action?.next_best_action;
 
+  const scrollDown = () => setTimeout(() => listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" }), 50);
+
+  /** Send (or re-send) one exchange. On failure the question is put back in the box. */
+  const send = async (id: number, text: string) => {
+    setAsking(true);
+    patch(id, { error: undefined, offline: false, response: undefined });
+    scrollDown();
+    try {
+      const response = await api.ask(text, { session_id: sessionId, plan_id: plan?.plan_id ?? null, step_id: step });
+      patch(id, { response });
+    } catch (e) {
+      const offline = e instanceof ApiError && (e.code === "NETWORK" || e.code === "TIMEOUT");
+      patch(id, { error: e instanceof ApiError ? e.message : String(e), offline });
+      setQ((cur) => cur || text);
+      if (offline) void checkHealth();
+    } finally {
+      setAsking(false);
+      scrollDown();
+    }
+  };
+
   const ask = async (question: string) => {
     const text = question.trim();
     if (!text || asking) return;
     const id = seq++;
     push({ id, question: text, step_id: step });
     setQ("");
-    setAsking(true);
-    try {
-      const response = await api.ask(text, { session_id: sessionId, plan_id: plan?.plan_id ?? null, step_id: step });
-      patch(id, { response });
-    } catch (e) {
-      patch(id, { error: e instanceof ApiError ? e.message : String(e) });
-    } finally {
-      setAsking(false);
-      setTimeout(() => listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" }), 50);
-    }
+    await send(id, text);
+  };
+
+  const recheck = async () => {
+    setChecking(true);
+    await checkHealth();
+    setChecking(false);
   };
 
   return (
@@ -73,7 +96,19 @@ export default function AssistantPanel({ className, onClose }: { className?: str
         )}
       </header>
 
-      <div ref={listRef} className="scroll-thin flex-1 space-y-4 overflow-y-auto p-4">
+      <div ref={listRef} className="scroll-thin flex-1 space-y-4 overflow-y-auto p-4" aria-live="polite">
+        {backendOnline === false && (
+          <div className="flex items-start gap-3 rounded-xl border border-coral/40 bg-coral/10 p-3.5" role="alert">
+            <ServerOff className="mt-0.5 h-5 w-5 shrink-0 text-coral" aria-hidden />
+            <div className="min-w-0 flex-1">
+              <div className="font-heading text-sm font-semibold text-rose-100">TERRA can't reach the knowledge base server — start the backend</div>
+              <p className="mt-0.5 text-xs text-rose-100/75">Answers come only from the knowledge base, so nothing can be answered until it is reachable.</p>
+            </div>
+            <button type="button" onClick={() => void recheck()} disabled={checking} className="btn-ghost !px-2.5 !py-1.5 text-xs">
+              <RefreshCw className={cx("h-3.5 w-3.5", checking && "animate-spin")} aria-hidden /> Retry
+            </button>
+          </div>
+        )}
         {/* Current step briefing — API text only */}
         <div className="rounded-xl border border-white/8 bg-white/[0.03] p-3.5">
           <div className="mb-2 flex items-center justify-between gap-2">
@@ -138,21 +173,27 @@ export default function AssistantPanel({ className, onClose }: { className?: str
                 {e.question}
               </div>
               {!e.response && !e.error && (
-                <div className="flex items-center gap-2 text-sm text-mist">
+                <div className="flex w-fit items-center gap-2 rounded-2xl rounded-bl-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-mist" role="status">
                   <span className="flex gap-1" aria-hidden>
                     {[0, 1, 2].map((d) => (
                       <span key={d} className="h-1.5 w-1.5 animate-bounce rounded-full bg-cyan" style={{ animationDelay: `${d * 120}ms` }} />
                     ))}
                   </span>
-                  Searching the knowledge base…
+                  TERRA is typing…
                 </div>
               )}
               {e.error && (
-                <div className="rounded-2xl rounded-bl-md border border-coral/30 bg-coral/10 px-3 py-2 text-sm text-rose-100" role="alert">
-                  {e.error}
-                  <button type="button" className="ml-2 underline underline-offset-2" onClick={() => void ask(e.question)}>
-                    Retry
-                  </button>
+                <div className="rounded-2xl rounded-bl-md border border-coral/30 bg-coral/10 px-3 py-2.5 text-sm text-rose-100" role="alert">
+                  <div className="flex items-start gap-2">
+                    {e.offline ? <ServerOff className="mt-0.5 h-4 w-4 shrink-0" aria-hidden /> : <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />}
+                    <span>{e.offline ? "TERRA can't reach the knowledge base server — start the backend, then retry." : e.error}</span>
+                  </div>
+                  <div className="mt-2 flex items-center gap-2">
+                    <button type="button" className="btn-ghost !px-2.5 !py-1 text-xs" disabled={asking} onClick={() => void send(e.id, e.question)}>
+                      <RefreshCw className="h-3.5 w-3.5" aria-hidden /> Retry
+                    </button>
+                    <span className="text-xs text-rose-100/60">Your question is kept in the box below.</span>
+                  </div>
                 </div>
               )}
               {e.response && <Answer r={e.response} onOpen={openEvidence} />}
@@ -168,6 +209,19 @@ export default function AssistantPanel({ className, onClose }: { className?: str
           void ask(q);
         }}
       >
+        <div className="no-scrollbar -mx-1 mb-2 flex gap-1.5 overflow-x-auto px-1" role="group" aria-label="Quick questions">
+          {QUICK_QUESTIONS.map((qq) => (
+            <button
+              key={qq}
+              type="button"
+              disabled={asking}
+              onClick={() => void ask(qq)}
+              className="shrink-0 rounded-full border border-violet/30 bg-violet/10 px-3 py-1.5 text-xs text-violet-100 transition-colors hover:border-violet/60 hover:bg-violet/20 disabled:opacity-50"
+            >
+              {qq}
+            </button>
+          ))}
+        </div>
         <label htmlFor="assistant-ask" className="sr-only">Ask TERRA·AI a question</label>
         <div className="flex items-end gap-2">
           <textarea

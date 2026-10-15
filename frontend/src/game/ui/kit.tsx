@@ -1,6 +1,6 @@
 // Small sci-fi "glass" UI kit for Explorer overlays. Evidence chips + drawer are re-used from the
 // shared components (Dashboard session) so both presentations open the same evidence records.
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { X, ExternalLink, Loader2, AlertTriangle } from "lucide-react";
 import EvidenceChipsShared from "../../components/EvidenceChips";
 import type { Evidence, StepId } from "../../types/terraform";
@@ -58,7 +58,8 @@ export function GlassPanel({
       role="dialog"
       aria-label={title}
       className={cx(
-        "pointer-events-auto absolute right-3 top-16 bottom-3 z-30 flex w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#0a1124]/88 text-ivory shadow-[0_0_40px_rgba(7,11,26,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md sm:right-4",
+        // phones: full-width bottom sheet with internal scroll; sm+: right-hand side panel
+        "pointer-events-auto absolute inset-x-0 bottom-0 z-30 flex h-[88dvh] flex-col overflow-hidden rounded-t-2xl border border-cyan-300/20 bg-[#0a1124]/95 text-ivory shadow-[0_0_40px_rgba(7,11,26,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md sm:inset-x-auto sm:bottom-3 sm:right-4 sm:top-16 sm:h-auto sm:rounded-2xl sm:bg-[#0a1124]/88",
         wide ? "sm:w-[620px]" : "sm:w-[500px]",
       )}
     >
@@ -76,11 +77,13 @@ export function GlassPanel({
             </div>
           )}
         </div>
-        <button type="button" onClick={onClose} aria-label="Close panel (Esc)" className="rounded-lg p-1.5 text-ivory/70 hover:bg-white/10 hover:text-ivory">
+        <button type="button" onClick={onClose} aria-label="Close panel (Esc)" className="grid min-h-11 min-w-11 place-items-center rounded-lg p-1.5 text-ivory/70 hover:bg-white/10 hover:text-ivory sm:min-h-0 sm:min-w-0">
           <X className="h-4 w-4" />
         </button>
       </div>
-      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-4 [scrollbar-width:thin]">{children}</div>
+      <div data-panel-scroll className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 [scrollbar-width:thin]" style={{ touchAction: "pan-y" }}>
+        {children}
+      </div>
       {footer && <div className="border-t border-white/10 px-4 py-3">{footer}</div>}
     </div>
   );
@@ -145,7 +148,7 @@ export function PrimaryButton({ children, onClick, disabled, type = "button", to
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={cx("inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-semibold transition disabled:cursor-not-allowed disabled:opacity-40", map[tone])}
+      className={cx("inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-0", map[tone])}
     >
       {children}
     </button>
@@ -158,7 +161,7 @@ export function GhostButton({ children, onClick, disabled }: { children: ReactNo
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1.5 text-[12px] font-medium text-ivory/85 hover:border-cyan-300/50 hover:text-cyan-100 disabled:opacity-40"
+      className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1.5 text-[12px] font-medium sm:min-h-0 text-ivory/85 hover:border-cyan-300/50 hover:text-cyan-100 disabled:opacity-40"
     >
       {children}
     </button>
@@ -192,3 +195,33 @@ export function ErrorNote({ message, onRetry }: { message: string; onRetry?: () 
 }
 
 export const humanize = (s: string) => s.replace(/^(res_|task_|gate_|unknown_|check_)/, "").replace(/_/g, " ");
+
+/**
+ * "Resume where you left": after a panel/tab renders, scroll to the focused task (from the quest list)
+ * or else the first element marked data-incomplete="true", and give it a brief glow.
+ */
+export function useAutoFocusItem(deps: unknown[], focusId: string | null | undefined, reduceMotion: boolean) {
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      const root = document.querySelector<HTMLElement>("[data-panel-scroll]");
+      if (!root) return;
+      const el =
+        (focusId ? root.querySelector<HTMLElement>(`[data-task-id="${CSS.escape(focusId)}"]`) : null) ??
+        root.querySelector<HTMLElement>('[data-incomplete="true"]');
+      if (!el) return;
+      el.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+      el.classList.add("ring-2", "ring-cyan-300/80", "shadow-[0_0_24px_rgba(56,225,255,0.35)]");
+      window.setTimeout(() => el.classList.remove("ring-2", "ring-cyan-300/80", "shadow-[0_0_24px_rgba(56,225,255,0.35)]"), 2400);
+    }, 180);
+    return () => window.clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+}
+
+export function ThisOneBadge() {
+  return (
+    <span className="inline-flex animate-pulse items-center rounded-md border border-cyan-300/60 bg-cyan-400/20 px-1.5 py-0.5 text-[10.5px] font-semibold text-cyan-50">
+      ← this one
+    </span>
+  );
+}

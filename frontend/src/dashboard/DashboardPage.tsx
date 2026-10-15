@@ -95,6 +95,27 @@ export default function DashboardPage() {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [safeStep]);
 
+  // Resume where you left off: after the step transition, bring the first incomplete item
+  // (undone task, unanswered check, unmet gate…) into view and pulse it briefly.
+  useEffect(() => {
+    if (safeStep === "observation_log") return;
+    let clear: ReturnType<typeof setTimeout> | undefined;
+    const t = setTimeout(() => {
+      const el = document.querySelector<HTMLElement>('#main-content [data-incomplete="true"]');
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const visible = r.top >= 80 && r.bottom <= window.innerHeight - 90;
+      if (!visible) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+      el.classList.add("resume-highlight");
+      clear = setTimeout(() => el.classList.remove("resume-highlight"), 2400);
+    }, reduce ? 150 : 650);
+    return () => {
+      clearTimeout(t);
+      if (clear) clearTimeout(clear);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [safeStep]);
+
   // Keyboard: Alt+← / Alt+→ moves between steps (ignored while typing).
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -223,7 +244,7 @@ export default function DashboardPage() {
               role="dialog"
               aria-modal="true"
               aria-label="TERRA·AI assistant"
-              className="absolute inset-x-0 bottom-0 h-[85vh] p-2 sm:inset-y-0 sm:left-auto sm:right-0 sm:h-full sm:w-[26rem]"
+              className="absolute inset-x-0 bottom-0 h-[92dvh] p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:inset-y-0 sm:left-auto sm:right-0 sm:h-full sm:w-[26rem]"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}

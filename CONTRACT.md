@@ -451,3 +451,15 @@ derived from it cite `src_team_field_notes` (verification `"team_notes_unverifie
 - `timeframe.calendar: { kb_id: string; phases: { when: string; actions: string[] }[] } | null`.
 - Crop `category` may be `"soil_builder"` → returned in `tree_options` list (long-term / non-food), never in field_crops.
 - Assistant search includes `troubleshooting` and `field_faq`.
+
+# v1.3 — Gate honesty + UX (additive)
+- **Accept risk waives only the empirical TEST, never the TASK.** A required gate is satisfied only when its task is done
+  AND (no verification OR test passed OR risk accepted). `PATCH /progress {accept_risk_gate_id}` on a gate whose task is not
+  done → 409 `{"error":{"code":"TASK_NOT_DONE","message":"Complete the task first — accepting a risk only skips the test.","retryable":false}}`.
+  If a task is later un-ticked, any accepted risk on that gate is dropped.
+- `GateItem` adds `can_accept_risk: boolean` (task_done && test not passed && not already accepted) and
+  `blocking_reason: "task_not_done" | "test_not_run" | "test_failed" | null`.
+- `planting_readiness`: `ready` = all required gates satisfied with no accepted risk; `ready_with_accepted_risk` = all satisfied,
+  ≥1 via accepted risk; else `not_ready`. Planting/care/harvest stay blocked while `not_ready`.
+- Assistant: "what next / what should I do / where do I go / what's left" questions (with plan_id or session_id) answer from the
+  plan's `next_best_action` + the labels of unsatisfied required gates (KB text) with those gates' KB ids; never refused when a plan exists.

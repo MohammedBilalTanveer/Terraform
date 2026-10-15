@@ -56,6 +56,7 @@ export default function RecommendationCard({ rec, index, className, defaultOpen 
         className,
       )}
       aria-labelledby={`rec-${rec.id}`}
+      data-incomplete={rec.task_id && !done ? "true" : undefined}
     >
       {p && <span className={cx("absolute inset-y-0 left-0 w-1 bg-gradient-to-b", p.accent)} aria-hidden />}
 

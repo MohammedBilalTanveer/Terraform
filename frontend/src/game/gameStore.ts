@@ -22,7 +22,10 @@ export type FarmView = { key: string | null; sown: boolean; careIdx: number; har
 /** Mutable per-frame player state (not reactive — read inside useFrame / rAF). */
 export const playerState = { x: SPAWN[0], z: SPAWN[1], y: 0, rot: Math.PI, speed: 0, vx: 0, vz: 0 };
 /** Mobile joystick vector (-1..1). */
-export const joystick = { x: 0, z: 0, active: false };
+export const joystick = { x: 0, z: 0, active: false, sprint: false };
+
+export type TouchMode = "auto" | "show" | "hide";
+export type Bubble = { text: string; until: number };
 
 type GameState = {
   overlay: OverlayId | null;
@@ -34,6 +37,12 @@ type GameState = {
   showHelp: boolean;
   farm: FarmView;
   interactPulse: number;
+  touchMode: TouchMode;
+  /** task the user picked in the quest list — its station panel scrolls to + highlights it */
+  focusTaskId: string | null;
+  /** last open tab per station panel */
+  lastTab: Record<string, string>;
+  bubble: Bubble | null;
 
   setOverlay: (o: OverlayId | null) => void;
   setNear: (s: StationId | null) => void;
@@ -44,6 +53,10 @@ type GameState = {
   pulseInteract: () => void;
   runAction: (a: { kind: ActionKind; label: string; station: StationId | null; fast?: boolean }, onDone?: () => void | Promise<void>) => boolean;
   updateFarm: (key: string | null, patch: Partial<Omit<FarmView, "key">>) => void;
+  setTouchMode: (m: TouchMode) => void;
+  setFocusTask: (id: string | null) => void;
+  setLastTab: (station: string, tab: string) => void;
+  say: (text: string, ms?: number) => void;
 };
 
 export const useGame = create<GameState>()(
@@ -58,6 +71,10 @@ export const useGame = create<GameState>()(
       showHelp: true,
       farm: { key: null, sown: false, careIdx: 0, harvested: false },
       interactPulse: 0,
+      touchMode: "auto",
+      focusTaskId: null,
+      lastTab: {},
+      bubble: null,
 
       setOverlay: (overlay) => set({ overlay }),
       setNear: (nearStation) => set({ nearStation }),
@@ -76,6 +93,10 @@ export const useGame = create<GameState>()(
         }, duration);
         return true;
       },
+      setTouchMode: (touchMode) => set({ touchMode }),
+      setFocusTask: (focusTaskId) => set({ focusTaskId }),
+      setLastTab: (station, tab) => set({ lastTab: { ...get().lastTab, [station]: tab } }),
+      say: (text, ms = 8000) => set({ bubble: { text, until: Date.now() + ms } }),
       updateFarm: (key, patch) => {
         const cur = get().farm;
         const base: FarmView = cur.key === key ? cur : { key, sown: false, careIdx: 0, harvested: false };
@@ -85,7 +106,7 @@ export const useGame = create<GameState>()(
     {
       name: "terraform-explorer-v1",
       storage: createJSONStorage(() => localStorage),
-      partialize: (s) => ({ zoom: s.zoom, showHelp: s.showHelp, farm: s.farm }),
+      partialize: (s) => ({ zoom: s.zoom, showHelp: s.showHelp, farm: s.farm, touchMode: s.touchMode, lastTab: s.lastTab }),
     },
   ),
 );

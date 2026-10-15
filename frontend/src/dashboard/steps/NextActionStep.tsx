@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, CircleCheck, CircleX, Compass, FlaskConical, ListChecks, Lock, LockOpen, RotateCcw, ShieldAlert, TriangleAlert, X } from "lucide-react";
-import type { GateItem } from "../../types/terraform";
+import { Check, ChevronDown, CircleCheck, CircleX, Compass, Hourglass, FlaskConical, ListChecks, Lock, LockOpen, RotateCcw, ShieldAlert, TriangleAlert, X } from "lucide-react";
+import type { GateItem, Recommendation } from "../../types/terraform";
 import { useTerraform } from "../../store/terraformStore";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import EvidenceChips from "../../components/EvidenceChips";
@@ -23,6 +23,8 @@ export default function NextActionStep() {
   if (!plan) return <NeedPlan />;
   const na = plan.workflow.next_action;
   const labels = taskLabelMap(plan);
+  const gateTasks: Record<string, Recommendation> = {};
+  for (const r of arr(na.gate_tasks)) if (r.task_id) gateTasks[r.task_id] = r;
   const r = READINESS[na.planting_readiness] ?? READINESS.not_ready;
   const Icon = r.icon;
   const gates = arr(na.readiness_gate);
@@ -76,7 +78,7 @@ export default function NextActionStep() {
         )}
         <ul className="grid gap-3">
           {gates.map((g) => (
-            <GateCard key={g.id} gate={g} labels={labels} onAcceptRisk={() => setConfirm(g)} />
+            <GateCard key={g.id} gate={g} labels={labels} gateTasks={gateTasks} onAcceptRisk={() => setConfirm(g)} />
           ))}
         </ul>
       </section>
@@ -87,7 +89,7 @@ export default function NextActionStep() {
 
       <ConfirmDialog
         open={!!confirm}
-        title="Accept this risk and continue?"
+        title="Skip this test and accept the risk?"
         confirmLabel="Accept risk"
         onCancel={() => setConfirm(null)}
         onConfirm={() => {
@@ -104,7 +106,7 @@ export default function NextActionStep() {
             )}
             <p className="flex items-start gap-2 text-amber-100">
               <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
-              This gate is not met. Accepting lets you move on, but the risk stays listed as unresolved in your summary.
+              The task is done but the test has not passed. Accepting skips the test only — the risk stays listed as unresolved in your summary.
             </p>
           </>
         )}
@@ -113,7 +115,23 @@ export default function NextActionStep() {
   );
 }
 
-function GateCard({ gate: g, labels, onAcceptRisk }: { gate: GateItem; labels: Record<string, string>; onAcceptRisk: () => void }) {
+const BLOCKING: Record<string, { label: string; tone: "stone" | "amber" | "coral" }> = {
+  task_not_done: { label: "Waiting on task", tone: "stone" },
+  test_not_run: { label: "Test not run yet", tone: "amber" },
+  test_failed: { label: "Test failed", tone: "coral" },
+};
+
+function GateCard({
+  gate: g,
+  labels,
+  gateTasks,
+  onAcceptRisk,
+}: {
+  gate: GateItem;
+  labels: Record<string, string>;
+  gateTasks: Record<string, Recommendation>;
+  onAcceptRisk: () => void;
+}) {
   const completed = useTerraform((s) => s.completedTasks);
   const gateResults = useTerraform((s) => s.gateResults ?? {});
   const toggleTask = useTerraform((s) => s.toggleTask);
@@ -127,8 +145,11 @@ function GateCard({ gate: g, labels, onAcceptRisk }: { gate: GateItem; labels: R
   // Store holds the user's latest choice (optimistic); the API's test_result is the fallback.
   const result = gateResults[g.id] ?? g.test_result ?? null;
   const met = g.satisfied;
-  const risk = !met && g.accepted_risk;
+  const risk = g.accepted_risk;
   const failed = result === "fail";
+  // v1.3: accepting a risk only waives the TEST, and only once the task is done.
+  const canAccept = typeof g.can_accept_risk === "boolean" ? g.can_accept_risk : taskDone && !!v && result !== "pass" && !risk;
+  const blocking = g.blocking_reason ? BLOCKING[g.blocking_reason] : null;
 
   const run = async (key: string, fn: () => Promise<void>) => {
     setPending(key);
@@ -138,6 +159,7 @@ function GateCard({ gate: g, labels, onAcceptRisk }: { gate: GateItem; labels: R
 
   return (
     <li
+      data-incomplete={!met && !risk ? "true" : undefined}
       className={cx(
         "glass rounded-2xl p-4 sm:p-5",
         met && "!border-sprout/30",
@@ -155,12 +177,13 @@ function GateCard({ gate: g, labels, onAcceptRisk }: { gate: GateItem; labels: R
         >
           {met ? <Check className="h-5 w-5" aria-hidden /> : risk ? <ShieldAlert className="h-5 w-5" aria-hidden /> : failed ? <X className="h-5 w-5" aria-hidden /> : <Lock className="h-4 w-4" aria-hidden />}
         </span>
-        <div className="min-w-0 flex-1">
+        <div className="min-w-[min(100%,15rem)] flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-heading font-semibold text-ivory">{g.label}</span>
             <Badge tone={g.required ? "coral" : "stone"}>{g.required ? "Required" : "Recommended"}</Badge>
             {met && <Badge tone="sprout">Satisfied</Badge>}
-            {risk && <Badge tone="amber">Risk accepted</Badge>}
+            {risk && <Badge tone="amber">Risk accepted · test skipped</Badge>}
+            {!met && blocking && <Badge tone={blocking.tone}>{blocking.label}</Badge>}
           </div>
           {g.detail && <p className="mt-1 text-sm leading-relaxed text-ivory/75">{g.detail}</p>}
 
@@ -182,29 +205,20 @@ function GateCard({ gate: g, labels, onAcceptRisk }: { gate: GateItem; labels: R
           {tasks.length > 0 && (
             <div className="mt-3">
               <div className="mb-1.5 text-xs text-mist">{tasks.length > 1 ? "Complete any one of:" : "Complete:"}</div>
-              <div className="flex flex-wrap gap-2">
-                {tasks.map((t) => {
-                  const done = completed.includes(t);
-                  return (
-                    <button
-                      key={t}
-                      type="button"
-                      onClick={() => void run(t, () => toggleTask(t))}
-                      disabled={!!pending || loading === "plan"}
-                      aria-pressed={done}
-                      className={cx(
-                        "flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm transition-colors disabled:opacity-50",
-                        done ? "border-sprout/50 bg-sprout/15 text-emerald-100" : "border-white/12 bg-white/[0.03] text-ivory hover:border-cyan/40",
-                      )}
-                    >
-                      <span className={cx("grid h-4 w-4 place-items-center rounded border", done ? "border-sprout bg-sprout text-midnight" : "border-white/30")}>
-                        {done && <Check className="h-3 w-3" strokeWidth={3} aria-hidden />}
-                      </span>
-                      {labels[t] ?? humanize(t)}
-                    </button>
-                  );
-                })}
-              </div>
+              <ul className="grid gap-2">
+                {tasks.map((t) => (
+                  <TaskRow
+                    key={t}
+                    taskId={t}
+                    label={labels[t] ?? gateTasks[t]?.task_label ?? humanize(t)}
+                    rec={gateTasks[t]}
+                    done={completed.includes(t)}
+                    disabled={!!pending || loading === "plan"}
+                    busy={pending === t}
+                    onToggle={() => void run(t, () => toggleTask(t))}
+                  />
+                ))}
+              </ul>
             </div>
           )}
 
@@ -278,12 +292,82 @@ function GateCard({ gate: g, labels, onAcceptRisk }: { gate: GateItem; labels: R
 
           <EvidenceChips evidence={g.evidence} compact className="mt-3" />
         </div>
-        {!met && !risk && (
-          <button type="button" className="btn-ghost !py-1.5 text-sm text-amber-100" onClick={onAcceptRisk}>
+        {!met && !risk && canAccept && (
+          <button type="button" className="btn-ghost !py-1.5 text-sm text-amber-100" onClick={onAcceptRisk} title="Skips the test only — the task stays required">
             <LockOpen className="h-4 w-4" aria-hidden /> Accept risk
           </button>
         )}
+        {!met && !risk && !canAccept && !taskDone && (
+          <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/12 bg-white/[0.03] px-2.5 py-1.5 text-xs text-mist" title="Accepting a risk only skips the test">
+            <Hourglass className="h-3.5 w-3.5" aria-hidden /> Complete the task first
+          </span>
+        )}
       </div>
+    </li>
+  );
+}
+
+function TaskRow({
+  taskId,
+  label,
+  rec,
+  done,
+  disabled,
+  busy,
+  onToggle,
+}: {
+  taskId: string;
+  label: string;
+  rec?: Recommendation;
+  done: boolean;
+  disabled: boolean;
+  busy: boolean;
+  onToggle: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const hasHow = !!rec && (arr(rec.actions).length > 0 || !!rec.explanation);
+  return (
+    <li className={cx("rounded-xl border", done ? "border-sprout/40 bg-sprout/[0.06]" : "border-white/12 bg-white/[0.03]")} data-incomplete={!done ? "true" : undefined}>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={onToggle}
+          disabled={disabled}
+          aria-pressed={done}
+          aria-label={`${done ? "Mark not done" : "Mark done"}: ${label}`}
+          className="flex min-h-11 flex-1 items-center gap-2.5 px-3 py-2 text-left text-sm disabled:opacity-50"
+        >
+          <span className={cx("grid h-5 w-5 shrink-0 place-items-center rounded-md border", done ? "border-sprout bg-sprout text-midnight" : "border-white/30")}>
+            {busy ? <Spinner /> : done && <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden />}
+          </span>
+          <span className={cx("font-heading font-semibold", done ? "text-emerald-100" : "text-ivory")}>{label}</span>
+        </button>
+        {hasHow && (
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-controls={`task-how-${taskId}`}
+            className="mr-1 flex min-h-11 items-center gap-1 px-2 text-xs text-mist hover:text-ivory"
+          >
+            How <ChevronDown className={cx("h-3.5 w-3.5 transition-transform", open && "rotate-180")} aria-hidden />
+          </button>
+        )}
+      </div>
+      {open && rec && (
+        <div id={`task-how-${taskId}`} className="border-t border-white/8 px-3 pb-3 pt-2">
+          {rec.explanation && <p className="text-sm leading-relaxed text-ivory/80">{rec.explanation}</p>}
+          {arr(rec.actions).length > 0 && <BulletList items={rec.actions} ordered className="mt-2" />}
+          {arr(rec.everyday_amounts).length > 0 && (
+            <ul className="mt-2 flex flex-wrap gap-1.5">
+              {rec.everyday_amounts.map((a, i) => (
+                <li key={i} className="rounded-lg border border-cyan/15 bg-cyan/[0.05] px-2 py-1 text-xs text-ivory/90">{a}</li>
+              ))}
+            </ul>
+          )}
+          <EvidenceChips evidence={rec.evidence} compact className="mt-2" />
+        </div>
+      )}
     </li>
   );
 }

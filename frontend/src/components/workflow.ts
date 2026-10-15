@@ -72,6 +72,8 @@ export function planTaskRecs(plan: PlanResponse | null): Recommendation[] {
     ...(pm?.methods ?? []),
     ...(pm?.sowing ?? []),
     ...(pm?.water_capture ?? []),
+    ...(pm?.irrigation ?? []),
+    ...(plan.workflow.next_action?.gate_tasks ?? []),
   ];
   const seen = new Set<string>();
   return all.filter((r) => r.task_id && !seen.has(r.task_id) && seen.add(r.task_id));

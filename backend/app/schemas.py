@@ -470,6 +470,8 @@ class GateItem(_Model):
     verification: Optional[GateVerification] = None
     test_result: Optional[GateTestResult] = None
     task_done: bool = False
+    can_accept_risk: bool = False
+    blocking_reason: Optional[Literal["task_not_done", "test_not_run", "test_failed"]] = None
 
 
 class Adaptation(_Model):
@@ -500,6 +502,7 @@ class NextActionStep(StepMeta):
     blocked_until: List[str]
     planting_readiness: PlantingReadiness
     next_best_action: str
+    gate_tasks: List[Recommendation] = Field(default_factory=list)
 
 
 class CropSuggestionsStep(StepMeta):

@@ -14,7 +14,8 @@ export type Section =
   | "sowing"
   | "water_capture"
   | "dry_spell"
-  | "regeneration";
+  | "regeneration"
+  | "gate";
 
 export type TaskGroup = "terraces" | "compost" | "water" | "plot" | "harvest" | "other";
 
@@ -36,6 +37,7 @@ export const SECTION_LABEL: Record<Section, string> = {
   water_capture: "Water capture",
   dry_spell: "Dry-spell plan",
   regeneration: "After harvest",
+  gate: "Readiness gate",
 };
 
 export const GROUP_STATION: Record<TaskGroup, StationId> = {
@@ -87,6 +89,7 @@ const STEP_OF: Record<Section, StepId> = {
   water_capture: "planting_method",
   dry_spell: "ongoing_care",
   regeneration: "harvest",
+  gate: "next_action",
 };
 
 export function collectPlanItems(plan: PlanResponse | null): PlanItem[] {
@@ -102,6 +105,8 @@ export function collectPlanItems(plan: PlanResponse | null): PlanItem[] {
     ["water_capture", w.planting_method?.water_capture],
     ["dry_spell", w.ongoing_care?.dry_spell_plan],
     ["regeneration", w.harvest?.regeneration],
+    // v1.3: a completable task for every applicable gate (deduped by task_id against the sections above)
+    ["gate", w.next_action?.gate_tasks],
   ];
   const seen = new Set<string>();
   const out: PlanItem[] = [];

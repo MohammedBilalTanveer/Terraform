@@ -10,7 +10,7 @@ from ..deps import require_kb, require_scenario, settings_of, store_of
 from ..errors import AppError
 from ..schemas import ObservationInput, PlanRequest, PlanResponse, ProgressRequest, ProgressResponse
 from ..services import llm_rewriter
-from ..services.planner import build_plan
+from ..services.planner import build_plan, gate_task_done
 from ..services.tagging import derive_tags
 from .observations import prepare_observation
 from .sessions import get_or_create, now_iso, save
@@ -104,6 +104,10 @@ def update_progress(plan_id: str, body: ProgressRequest, request: Request):
             raise AppError(404, "TASK_NOT_FOUND", f"Task '{body.task_id}' is not defined in the knowledge base.")
         if body.completed is False:
             completed = [t for t in completed if t != body.task_id]
+            # un-ticking a gate's last done task drops any accepted risk on that gate
+            for g in scenario.get("readiness_gate") or []:
+                if isinstance(g, dict) and g.get("id") in accepted and not gate_task_done(g, completed):
+                    accepted = [a for a in accepted if a != g.get("id")]
         elif body.task_id not in completed:
             completed.append(body.task_id)
     gate_ids = {g.get("id") for g in scenario.get("readiness_gate") or [] if isinstance(g, dict)}
@@ -118,6 +122,10 @@ def update_progress(plan_id: str, body: ProgressRequest, request: Request):
     if body.accept_risk_gate_id:
         if body.accept_risk_gate_id not in gate_ids:
             raise AppError(404, "GATE_NOT_FOUND", f"Readiness item '{body.accept_risk_gate_id}' does not exist.")
+        gate = next(g for g in scenario.get("readiness_gate") or []
+                    if isinstance(g, dict) and g.get("id") == body.accept_risk_gate_id)
+        if not gate_task_done(gate, completed):
+            raise AppError(409, "TASK_NOT_DONE", "Complete the task first — accepting a risk only skips the test.")
         if body.accept_risk_gate_id not in accepted:
             accepted.append(body.accept_risk_gate_id)
     if "selected_crop_id" in body.model_fields_set:

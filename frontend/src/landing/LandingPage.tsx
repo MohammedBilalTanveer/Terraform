@@ -73,7 +73,7 @@ export default function LandingPage() {
   const fade = (d = 0) => ({ initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0 }, transition: { delay: reduceMotion ? 0 : d, duration: reduceMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] as const } });
 
   return (
-    <div className={cx("relative isolate min-h-screen overflow-x-hidden", reduceMotion && "reduce-motion")}>
+    <div className={cx("tap-scope relative isolate min-h-screen overflow-x-hidden", reduceMotion && "reduce-motion")}>
       <Background intensity="hero" />
 
       <header className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-5 lg:px-8">

@@ -222,7 +222,12 @@ function CheckCardView({ card }: { card: CheckCard }) {
   );
 
   return (
-    <article id={`check-${card.id}`} className="glass scroll-mt-28 rounded-2xl p-5" aria-labelledby={`chk-${card.id}`}>
+    <article
+      id={`check-${card.id}`}
+      className="glass scroll-mt-28 rounded-2xl p-5"
+      aria-labelledby={`chk-${card.id}`}
+      data-incomplete={!selected && !isUnable ? "true" : undefined}
+    >
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-cyan/20 to-violet/20 text-cyan-100">

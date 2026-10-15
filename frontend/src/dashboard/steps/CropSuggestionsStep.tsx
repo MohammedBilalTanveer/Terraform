@@ -171,7 +171,11 @@ function CropCardView({ crop, comparing, onCompare, compareFull, nonFood = false
   };
 
   return (
-    <article className={cx("glass relative overflow-hidden rounded-2xl p-5", selected && "!border-cyan/50 shadow-[0_0_40px_-18px_rgba(56,225,255,0.7)]")} aria-labelledby={`crop-${crop.crop_id}`}>
+    <article
+      className={cx("glass relative overflow-hidden rounded-2xl p-5", selected && "!border-cyan/50 shadow-[0_0_40px_-18px_rgba(56,225,255,0.7)]")}
+      aria-labelledby={`crop-${crop.crop_id}`}
+      data-incomplete={!selectedCropId && !nonFood && crop.rank === 1 ? "true" : undefined}
+    >
       {selected && <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-cyan via-violet to-transparent" aria-hidden />}
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
@@ -313,13 +317,13 @@ function CompareModal({ open, crops, onClose }: { open: boolean; crops: CropCard
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[85] grid place-items-center p-3" onKeyDown={(e) => e.key === "Escape" && onClose()}>
+        <div className="fixed inset-0 z-[85] grid place-items-center sm:p-3" onKeyDown={(e) => e.key === "Escape" && onClose()}>
           <motion.div className="absolute inset-0 bg-black/60 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} aria-hidden />
           <motion.div
             role="dialog"
             aria-modal="true"
             aria-labelledby="compare-title"
-            className="glass-strong relative max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-2xl"
+            className="glass-strong relative h-full w-full max-w-5xl overflow-hidden sm:h-auto sm:max-h-[88vh] sm:rounded-2xl"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 16 }}
@@ -332,7 +336,7 @@ function CompareModal({ open, crops, onClose }: { open: boolean; crops: CropCard
                 <X className="h-4 w-4" aria-hidden />
               </button>
             </header>
-            <div className="scroll-thin max-h-[calc(88vh-4rem)] overflow-auto p-4">
+            <div className="scroll-thin h-[calc(100%-4.5rem)] overflow-auto p-4 sm:h-auto sm:max-h-[calc(88vh-4rem)]">
               <table className="w-full min-w-[640px] border-separate border-spacing-0 text-sm">
                 <thead>
                   <tr>

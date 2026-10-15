@@ -342,10 +342,16 @@ def test_progress_gate_flow(client, kb):
 def test_progress_accept_risk_and_select_crop(client, kb):
     p = plan(client, {"description": STANDARD})
     pid = p["plan_id"]
-    for g in [g for g in p["workflow"]["next_action"]["readiness_gate"] if g["required"]]:
-        r = client.patch(f"/api/plans/{pid}/progress", json={"accept_risk_gate_id": g["id"]})
+    required = [g for g in p["workflow"]["next_action"]["readiness_gate"] if g["required"]]
+    for g in required:
+        task = next(t for t in g["satisfied_by_tasks"] if t in kb.task_ids)
+        r = client.patch(f"/api/plans/{pid}/progress", json={"task_id": task})
         assert r.status_code == 200
-    assert r.json()["planting_readiness"] == "ready_with_accepted_risk"
+        if g["verification"]:  # skip the test as an accepted risk (allowed only after the task)
+            r = client.patch(f"/api/plans/{pid}/progress", json={"accept_risk_gate_id": g["id"]})
+            assert r.status_code == 200
+    expected = "ready_with_accepted_risk" if any(g["verification"] for g in required) else "ready"
+    assert r.json()["planting_readiness"] == expected
     crop = p["workflow"]["crop_suggestions"]["field_crops"][-1]["crop_id"]
     r = client.patch(f"/api/plans/{pid}/progress", json={"selected_crop_id": crop})
     assert r.status_code == 200 and r.json()["steps_status"]["crop_suggestions"] == "complete"

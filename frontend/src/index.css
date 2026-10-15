@@ -161,3 +161,17 @@ body { margin: 0; background: var(--color-midnight); color: var(--color-ivory); 
 .reduce-motion *, .reduce-motion *::before, .reduce-motion *::after { animation: none !important; }
 
 ::selection { background: rgba(139, 92, 246, 0.45); color: #fff; }
+
+/* v1.3 — "resume where you left off" pulse on the first incomplete item */
+@keyframes resume-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(56, 225, 255, 0.0); }
+  20% { box-shadow: 0 0 0 3px rgba(56, 225, 255, 0.75), 0 0 40px -6px rgba(56, 225, 255, 0.6); }
+  100% { box-shadow: 0 0 0 0 rgba(56, 225, 255, 0.0); }
+}
+.resume-highlight { animation: resume-pulse 2.2s ease-out 1; border-color: rgba(56, 225, 255, 0.55) !important; }
+
+/* v1.3 — comfortable touch targets on touch screens */
+@media (pointer: coarse) {
+  .tap-scope :is(button, summary, [role="button"], input[type="checkbox"], input[type="radio"], select) { min-height: 44px; }
+  .tap-scope button { min-width: 44px; }
+}
