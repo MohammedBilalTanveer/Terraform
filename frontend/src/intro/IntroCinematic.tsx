@@ -58,9 +58,9 @@ function usePrefersReducedMotion() {
 }
 
 function BlackCard({ reduceMotion }: { reduceMotion: boolean }) {
-  const { shown } = useTypewriter("You lost. The wager was your world.", 70, reduceMotion);
+  const { shown, finish } = useTypewriter("You lost. The wager was your world.", 70, reduceMotion, { skipOnKey: true });
   return (
-    <div className="absolute inset-0 z-30 grid place-items-center overflow-y-auto bg-black px-5 text-center">
+    <div onClick={finish} className="absolute inset-0 z-30 grid place-items-center overflow-y-auto bg-black px-5 text-center">
       <p className="max-w-[34rem] break-words font-display leading-snug tracking-[0.06em] text-ivory sm:tracking-[0.12em]" style={{ fontSize: "clamp(1.15rem, 5.2vw, 2rem)" }}>
         {shown}
       </p>
@@ -69,8 +69,8 @@ function BlackCard({ reduceMotion }: { reduceMotion: boolean }) {
 }
 
 function BootHud({ kb }: { kb: string }) {
-  const a = useTypewriter("TERRAFORM // SYSTEM AWAKENING…", 45, false);
-  const b = useTypewriter(a.done ? `knowledge base link: ${kb}` : "", 35, false);
+  const a = useTypewriter("TERRAFORM // SYSTEM AWAKENING…", 45, false, { skipOnKey: true });
+  const b = useTypewriter(a.done ? `knowledge base link: ${kb}` : "", 35, false, { skipOnKey: true });
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="tf-boot pointer-events-none absolute z-20 font-display">
       <div className="tracking-[0.16em] text-cyan-200 drop-shadow-[0_0_10px_rgba(56,225,255,0.6)] sm:tracking-[0.28em]" style={{ fontSize: "clamp(12px, 3.4vw, 16px)" }}>{a.shown}</div>

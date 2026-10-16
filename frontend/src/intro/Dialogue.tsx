@@ -1,5 +1,5 @@
 // Sleek sci-fi typewriter dialogue box with optional choices. Click / Space / Enter advances.
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { isTypingTarget } from "../game/input";
 
@@ -13,23 +13,47 @@ const SPEAKER: Record<Speaker, { name: string; color: string; ring: string }> = 
   system: { name: "SYSTEM", color: "text-emerald-300", ring: "border-emerald-300/40" },
 };
 
-export function useTypewriter(text: string, speed: number, instant: boolean) {
+export function useTypewriter(text: string, speed: number, instant: boolean, opts?: { skipOnKey?: boolean }) {
   const [n, setN] = useState(instant ? text.length : 0);
+  const timer = useRef<number | null>(null);
+  const stop = () => {
+    if (timer.current !== null) {
+      window.clearInterval(timer.current);
+      timer.current = null;
+    }
+  };
   useEffect(() => {
+    stop();
     if (instant) {
       setN(text.length);
       return;
     }
     setN(0);
     let i = 0;
-    const t = window.setInterval(() => {
+    timer.current = window.setInterval(() => {
       i += 1;
       setN(i);
-      if (i >= text.length) window.clearInterval(t);
+      if (i >= text.length) stop();
     }, speed);
-    return () => window.clearInterval(t);
+    return stop;
   }, [text, speed, instant]);
-  return { shown: text.slice(0, n), done: n >= text.length, finish: () => setN(text.length) };
+  // finishing must also stop the typing timer — otherwise its next tick would overwrite the full sentence
+  const finish = useCallback(() => {
+    stop();
+    setN(text.length);
+  }, [text]);
+  const done = n >= text.length;
+  // optional: Enter / Space completes the sentence (for lines that are not inside a DialogueBox)
+  useEffect(() => {
+    if (!opts?.skipOnKey || done) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.repeat || isTypingTarget(e.target)) return;
+      if (e.key === "Enter" || e.code === "Space") finish();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [opts?.skipOnKey, done, finish]);
+  return { shown: text.slice(0, n), done, finish };
 }
 
 export type Choice = { label: string; value: string };
@@ -68,6 +92,7 @@ export default function DialogueBox({
       if (isTypingTarget(e.target)) return;
       if (e.code === "Space" || e.key === "Enter") {
         e.preventDefault();
+        if (e.repeat) return; // holding the key must not also skip to the next line
         if (!done) finish();
         else if (!choices?.length) nextRef.current?.();
       }

@@ -1,4 +1,4 @@
-// On-screen touch controls: drag joystick (bottom-left), "E" interact + hold-to-sprint (bottom-right).
+// On-screen touch controls: drag joystick (bottom-left); bottom-right stack: SPRINT toggle above the "E" interact button.
 // Multi-touch safe: the joystick tracks only the pointer that started on it; buttons track their own pointers.
 import { useEffect, useRef, useState, type PointerEvent as RPointerEvent } from "react";
 import { Zap } from "lucide-react";
@@ -37,8 +37,8 @@ export default function TouchControls() {
   const near = useGame((s) => s.nearStation);
   const knob = useRef<HTMLDivElement>(null);
   const stickId = useRef<number | null>(null);
-  const sprintId = useRef<number | null>(null);
-  const [sprinting, setSprinting] = useState(false);
+  // Sprint is a toggle: tap to turn it on (coloured), tap again to turn it off (transparent). It stays on while walking.
+  const [sprinting, setSprinting] = useState(joystick.sprint);
 
   const reset = () => {
     stickId.current = null;
@@ -47,17 +47,9 @@ export default function TouchControls() {
     joystick.active = false;
     if (knob.current) knob.current.style.transform = "translate(0px, 0px)";
   };
-  const stopSprint = () => {
-    sprintId.current = null;
-    joystick.sprint = false;
-    setSprinting(false);
-  };
-  // release everything when hidden / a panel opens / unmount
+  // release the stick when hidden / a panel opens (the sprint preference is kept)
   useEffect(() => {
-    if (!visible || overlay) {
-      reset();
-      stopSprint();
-    }
+    if (!visible || overlay) reset();
   }, [visible, overlay]);
   useEffect(
     () => () => {
@@ -110,25 +102,21 @@ export default function TouchControls() {
         <div className="pointer-events-none absolute inset-6 rounded-full border border-white/10" />
         <div ref={knob} className="pointer-events-none h-[40%] w-[40%] rounded-full border border-cyan-200/70 bg-cyan-400/30 shadow-[0_0_18px_rgba(56,225,255,0.35)]" />
       </div>
-      <div className="tf-acts pointer-events-none absolute z-20 flex items-end gap-3" style={{ touchAction: "none" }}>
+      <div className="tf-acts pointer-events-none absolute z-20 flex flex-col items-end gap-3" style={{ touchAction: "none" }}>
         <button
           type="button"
-          className={`tf-act-sprint tf-keep pointer-events-auto grid select-none place-items-center rounded-full border font-display text-[10px] tracking-[0.1em] ${
-            sprinting ? "border-amber-200 bg-amber-300/40 text-amber-50" : "border-white/25 bg-[#070b1a]/45 text-ivory/85"
+          className={`tf-act-sprint tf-keep pointer-events-auto inline-flex select-none items-center justify-center gap-1.5 rounded-full border font-display text-[11px] tracking-[0.12em] transition-colors ${
+            sprinting
+              ? "border-amber-200 bg-amber-300/45 text-amber-50 shadow-[0_0_20px_rgba(246,193,119,0.5)]"
+              : "border-white/30 bg-transparent text-ivory/75"
           }`}
-          style={{ touchAction: "none" }}
-          onPointerDown={(e) => {
-            e.preventDefault();
-            sprintId.current = e.pointerId;
-            e.currentTarget.setPointerCapture(e.pointerId);
-            joystick.sprint = true;
-            setSprinting(true);
+          style={{ touchAction: "manipulation" }}
+          onClick={() => {
+            joystick.sprint = !joystick.sprint;
+            setSprinting(joystick.sprint);
           }}
-          onPointerUp={(e) => e.pointerId === sprintId.current && stopSprint()}
-          onPointerCancel={(e) => e.pointerId === sprintId.current && stopSprint()}
-          onLostPointerCapture={(e) => e.pointerId === sprintId.current && stopSprint()}
           onContextMenu={(e) => e.preventDefault()}
-          aria-label="Sprint (hold)"
+          aria-label={sprinting ? "Sprint on — tap to turn off" : "Sprint off — tap to turn on"}
           aria-pressed={sprinting}
         >
           <Zap className="h-4 w-4" />
