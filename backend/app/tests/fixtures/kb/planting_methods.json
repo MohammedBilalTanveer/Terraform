@@ -187,7 +187,8 @@
    "when_to_sow": "Fixture: after a soaking rain.",
    "task": {
     "task_id": "task_sow_seeds",
-    "label": "Sow seeds"
+    "label": "Sow seeds",
+    "phase": "plant"
    }
   },
   {
@@ -225,7 +226,8 @@
    "when_to_sow": "Fixture: after a soaking rain.",
    "task": {
     "task_id": "task_mulch_after_sowing",
-    "label": "Mulch"
+    "label": "Mulch",
+    "phase": "plant"
    }
   },
   {
@@ -334,6 +336,84 @@
    ],
    "when_to_sow": "Fixture: after a soaking rain.",
    "task": null
+  },
+  {
+   "id": "plant_confirm_reliable_rains",
+   "topic": "planting_method",
+   "title": "Confirm the first reliable rains",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture method: Confirm the first reliable rains.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Direct sowing."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "sowing",
+   "steps": [
+    "Fixture step 1 of Direct sowing.",
+    "Fixture step 2 of Direct sowing."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": {
+    "task_id": "task_confirm_reliable_rains",
+    "label": "Confirm the first reliable rains",
+    "phase": "readiness"
+   }
+  },
+  {
+   "id": "plant_tree_seedling_pits",
+   "topic": "planting_method",
+   "title": "Tree seedling pits",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture method: Tree seedling pits.",
+   "instructions": [],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Direct sowing."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "method_type": "planting_pit",
+   "steps": [
+    "Fixture step 1 of Direct sowing.",
+    "Fixture step 2 of Direct sowing."
+   ],
+   "when_to_sow": "Fixture: after a soaking rain.",
+   "task": {
+    "task_id": "task_plant_tree_seedlings",
+    "label": "Plant tree seedlings",
+    "phase": "plant"
+   }
   }
  ]
 }

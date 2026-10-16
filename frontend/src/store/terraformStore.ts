@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { api, ApiError, SCENARIO_ID } from "../api/terraformApi";
+import { harvestRequirements, taskLockFor } from "./workflowRules";
 import type {
   AnalysisResponse,
   AppMode,
@@ -55,6 +56,8 @@ export type TerraformState = {
   // UI
   evidenceKbId: string | null;
   toasts: Toast[];
+  /** consecutive failed health checks since the last success (drives the "waking up the server" banner) */
+  healthAttempts: number;
 
   // actions
   setMode: (mode: AppMode) => void;
@@ -93,30 +96,88 @@ const errMsg = (e: unknown) => (e instanceof ApiError ? e.message : (e as Error)
 export const useTerraform = create<TerraformState>()(
   persist(
     (set, get) => {
+      // ───────── self-healing (the free hosting tier wipes the backend's session/plan store on sleep) ─────────
+      const isNotFound = (e: unknown) => e instanceof ApiError && (e.status === 404 || /NOT_FOUND/i.test(e.code));
+
+      /** Rebuild the server-side session + plan from what the browser still holds. Silent: no loading/error state. */
+      let restoring: Promise<void> | null = null;
+      const restoreServerState = (): Promise<void> => {
+        if (restoring) return restoring;
+        restoring = (async () => {
+          const sessionId = await get().ensureSession(); // keeps the id if the server still knows it, else makes a new one
+          if (!sessionId) throw new ApiError("Cannot reach the TERRAFORM backend to restore your progress.", "NETWORK", true);
+          const s = get();
+          if (s.plan && s.observation) {
+            const plan = await api.generatePlan({
+              observation: { ...s.observation, user_confirmed_checks: s.checkOutcomes },
+              session_id: sessionId,
+              selected_crop_id: s.selectedCropId,
+              completed_tasks: s.completedTasks,
+              accepted_risks: s.acceptedRisks,
+              gate_results: s.gateResults,
+            });
+            set({ plan, completedTasks: plan.completed_tasks ?? get().completedTasks });
+          }
+        })().finally(() => {
+          restoring = null;
+        });
+        return restoring;
+      };
+
+      let lastRestoreToast = 0;
+      /** Run `op`; on a 404 restore the server state and retry ONCE. `op` must read fresh ids via get(). */
+      async function healAndRetry<T>(op: () => Promise<T>, opts: { toastOnFail?: boolean } = {}): Promise<T> {
+        try {
+          return await op();
+        } catch (e) {
+          if (!isNotFound(e)) throw e;
+          try {
+            await restoreServerState();
+          } catch (re) {
+            if (opts.toastOnFail) get().toast("error", errMsg(re));
+            throw re;
+          }
+          const result = await op(); // single retry — a second 404 propagates to the caller
+          if (Date.now() - lastRestoreToast > 10000) {
+            lastRestoreToast = Date.now();
+            get().toast("info", "The server restarted — your progress was restored.");
+          }
+          return result;
+        }
+      }
+
       const syncSession = async () => {
-        const s = get();
-        if (!s.sessionId) {
+        if (!get().sessionId) {
           set({ saveStatus: "unsaved" });
           return;
         }
         set({ saveStatus: "saving" });
         try {
-          await api.updateSession(s.sessionId, {
-            observation: s.observation,
-            plan_id: s.plan?.plan_id ?? null,
-            selected_crop_id: s.selectedCropId,
-            completed_tasks: s.completedTasks,
-            accepted_risks: s.acceptedRisks,
-            check_outcomes: s.checkOutcomes,
-            journal: s.journal,
-            current_step: s.currentStep,
-            gate_results: s.gateResults,
-          });
+          await healAndRetry(
+            () => {
+              const s = get();
+              return api.updateSession(s.sessionId ?? "", {
+                observation: s.observation,
+                plan_id: s.plan?.plan_id ?? null,
+                selected_crop_id: s.selectedCropId,
+                completed_tasks: s.completedTasks,
+                accepted_risks: s.acceptedRisks,
+                check_outcomes: s.checkOutcomes,
+                journal: s.journal,
+                current_step: s.currentStep,
+                gate_results: s.gateResults,
+              });
+            },
+            { toastOnFail: true },
+          );
           set({ saveStatus: "saved" });
         } catch {
           set({ saveStatus: "offline" });
         }
       };
+
+      // ───────── cold-start friendly health checks (Render free tier needs 30–60 s to wake) ─────────
+      let healthTimer: ReturnType<typeof setTimeout> | null = null;
 
       return {
         mode: "landing",
@@ -146,6 +207,7 @@ export const useTerraform = create<TerraformState>()(
         error: null,
         evidenceKbId: null,
         toasts: [],
+        healthAttempts: 0,
 
         setMode: (mode) => set({ mode }),
         setCurrentStep: (currentStep) => {
@@ -158,9 +220,20 @@ export const useTerraform = create<TerraformState>()(
         checkHealth: async () => {
           try {
             const health = await api.health();
-            set({ health, backendOnline: true });
+            if (healthTimer) {
+              clearTimeout(healthTimer);
+              healthTimer = null;
+            }
+            set({ health, backendOnline: true, healthAttempts: 0 });
           } catch {
-            set({ backendOnline: false });
+            set({ backendOnline: false, healthAttempts: get().healthAttempts + 1 });
+            // Not reachable (yet): keep trying every 5 s until it answers — a sleeping server is not an error.
+            if (!healthTimer) {
+              healthTimer = setTimeout(() => {
+                healthTimer = null;
+                void get().checkHealth();
+              }, 5000);
+            }
           }
         },
 
@@ -195,8 +268,15 @@ export const useTerraform = create<TerraformState>()(
           try {
             const sessionId = await get().ensureSession();
             const withChecks: ObservationInput = { ...observation, user_confirmed_checks: get().checkOutcomes };
-            const analysis = await api.analyze(withChecks, sessionId);
-            set({ analysis, sessionId: analysis.session_id ?? sessionId, loading: null });
+            let analysis;
+            try {
+              analysis = await api.analyze(withChecks, sessionId);
+            } catch (e) {
+              if (!isNotFound(e)) throw e;
+              set({ sessionId: null });
+              analysis = await api.analyze(withChecks, await get().ensureSession());
+            }
+            set({ analysis, sessionId: analysis.session_id ?? get().sessionId, loading: null });
             void syncSession();
             return analysis;
           } catch (e) {
@@ -210,15 +290,23 @@ export const useTerraform = create<TerraformState>()(
           if (!observation) return null;
           set({ loading: "plan", error: null });
           try {
-            const sessionId = await get().ensureSession();
-            const plan = await api.generatePlan({
-              observation: { ...observation, user_confirmed_checks: get().checkOutcomes },
-              session_id: sessionId,
-              selected_crop_id: get().selectedCropId,
-              completed_tasks: get().completedTasks,
-              accepted_risks: get().acceptedRisks,
-              gate_results: get().gateResults,
-            });
+            const build = (sid: string | null) =>
+              api.generatePlan({
+                observation: { ...observation, user_confirmed_checks: get().checkOutcomes },
+                session_id: sid,
+                selected_crop_id: get().selectedCropId,
+                completed_tasks: get().completedTasks,
+                accepted_risks: get().acceptedRisks,
+                gate_results: get().gateResults,
+              });
+            let plan;
+            try {
+              plan = await build(await get().ensureSession());
+            } catch (e) {
+              if (!isNotFound(e)) throw e;
+              set({ sessionId: null });
+              plan = await build(await get().ensureSession());
+            }
             set({ plan, loading: null, completedTasks: plan.completed_tasks ?? get().completedTasks });
             void syncSession();
             return plan;
@@ -253,35 +341,48 @@ export const useTerraform = create<TerraformState>()(
         },
 
         toggleTask: async (taskId) => {
-          const done = get().completedTasks.includes(taskId);
-          const completedTasks = done
-            ? get().completedTasks.filter((t) => t !== taskId)
-            : [...get().completedTasks, taskId];
-          set({ completedTasks });
-          const plan = get().plan;
-          if (plan) {
+          const prevTasks = get().completedTasks;
+          const done = prevTasks.includes(taskId);
+          if (!done) {
+            // v1.4: plant-phase tasks stay locked until a crop is chosen and the readiness gate has passed.
+            const lock = taskLockFor(taskId, get().plan, get().selectedCropId);
+            if (lock.locked) {
+              get().toast("info", lock.message ?? "This task is locked.");
+              return;
+            }
+          }
+          set({ completedTasks: done ? prevTasks.filter((t) => t !== taskId) : [...prevTasks, taskId] });
+          const planId = get().plan?.plan_id;
+          if (planId) {
             try {
-              const res = await api.updateProgress(plan.plan_id, { task_id: taskId, completed: !done });
+              const res = await healAndRetry(() => api.updateProgress(get().plan?.plan_id ?? planId, { task_id: taskId, completed: !done }));
+              const cur = get().plan;
               set({
                 completedTasks: res.completed_tasks,
                 acceptedRisks: res.accepted_risks,
                 ...(res.gate_results ? { gateResults: res.gate_results } : {}),
-                plan: {
-                  ...plan,
-                  completed_tasks: res.completed_tasks,
-                  steps_status: res.steps_status,
-                  workflow: {
-                    ...plan.workflow,
-                    next_action: {
-                      ...plan.workflow.next_action,
-                      readiness_gate: res.readiness_gate,
-                      planting_readiness: res.planting_readiness,
-                    },
-                  },
-                },
+                ...(cur
+                  ? {
+                      plan: {
+                        ...cur,
+                        completed_tasks: res.completed_tasks,
+                        steps_status: res.steps_status,
+                        workflow: {
+                          ...cur.workflow,
+                          next_action: {
+                            ...cur.workflow.next_action,
+                            readiness_gate: res.readiness_gate,
+                            planting_readiness: res.planting_readiness,
+                          },
+                        },
+                      },
+                    }
+                  : {}),
               });
               get().toast("success", done ? "Task reopened" : "Task marked complete");
             } catch (e) {
+              // 409 (e.g. TASK_LOCKED): the server refused — undo the optimistic tick and show its message.
+              if (e instanceof ApiError && e.status === 409) set({ completedTasks: prevTasks });
               get().toast("error", errMsg(e));
             }
           }
@@ -289,25 +390,30 @@ export const useTerraform = create<TerraformState>()(
         },
 
         acceptRisk: async (gateId) => {
-          const plan = get().plan;
-          if (!plan) return;
+          const planId = get().plan?.plan_id;
+          if (!planId) return;
           try {
-            const res = await api.updateProgress(plan.plan_id, { accept_risk_gate_id: gateId });
+            const res = await healAndRetry(() => api.updateProgress(get().plan?.plan_id ?? planId, { accept_risk_gate_id: gateId }));
+            const cur = get().plan;
             set({
               acceptedRisks: res.accepted_risks,
               ...(res.gate_results ? { gateResults: res.gate_results } : {}),
-              plan: {
-                ...plan,
-                steps_status: res.steps_status,
-                workflow: {
-                  ...plan.workflow,
-                  next_action: {
-                    ...plan.workflow.next_action,
-                    readiness_gate: res.readiness_gate,
-                    planting_readiness: res.planting_readiness,
-                  },
-                },
-              },
+              ...(cur
+                ? {
+                    plan: {
+                      ...cur,
+                      steps_status: res.steps_status,
+                      workflow: {
+                        ...cur.workflow,
+                        next_action: {
+                          ...cur.workflow.next_action,
+                          readiness_gate: res.readiness_gate,
+                          planting_readiness: res.planting_readiness,
+                        },
+                      },
+                    },
+                  }
+                : {}),
             });
             get().toast("info", "Risk accepted — shown as an open uncertainty.");
           } catch (e) {
@@ -322,27 +428,34 @@ export const useTerraform = create<TerraformState>()(
           if (result) next[gateId] = result;
           else delete next[gateId];
           set({ gateResults: next });
-          const plan = get().plan;
-          if (plan) {
+          const planId = get().plan?.plan_id;
+          if (planId) {
             try {
-              const res = await api.updateProgress(plan.plan_id, { gate_result: { gate_id: gateId, result } });
+              const res = await healAndRetry(() =>
+                api.updateProgress(get().plan?.plan_id ?? planId, { gate_result: { gate_id: gateId, result } }),
+              );
+              const cur = get().plan;
               set({
                 completedTasks: res.completed_tasks ?? get().completedTasks,
                 acceptedRisks: res.accepted_risks ?? get().acceptedRisks,
                 gateResults: res.gate_results ?? next,
-                plan: {
-                  ...plan,
-                  completed_tasks: res.completed_tasks ?? plan.completed_tasks,
-                  steps_status: res.steps_status ?? plan.steps_status,
-                  workflow: {
-                    ...plan.workflow,
-                    next_action: {
-                      ...plan.workflow.next_action,
-                      readiness_gate: res.readiness_gate ?? plan.workflow.next_action.readiness_gate,
-                      planting_readiness: res.planting_readiness ?? plan.workflow.next_action.planting_readiness,
-                    },
-                  },
-                },
+                ...(cur
+                  ? {
+                      plan: {
+                        ...cur,
+                        completed_tasks: res.completed_tasks ?? cur.completed_tasks,
+                        steps_status: res.steps_status ?? cur.steps_status,
+                        workflow: {
+                          ...cur.workflow,
+                          next_action: {
+                            ...cur.workflow.next_action,
+                            readiness_gate: res.readiness_gate ?? cur.workflow.next_action.readiness_gate,
+                            planting_readiness: res.planting_readiness ?? cur.workflow.next_action.planting_readiness,
+                          },
+                        },
+                      },
+                    }
+                  : {}),
               });
               get().toast(result === "fail" ? "info" : "success", result ? `Test recorded: ${result.toUpperCase()}` : "Test result cleared");
             } catch (e) {
@@ -369,6 +482,12 @@ export const useTerraform = create<TerraformState>()(
         markHarvested: () => {
           if (get().harvestedAt) {
             set({ endingOpen: true });
+            return;
+          }
+          // v1.4: a harvest can only be recorded after a crop was chosen, the gate passed and the sowing task is done.
+          const req = harvestRequirements(get().plan, get().selectedCropId, get().completedTasks);
+          if (!req.ok) {
+            get().toast("info", `Not yet — still missing: ${req.missing.map((m) => m.label.toLowerCase()).join(", ")}.`);
             return;
           }
           const at = new Date().toISOString();

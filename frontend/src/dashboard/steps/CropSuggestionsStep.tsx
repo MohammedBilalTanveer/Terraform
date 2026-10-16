@@ -7,6 +7,7 @@ import EvidenceChips from "../../components/EvidenceChips";
 import RecommendationCard from "../../components/RecommendationCard";
 import { Spinner } from "../../components/LoadingAndError";
 import { Badge, BulletList, ConfidenceBadge, Empty, FIT_LABEL_META, Panel, SeasonFitBadge, SectionTitle, Weeks, arr, cx, humanize } from "../../components/ui";
+import { CollapsibleSection } from "../../components/Accordion";
 import { NeedPlan, useGo } from "./common";
 
 export default function CropSuggestionsStep() {
@@ -70,12 +71,11 @@ export default function CropSuggestionsStep() {
       {cs.trial_advice && (
         <section>
           <SectionTitle icon={<FlaskRound className="h-4 w-4" aria-hidden />} eyebrow="Start small" title="Trial advice" />
-          <RecommendationCard rec={cs.trial_advice} defaultOpen />
+          <RecommendationCard rec={cs.trial_advice} collapsible />
         </section>
       )}
 
-      <section aria-labelledby="trees-title">
-        <SectionTitle icon={<TreePine className="h-4 w-4" aria-hidden />} eyebrow="Long-term" title={<span id="trees-title">Long-term tree options</span>} />
+      <CollapsibleSection icon={<TreePine className="h-4 w-4" aria-hidden />} eyebrow="Long-term" title="Long-term tree options" count={longTerm.length} id="trees-title">
         {trees.length ? (
           <div className="grid gap-4 2xl:grid-cols-2">
             {trees.map((c) => (
@@ -98,7 +98,7 @@ export default function CropSuggestionsStep() {
             </div>
           </div>
         )}
-      </section>
+      </CollapsibleSection>
 
       {excluded.length > 0 && (
         <details className="glass group rounded-2xl">
@@ -160,6 +160,7 @@ function CropCardView({ crop, comparing, onCompare, compareFull, nonFood = false
   const loading = useTerraform((s) => s.loading);
   const [pending, setPending] = useState(false);
   const [showScore, setShowScore] = useState(false);
+  const [more, setMore] = useState(crop.rank === 1 && !nonFood);
   const fit = FIT_LABEL_META[crop.fit_label] ?? FIT_LABEL_META.possible;
   const selected = selectedCropId === crop.crop_id;
   const isTree = crop.category === "tree";
@@ -189,6 +190,7 @@ function CropCardView({ crop, comparing, onCompare, compareFull, nonFood = false
               <Badge tone={fit.tone}>{fit.label}</Badge>
               <SeasonFitBadge fit={crop.season_fit} />
               <ConfidenceBadge value={crop.confidence} />
+              {!more && arr(crop.cautions_triggered).length > 0 && <Badge tone="coral" icon={<TriangleAlert className="h-3 w-3" aria-hidden />}>{arr(crop.cautions_triggered).length} caution{arr(crop.cautions_triggered).length > 1 ? "s" : ""}</Badge>}
               {nonFood && <Badge tone="sprout" icon={<Layers className="h-3 w-3" aria-hidden />}>Soil builder · not food</Badge>}
               {isTree && <Badge tone="violet" icon={<TreePine className="h-3 w-3" aria-hidden />}>Long-term</Badge>}
             </div>
@@ -221,6 +223,17 @@ function CropCardView({ crop, comparing, onCompare, compareFull, nonFood = false
         </table>
       )}
 
+      <button
+        type="button"
+        onClick={() => setMore((m) => !m)}
+        aria-expanded={more}
+        className="mt-3 flex min-h-10 items-center gap-1.5 font-heading text-sm font-semibold text-cyan-200 hover:text-ivory"
+      >
+        <ChevronDown className={cx("h-4 w-4 transition-transform", more && "rotate-180")} aria-hidden />
+        {more ? "Hide details" : "Why it may fit, water, roots, maturity & limitations"}
+      </button>
+
+      {more && (<>
       {arr(crop.why_it_may_fit).length > 0 && (
         <div className="mt-4">
           <div className="eyebrow mb-1.5">Why it may fit</div>
@@ -245,7 +258,6 @@ function CropCardView({ crop, comparing, onCompare, compareFull, nonFood = false
           </dd>
         </div>
       </dl>
-
       {(arr(crop.missing_resources).length > 0 || arr(crop.cautions_triggered).length > 0 || arr(crop.limitations).length > 0) && (
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           {arr(crop.cautions_triggered).length > 0 && (
@@ -270,6 +282,8 @@ function CropCardView({ crop, comparing, onCompare, compareFull, nonFood = false
           )}
         </div>
       )}
+
+      </>)}
 
       <footer className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/8 pt-3">
         <EvidenceChips evidence={crop.evidence} compact />

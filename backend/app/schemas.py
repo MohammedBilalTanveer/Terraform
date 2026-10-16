@@ -43,6 +43,9 @@ class Recommendation(_Model):
     task_id: Optional[str]
     task_label: Optional[str]
     evidence: Evidence
+    phase: Optional[Literal["prepare", "readiness", "plant"]] = None
+    locked: bool = False
+    locked_reason: Optional[Literal["choose_crop", "pass_gate", "choose_crop_and_pass_gate"]] = None
 
 
 class StepMeta(_Model):

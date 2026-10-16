@@ -40,6 +40,7 @@ COLLECTIONS = [
 ]
 OPTIONAL_COLLECTIONS = {"stress_mitigation", "troubleshooting", "field_faq"}
 CROP_CATEGORIES = ("field_crop", "tree", "soil_builder")
+TASK_PHASES = ("prepare", "readiness", "plant")  # v1.4 (optional for older KBs)
 REQUIRED_COLLECTIONS = [c for c in COLLECTIONS if c not in OPTIONAL_COLLECTIONS]
 SCENARIO_COLLECTION = "scenarios"
 
@@ -325,6 +326,10 @@ def _check_references(kb: KnowledgeBase) -> None:
                 for key in ("triggered_by_tags", "indirect_tags"):
                     if not isinstance(f.get(key, []) or [], list):
                         kb.errors.append(f"{fw}: '{key}' must be a list")
+        task = rec.get("task")
+        if isinstance(task, dict) and task.get("phase") is not None and task.get("phase") not in TASK_PHASES:
+            kb.errors.append(f"{where}: task '{task.get('task_id')}' has invalid phase {task.get('phase')!r} "
+                             f"(expected one of {', '.join(TASK_PHASES)})")
         if cname in ("troubleshooting", "field_faq"):
             for x in _as_list(rec.get("related_kb_ids")):
                 _ref(kb, where, "related_kb_ids", x)

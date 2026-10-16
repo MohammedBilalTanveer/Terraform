@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { Archive, Ban, CircleCheck, CircleHelp, Eye, Hand, Recycle, ScrollText, ShieldAlert, Trophy, Wheat, Wind } from "lucide-react";
+import { Archive, Ban, CircleCheck, Lock, CircleHelp, Eye, Hand, Recycle, ScrollText, ShieldAlert, Trophy, Wheat, Wind } from "lucide-react";
 import { useTerraform } from "../../store/terraformStore";
 import EvidenceChips from "../../components/EvidenceChips";
 import RecommendationCard from "../../components/RecommendationCard";
 import { Badge, Panel, SectionTitle, arr } from "../../components/ui";
-import { collectEvidence, planTaskRecs } from "../../components/workflow";
+import { collectEvidence, goToStep, planTaskRecs, useHarvestRequirements } from "../../components/workflow";
 import { ListPanel, NeedPlan } from "./common";
 
 export default function HarvestStep() {
@@ -19,6 +19,7 @@ export default function HarvestStep() {
   const unable = useTerraform((s) => s.unableChecks ?? []);
   const gateResults = useTerraform((s) => s.gateResults ?? {});
   const openEvidence = useTerraform((s) => s.openEvidence);
+  const req = useHarvestRequirements();
   if (!plan) return <NeedPlan />;
   const hv = plan.workflow.harvest;
   const cs = plan.workflow.crop_suggestions;
@@ -57,7 +58,7 @@ export default function HarvestStep() {
         <section>
           <SectionTitle icon={<Recycle className="h-4 w-4" aria-hidden />} eyebrow="After harvest" title="Regenerate the soil" />
           <div className="grid gap-4">
-            {hv.regeneration.map((r) => <RecommendationCard key={r.id} rec={r} />)}
+            {hv.regeneration.map((r) => <RecommendationCard key={r.id} rec={r} collapsible />)}
           </div>
         </section>
       )}
@@ -89,9 +90,30 @@ export default function HarvestStep() {
                 ? `Season ${season} harvest recorded. Open the ending to start season ${season + 1}.`
                 : "When you have picked the crop using the ripeness signs above, record the harvest to finish the season."}
             </div>
-            <button type="button" className="btn-primary" onClick={markHarvested}>
+            <button
+              type="button"
+              className="btn-primary"
+              onClick={markHarvested}
+              disabled={!harvestedAt && !req.ok}
+              aria-describedby={!harvestedAt && !req.ok ? "harvest-missing" : undefined}
+            >
+              {!harvestedAt && !req.ok && <Lock className="h-4 w-4" aria-hidden />}
               {harvestedAt ? "Open season ending" : "Complete the harvest"}
             </button>
+            {!harvestedAt && !req.ok && (
+              <div id="harvest-missing" className="w-full rounded-xl border border-amber/30 bg-amber/[0.07] p-3 text-sm">
+                <div className="font-heading font-semibold text-amber-100">Not yet — still missing:</div>
+                <ul className="mt-2 grid gap-2">
+                  {req.missing.map((m) => (
+                    <li key={m.key} className="flex flex-wrap items-center gap-2 text-ivory/90">
+                      <Lock className="h-3.5 w-3.5 shrink-0 text-amber" aria-hidden />
+                      <span className="min-w-0 flex-1">{m.label}</span>
+                      <button type="button" className="btn-ghost !px-3 !py-1.5 text-sm" onClick={() => goToStep(m.step)}>{m.cta}</button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           <div className="mt-6 grid gap-5 lg:grid-cols-2">

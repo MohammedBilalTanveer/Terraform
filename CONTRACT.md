@@ -463,3 +463,20 @@ derived from it cite `src_team_field_notes` (verification `"team_notes_unverifie
   ≥1 via accepted risk; else `not_ready`. Planting/care/harvest stay blocked while `not_ready`.
 - Assistant: "what next / what should I do / where do I go / what's left" questions (with plan_id or session_id) answer from the
   plan's `next_best_action` + the labels of unsatisfied required gates (KB text) with those gates' KB ids; never refused when a plan exists.
+
+# v1.4 — One enforced workflow order (additive)
+Order of work, enforced by the BACKEND and displayed identically by the Dashboard and the 3D Explorer:
+`prepare (fix protocol tasks) → readiness (gate tasks + empirical tests) → choose crop → plant (sow tasks) → care stages → harvest`.
+- **KB:** every `task` object (soil_treatments + planting_methods) gains `"phase": "prepare" | "readiness" | "plant"`.
+  - `prepare`: building/gathering work (spot, pits, beds, containers, stone lines, half-moons, mulch, compost, organic matter, water storage, trial plot, compost heap, overflow …).
+  - `readiness`: checks/confirmations the gate depends on (task_confirm_reliable_rains, task_test_moisture_retention, task_recheck_fizz_optional …).
+  - `plant`: everything that happens at or after sowing (task_sow_seeds, task_mulch_after_sowing, task_plant_tree_seedlings …).
+- **API:** `Recommendation` gains `phase?: "prepare"|"readiness"|"plant"|null`, `locked?: boolean`,
+  `locked_reason?: "choose_crop" | "pass_gate" | "choose_crop_and_pass_gate" | null`.
+  A `plant`-phase task is locked until `planting_readiness != "not_ready"` AND a crop is selected. `prepare`/`readiness` tasks are never locked.
+  Applies to every Recommendation that carries a task_id (fix_protocol, planting_method, gate_tasks, …).
+- `PATCH /api/plans/{id}/progress {task_id, completed:true}` on a locked task → **409** `{"error":{"code":"TASK_LOCKED","message":"<neutral text: Choose a crop first / Pass the readiness gate first>","retryable":false}}`.
+  Un-ticking is always allowed.
+- `GateItem` gate tasks (`next_action.gate_tasks`) must always include `task_confirm_reliable_rains` (phase `readiness`) so it is completable at the gate; it must NOT be locked.
+- Frontends: never offer a "complete" button for a locked task; show a lock + reason + a button that goes to what unlocks it (Crops tab/step, Readiness tab/step).
+  "Sown/planted" state requires a selected crop AND readiness ok AND the sowing task done.

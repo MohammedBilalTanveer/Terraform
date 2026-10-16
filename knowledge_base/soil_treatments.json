@@ -57,7 +57,8 @@
       ],
       "task": {
         "task_id": "task_choose_growing_spot",
-        "label": "Choose and mark the growing spot"
+        "label": "Choose and mark the growing spot",
+        "phase": "prepare"
       }
     },
     {
@@ -134,7 +135,8 @@
       ],
       "task": {
         "task_id": "task_build_pits",
-        "label": "Dig and fill planting pits"
+        "label": "Dig and fill planting pits",
+        "phase": "prepare"
       }
     },
     {
@@ -205,7 +207,8 @@
       ],
       "task": {
         "task_id": "task_build_raised_beds",
-        "label": "Build and fill knee-high raised beds"
+        "label": "Build and fill knee-high raised beds",
+        "phase": "prepare"
       }
     },
     {
@@ -266,7 +269,8 @@
       ],
       "task": {
         "task_id": "task_prepare_containers",
-        "label": "Prepare and fill containers or sacks"
+        "label": "Prepare and fill containers or sacks",
+        "phase": "prepare"
       }
     },
     {
@@ -341,7 +345,8 @@
       ],
       "task": {
         "task_id": "task_build_stone_lines",
-        "label": "Lay stone lines across the slope and check the overflow path"
+        "label": "Lay stone lines across the slope and check the overflow path",
+        "phase": "prepare"
       }
     },
     {
@@ -404,7 +409,8 @@
       ],
       "task": {
         "task_id": "task_plan_overflow",
-        "label": "Mark pooling spots and plan a safe overflow path"
+        "label": "Mark pooling spots and plan a safe overflow path",
+        "phase": "prepare"
       }
     },
     {
@@ -472,7 +478,8 @@
       ],
       "task": {
         "task_id": "task_gather_mulch",
-        "label": "Gather and store mulch material"
+        "label": "Gather and store mulch material",
+        "phase": "prepare"
       }
     },
     {
@@ -537,7 +544,8 @@
       ],
       "task": {
         "task_id": "task_fill_compost",
-        "label": "Mix compost or manure into pits and beds"
+        "label": "Mix compost or manure into pits and beds",
+        "phase": "prepare"
       }
     },
     {
@@ -594,7 +602,8 @@
       ],
       "task": {
         "task_id": "task_mark_trial_plot",
-        "label": "Mark a small trial plot and start a journal"
+        "label": "Mark a small trial plot and start a journal",
+        "phase": "prepare"
       }
     },
     {
@@ -660,7 +669,8 @@
       ],
       "task": {
         "task_id": "task_build_half_moons",
-        "label": "Build half-moon catchments"
+        "label": "Build half-moon catchments",
+        "phase": "prepare"
       }
     },
     {
@@ -723,7 +733,8 @@
       ],
       "task": {
         "task_id": "task_gather_organic_matter",
-        "label": "Gather leaf litter, grass and prunings for pit and bed fill"
+        "label": "Gather leaf litter, grass and prunings for pit and bed fill",
+        "phase": "prepare"
       }
     },
     {
@@ -786,7 +797,8 @@
       ],
       "task": {
         "task_id": "task_set_up_water_storage",
-        "label": "Set up covered rainwater storage"
+        "label": "Set up covered rainwater storage",
+        "phase": "prepare"
       }
     },
     {
@@ -953,7 +965,8 @@
       ],
       "task": {
         "task_id": "task_add_ash_or_shell_optional",
-        "label": "Optional: mix a small handful of ash or crushed shell into each pit"
+        "label": "Optional: mix a small handful of ash or crushed shell into each pit",
+        "phase": "prepare"
       }
     },
     {
@@ -1002,7 +1015,8 @@
       ],
       "task": {
         "task_id": "task_recheck_fizz_optional",
-        "label": "Optional: repeat the fizz check on filled pit soil"
+        "label": "Optional: repeat the fizz check on filled pit soil",
+        "phase": "readiness"
       }
     },
     {
@@ -1406,7 +1420,8 @@
       ],
       "task": {
         "task_id": "task_test_moisture_retention",
-        "label": "Test that mulched pit or bed soil stays damp"
+        "label": "Test that mulched pit or bed soil stays damp",
+        "phase": "readiness"
       }
     },
     {
@@ -1473,7 +1488,8 @@
       ],
       "task": {
         "task_id": "task_start_compost",
-        "label": "Start a layered compost heap"
+        "label": "Start a layered compost heap",
+        "phase": "prepare"
       }
     },
     {

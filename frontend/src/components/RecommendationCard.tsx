@@ -5,14 +5,19 @@ import { Ban, Check, ChevronDown, Ruler, ShieldAlert, Target, TriangleAlert } fr
 import type { Recommendation } from "../types/terraform";
 import { useTerraform } from "../store/terraformStore";
 import EvidenceChips from "./EvidenceChips";
+import LockedTask from "./LockedTask";
 import { Badge, BulletList, ConfidenceBadge, cx, humanize } from "./ui";
+import { useTaskLock } from "./workflow";
 
 export type RecommendationCardProps = {
   rec: Recommendation;
   /** Optional step number shown in ordered layouts (planting method). */
   index?: number;
   className?: string;
+  /** Not collapsible: opens the "why this matches · limitations" block. Collapsible: opens the whole body. */
   defaultOpen?: boolean;
+  /** Collapsed by default: header, explanation, safety notes and the task control stay visible; steps/amounts fold away. */
+  collapsible?: boolean;
 };
 
 const PRIORITY: Record<string, { label: string; tone: "cyan" | "violet" | "coral" | "stone"; accent: string }> = {
@@ -22,12 +27,15 @@ const PRIORITY: Record<string, { label: string; tone: "cyan" | "violet" | "coral
   optional: { label: "Optional", tone: "stone", accent: "from-white/30 to-white/5" },
 };
 
-export default function RecommendationCard({ rec, index, className, defaultOpen = false }: RecommendationCardProps) {
+export default function RecommendationCard({ rec, index, className, defaultOpen = false, collapsible = false }: RecommendationCardProps) {
   const completed = useTerraform((s) => s.completedTasks);
   const toggleTask = useTerraform((s) => s.toggleTask);
   const busy = useTerraform((s) => s.loading);
   const [open, setOpen] = useState(defaultOpen);
   const [pending, setPending] = useState(false);
+  const [detail, setDetail] = useState(!collapsible && defaultOpen);
+  const lock = useTaskLock(rec);
+  const bodyShown = !collapsible || open;
 
   const p = rec.priority ? PRIORITY[rec.priority] : null;
   const isAvoid = rec.priority === "avoid";
@@ -56,7 +64,7 @@ export default function RecommendationCard({ rec, index, className, defaultOpen 
         className,
       )}
       aria-labelledby={`rec-${rec.id}`}
-      data-incomplete={rec.task_id && !done ? "true" : undefined}
+      data-incomplete={rec.task_id && !done && !lock.locked ? "true" : undefined}
     >
       {p && <span className={cx("absolute inset-y-0 left-0 w-1 bg-gradient-to-b", p.accent)} aria-hidden />}
 
@@ -80,10 +88,11 @@ export default function RecommendationCard({ rec, index, className, defaultOpen 
               {p && <Badge tone={p.tone}>{p.label}</Badge>}
               {rec.category && <Badge tone="stone">{humanize(rec.category)}</Badge>}
               <ConfidenceBadge value={rec.confidence} />
+              {safety.length > 0 && !bodyShown && <Badge tone="amber" icon={<ShieldAlert className="h-3 w-3" aria-hidden />}>Safety notes inside</Badge>}
             </div>
           </div>
         </div>
-        {rec.task_id && (
+        {rec.task_id && !lock.locked && (
           <button
             type="button"
             onClick={onToggle}
@@ -105,15 +114,17 @@ export default function RecommendationCard({ rec, index, className, defaultOpen 
         )}
       </header>
 
-      {rec.explanation && <p className="mt-3 leading-relaxed text-ivory/85">{rec.explanation}</p>}
+      {rec.task_id && lock.locked && <LockedTask className="mt-3" reason={lock.reason} label={rec.task_label ?? rec.title} />}
 
-      {actions.length > 0 && (
+      {rec.explanation && bodyShown && <p className="mt-3 leading-relaxed text-ivory/85">{rec.explanation}</p>}
+
+      {bodyShown && actions.length > 0 && (
         <div className="mt-4">
           <BulletList items={actions} ordered={!isAvoid} tone={isAvoid ? "coral" : "cyan"} />
         </div>
       )}
 
-      {amounts.length > 0 && (
+      {bodyShown && amounts.length > 0 && (
         <div className="mt-4 rounded-xl border border-cyan/15 bg-cyan/[0.05] p-3">
           <div className="eyebrow mb-2 flex items-center gap-1.5 !text-cyan-100/80">
             <Ruler className="h-3.5 w-3.5" aria-hidden /> Everyday amounts
@@ -128,7 +139,7 @@ export default function RecommendationCard({ rec, index, className, defaultOpen 
         </div>
       )}
 
-      {safety.length > 0 && (
+      {safety.length > 0 && bodyShown && (
         <div className="mt-4 rounded-xl border border-amber/30 bg-amber/[0.07] p-3">
           <div className="eyebrow mb-1.5 flex items-center gap-1.5 !text-amber-100">
             <ShieldAlert className="h-3.5 w-3.5" aria-hidden /> Safety
@@ -137,18 +148,30 @@ export default function RecommendationCard({ rec, index, className, defaultOpen 
         </div>
       )}
 
-      {hasDetail && (
+      {collapsible && (actions.length > 0 || amounts.length > 0 || hasDetail) && (
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          className="mt-3 flex min-h-10 items-center gap-1.5 font-heading text-sm font-semibold text-cyan-200 hover:text-ivory"
+        >
+          <ChevronDown className={cx("h-4 w-4 transition-transform", open && "rotate-180")} aria-hidden />
+          {open ? "Hide steps & details" : "Show steps, amounts & details"}
+        </button>
+      )}
+
+      {bodyShown && hasDetail && (
         <div className="mt-4">
           <button
             type="button"
-            onClick={() => setOpen((o) => !o)}
-            aria-expanded={open}
-            className="flex items-center gap-1.5 font-heading text-sm font-semibold text-mist hover:text-ivory"
+            onClick={() => setDetail((d) => !d)}
+            aria-expanded={detail}
+            className="flex min-h-10 items-center gap-1.5 font-heading text-sm font-semibold text-mist hover:text-ivory"
           >
-            <ChevronDown className={cx("h-4 w-4 transition-transform", open && "rotate-180")} aria-hidden />
+            <ChevronDown className={cx("h-4 w-4 transition-transform", detail && "rotate-180")} aria-hidden />
             Why this matches · limitations
           </button>
-          {open && (
+          {detail && (
             <div className="mt-3 grid gap-4 md:grid-cols-2">
               {why.length > 0 && (
                 <div>
@@ -167,7 +190,7 @@ export default function RecommendationCard({ rec, index, className, defaultOpen 
         </div>
       )}
 
-      <footer className="mt-4 border-t border-white/8 pt-3">
+      <footer className={cx("border-t border-white/8", bodyShown ? "mt-4 pt-3" : "mt-2 pt-2")}>
         <EvidenceChips evidence={rec.evidence} compact />
       </footer>
     </motion.article>

@@ -4,9 +4,10 @@ import { AlertTriangle, CheckCircle2, Circle, Lock, Navigation, ShieldAlert, Spr
 import type { CropCard, StepId } from "../../types/terraform";
 import { useTerraform } from "../../store/terraformStore";
 import { farmFor, useGame } from "../gameStore";
-import { GROUP_STATION, collectPlanItems, guidance, worldView } from "../planData";
+import { GROUP_STATION, collectPlanItems, gateTaskIds, guidance, lockOf, taskPhase, worldView, type PlanItem } from "../planData";
 import { stationById } from "../worldConfig";
-import RecCard from "./RecCard";
+import RecCard, { RecDetails, TaskButton } from "./RecCard";
+import CareTab from "./CareTab";
 import { Bullets, Busy, Card, Chips, DetailsButton, ErrorNote, GhostButton, GlassPanel, Pill, PrimaryButton, Section, ThisOneBadge, cx, humanize, useAutoFocusItem } from "./kit";
 
 type Tab = "gate" | "crops" | "time" | "plant" | "care";
@@ -20,6 +21,68 @@ const TABS: { id: Tab; label: string; step: StepId }[] = [
 
 const fitTone = (f: CropCard["fit_label"]) => (f === "good_fit" ? "sprout" : f === "possible" ? "cyan" : f === "high_risk" ? "amber" : "coral");
 const seasonTone = (f: string) => (f === "fits" ? "sprout" : f === "tight" ? "amber" : f === "high_risk" ? "coral" : "muted");
+
+/** One task that a readiness gate depends on: what to do (KB text), where, and a real action button. */
+function GateTaskRow({ t, onSwitchTab }: { t: PlanItem; onSwitchTab: (tab: Tab) => void }) {
+  const [how, setHow] = useState(false);
+  const completed = useTerraform((s) => s.completedTasks);
+  const focusTaskId = useGame((s) => s.focusTaskId);
+  const setFocusTask = useGame((s) => s.setFocusTask);
+  const setTargetOverride = useGame((s) => s.setTargetOverride);
+  const setOverlay = useGame((s) => s.setOverlay);
+  const say = useGame((s) => s.say);
+  const done = completed.includes(t.rec.task_id!);
+  const st = GROUP_STATION[t.group];
+  const focused = focusTaskId === t.rec.task_id && !done;
+  void onSwitchTab;
+  return (
+    <li
+      data-task-id={t.rec.task_id ?? undefined}
+      data-incomplete={done ? undefined : "true"}
+      className={cx("space-y-2 rounded-lg border px-2.5 py-2 transition-shadow", done ? "border-emerald-300/25 bg-emerald-400/[0.04]" : "border-white/10 bg-white/[0.03]", focused && "ring-2 ring-cyan-300/50")}
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        {done ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-300" /> : <Circle className="h-3.5 w-3.5 shrink-0 text-ivory/40" />}
+        <div className="min-w-0 flex-1">
+          <div className={cx("text-[12.5px] font-medium", done && "text-ivory/55 line-through")}>{t.rec.task_label ?? t.rec.title}</div>
+          <div className="text-[10.5px] text-ivory/50">Done at: {stationById(st).name}</div>
+        </div>
+        {focused && <ThisOneBadge />}
+      </div>
+      {!done && t.rec.explanation && !how && <p className="line-clamp-2 text-[12px] leading-relaxed text-ivory/75">{t.rec.explanation}</p>}
+      {!done && t.rec.explanation && how && <p className="text-[12px] leading-relaxed text-ivory/80">{t.rec.explanation}</p>}
+      <div className="flex flex-wrap items-center gap-2">
+        {st === "plot" ? (
+          <TaskButton item={t} here="plot" />
+        ) : (
+          !done && (
+            <GhostButton
+              onClick={() => {
+                setFocusTask(t.rec.task_id);
+                setTargetOverride(st);
+                say(`Head to ${stationById(st).name} — ${t.rec.task_label ?? t.rec.title}`);
+                setOverlay(null);
+              }}
+            >
+              <Navigation className="h-3.5 w-3.5" /> Go there
+            </GhostButton>
+          )
+        )}
+        <button type="button" onClick={() => setHow(!how)} className="min-h-9 text-[11.5px] text-cyan-200 underline hover:text-cyan-100" aria-expanded={how}>
+          {how ? "Hide how" : "How?"}
+        </button>
+      </div>
+      {how && (
+        <div>
+          <RecDetails rec={t.rec} />
+          <div className="mt-2">
+            <Chips evidence={t.rec.evidence} />
+          </div>
+        </div>
+      )}
+    </li>
+  );
+}
 
 function CropCardView({ c }: { c: CropCard }) {
   const selected = useTerraform((s) => s.selectedCropId);
@@ -126,7 +189,9 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
     if (v.stage !== "harvest_ready") return "care";
     return lastTab ?? "care";
   })();
-  const [tab, setTabState] = useState<Tab>(initial);
+  const forceTab = useGame((s) => s.forceTab);
+  const setForceTab = useGame((s) => s.setForceTab);
+  const [tab, setTabState] = useState<Tab>(() => (forceTab && TABS.some((t) => t.id === forceTab) ? (forceTab as Tab) : initial));
   const setTab = (t: Tab) => {
     setTabState(t);
     setLastTab("plot", t);
@@ -134,9 +199,17 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
   const [confirmRisk, setConfirmRisk] = useState<string | null>(null);
   useAutoFocusItem([tab, plan?.plan_id], focusTaskId, reduceMotion);
   useEffect(() => {
-    setLastTab("plot", initial);
+    setLastTab("plot", tab);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // another part of the UI (a locked task, a quest row) asked for a specific tab
+  useEffect(() => {
+    if (forceTab && TABS.some((t) => t.id === forceTab)) {
+      setTab(forceTab as Tab);
+      setForceTab(null);
+    } else if (forceTab) setForceTab(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [forceTab]);
 
   if (!plan) {
     return (
@@ -170,12 +243,15 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
   const na = w.next_action;
   const view = worldView(analysis, plan, completed, crop, farm);
   const plotItems = items.filter((i) => i.group === "plot");
-  const prepItems = plotItems.filter((i) => i.section !== "sowing" && i.action !== "sow");
+  // Readiness "Prepare the plot": everything at the plot that is NOT plant-phase (gate prerequisites included
+  // regardless of section — they are never gated by crop/readiness).
+  const gateIds = gateTaskIds(plan);
+  const prepItems = plotItems.filter((i) => taskPhase(plan, i) !== "plant");
   const sowTaskItems = plotItems.filter((i) => i.action === "sow" && i.rec.task_id);
   const readinessOk = na.planting_readiness !== "not_ready";
+  const firstOpenGateId = na.readiness_gate.find((g0) => g0.required && !g0.satisfied)?.id;
   const cropCard = [...w.crop_suggestions.field_crops, ...w.crop_suggestions.tree_options].find((c) => c.crop_id === crop);
   const stages = [...(w.ongoing_care.stages ?? [])].sort((a, b) => a.order - b.order);
-  const curStage = stages[view.careIdx];
 
   const sowManually = () =>
     runAction({ kind: "sow", label: cropCard ? `Sowing ${cropCard.name}` : "Sowing", station: "plot", fast: reduceMotion }, async () => {
@@ -187,7 +263,16 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
   const advanceStage = () =>
     runAction({ kind: "water", label: stages[view.careIdx + 1]?.label ?? "Tending the crop", station: "plot", fast: reduceMotion }, async () => {
       updateFarm(sessionId, { careIdx: Math.min(view.careIdx + 1, Math.max(0, stages.length - 1)) });
+      useGame.getState().setLastTab("plot", "care");
       await addJournal(`Explorer: reached care stage "${stages[view.careIdx + 1]?.label ?? ""}".`);
+    });
+
+  // the last stage must be completed before the crop is harvest-ready
+  const finishCare = () =>
+    runAction({ kind: "water", label: "Finishing the last care stage", station: "plot", fast: reduceMotion }, async () => {
+      updateFarm(sessionId, { careDone: true, careIdx: Math.max(0, stages.length - 1) });
+      setCurrentStep("harvest");
+      await addJournal("Explorer: completed the last care stage — crop is ready to harvest.");
     });
 
   const tabStep = TABS.find((t) => t.id === tab)!.step;
@@ -266,39 +351,12 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
                       </div>
                       {gt.detail && <p className="text-[12.5px] text-ivory/70">{gt.detail}</p>}
                       {(tasks.length > 0 || unknownIds.length > 0) && (
-                        <ul className="mt-2 space-y-1.5">
-                          {tasks.map((t) => {
-                            const done = completed.includes(t.rec.task_id!);
-                            const st = GROUP_STATION[t.group];
-                            const focused = focusTaskId === t.rec.task_id && !done;
-                            return (
-                              <li key={t.rec.task_id} className={cx("flex flex-wrap items-center gap-2 rounded-lg border px-2 py-1.5", done ? "border-emerald-300/25 bg-emerald-400/[0.04]" : "border-white/10 bg-white/[0.03]", focused && "ring-2 ring-cyan-300/50")}>
-                                {done ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-300" /> : <Circle className="h-3.5 w-3.5 shrink-0 text-ivory/40" />}
-                                <div className="min-w-0 flex-1">
-                                  <div className={cx("text-[12.5px]", done && "text-ivory/55 line-through")}>{t.rec.task_label ?? t.rec.title}</div>
-                                  <div className="text-[10.5px] text-ivory/50">Done at: {stationById(st).name}</div>
-                                </div>
-                                {focused && <ThisOneBadge />}
-                                {!done && (
-                                  <GhostButton
-                                    onClick={() => {
-                                      setFocusTask(t.rec.task_id);
-                                      if (st === "plot") {
-                                        setTab("gate");
-                                        window.setTimeout(() => document.querySelector(`[data-panel-scroll] [data-task-id="${t.rec.task_id}"]`)?.scrollIntoView({ block: "center", behavior: "smooth" }), 60);
-                                      } else {
-                                        setTargetOverride(st);
-                                        say(`Head to ${stationById(st).name} — ${t.rec.task_label ?? t.rec.title}`);
-                                        setOverlay(null);
-                                      }
-                                    }}
-                                  >
-                                    <Navigation className="h-3.5 w-3.5" /> {st === "plot" ? "Do it here" : "Go there"}
-                                  </GhostButton>
-                                )}
-                              </li>
-                            );
-                          })}
+                        <details className="mt-2" open={gt.id === firstOpenGateId || (!!focusTaskId && gt.satisfied_by_tasks.includes(focusTaskId))}>
+                        <summary className="min-h-9 cursor-pointer text-[12px] font-medium text-cyan-200/90">Tasks for this gate ({tasks.filter((t) => completed.includes(t.rec.task_id!)).length}/{tasks.length})</summary>
+                        <ul className="mt-1.5 space-y-2">
+                          {tasks.map((t) => (
+                            <GateTaskRow key={t.rec.task_id} t={t} onSwitchTab={setTab} />
+                          ))}
                           {unknownIds.map((id) => (
                             <li key={id} className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-2 py-1.5 text-[12.5px]">
                               {completed.includes(id) ? <CheckCircle2 className="h-3.5 w-3.5 text-emerald-300" /> : <Circle className="h-3.5 w-3.5 text-ivory/40" />}
@@ -307,6 +365,7 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
                             </li>
                           ))}
                         </ul>
+                        </details>
                       )}
                       {open && !gt.accepted_risk && (
                         <div className="mt-2">
@@ -330,8 +389,8 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
                         </div>
                       )}
                       {gt.verification?.test && (
-                        <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-2 text-[12px]">
-                          <div className="text-[11px] font-semibold text-cyan-200/90">Verification test</div>
+                        <details className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-2 text-[12px]" open={gateResults[gt.id] === "fail" || gt.test_result === "fail" || (taskDone && !gt.satisfied)}>
+                          <summary className="min-h-9 cursor-pointer text-[11.5px] font-semibold text-cyan-200/90">Verification test — {(gateResults[gt.id] ?? gt.test_result) ?? "not run"}</summary>
                           <p className="text-ivory/85">{gt.verification.test}</p>
                           {gt.verification.pass && <p className="mt-1 text-emerald-200/85">Pass: {gt.verification.pass}</p>}
                           {gt.verification.fail && <p className="text-rose-200/85">Fail: {gt.verification.fail}</p>}
@@ -355,7 +414,7 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
                               );
                             })}
                           </div>
-                        </div>
+                        </details>
                       )}
                       <div className="mt-1.5">
                         <Chips evidence={gt.evidence} />
@@ -367,11 +426,19 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
             })}
           </Section>
           {prepItems.length > 0 && (
-            <Section title="Prepare the plot">
-              {prepItems.map((i) => (
-                <RecCard key={i.rec.id + i.section} rec={i.rec} item={i} here="plot" />
-              ))}
-            </Section>
+            <details
+              className="rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2"
+              open={!!focusTaskId && prepItems.some((i) => i.rec.task_id === focusTaskId && !gateIds.has(i.rec.task_id!))}
+            >
+              <summary className="min-h-9 cursor-pointer font-display text-[10px] uppercase tracking-[0.22em] text-amber-200/90">
+                Prepare the plot ({prepItems.filter((i) => i.rec.task_id && completed.includes(i.rec.task_id)).length}/{prepItems.filter((i) => i.rec.task_id).length} tasks done) — tap to expand
+              </summary>
+              <div className="mt-2 space-y-2">
+                {prepItems.map((i) => (
+                  <RecCard key={i.rec.id + i.section} rec={i.rec} item={i} here="plot" compact />
+                ))}
+              </div>
+            </details>
           )}
         </>
       )}
@@ -464,7 +531,7 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
               <Pill tone={crop ? "sprout" : "muted"}>crop: {cropCard?.name ?? "not chosen"}</Pill>
               <Pill tone={view.sown ? "sprout" : "muted"}>{view.sown ? "sown" : "not sown"}</Pill>
             </div>
-            {!readinessOk && <p className="mt-1.5 text-[12.5px] text-amber-100/85">The readiness gate is still open. Finish the gate tasks or accept the risk first.</p>}
+            {!readinessOk && <p className="mt-1.5 text-[12.5px] text-amber-100/85">The readiness gate is still open — finish its tasks (Readiness tab) first. Order: prepare, readiness, choose a crop, then plant.</p>}
             {!crop && (
               <div className="mt-2">
                 <GhostButton onClick={() => setTab("crops")}>Choose a crop first</GhostButton>
@@ -475,6 +542,7 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
                 <PrimaryButton tone="sprout" disabled={!readinessOk} onClick={sowManually}>
                   <Sprout className="h-4 w-4" /> Sow {cropCard?.name ?? "crop"} here
                 </PrimaryButton>
+                {!readinessOk && <p className="mt-1.5 text-[11.5px] text-ivory/60">Pass the readiness gate first.</p>}
               </div>
             )}
           </Card>
@@ -485,17 +553,14 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
               return <RecCard key={r.id} rec={r} item={it} here={it && GROUP_STATION[it.group] === "plot" ? "plot" : undefined} />;
             })}
           </Section>
-          {w.planting_method.sowing.length > 0 && (
+          {w.planting_method.sowing.filter((r0) => !r0.task_id || !gateIds.has(r0.task_id)).length > 0 && (
             <Section title="Sowing">
-              {w.planting_method.sowing.map((r) => {
-                const it = items.find((i) => i.rec.task_id && i.rec.task_id === r.task_id);
-                const gated = !readinessOk || !crop;
-                return (
-                  <div key={r.id} className={cx(gated && "opacity-70")}>
-                    <RecCard rec={r} item={gated ? undefined : it} here={gated ? undefined : "plot"} />
-                  </div>
-                );
-              })}
+              {w.planting_method.sowing
+                .filter((r0) => !r0.task_id || !gateIds.has(r0.task_id))
+                .map((r0) => {
+                  const it = items.find((i) => i.rec.task_id && i.rec.task_id === r0.task_id);
+                  return <RecCard key={r0.id} rec={r0} item={it} here="plot" />;
+                })}
             </Section>
           )}
           {w.planting_method.water_capture.length > 0 && (
@@ -508,103 +573,7 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
         </>
       )}
 
-      {tab === "care" && (
-        <>
-          <Section title="Growth stage" right={<Chips evidence={w.ongoing_care.evidence} />}>
-            {!view.sown ? (
-              <Card>
-                <p className="text-[13px] text-ivory/80">Nothing is growing yet. Sow first — the stages below are a preview.</p>
-              </Card>
-            ) : (
-              <Card className="border-emerald-300/25">
-                <div className="flex items-center justify-between gap-2">
-                  <div>
-                    <div className="text-[11px] text-ivory/60">Current stage ({view.careIdx + 1}/{stages.length || 1})</div>
-                    <div className="font-heading text-[15px] font-semibold">{curStage?.label ?? "—"}</div>
-                  </div>
-                  {view.careIdx < stages.length - 1 && (
-                    <PrimaryButton tone="sprout" onClick={advanceStage}>
-                      <TimerReset className="h-4 w-4" /> Tend & advance
-                    </PrimaryButton>
-                  )}
-                  {view.stage === "harvest_ready" && <Pill tone="amber">Ready for the Harvest Point</Pill>}
-                </div>
-                <div className="mt-2 flex gap-1">
-                  {stages.map((s, i) => (
-                    <div key={s.id} className={cx("h-1.5 flex-1 rounded-full", i <= view.careIdx ? "bg-emerald-300" : "bg-white/10")} title={s.label} />
-                  ))}
-                </div>
-              </Card>
-            )}
-            {w.ongoing_care.crop_basis !== "selected" && (
-              <p className="text-[11.5px] text-amber-200/80">Care basis: {w.ongoing_care.crop_basis.replace(/_/g, " ")}</p>
-            )}
-          </Section>
-          <Section title="Care stages">
-            {stages.map((s, i) => (
-              <Card key={s.id} className={cx(view.sown && i === view.careIdx && "border-cyan-300/40")}>
-                {view.sown && i === view.careIdx && <span data-incomplete="true" className="sr-only">Current stage</span>}
-                <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="font-medium text-[13px]">{s.label}</span>
-                  <Pill tone="muted">{s.stage.replace(/_/g, " ")}</Pill>
-                </div>
-                {s.timing_description && <p className="text-[12px] text-ivory/65">{s.timing_description}</p>}
-                <div className="mt-1.5 grid gap-1 text-[12.5px]">
-                  {s.water && <div><span className="text-cyan-200/90">Water: </span>{s.water}</div>}
-                  {s.mulch && <div><span className="text-cyan-200/90">Mulch: </span>{s.mulch}</div>}
-                  {s.nutrients && <div><span className="text-cyan-200/90">Nutrients: </span>{s.nutrients}</div>}
-                  {s.weeds && <div><span className="text-cyan-200/90">Weeds: </span>{s.weeds}</div>}
-                  {s.dry_spell && <div><span className="text-amber-200/90">Dry spell: </span>{s.dry_spell}</div>}
-                </div>
-                <div className="mt-1.5">
-                  <Bullets items={s.actions} />
-                </div>
-                {s.watch_for.length > 0 && (
-                  <div className="mt-1.5">
-                    <div className="text-[11px] font-semibold text-amber-200/90">Watch for</div>
-                    <Bullets items={s.watch_for} tone="warn" />
-                  </div>
-                )}
-                <div className="mt-1.5">
-                  <Chips evidence={s.evidence} />
-                </div>
-              </Card>
-            ))}
-          </Section>
-          {w.ongoing_care.pest_watch.length > 0 && (
-            <Section title="Pest watch">
-              {w.ongoing_care.pest_watch.map((p) => (
-                <Card key={p.id}>
-                  <div className="font-medium text-[13px]">{p.title}</div>
-                  <div className="mt-1 text-[11px] font-semibold text-amber-200/90">Signs</div>
-                  <Bullets items={p.signs} tone="warn" />
-                  <div className="mt-1 text-[11px] font-semibold text-cyan-200/90">Actions</div>
-                  <Bullets items={p.actions} />
-                  {p.bio_options.map((b, i) => (
-                    <div key={i} className="mt-1.5 rounded-lg bg-white/[0.03] p-2 text-[12px]">
-                      <div className="font-medium">{b.name}</div>
-                      <div className="text-ivory/70">{b.preparation}</div>
-                      <Bullets items={b.safe_use} />
-                      <Bullets items={b.cautions} tone="safety" />
-                    </div>
-                  ))}
-                  <Bullets items={p.cautions} tone="safety" />
-                  <div className="mt-1.5">
-                    <Chips evidence={p.evidence} />
-                  </div>
-                </Card>
-              ))}
-            </Section>
-          )}
-          {w.ongoing_care.dry_spell_plan.length > 0 && (
-            <Section title="Dry-spell plan (tasks at Water Storage)">
-              {w.ongoing_care.dry_spell_plan.map((r) => (
-                <RecCard key={r.id} rec={r} />
-              ))}
-            </Section>
-          )}
-        </>
-      )}
+      {tab === "care" && <CareTab plan={plan} view={view} stages={stages} sown={view.sown} onAdvance={advanceStage} onFinish={finishCare} />}
     </GlassPanel>
   );
 }

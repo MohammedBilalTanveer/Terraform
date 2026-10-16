@@ -5,6 +5,7 @@ import EvidenceDrawer from "./EvidenceDrawer";
 import ModeSwitcher from "./ModeSwitcher";
 import RestartButton from "./RestartButton";
 import HeaderMenu from "./HeaderMenu";
+import WakeBanner from "./WakeBanner";
 import { BackendPill, GenerationModePill, KbOnlyPill, KbPill, SavePill } from "./StatusPills";
 import Toasts from "./Toasts";
 
@@ -68,6 +69,7 @@ export default function AppShell({ children, showStatus = true }: { children: Re
           </div>
         )}
       </header>
+      <WakeBanner />
       {children}
       <EvidenceDrawer />
       <Toasts />

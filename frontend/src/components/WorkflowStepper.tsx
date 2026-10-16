@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { WORKFLOW_STEPS } from "../types/terraform";
-import type { StepId } from "../types/terraform";
+import type { StepId, StepStatus } from "../types/terraform";
 import { useTerraform } from "../store/terraformStore";
 import { STATUS_META, StatusIcon, cx } from "./ui";
-import { rubricStage, useStepStatuses } from "./workflow";
+import { rubricStage, useStepStatuses, stepPrereqs } from "./workflow";
 
 export type WorkflowStepperProps = { orientation?: "vertical" | "horizontal"; className?: string; onNavigate?: (id: StepId) => void };
 
@@ -12,6 +12,10 @@ export default function WorkflowStepper({ orientation = "vertical", className, o
   const current = useTerraform((s) => s.currentStep);
   const setCurrentStep = useTerraform((s) => s.setCurrentStep);
   const statuses = useStepStatuses();
+  const plan = useTerraform((s) => s.plan);
+  const selectedCropId = useTerraform((s) => s.selectedCropId);
+  /** Planting / Care / Harvest show a lock while the crop or the readiness gate is still missing. */
+  const lockedStep = (id: StepId) => stepPrereqs(id, plan, selectedCropId);
   const activeRef = useRef<HTMLButtonElement>(null);
   const completeCount = Object.values(statuses).filter((s) => s === "complete").length;
 
@@ -29,7 +33,8 @@ export default function WorkflowStepper({ orientation = "vertical", className, o
       <nav aria-label="Workflow steps" className={cx("no-scrollbar -mx-4 overflow-x-auto px-4", className)}>
         <ol className="flex w-max gap-2 pb-1">
           {WORKFLOW_STEPS.map((s) => {
-            const st = statuses[s.id];
+            const missing = lockedStep(s.id);
+            const st: StepStatus = missing.length && statuses[s.id] !== "complete" ? "blocked" : statuses[s.id];
             const active = s.id === current;
             return (
               <li key={s.id}>
@@ -38,7 +43,7 @@ export default function WorkflowStepper({ orientation = "vertical", className, o
                   type="button"
                   onClick={() => go(s.id)}
                   aria-current={active ? "step" : undefined}
-                  aria-label={`Step ${s.n}: ${s.label} (${rubricStage(s.id).full}) — ${STATUS_META[st].label}`}
+                  aria-label={`Step ${s.n}: ${s.label} (${rubricStage(s.id).full}) — ${missing.length ? `Locked: ${missing.map((p) => p.label.toLowerCase()).join(" and ")}` : STATUS_META[st].label}`}
                   className={cx(
                     "flex items-center gap-2 rounded-xl border px-3 py-2 font-heading text-sm transition-colors",
                     active ? "border-cyan/50 bg-gradient-to-r from-cyan/20 to-violet/20 text-ivory" : "border-white/10 bg-white/[0.03] text-mist",
@@ -67,9 +72,10 @@ export default function WorkflowStepper({ orientation = "vertical", className, o
       </div>
       <ol className="relative space-y-1">
         {WORKFLOW_STEPS.map((s, i) => {
-          const st = statuses[s.id];
+          const missing = lockedStep(s.id);
+            const st: StepStatus = missing.length && statuses[s.id] !== "complete" ? "blocked" : statuses[s.id];
           const active = s.id === current;
-          const m = STATUS_META[st];
+          const m = missing.length && st === "blocked" ? { ...STATUS_META.blocked, label: "Locked" } : STATUS_META[st];
           return (
             <li key={s.id} className="relative">
               {i < WORKFLOW_STEPS.length - 1 && (
@@ -79,7 +85,7 @@ export default function WorkflowStepper({ orientation = "vertical", className, o
                 type="button"
                 onClick={() => go(s.id)}
                 aria-current={active ? "step" : undefined}
-                aria-label={`Step ${s.n}: ${s.label} (${rubricStage(s.id).full}) — ${m.label}`}
+                aria-label={`Step ${s.n}: ${s.label} (${rubricStage(s.id).full}) — ${m.label}${missing.length ? `: ${missing.map((p) => p.label.toLowerCase()).join(" and ")}` : ""}`}
                 className={cx(
                   "group relative flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left transition-colors",
                   active ? "text-ivory" : "text-mist hover:bg-white/[0.04] hover:text-ivory",

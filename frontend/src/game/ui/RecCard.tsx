@@ -4,7 +4,8 @@ import { CheckCircle2, ChevronDown, ChevronUp, Circle, Navigation, Hammer } from
 import type { Recommendation } from "../../types/terraform";
 import { useTerraform } from "../../store/terraformStore";
 import { useGame, type ActionKind } from "../gameStore";
-import { GROUP_STATION, SECTION_LABEL, type PlanItem } from "../planData";
+import { GROUP_STATION, SECTION_LABEL, lockOf, type PlanItem } from "../planData";
+import { LockedNotice } from "./lock";
 import { stationById, type StationId } from "../worldConfig";
 import { Bullets, Card, Chips, GhostButton, Pill, PrimaryButton, ThisOneBadge, cx, humanize } from "./kit";
 
@@ -25,6 +26,8 @@ export function TaskButton({ item, here }: { item: PlanItem; here: StationId }) 
   const completed = useTerraform((s) => s.completedTasks);
   const toggleTask = useTerraform((s) => s.toggleTask);
   const loading = useTerraform((s) => s.loading);
+  const plan = useTerraform((s) => s.plan);
+  const crop = useTerraform((s) => s.selectedCropId);
   const runAction = useGame((s) => s.runAction);
   const setTargetOverride = useGame((s) => s.setTargetOverride);
   const setOverlay = useGame((s) => s.setOverlay);
@@ -47,6 +50,8 @@ export function TaskButton({ item, here }: { item: PlanItem; here: StationId }) 
     );
   }
   if (!atStation && here !== "outpost") return null;
+  const lock = lockOf(plan, item, crop);
+  if (lock) return <LockedNotice reason={lock} here={here} />;
   if (!atStation) {
     return (
       <GhostButton
@@ -77,7 +82,44 @@ export function TaskButton({ item, here }: { item: PlanItem; here: StationId }) 
   );
 }
 
-export default function RecCard({ rec, item, here, defaultOpen = false }: { rec: Recommendation; item?: PlanItem; here?: StationId; defaultOpen?: boolean }) {
+export function RecDetails({ rec }: { rec: Recommendation }) {
+  return (
+    <div className="mt-3 space-y-2.5 border-t border-white/10 pt-3">
+      {rec.actions?.length > 0 && (
+        <div>
+          <div className="mb-1 text-[11px] font-semibold text-cyan-200/90">Steps</div>
+          <Bullets items={rec.actions} />
+        </div>
+      )}
+      {rec.everyday_amounts?.length > 0 && (
+        <div>
+          <div className="mb-1 text-[11px] font-semibold text-cyan-200/90">Everyday amounts</div>
+          <Bullets items={rec.everyday_amounts} />
+        </div>
+      )}
+      {rec.why_this_matches?.length > 0 && (
+        <div>
+          <div className="mb-1 text-[11px] font-semibold text-cyan-200/90">Why this matches your land</div>
+          <Bullets items={rec.why_this_matches} />
+        </div>
+      )}
+      {rec.limitations?.length > 0 && (
+        <div>
+          <div className="mb-1 text-[11px] font-semibold text-amber-200/90">Limitations</div>
+          <Bullets items={rec.limitations} tone="warn" />
+        </div>
+      )}
+      {rec.safety_notes?.length > 0 && (
+        <div>
+          <div className="mb-1 text-[11px] font-semibold text-rose-200/90">Safety</div>
+          <Bullets items={rec.safety_notes} tone="safety" />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function RecCard({ rec, item, here, defaultOpen = false, compact = false }: { rec: Recommendation; item?: PlanItem; here?: StationId; defaultOpen?: boolean; compact?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   const completed = useTerraform((s) => s.completedTasks);
   const done = !!rec.task_id && completed.includes(rec.task_id);
@@ -101,43 +143,10 @@ export default function RecCard({ rec, item, here, defaultOpen = false }: { rec:
             {rec.category && <Pill tone="muted">{humanize(rec.category)}</Pill>}
             <Pill tone={rec.confidence === "high" ? "sprout" : rec.confidence === "medium" ? "amber" : "coral"}>confidence: {rec.confidence}</Pill>
           </div>
-          {rec.explanation && <p className="mt-2 text-[13px] leading-relaxed text-ivory/85">{rec.explanation}</p>}
+          {rec.explanation && (!compact || open) && <p className="mt-2 text-[13px] leading-relaxed text-ivory/85">{rec.explanation}</p>}
         </div>
       </div>
-      {open && (
-        <div className="mt-3 space-y-2.5 border-t border-white/10 pt-3">
-          {rec.actions?.length > 0 && (
-            <div>
-              <div className="mb-1 text-[11px] font-semibold text-cyan-200/90">Steps</div>
-              <Bullets items={rec.actions} />
-            </div>
-          )}
-          {rec.everyday_amounts?.length > 0 && (
-            <div>
-              <div className="mb-1 text-[11px] font-semibold text-cyan-200/90">Everyday amounts</div>
-              <Bullets items={rec.everyday_amounts} />
-            </div>
-          )}
-          {rec.why_this_matches?.length > 0 && (
-            <div>
-              <div className="mb-1 text-[11px] font-semibold text-cyan-200/90">Why this matches your land</div>
-              <Bullets items={rec.why_this_matches} />
-            </div>
-          )}
-          {rec.limitations?.length > 0 && (
-            <div>
-              <div className="mb-1 text-[11px] font-semibold text-amber-200/90">Limitations</div>
-              <Bullets items={rec.limitations} tone="warn" />
-            </div>
-          )}
-          {rec.safety_notes?.length > 0 && (
-            <div>
-              <div className="mb-1 text-[11px] font-semibold text-rose-200/90">Safety</div>
-              <Bullets items={rec.safety_notes} tone="safety" />
-            </div>
-          )}
-        </div>
-      )}
+      {open && <RecDetails rec={rec} />}
       <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2">
         <Chips evidence={rec.evidence} />
         <button type="button" onClick={() => setOpen(!open)} className="inline-flex items-center gap-0.5 text-[11px] text-ivory/60 hover:text-ivory">

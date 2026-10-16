@@ -4,7 +4,7 @@ import type { StepId, StepStatus } from "../types/terraform";
 import { useTerraform } from "../store/terraformStore";
 import EvidenceChips from "../components/EvidenceChips";
 import { Badge, BulletList, Panel, StatusBadge, arr } from "../components/ui";
-import { getStepMeta, rubricStage, stepIndex, stepInfo } from "../components/workflow";
+import { getStepMeta, goToStep, rubricStage, stepIndex, stepInfo, useStepPrereqs } from "../components/workflow";
 
 export default function StepFrame({ step, status, children }: { step: StepId; status: StepStatus; children: ReactNode }) {
   const analysis = useTerraform((s) => s.analysis);
@@ -13,10 +13,13 @@ export default function StepFrame({ step, status, children }: { step: StepId; st
   const info = stepInfo(step);
   const meta = getStepMeta(step, analysis, plan);
   const blockedUntil = stepIndex(step) > stepIndex("next_action") ? arr(plan?.workflow?.next_action?.blocked_until) : [];
-  const blocked = status === "blocked";
+  const prereqs = useStepPrereqs(step);
+  const lockedByPrereq = prereqs.length > 0;
+  const blocked = status === "blocked" || lockedByPrereq;
   // The readiness gate is where a block gets resolved, so its content is never hidden.
   const gatePage = step === "next_action";
-  const showContent = !blocked || viewAnyway || gatePage;
+  // Planting / Care / Harvest always show their content: their tasks are individually locked, so nothing can be ticked early.
+  const showContent = !blocked || viewAnyway || gatePage || lockedByPrereq;
 
   return (
     <div>
@@ -42,10 +45,21 @@ export default function StepFrame({ step, status, children }: { step: StepId; st
               <Lock className="h-5 w-5" aria-hidden />
             </span>
             <div className="min-w-[12rem] flex-1">
-              <div className="font-heading font-semibold text-rose-100">This step is blocked</div>
+              <div className="font-heading font-semibold text-rose-100">{lockedByPrereq ? "Locked until the earlier steps are done" : "This step is blocked"}</div>
+              {lockedByPrereq && (
+                <ul className="mt-2 grid gap-2">
+                  {prereqs.map((p) => (
+                    <li key={p.key} className="flex flex-wrap items-center gap-2 text-sm text-ivory/90">
+                      <Lock className="h-3.5 w-3.5 shrink-0 text-coral" aria-hidden />
+                      <span className="min-w-0 flex-1">{p.label}</span>
+                      <button type="button" className="btn-ghost !px-3 !py-1.5 text-sm" onClick={() => goToStep(p.step)}>{p.cta}</button>
+                    </li>
+                  ))}
+                </ul>
+              )}
               {meta?.summary && <p className="mt-1 text-sm leading-relaxed text-ivory/80">{meta.summary}</p>}
               {arr(meta?.warnings).length > 0 && <BulletList items={meta!.warnings} tone="coral" className="mt-2" />}
-              {blockedUntil.length > 0 && (
+              {!lockedByPrereq && blockedUntil.length > 0 && (
                 <div className="mt-3">
                   <div className="eyebrow mb-1">Blocked until</div>
                   <BulletList items={blockedUntil} tone="coral" />

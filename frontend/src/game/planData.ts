@@ -130,6 +130,50 @@ export const taskItems = (items: PlanItem[]) => items.filter((i) => i.rec.task_i
 const has = (list: string[], id: string | null) => !!id && list.includes(id);
 
 // ---------------------------------------------------------------------------------------------
+// v1.4 enforced order: prepare → readiness → choose crop → plant → care → harvest.
+export type TaskPhase = "prepare" | "readiness" | "plant";
+export type LockReason = "choose_crop" | "pass_gate" | "choose_crop_and_pass_gate";
+
+export const LOCK_TEXT: Record<LockReason, string> = {
+  choose_crop: "Choose a crop first",
+  pass_gate: "Pass the readiness gate first",
+  choose_crop_and_pass_gate: "Pass the readiness gate and choose a crop first",
+};
+
+/** Task ids that some readiness gate depends on (never gated by crop/readiness). */
+export function gateTaskIds(plan: PlanResponse | null): Set<string> {
+  const s = new Set<string>();
+  for (const g of plan?.workflow.next_action?.readiness_gate ?? []) for (const id of g.satisfied_by_tasks ?? []) s.add(id);
+  return s;
+}
+
+export const isGateItem = (plan: PlanResponse | null, item: PlanItem) => !!item.rec.task_id && gateTaskIds(plan).has(item.rec.task_id);
+
+export function taskPhase(plan: PlanResponse | null, item: PlanItem): TaskPhase {
+  const id = item.rec.task_id ?? "";
+  if (gateTaskIds(plan).has(id)) return "readiness";
+  if (item.rec.phase) return item.rec.phase;
+  // fallback when the backend/KB doesn't send `phase`
+  if (item.action === "sow" || /sow|plant_tree/.test(id)) return "plant";
+  if (item.section === "gate" || /confirm|recheck|test_/.test(id)) return "readiness";
+  return "prepare";
+}
+
+/** Local (always current) lock state; plant-phase tasks need a chosen crop AND a passed gate. */
+export function lockOf(plan: PlanResponse | null, item: PlanItem, selectedCropId: string | null): LockReason | null {
+  if (!plan || taskPhase(plan, item) !== "plant") return null;
+  const needCrop = !selectedCropId;
+  const needGate = plan.workflow.next_action.planting_readiness === "not_ready";
+  if (needCrop && needGate) return "choose_crop_and_pass_gate";
+  if (needGate) return "pass_gate";
+  if (needCrop) return "choose_crop";
+  return null;
+}
+
+/** Which Plot tab unlocks the task. */
+export const unlockTab = (r: LockReason): "gate" | "crops" => (r === "choose_crop" ? "crops" : "gate");
+
+// ---------------------------------------------------------------------------------------------
 export type PlotStage = "unassessed" | "inspected" | "planned" | "prepared" | "crop_selected" | "planted" | "growing" | "harvest_ready";
 
 export type WorldView = {
@@ -148,6 +192,7 @@ export type WorldView = {
   careTotal: number;
   readiness: PlanResponse["workflow"]["next_action"]["planting_readiness"] | null;
   cropName: string | null;
+  careDone: boolean;
 };
 
 export function worldView(
@@ -167,7 +212,9 @@ export function worldView(
   const beds = prepDoneItems.filter((i) => /bed/.test(k(i))).length;
   const pots = prepDoneItems.filter((i) => /container|pot/.test(k(i))).length;
   const terr = items.filter((i) => i.group === "terraces" && i.rec.task_id);
-  const sown = (sowItems.length > 0 && sowItems.some(done)) || farm.sown || plan?.steps_status?.planting_method === "complete";
+  // "sown" requires a chosen crop AND a passed readiness gate AND the sowing task done (or the manual sow action)
+  const orderOk = !!selectedCropId && !!plan && plan.workflow.next_action.planting_readiness !== "not_ready";
+  const sown = orderOk && ((sowItems.length > 0 && sowItems.some(done)) || farm.sown || plan?.steps_status?.planting_method === "complete");
   const stages = plan?.workflow.ongoing_care?.stages ?? [];
   const careTotal = stages.length;
   const careIdx = Math.min(farm.careIdx, Math.max(0, careTotal - 1));
@@ -182,7 +229,8 @@ export function worldView(
   if (plan && prepDoneItems.length > 0) stage = "prepared";
   if (plan && selectedCropId) stage = "crop_selected";
   if (plan && selectedCropId && sown) stage = growth > 0 ? "growing" : "planted";
-  if (plan && selectedCropId && sown && careTotal > 0 && careIdx >= careTotal - 1) stage = "harvest_ready";
+  // harvest-ready only after the LAST care stage has been completed ("Finish care")
+  if (plan && selectedCropId && sown && (careTotal === 0 ? !!farm.careDone : careIdx >= careTotal - 1 && !!farm.careDone)) stage = "harvest_ready";
 
   return {
     stage,
@@ -200,6 +248,7 @@ export function worldView(
     careTotal,
     readiness: plan?.workflow.next_action.planting_readiness ?? null,
     cropName: crop?.name ?? null,
+    careDone: !!farm.careDone,
   };
 }
 
@@ -257,16 +306,17 @@ export function guidance(args: {
   let step: StepId = "next_action";
   let evidence: Evidence | null = na.evidence;
 
-  const firstDoFirst = open.find((i) => i.section === "do_first");
+  const firstDoFirst = open.find((i) => i.section === "do_first" && !lockOf(plan, i, selectedCropId));
   const gateBlock = na.readiness_gate.find((g) => g.required && !g.satisfied && !g.accepted_risk);
   const gateItem = gateBlock ? open.find((i) => gateBlock.satisfied_by_tasks.includes(i.rec.task_id ?? "")) : undefined;
 
+  // order: prepare → readiness → choose crop → plant → care → harvest
   if (firstDoFirst) {
     target = GROUP_STATION[firstDoFirst.group];
     step = firstDoFirst.step;
     evidence = firstDoFirst.rec.evidence;
-  } else if (na.planting_readiness === "not_ready" && gateItem) {
-    target = GROUP_STATION[gateItem.group];
+  } else if (na.planting_readiness === "not_ready") {
+    target = gateItem ? GROUP_STATION[gateItem.group] : "plot";
     step = "next_action";
   } else if (!selectedCropId) {
     target = "plot";

@@ -88,7 +88,8 @@
           "type": "object",
           "required": [
             "task_id",
-            "label"
+            "label",
+            "phase"
           ],
           "additionalProperties": false,
           "properties": {
@@ -98,6 +99,13 @@
             },
             "label": {
               "type": "string"
+            },
+            "phase": {
+              "enum": [
+                "prepare",
+                "readiness",
+                "plant"
+              ]
             }
           }
         }

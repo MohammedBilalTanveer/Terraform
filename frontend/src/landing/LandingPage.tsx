@@ -7,6 +7,7 @@ import { useTerraform } from "../store/terraformStore";
 import Background from "../components/Background";
 import ConfirmDialog from "../components/ConfirmDialog";
 import Toasts from "../components/Toasts";
+import WakeBanner from "../components/WakeBanner";
 import { Logo } from "../components/AppShell";
 import { BackendPill, KbOnlyPill, KbPill } from "../components/StatusPills";
 import { cx } from "../components/ui";
@@ -75,6 +76,7 @@ export default function LandingPage() {
   return (
     <div className={cx("tap-scope relative isolate min-h-screen overflow-x-hidden", reduceMotion && "reduce-motion")}>
       <Background intensity="hero" />
+      <WakeBanner />
 
       <header className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-5 lg:px-8">
         <Logo />

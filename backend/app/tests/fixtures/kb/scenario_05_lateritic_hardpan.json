@@ -248,6 +248,24 @@
      }
     },
     {
+     "id": "gate_planting_timed_to_rains",
+     "label": "Planting timed to the rains",
+     "detail": "Fixture detail.",
+     "required": true,
+     "satisfied_by_tasks": [
+      "task_confirm_reliable_rains"
+     ],
+     "verification": null,
+     "applies_when": {
+      "any_tags": [],
+      "all_tags": [],
+      "none_tags": []
+     },
+     "source_ids": [
+      "src_fixture_soils"
+     ]
+    },
+    {
      "id": "gate_trial_plot_marked",
      "label": "Trial plot marked",
      "detail": "Fixture detail.",

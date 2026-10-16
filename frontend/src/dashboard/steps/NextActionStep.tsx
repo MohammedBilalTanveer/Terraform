@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, ChevronDown, CircleCheck, CircleX, Compass, Hourglass, FlaskConical, ListChecks, Lock, LockOpen, RotateCcw, ShieldAlert, TriangleAlert, X } from "lucide-react";
+import { Check, ChevronDown, CircleCheck, CircleX, Compass, Hourglass, Info, FlaskConical, ListChecks, Lock, LockOpen, RotateCcw, ShieldAlert, TriangleAlert, X } from "lucide-react";
 import type { GateItem, Recommendation } from "../../types/terraform";
 import { useTerraform } from "../../store/terraformStore";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import EvidenceChips from "../../components/EvidenceChips";
 import { Spinner } from "../../components/LoadingAndError";
 import { Badge, BulletList, Panel, SectionTitle, arr, cx, humanize } from "../../components/ui";
-import { taskLabelMap } from "../../components/workflow";
+import LockedTask from "../../components/LockedTask";
+import { planTaskRecs, taskLabelMap, useTaskLock } from "../../components/workflow";
 import { NeedPlan } from "./common";
 
 const READINESS = {
@@ -24,10 +25,13 @@ export default function NextActionStep() {
   const na = plan.workflow.next_action;
   const labels = taskLabelMap(plan);
   const gateTasks: Record<string, Recommendation> = {};
+  // gate_tasks first (they cover every applicable gate); any other plan task is a fallback for the "How" panel.
   for (const r of arr(na.gate_tasks)) if (r.task_id) gateTasks[r.task_id] = r;
+  for (const r of planTaskRecs(plan)) if (r.task_id && !gateTasks[r.task_id]) gateTasks[r.task_id] = r;
   const r = READINESS[na.planting_readiness] ?? READINESS.not_ready;
   const Icon = r.icon;
   const gates = arr(na.readiness_gate);
+  const firstOpenGate = gates.find((g) => !g.satisfied && !g.accepted_risk)?.id ?? null;
   const satisfiedCount = gates.filter((g) => g.satisfied || g.accepted_risk).length;
   const withTests = gates.filter((g) => g.verification).length;
 
@@ -78,7 +82,7 @@ export default function NextActionStep() {
         )}
         <ul className="grid gap-3">
           {gates.map((g) => (
-            <GateCard key={g.id} gate={g} labels={labels} gateTasks={gateTasks} onAcceptRisk={() => setConfirm(g)} />
+            <GateCard key={g.id} gate={g} labels={labels} gateTasks={gateTasks} testOpenByDefault={g.id === firstOpenGate} onAcceptRisk={() => setConfirm(g)} />
           ))}
         </ul>
       </section>
@@ -125,13 +129,16 @@ function GateCard({
   gate: g,
   labels,
   gateTasks,
+  testOpenByDefault,
   onAcceptRisk,
 }: {
   gate: GateItem;
   labels: Record<string, string>;
   gateTasks: Record<string, Recommendation>;
+  testOpenByDefault: boolean;
   onAcceptRisk: () => void;
 }) {
+  const [testOpen, setTestOpen] = useState(testOpenByDefault);
   const completed = useTerraform((s) => s.completedTasks);
   const gateResults = useTerraform((s) => s.gateResults ?? {});
   const toggleTask = useTerraform((s) => s.toggleTask);
@@ -185,7 +192,7 @@ function GateCard({
             {risk && <Badge tone="amber">Risk accepted · test skipped</Badge>}
             {!met && blocking && <Badge tone={blocking.tone}>{blocking.label}</Badge>}
           </div>
-          {g.detail && <p className="mt-1 text-sm leading-relaxed text-ivory/75">{g.detail}</p>}
+          {g.detail && (testOpen || failed) && <p className="mt-1 text-sm leading-relaxed text-ivory/75">{g.detail}</p>}
 
           {/* Two indicators: task + test */}
           <div className="mt-3 flex flex-wrap gap-2" aria-label="Gate conditions">
@@ -222,7 +229,19 @@ function GateCard({
             </div>
           )}
 
-          {v && (
+          {(v || g.detail) && !failed && (
+            <button
+              type="button"
+              onClick={() => setTestOpen((o) => !o)}
+              aria-expanded={testOpen}
+              className="mt-3 flex min-h-11 items-center gap-1.5 font-heading text-sm font-semibold text-violet-200 hover:text-ivory"
+            >
+              {v ? <FlaskConical className="h-4 w-4" aria-hidden /> : <Info className="h-4 w-4" aria-hidden />}
+              {testOpen ? "Hide details" : v ? "Show details & the empirical test" : "Show details"}
+              <ChevronDown className={cx("h-4 w-4 transition-transform", testOpen && "rotate-180")} aria-hidden />
+            </button>
+          )}
+          {v && (testOpen || failed) && (
             <div className={cx("mt-4 rounded-xl border p-4", failed ? "border-coral/40 bg-coral/[0.07]" : result === "pass" ? "border-sprout/30 bg-sprout/[0.05]" : "border-violet/25 bg-violet/[0.05]")}>
               <div className="eyebrow mb-2 flex items-center gap-1.5 !text-violet-100">
                 <FlaskConical className="h-3.5 w-3.5" aria-hidden /> Empirical test
@@ -326,6 +345,15 @@ function TaskRow({
 }) {
   const [open, setOpen] = useState(false);
   const hasHow = !!rec && (arr(rec.actions).length > 0 || !!rec.explanation);
+  const lock = useTaskLock(rec ?? { id: taskId, task_id: taskId } as Recommendation);
+  if (lock.locked && !done) {
+    // never an active checkbox for a locked task
+    return (
+      <li>
+        <LockedTask reason={lock.reason} label={label} />
+      </li>
+    );
+  }
   return (
     <li className={cx("rounded-xl border", done ? "border-sprout/40 bg-sprout/[0.06]" : "border-white/12 bg-white/[0.03]")} data-incomplete={!done ? "true" : undefined}>
       <div className="flex items-center gap-2">

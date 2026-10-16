@@ -87,6 +87,15 @@ METHOD_GROUPS = {
     "irrigation": "irrigation",
 }
 VERIFICATION_KEYS = ("test", "pass", "fail", "if_fail")
+PLANT_TASKS = ("task_sow_seeds", "task_mulch_after_sowing", "task_plant_tree_seedlings")
+SOW_TASKS = ("task_sow_seeds", "task_plant_tree_seedlings")  # sowing/planting itself starts care + harvest
+READINESS_WORDS = ("confirm", "test", "recheck", "verify", "check")
+PHASE_ORDER = {"prepare": 0, "readiness": 1, "plant": 2}
+LOCK_MESSAGES = {
+    "choose_crop": "Choose a crop first.",
+    "pass_gate": "Pass the readiness gate first.",
+    "choose_crop_and_pass_gate": "Choose a crop and pass the readiness gate first.",
+}
 LONG_TERM_CATEGORIES = ("tree", "soil_builder")  # shown as long-term options, never ranked as food crops
 SCARCITY_MISSING = {"no_compost": ["res_compost", "res_manure"]}
 DRY_SPELL_CATEGORIES = ("mulch", "water_capture")
@@ -188,6 +197,62 @@ def is_fizz_gate(g: dict) -> bool:
     return "fizz" in hay or "baking_soda" in hay
 
 
+def task_phase(kb: KnowledgeBase, task_id: Optional[str]) -> Optional[str]:
+    """Workflow phase of a task. The KB value (task.phase) wins; for older KBs without it a fallback is derived:
+    sow/mulch-after-sowing/tree-planting tasks and tasks on `sowing` planting methods -> plant, except
+    confirmation/test/check tasks -> readiness; everything else -> prepare."""
+    if not task_id:
+        return None
+    owners = [kb.get(o) for o in kb.task_owner.get(task_id, [])]
+    for rec in owners:
+        ph = ((rec or {}).get("task") or {}).get("phase")
+        if ph in PHASE_ORDER:
+            return ph
+    if task_id in PLANT_TASKS:
+        return "plant"
+    if any(w in task_id for w in READINESS_WORDS):
+        return "readiness"
+    if any(r and r.get("method_type") == "sowing" for r in owners):
+        return "plant"
+    return "prepare"
+
+
+def lock_state(phase: Optional[str], readiness: str, crop_selected: bool):
+    """plant-phase tasks need a chosen crop AND planting_readiness != not_ready; others are never locked."""
+    if phase != "plant":
+        return False, None
+    need_gate = readiness == "not_ready"
+    need_crop = not crop_selected
+    if need_gate and need_crop:
+        return True, "choose_crop_and_pass_gate"
+    if need_gate:
+        return True, "pass_gate"
+    if need_crop:
+        return True, "choose_crop"
+    return False, None
+
+
+def annotate_tasks(kb: KnowledgeBase, node, readiness: str, crop_selected: bool) -> None:
+    """Add phase / locked / locked_reason to every Recommendation (dict with task_id + why_this_matches)."""
+    if isinstance(node, dict):
+        if "task_id" in node and "why_this_matches" in node:
+            ph = task_phase(kb, node.get("task_id"))
+            locked, reason = lock_state(ph, readiness, crop_selected)
+            node.update({"phase": ph, "locked": locked, "locked_reason": reason})
+        for v in node.values():
+            annotate_tasks(kb, v, readiness, crop_selected)
+    elif isinstance(node, list):
+        for v in node:
+            annotate_tasks(kb, v, readiness, crop_selected)
+
+
+def gate_phase(kb: KnowledgeBase, g: dict, completed: List[str]) -> str:
+    if g.get("task_done"):
+        return "readiness"  # only the empirical test remains
+    todo = [t for t in g.get("satisfied_by_tasks") or [] if t not in completed]
+    return task_phase(kb, todo[0]) if todo else "readiness"
+
+
 def verification_of(g: dict) -> Optional[dict]:
     v = g.get("verification")
     if not isinstance(v, dict):
@@ -245,6 +310,7 @@ def compute_gates(kb: KnowledgeBase, scenario: dict, tags: Set[str], completed: 
         readiness = "ready_with_accepted_risk"
     else:
         readiness = "ready"
+    blocked = sorted(blocked, key=lambda g: PHASE_ORDER.get(gate_phase(kb, g, completed), 1))  # stable
     blocked_until = [g["label"] for g in blocked]
     if blocked:
         b = blocked[0]
@@ -651,6 +717,7 @@ def build_plan(kb: KnowledgeBase, scenario: dict, tr: TagResult, obs: dict, sele
 
     # ---------------- statuses & step metas
     steps_status = compute_steps_status(obs, fix_tasks, method_tasks, completed_tasks, readiness, sel_valid)
+    steps_status = _apply_sown_gate(steps_status, completed_tasks, readiness, sel_valid)
     unk_q = lambda sid: unknown_questions(scenario, tr, sid)  # noqa: E731
 
     fix_step = step("fix_protocol", steps_status["fix_protocol"], STEP_TITLES["fix_protocol"],
@@ -731,6 +798,8 @@ def build_plan(kb: KnowledgeBase, scenario: dict, tr: TagResult, obs: dict, sele
 
     workflow = {"fix_protocol": fix_step, "next_action": na_step, "crop_suggestions": cs_step,
                 "timeframe": tf_step, "planting_method": pm_step, "ongoing_care": oc_step, "harvest": hv_step}
+
+    annotate_tasks(kb, workflow, readiness, bool(sel_valid))
 
     arch = archetype(kb, scenario, tr)
     situation = situation_summary(scenario, tr, arch)
@@ -815,9 +884,12 @@ def compute_steps_status(obs: dict, fix_tasks: List[str], method_tasks: List[str
         return "complete" if n == len(tasks) else "in_progress" if n else "ready"
 
     gated = readiness != "not_ready"
-    pm = frac(method_tasks) if gated else "blocked"
-    if pm == "ready" and gated and any(t in done for t in method_tasks):
-        pm = "in_progress"
+    if not gated:
+        pm = "blocked"
+    elif not selected_crop:
+        pm = "ready"  # unlocks only once a crop is chosen
+    else:
+        pm = frac(method_tasks)
     return {
         "observation_log": "complete" if (obs.get("description") or "").strip() else "needs_input",
         "input_echo": "complete",
@@ -830,3 +902,13 @@ def compute_steps_status(obs: dict, fix_tasks: List[str], method_tasks: List[str
         "ongoing_care": "ready" if gated else "blocked",
         "harvest": "ready" if gated else "blocked",
     }
+
+
+def _apply_sown_gate(steps_status: Dict[str, str], completed: List[str], readiness: str,
+                     selected_crop: Optional[str]) -> Dict[str, str]:
+    """Care and harvest stay blocked until a plant-phase sow task is done (with a crop chosen and the gate passed)."""
+    sown = readiness != "not_ready" and bool(selected_crop) and any(t in completed for t in SOW_TASKS)
+    out = dict(steps_status)
+    out["ongoing_care"] = "ready" if sown else "blocked"
+    out["harvest"] = "ready" if sown else "blocked"
+    return out

@@ -59,7 +59,7 @@ export function GlassPanel({
       aria-label={title}
       className={cx(
         // phones: full-width bottom sheet with internal scroll; sm+: right-hand side panel
-        "pointer-events-auto absolute inset-x-0 bottom-0 z-30 flex h-[88dvh] flex-col overflow-hidden rounded-t-2xl border border-cyan-300/20 bg-[#0a1124]/95 text-ivory shadow-[0_0_40px_rgba(7,11,26,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md sm:inset-x-auto sm:bottom-3 sm:right-4 sm:top-16 sm:h-auto sm:rounded-2xl sm:bg-[#0a1124]/88",
+        "pointer-events-auto absolute inset-x-0 bottom-0 z-30 flex h-[88dvh] flex-col overflow-hidden rounded-t-2xl border border-cyan-300/20 bg-[#0a1124] text-ivory shadow-[0_0_40px_rgba(7,11,26,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] sm:inset-x-auto sm:bottom-3 sm:right-4 sm:top-16 sm:h-auto sm:rounded-2xl",
         wide ? "sm:w-[620px]" : "sm:w-[500px]",
       )}
     >
@@ -81,7 +81,7 @@ export function GlassPanel({
           <X className="h-4 w-4" />
         </button>
       </div>
-      <div data-panel-scroll className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 [scrollbar-width:thin]" style={{ touchAction: "pan-y" }}>
+      <div data-panel-scroll className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 [scrollbar-width:thin]" style={{ touchAction: "pan-y", willChange: "transform", transform: "translateZ(0)" }}>
         {children}
       </div>
       {footer && <div className="border-t border-white/10 px-4 py-3">{footer}</div>}

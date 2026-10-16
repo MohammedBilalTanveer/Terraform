@@ -180,6 +180,7 @@ function CheckCardView({ card }: { card: CheckCard }) {
   const setCheckUnable = useTerraform((s) => s.setCheckUnable);
   const loading = useTerraform((s) => s.loading);
   const [pending, setPending] = useState<string | null>(null);
+  const [howOpen, setHowOpen] = useState(false);
 
   const isUnable = unable.includes(card.id);
   const selected = outcomes.find((o) => o.check_id === card.id)?.outcome_id ?? (isUnable ? null : card.user_outcome);
@@ -252,6 +253,19 @@ function CheckCardView({ card }: { card: CheckCard }) {
         </div>
       )}
 
+      {(card.explanation || arr(card.actions).length > 0 || arr(card.everyday_amounts).length > 0 || arr(card.safety_notes).length > 0) && (
+        <button
+          type="button"
+          onClick={() => setHowOpen((o) => !o)}
+          aria-expanded={howOpen}
+          className="mt-3 flex min-h-10 items-center gap-1.5 font-heading text-sm font-semibold text-cyan-200 hover:text-ivory"
+        >
+          <ChevronDown className={cx("h-4 w-4 transition-transform", howOpen && "rotate-180")} aria-hidden />
+          {howOpen ? "Hide how to do this check" : "How to do this check"}
+        </button>
+      )}
+      {howOpen && (
+        <>
       {card.explanation && <p className="mt-3 leading-relaxed text-ivory/85">{card.explanation}</p>}
       {arr(card.actions).length > 0 && (
         <div className="mt-3">
@@ -276,6 +290,9 @@ function CheckCardView({ card }: { card: CheckCard }) {
           <summary className="cursor-pointer text-sm font-semibold text-mist hover:text-ivory">Limitations</summary>
           <BulletList items={card.limitations} tone="amber" className="mt-2" />
         </details>
+      )}
+
+        </>
       )}
 
       <div className="mt-4 rounded-xl border border-white/8 bg-midnight/40 p-3">

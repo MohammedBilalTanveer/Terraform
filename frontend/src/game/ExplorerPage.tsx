@@ -48,26 +48,29 @@ function EnterVeil({ armed }: { armed: boolean }) {
     const t = window.setTimeout(() => setFinished(true), 9000); // never block the world for long
     return () => window.clearTimeout(t);
   }, []);
+  // Fade out with a plain CSS transition and unmount from a timer (not from animation frames), so the
+  // veil can never stay stuck on a device or pane that throttles requestAnimationFrame.
+  const [gone, setGone] = useState(false);
+  useEffect(() => {
+    if (show) return;
+    const t = window.setTimeout(() => setGone(true), 700);
+    return () => window.clearTimeout(t);
+  }, [show]);
+  if (gone) return null;
   return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          key="veil"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.6 } }}
-          className="absolute inset-0 z-[60] grid place-items-center bg-[#1a0d08]"
-          onPointerDown={(e) => e.stopPropagation()}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="text-center">
-            <div className="font-display text-[12px] tracking-[0.4em] text-amber-200/90">ENTERING THE VALLEY…</div>
-            <div className="mx-auto mt-3 h-1 w-40 overflow-hidden rounded-full bg-white/10">
-              <div className="h-full rounded-full bg-gradient-to-r from-amber-300 to-cyan-300 transition-all" style={{ width: `${active ? Math.max(8, progress) : 100}%` }} />
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      className="absolute inset-0 z-[60] grid place-items-center bg-[#1a0d08] transition-opacity duration-500"
+      style={{ opacity: show ? 1 : 0, pointerEvents: show ? "auto" : "none" }}
+      onPointerDown={(e) => e.stopPropagation()}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="text-center">
+        <div className="font-display text-[12px] tracking-[0.4em] text-amber-200/90">ENTERING THE VALLEY…</div>
+        <div className="mx-auto mt-3 h-1 w-40 overflow-hidden rounded-full bg-white/10">
+          <div className="h-full rounded-full bg-gradient-to-r from-amber-300 to-cyan-300 transition-all" style={{ width: `${active ? Math.max(8, progress) : 100}%` }} />
+        </div>
+      </div>
+    </div>
   );
 }
 

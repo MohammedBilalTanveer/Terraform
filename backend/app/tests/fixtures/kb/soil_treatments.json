@@ -51,7 +51,8 @@
    ],
    "task": {
     "task_id": "task_build_pits",
-    "label": "Dig pits"
+    "label": "Dig pits",
+    "phase": "prepare"
    }
   },
   {
@@ -100,7 +101,8 @@
    ],
    "task": {
     "task_id": "task_build_raised_beds",
-    "label": "Build raised beds"
+    "label": "Build raised beds",
+    "phase": "prepare"
    }
   },
   {
@@ -147,7 +149,8 @@
    ],
    "task": {
     "task_id": "task_prepare_containers",
-    "label": "Prepare containers"
+    "label": "Prepare containers",
+    "phase": "prepare"
    }
   },
   {
@@ -202,7 +205,8 @@
    ],
    "task": {
     "task_id": "task_build_stone_lines",
-    "label": "Lay stone lines"
+    "label": "Lay stone lines",
+    "phase": "prepare"
    }
   },
   {
@@ -250,7 +254,8 @@
    ],
    "task": {
     "task_id": "task_plan_overflow",
-    "label": "Plan overflow"
+    "label": "Plan overflow",
+    "phase": "prepare"
    }
   },
   {
@@ -301,7 +306,8 @@
    ],
    "task": {
     "task_id": "task_fill_compost",
-    "label": "Fill compost"
+    "label": "Fill compost",
+    "phase": "prepare"
    }
   },
   {
@@ -348,7 +354,8 @@
    ],
    "task": {
     "task_id": "task_gather_organic_matter",
-    "label": "Gather organic matter"
+    "label": "Gather organic matter",
+    "phase": "prepare"
    }
   },
   {
@@ -397,7 +404,8 @@
    ],
    "task": {
     "task_id": "task_gather_mulch",
-    "label": "Gather mulch"
+    "label": "Gather mulch",
+    "phase": "prepare"
    }
   },
   {
@@ -488,7 +496,8 @@
    ],
    "task": {
     "task_id": "task_mark_trial_plot",
-    "label": "Mark trial plot"
+    "label": "Mark trial plot",
+    "phase": "prepare"
    }
   },
   {
@@ -533,7 +542,8 @@
    ],
    "task": {
     "task_id": "task_recheck_fizz_optional",
-    "label": "Repeat fizz check"
+    "label": "Repeat fizz check",
+    "phase": "readiness"
    }
   },
   {

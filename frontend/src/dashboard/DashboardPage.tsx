@@ -104,8 +104,13 @@ export default function DashboardPage() {
       const el = document.querySelector<HTMLElement>('#main-content [data-incomplete="true"]');
       if (!el) return;
       const r = el.getBoundingClientRect();
-      const visible = r.top >= 80 && r.bottom <= window.innerHeight - 90;
-      if (!visible) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+      const visible = r.top >= 100 && r.top <= window.innerHeight - 140;
+      if (!visible) {
+        // Aim a little below the sticky header, but CLAMP to the real scroll range so we never land past the content.
+        const maxTop = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        const desired = window.scrollY + r.top - Math.round(window.innerHeight * 0.25);
+        window.scrollTo({ top: Math.min(Math.max(0, desired), maxTop), behavior: reduce ? "auto" : "smooth" });
+      }
       el.classList.add("resume-highlight");
       clear = setTimeout(() => el.classList.remove("resume-highlight"), 2400);
     }, reduce ? 150 : 650);

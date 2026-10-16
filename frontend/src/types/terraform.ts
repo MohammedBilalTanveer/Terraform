@@ -61,6 +61,11 @@ export type Recommendation = {
   category: string | null;
   task_id: string | null;
   task_label: string | null;
+  /** v1.4 workflow phase of the task: prepare → readiness → plant */
+  phase?: "prepare" | "readiness" | "plant" | null;
+  /** v1.4: plant-phase tasks are locked until a crop is chosen and the readiness gate passed */
+  locked?: boolean;
+  locked_reason?: "choose_crop" | "pass_gate" | "choose_crop_and_pass_gate" | null;
   evidence: Evidence;
 };
 

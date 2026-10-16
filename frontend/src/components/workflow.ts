@@ -11,6 +11,10 @@ import type {
   StepStatus,
 } from "../types/terraform";
 import { useTerraform } from "../store/terraformStore";
+import { harvestRequirements, planTaskRecs, recLock, stepPrereqs } from "../store/workflowRules";
+
+export { planTaskRecs, recLock, taskPhase, harvestRequirements, stepPrereqs, SOW_TASK_IDS, LOCK_MESSAGE } from "../store/workflowRules";
+export type { TaskLock, Prereq, LockReason } from "../store/workflowRules";
 
 export const STEP_IDS = WORKFLOW_STEPS.map((s) => s.id) as StepId[];
 export const stepIndex = (id: StepId) => STEP_IDS.indexOf(id);
@@ -60,25 +64,6 @@ export function useGenerationMode(): { mode: GenerationMode | null; source: "pla
   return { mode: null, source: null };
 }
 
-/** Every Recommendation in the plan that carries a completable task. */
-export function planTaskRecs(plan: PlanResponse | null): Recommendation[] {
-  if (!plan?.workflow) return [];
-  const fp = plan.workflow.fix_protocol;
-  const pm = plan.workflow.planting_method;
-  const all: Recommendation[] = [
-    ...(fp?.do_first ?? []),
-    ...(fp?.do_next ?? []),
-    ...(fp?.optional ?? []),
-    ...(pm?.methods ?? []),
-    ...(pm?.sowing ?? []),
-    ...(pm?.water_capture ?? []),
-    ...(pm?.irrigation ?? []),
-    ...(plan.workflow.next_action?.gate_tasks ?? []),
-  ];
-  const seen = new Set<string>();
-  return all.filter((r) => r.task_id && !seen.has(r.task_id) && seen.add(r.task_id));
-}
-
 /** task_id → label as given by the API. */
 export function taskLabelMap(plan: PlanResponse | null): Record<string, string> {
   const m: Record<string, string> = {};
@@ -113,4 +98,32 @@ export function rubricStage(id: StepId): { short: string; full: string } {
   const r = RUBRIC_STAGE[id];
   if (!r) return { short: "Intake", full: "Intake" };
   return { short: `Protocol ${r.n}`, full: `Protocol ${r.n} · ${r.name}` };
+}
+
+/** Live lock state of a task-bearing recommendation (re-computed when crop / gate / plan change). */
+export function useTaskLock(rec: Recommendation) {
+  const plan = useTerraform((s) => s.plan);
+  const crop = useTerraform((s) => s.selectedCropId);
+  return recLock(rec, plan, crop);
+}
+
+export function useHarvestRequirements() {
+  const plan = useTerraform((s) => s.plan);
+  const crop = useTerraform((s) => s.selectedCropId);
+  const done = useTerraform((s) => s.completedTasks);
+  return harvestRequirements(plan, crop, done);
+}
+
+export function useStepPrereqs(step: StepId) {
+  const plan = useTerraform((s) => s.plan);
+  const crop = useTerraform((s) => s.selectedCropId);
+  return stepPrereqs(step, plan, crop);
+}
+
+/** Jump to a workflow step from anywhere (works from the 3D Explorer too). */
+export function goToStep(step: StepId) {
+  const t = useTerraform.getState();
+  if (t.mode !== "dashboard") t.setMode("dashboard");
+  t.setCurrentStep(step);
+  if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "auto" });
 }

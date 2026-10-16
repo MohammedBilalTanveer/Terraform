@@ -10,7 +10,7 @@ from ..deps import require_kb, require_scenario, settings_of, store_of
 from ..errors import AppError
 from ..schemas import ObservationInput, PlanRequest, PlanResponse, ProgressRequest, ProgressResponse
 from ..services import llm_rewriter
-from ..services.planner import build_plan, gate_task_done
+from ..services.planner import LOCK_MESSAGES, build_plan, gate_task_done, lock_state, task_phase
 from ..services.tagging import derive_tags
 from .observations import prepare_observation
 from .sessions import get_or_create, now_iso, save
@@ -99,6 +99,7 @@ def update_progress(plan_id: str, body: ProgressRequest, request: Request):
     gate_results = dict(inputs.get("gate_results") or {})
     selected = inputs.get("selected_crop_id")
 
+    complete_task = None
     if body.task_id:
         if body.task_id not in kb.task_ids:
             raise AppError(404, "TASK_NOT_FOUND", f"Task '{body.task_id}' is not defined in the knowledge base.")
@@ -109,7 +110,7 @@ def update_progress(plan_id: str, body: ProgressRequest, request: Request):
                 if isinstance(g, dict) and g.get("id") in accepted and not gate_task_done(g, completed):
                     accepted = [a for a in accepted if a != g.get("id")]
         elif body.task_id not in completed:
-            completed.append(body.task_id)
+            complete_task = body.task_id
     gate_ids = {g.get("id") for g in scenario.get("readiness_gate") or [] if isinstance(g, dict)}
     if body.gate_result is not None:
         gid = body.gate_result.gate_id
@@ -119,6 +120,23 @@ def update_progress(plan_id: str, body: ProgressRequest, request: Request):
             gate_results.pop(gid, None)
         else:
             gate_results[gid] = body.gate_result.result
+    if "selected_crop_id" in body.model_fields_set:
+        if body.selected_crop_id is not None and kb.collection_of(body.selected_crop_id) != "crop_profiles":
+            raise AppError(404, "CROP_NOT_FOUND", f"Crop '{body.selected_crop_id}' is not in the knowledge base.")
+        selected = body.selected_crop_id
+    session = get_or_create(store, plan["session_id"], plan["scenario_id"])
+    if complete_task:
+        # v1.4: plant-phase tasks are locked until a crop is chosen and the readiness gate has passed
+        trial = _assemble(request, plan_id=plan_id, created_at=plan["meta"]["created_at"], session=session,
+                          scenario=scenario, observation=inputs.get("observation") or {"description": ""},
+                          selected_crop_id=selected, completed=completed, accepted=accepted,
+                          gate_results=gate_results, previous=plan)
+        sel_ok = bool(selected) and kb.collection_of(selected) == "crop_profiles"
+        locked, reason = lock_state(task_phase(kb, complete_task), trial["workflow"]["next_action"]["planting_readiness"],
+                                    sel_ok)
+        if locked:
+            raise AppError(409, "TASK_LOCKED", LOCK_MESSAGES[reason])
+        completed.append(complete_task)
     if body.accept_risk_gate_id:
         if body.accept_risk_gate_id not in gate_ids:
             raise AppError(404, "GATE_NOT_FOUND", f"Readiness item '{body.accept_risk_gate_id}' does not exist.")
@@ -128,12 +146,7 @@ def update_progress(plan_id: str, body: ProgressRequest, request: Request):
             raise AppError(409, "TASK_NOT_DONE", "Complete the task first — accepting a risk only skips the test.")
         if body.accept_risk_gate_id not in accepted:
             accepted.append(body.accept_risk_gate_id)
-    if "selected_crop_id" in body.model_fields_set:
-        if body.selected_crop_id is not None and kb.collection_of(body.selected_crop_id) != "crop_profiles":
-            raise AppError(404, "CROP_NOT_FOUND", f"Crop '{body.selected_crop_id}' is not in the knowledge base.")
-        selected = body.selected_crop_id
 
-    session = get_or_create(store, plan["session_id"], plan["scenario_id"])
     new_plan = _assemble(request, plan_id=plan_id, created_at=plan["meta"]["created_at"], session=session,
                          scenario=scenario, observation=inputs.get("observation") or {"description": ""},
                          selected_crop_id=selected, completed=completed, accepted=accepted,

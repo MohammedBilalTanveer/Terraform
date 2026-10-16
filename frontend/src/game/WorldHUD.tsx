@@ -10,6 +10,7 @@ import {
   Circle,
   Compass,
   Gamepad2,
+  Lock,
   Keyboard,
   LayoutDashboard,
   Menu as MenuIcon,
@@ -24,7 +25,7 @@ import { useTerraform } from "../store/terraformStore";
 import { WORKFLOW_STEPS } from "../types/terraform";
 import { playerState, useGame } from "./gameStore";
 import TouchControls, { useTouchVisible } from "./TouchControls";
-import { GROUP_STATION, collectPlanItems, progressCount, taskItems, type Guidance, type PlanItem } from "./planData";
+import { GROUP_STATION, LOCK_TEXT, collectPlanItems, lockOf, progressCount, taskItems, unlockTab, type Guidance, type PlanItem } from "./planData";
 import { CHANNEL, STATIONS, WORLD, stationById, type StationId } from "./worldConfig";
 import { Chips, cx } from "./ui/kit";
 
@@ -87,14 +88,30 @@ function TopBar({ onMenu }: { onMenu: () => void }) {
 /** Point TERRA at the station where a plan task is done and remember it so that panel opens on it. */
 export function focusPlanTask(item: PlanItem) {
   const game = useGame.getState();
+  const tf = useTerraform.getState();
   const station = GROUP_STATION[item.group];
   const id = item.rec.task_id;
+  // locked plant-phase task: go to what unlocks it (Crops / Readiness at the plot), not to its station
+  const lock = lockOf(tf.plan, item, tf.selectedCropId);
+  if (lock) {
+    game.setTargetOverride("plot");
+    game.setFocusTask(null);
+    game.setForceTab(unlockTab(lock));
+    if (game.area === "plot" || game.nearStation === "plot") {
+      if (!game.action) game.setOverlay("plot");
+    } else {
+      game.say(`${LOCK_TEXT[lock]} — head to ${stationById("plot").name}.`);
+      game.setOverlay(null);
+    }
+    return;
+  }
   game.setTargetOverride(station);
   game.setFocusTask(id);
   if (game.area === station || game.nearStation === station) {
     if (!game.action) game.setOverlay(station);
   } else {
     game.say(`Head to ${stationById(station).name} — ${item.rec.task_label ?? item.rec.title}`);
+    game.setOverlay(null);
   }
 }
 
@@ -116,13 +133,17 @@ function QuestPanel({ g }: { g: Guidance }) {
   const focusTaskId = useGame((s) => s.focusTaskId);
   const setTargetOverride = useGame((s) => s.setTargetOverride);
   const openEvidence = useTerraform((s) => s.openEvidence);
+  const crop = useTerraform((s) => s.selectedCropId);
   const [collapsed, setCollapsed] = useState(() => typeof window !== "undefined" && window.innerWidth < 640);
   const [dist, setDist] = useState<number | null>(null);
   const target = override ?? g.target;
   const tasks = useMemo(() => taskItems(collectPlanItems(plan)), [plan]);
   const isDone = (t: PlanItem) => completed.includes(t.rec.task_id!);
   const doneCount = tasks.filter(isDone).length;
-  const open = tasks.filter((t) => !isDone(t));
+  // unlocked open tasks first, then locked ones (greyed, with a lock), then done
+  const lockedOf = (t: PlanItem) => lockOf(plan, t, crop);
+  const openAll = tasks.filter((t) => !isDone(t));
+  const open = [...openAll.filter((t) => !lockedOf(t)), ...openAll.filter((t) => lockedOf(t))];
   const step = WORKFLOW_STEPS.find((s) => s.id === g.step);
   const perStation = useMemo(() => {
     const m = new Map<StationId, { open: number; total: number }>();
@@ -215,21 +236,22 @@ function QuestPanel({ g }: { g: Guidance }) {
               ))}
             </div>
             <ul className="space-y-0.5">
-              {[...open.slice(0, 5), ...tasks.filter(isDone).slice(0, Math.max(0, 6 - Math.min(open.length, 5)))].map((t) => {
+              {[...open.filter((t0) => !lockedOf(t0)).slice(0, 5), ...open.filter((t0) => lockedOf(t0)).slice(0, 3), ...tasks.filter(isDone).slice(0, 3)].map((t) => {
                 const done = isDone(t);
                 const st = GROUP_STATION[t.group];
+                const lock = done ? null : lockedOf(t);
                 const focused = focusTaskId === t.rec.task_id;
                 return (
                   <li key={t.rec.task_id} className={cx("flex items-center gap-1.5 rounded-md px-1", focused && "bg-cyan-400/10 ring-1 ring-cyan-300/40")}>
-                    {done ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-300" /> : <Circle className="h-3.5 w-3.5 shrink-0 text-ivory/35" />}
+                    {done ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-300" /> : lock ? <Lock className="h-3.5 w-3.5 shrink-0 text-amber-300/80" /> : <Circle className="h-3.5 w-3.5 shrink-0 text-ivory/35" />}
                     <button
                       type="button"
                       onClick={() => focusPlanTask(t)}
-                      title={`Guide me to ${stationById(st).name}`}
-                      className={cx("flex min-h-9 min-w-0 flex-1 flex-col justify-center text-left hover:text-cyan-100 sm:min-h-7", done ? "text-ivory/45" : "text-ivory/90")}
+                      title={lock ? LOCK_TEXT[lock] : `Guide me to ${stationById(st).name}`}
+                      className={cx("flex min-h-9 min-w-0 flex-1 flex-col justify-center text-left hover:text-cyan-100 sm:min-h-7", done ? "text-ivory/45" : lock ? "text-ivory/45" : "text-ivory/90")}
                     >
                       <span className={cx("truncate text-[12px]", done && "line-through")}>{t.rec.task_label ?? t.rec.title}</span>
-                      <span className="truncate text-[10px] text-ivory/45">{stationById(st).name}</span>
+                      <span className={cx("truncate text-[10px]", lock ? "text-amber-200/70" : "text-ivory/45")}>{lock ? LOCK_TEXT[lock] : stationById(st).name}</span>
                     </button>
                     {t.rec.evidence.kb_ids[0] && (
                       <button

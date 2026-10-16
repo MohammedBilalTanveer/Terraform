@@ -309,7 +309,8 @@
       "when_to_sow": "After the first reliable soaking rains: more than one good rain, soil moist down to the hard layer, and no long dry gap expected. Not after a single shower.",
       "task": {
         "task_id": "task_confirm_reliable_rains",
-        "label": "Confirm the first reliable soaking rains"
+        "label": "Confirm the first reliable soaking rains",
+        "phase": "readiness"
       }
     },
     {
@@ -373,7 +374,8 @@
       "when_to_sow": "After the first reliable soaking rains: more than one good rain, soil moist down to the hard layer, and no long dry gap expected. Not after a single shower.",
       "task": {
         "task_id": "task_sow_seeds",
-        "label": "Sow the trial pits or beds"
+        "label": "Sow the trial pits or beds",
+        "phase": "plant"
       },
       "planting_depth": "Tiny seeds just covered; small seeds about one finger-joint deep; bean-sized seeds about two finger-joints deep.",
       "spacing": "Beds: millets about a hand-span apart, legumes about two hand-spans apart. Pits: one sowing spot per pit, pits a long pace apart.",
@@ -424,7 +426,8 @@
       "when_to_sow": "Right after seedlings emerge, and again before the dry spells.",
       "task": {
         "task_id": "task_mulch_after_sowing",
-        "label": "Mulch around emerged seedlings"
+        "label": "Mulch around emerged seedlings",
+        "phase": "plant"
       }
     },
     {
@@ -526,7 +529,8 @@
       "when_to_sow": "At the start of reliable rains, so roots grow through the whole wet season before the first dry season.",
       "task": {
         "task_id": "task_plant_tree_seedlings",
-        "label": "Plant tree seedlings in enlarged pits"
+        "label": "Plant tree seedlings in enlarged pits",
+        "phase": "plant"
       }
     },
     {

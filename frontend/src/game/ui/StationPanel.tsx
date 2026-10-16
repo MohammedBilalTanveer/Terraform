@@ -1,13 +1,14 @@
 // Generic task station (Stone-Line Terraces, Compost & Mulch, Water Storage, Research Outpost terminal).
 // Lists the plan's recommendations routed to this station; "mark complete" plays the matching animation.
 import { useMemo } from "react";
-import { CheckCircle2, Circle, Map as MapIcon, Navigation } from "lucide-react";
+import { CheckCircle2, Circle, Lock, Map as MapIcon, Navigation } from "lucide-react";
 import { useTerraform } from "../../store/terraformStore";
 import { useGame, farmFor } from "../gameStore";
-import { GROUP_STATION, collectPlanItems, guidance, itemsForStation, taskItems } from "../planData";
+import { GROUP_STATION, LOCK_TEXT, collectPlanItems, guidance, itemsForStation, lockOf, taskItems } from "../planData";
 import { stationById, type StationId } from "../worldConfig";
 import RecCard from "./RecCard";
-import { Card, Chips, DetailsButton, GlassPanel, PrimaryButton, Pill, Section, useAutoFocusItem } from "./kit";
+import { focusPlanTask } from "../WorldHUD";
+import { Card, Chips, DetailsButton, GlassPanel, PrimaryButton, Pill, Section, cx, useAutoFocusItem } from "./kit";
 
 const KICKER: Partial<Record<StationId, string>> = {
   terraces: "WATER CAPTURE · STONE LINES",
@@ -58,6 +59,7 @@ export default function StationPanel({ station, onClose }: { station: StationId;
   const setOverlay = useGame((s) => s.setOverlay);
   const items = useMemo(() => collectPlanItems(plan), [plan]);
   const focusTaskId = useGame((s) => s.focusTaskId);
+  const selectedCrop = useTerraform((s) => s.selectedCropId);
   const reduceMotion = useTerraform((s) => s.reduceMotion);
   // resume where you left: scroll to the task picked in the quest list, else the first open task here
   useAutoFocusItem([station, plan?.plan_id], focusTaskId, reduceMotion);
@@ -93,25 +95,21 @@ export default function StationPanel({ station, onClose }: { station: StationId;
             {tasks.map((t) => {
               const done = completed.includes(t.rec.task_id!);
               const target = GROUP_STATION[t.group];
+              const lock = done ? null : lockOf(plan, t, selectedCrop);
               return (
-                <li key={t.rec.task_id} className="flex items-center gap-2 rounded-lg border border-white/8 bg-white/[0.02] px-2.5 py-1.5">
-                  {done ? <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" /> : <Circle className="h-4 w-4 shrink-0 text-ivory/40" />}
+                <li key={t.rec.task_id} className={cx("flex items-center gap-2 rounded-lg border border-white/8 bg-white/[0.02] px-2.5 py-1.5", lock && "opacity-70")}>
+                  {done ? <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" /> : lock ? <Lock className="h-4 w-4 shrink-0 text-amber-300" /> : <Circle className="h-4 w-4 shrink-0 text-ivory/40" />}
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-[12.5px] font-medium">{t.rec.task_label ?? t.rec.title}</div>
-                    <div className="text-[10.5px] text-ivory/55">{stationById(target).name}</div>
+                    <div className={cx("text-[10.5px]", lock ? "text-amber-200/80" : "text-ivory/55")}>{lock ? LOCK_TEXT[lock] : stationById(target).name}</div>
                   </div>
                   <Chips evidence={t.rec.evidence} />
-                  {!done && target !== "outpost" && (
+                  {!done && (target !== "outpost" || lock) && (
                     <button
                       type="button"
                       aria-label={`Guide me to ${stationById(target).name}`}
                       className="grid min-h-11 min-w-11 place-items-center rounded-md p-1 text-cyan-200 hover:bg-white/10 sm:min-h-8 sm:min-w-8"
-                      onClick={() => {
-                        setTargetOverride(target);
-                        useGame.getState().setFocusTask(t.rec.task_id);
-                        useGame.getState().say(`Head to ${stationById(target).name} — ${t.rec.task_label ?? t.rec.title}`);
-                        setOverlay(null);
-                      }}
+                      onClick={() => focusPlanTask(t)}
                     >
                       <Navigation className="h-3.5 w-3.5" />
                     </button>

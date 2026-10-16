@@ -6,16 +6,18 @@ import { useTerraform } from "../../store/terraformStore";
 import RecommendationCard from "../../components/RecommendationCard";
 import EvidenceChips from "../../components/EvidenceChips";
 import { Badge, Empty, Panel, SectionTitle, arr } from "../../components/ui";
+import { taskPhase } from "../../components/workflow";
+import { CollapsibleSection } from "../../components/Accordion";
 import { NeedPlan } from "./common";
 
-function Column({ title, eyebrow, recs, icon, tone }: { title: string; eyebrow: string; recs: Recommendation[]; icon: ReactNode; tone: "cyan" | "violet" | "coral" | "stone" }) {
+function Column({ title, eyebrow, recs, icon, tone, openId }: { title: string; eyebrow: string; recs: Recommendation[]; icon: ReactNode; tone: "cyan" | "violet" | "coral" | "stone"; openId?: string | null }) {
   return (
     <section aria-label={title}>
       <SectionTitle icon={icon} eyebrow={eyebrow} title={title} right={<Badge tone={tone}>{recs.length}</Badge>} />
       {recs.length ? (
         <div className="grid gap-4">
           {recs.map((r) => (
-            <RecommendationCard key={r.id} rec={r} />
+            <RecommendationCard key={r.id} rec={r} collapsible defaultOpen={r.id === openId} />
           ))}
         </div>
       ) : (
@@ -30,7 +32,17 @@ export default function FixProtocolStep() {
   const completed = useTerraform((s) => s.completedTasks);
   if (!plan) return <NeedPlan />;
   const fp = plan.workflow.fix_protocol;
-  const all = [...arr(fp.do_first), ...arr(fp.do_next), ...arr(fp.optional)];
+  // v1.4 order: this step is PREPARE work only. Readiness checks live on step 5, sowing on step 8.
+  const prepareOnly = (r: Recommendation) => {
+    const ph = taskPhase(r, plan);
+    return ph !== "plant" && ph !== "readiness";
+  };
+  const doFirst = arr(fp.do_first).filter(prepareOnly);
+  const doNext = arr(fp.do_next).filter(prepareOnly);
+  const optional = arr(fp.optional).filter(prepareOnly);
+  const moved = arr(fp.do_first).length + arr(fp.do_next).length + arr(fp.optional).length - doFirst.length - doNext.length - optional.length;
+  const all = [...doFirst, ...doNext, ...optional];
+  const firstOpen = all.find((r) => r.task_id && !completed.includes(r.task_id))?.id ?? all[0]?.id ?? null;
   const taskIds = [...new Set(all.map((r) => r.task_id).filter((t): t is string => !!t))];
   const done = taskIds.filter((t) => completed.includes(t)).length;
   const pct = taskIds.length ? Math.round((done / taskIds.length) * 100) : 0;
@@ -85,11 +97,29 @@ export default function FixProtocolStep() {
       )}
 
       <div className="grid gap-6 2xl:grid-cols-2">
-        <Column title="Do first" eyebrow="Priority 1" recs={arr(fp.do_first)} icon={<Hammer className="h-4 w-4" aria-hidden />} tone="cyan" />
-        <Column title="Do next" eyebrow="Priority 2" recs={arr(fp.do_next)} icon={<ListChecks className="h-4 w-4" aria-hidden />} tone="violet" />
+        <Column title="Do first" eyebrow="Priority 1" recs={doFirst} openId={firstOpen} icon={<Hammer className="h-4 w-4" aria-hidden />} tone="cyan" />
+        <Column title="Do next" eyebrow="Priority 2" recs={doNext} openId={firstOpen} icon={<ListChecks className="h-4 w-4" aria-hidden />} tone="violet" />
       </div>
-      <Column title="Avoid" eyebrow="Do not" recs={arr(fp.avoid)} icon={<Ban className="h-4 w-4" aria-hidden />} tone="coral" />
-      {arr(fp.optional).length > 0 && <Column title="Optional" eyebrow="If you can" recs={fp.optional} icon={<Sparkles className="h-4 w-4" aria-hidden />} tone="stone" />}
+      {arr(fp.avoid).length > 0 && (
+        <CollapsibleSection icon={<Ban className="h-4 w-4" aria-hidden />} eyebrow="Do not" title="Avoid" count={arr(fp.avoid).length}>
+          <div className="grid gap-4">
+            {arr(fp.avoid).map((r) => <RecommendationCard key={r.id} rec={r} collapsible />)}
+          </div>
+        </CollapsibleSection>
+      )}
+      {optional.length > 0 && (
+        <CollapsibleSection icon={<Sparkles className="h-4 w-4" aria-hidden />} eyebrow="If you can" title="Optional" count={optional.length}>
+          <div className="grid gap-4">
+            {optional.map((r) => <RecommendationCard key={r.id} rec={r} collapsible defaultOpen={r.id === firstOpen} />)}
+          </div>
+        </CollapsibleSection>
+      )}
+
+      {moved > 0 && (
+        <p className="rounded-xl border border-dashed border-white/12 px-4 py-3 text-sm text-mist">
+          {moved} readiness / planting task{moved > 1 ? "s" : ""} {moved > 1 ? "are" : "is"} listed later, in order: readiness checks on step 5, sowing on step 8.
+        </p>
+      )}
 
       <div className="border-t border-white/8 pt-3">
         <EvidenceChips evidence={fp.evidence} />

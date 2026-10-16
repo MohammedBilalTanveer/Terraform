@@ -182,13 +182,26 @@ def is_next_step_question(question: str) -> bool:
 
 
 def next_step_answer(kb: KnowledgeBase, plan: dict) -> dict:
-    """Answer from the stored plan: next_best_action + each unsatisfied required gate and its first
-    not-done task (all KB text)."""
-    na = (plan.get("workflow") or {}).get("next_action") or {}
+    """Answer from the stored plan, in the enforced workflow order:
+    prepare -> readiness (tasks, then tests) -> choose a crop -> plant (all KB text)."""
+    from .planner import PHASE_ORDER, SOW_TASKS, gate_phase, task_phase  # local import: avoids a cycle
+
+    wf = plan.get("workflow") or {}
+    na = wf.get("next_action") or {}
     completed = set(plan.get("completed_tasks") or [])
-    lines = [na.get("next_best_action") or ""]
+    selected = (plan.get("_inputs") or {}).get("selected_crop_id")
     matched, ids = [], [plan.get("scenario_id") or ""]
+
+    def add_match(kb_id, title, snippet, coll):
+        if kb_id and kb_id not in [m["kb_id"] for m in matched]:
+            matched.append({"kb_id": kb_id, "title": title or kb_id, "snippet": (snippet or "")[:240], "collection": coll})
+            ids.append(kb_id)
+
     open_gates = [g for g in na.get("readiness_gate") or [] if g.get("required") and not g.get("satisfied")]
+    open_gates.sort(key=lambda g: PHASE_ORDER.get(gate_phase(kb, g, list(completed)), 1))  # stable
+    lines = [na.get("next_best_action") or ""]
+    if open_gates:
+        lines.append("Still open before planting:")
     for g in open_gates:
         task = next((t for t in g.get("satisfied_by_tasks") or [] if t not in completed and t in kb.task_ids), None)
         line = f"- {g.get('label')}"
@@ -197,16 +210,25 @@ def next_step_answer(kb: KnowledgeBase, plan: dict) -> dict:
         elif g.get("blocking_reason") in ("test_not_run", "test_failed") and (g.get("verification") or {}).get("test"):
             line += f": {g['verification']['test']}"
         lines.append(line)
-        matched.append({"kb_id": g.get("id"), "title": g.get("label") or g.get("id"),
-                        "snippet": (g.get("detail") or "")[:240], "collection": "scenarios.readiness_gate"})
+        add_match(g.get("id"), g.get("label"), g.get("detail"), "scenarios.readiness_gate")
         if task:
             for rid in kb.task_owner.get(task, [])[:1]:
-                rec = kb.get(rid)
-                if rec and rid not in [m["kb_id"] for m in matched]:
-                    matched.append({"kb_id": rid, "title": text(rec.get("title")) or rid,
-                                    "snippet": record_snippet(rec)[:240], "collection": kb.collection_of(rid) or ""})
-                    ids.append(rid)
-    if open_gates:
-        lines.insert(1, "Still open before planting:")
+                rec = kb.get(rid) or {}
+                add_match(rid, text(rec.get("title")), record_snippet(rec), kb.collection_of(rid) or "")
+
+    if not open_gates:
+        crops = (wf.get("crop_suggestions") or {}).get("field_crops") or []
+        if not selected:
+            step = "Next, choose a crop from the crop suggestions"
+            if crops:
+                step += f" (top-ranked: {crops[0]['name']})"
+                add_match(crops[0]["crop_id"], crops[0]["name"], crops[0].get("maturity_description"), "crop_profiles")
+            lines.append(step + ".")
+        else:
+            sow = next((c for c in (wf.get("planting_method") or {}).get("sowing") or []
+                        if c.get("task_id") and c["task_id"] not in completed and task_phase(kb, c["task_id"]) == "plant"), None)
+            if sow:
+                lines.append(f"Next, plant: {sow['task_label']}.")
+                add_match(sow["id"], sow["title"], sow["explanation"], "planting_methods")
     return {"answer": "\n".join(l for l in lines if l), "refused": False, "matched": matched,
             "kb_ids": [i for i in ids if i]}

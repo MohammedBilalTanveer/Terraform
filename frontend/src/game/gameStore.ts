@@ -17,7 +17,7 @@ export type ActiveAction = {
 };
 
 /** Per-session farm presentation (keyed by session id so a reset session starts fresh). */
-export type FarmView = { key: string | null; sown: boolean; careIdx: number; harvested: boolean };
+export type FarmView = { key: string | null; sown: boolean; careIdx: number; careDone?: boolean; harvested: boolean };
 
 /** Mutable per-frame player state (not reactive — read inside useFrame / rAF). */
 export const playerState = { x: SPAWN[0], z: SPAWN[1], y: 0, rot: Math.PI, speed: 0, vx: 0, vz: 0 };
@@ -43,6 +43,8 @@ type GameState = {
   /** last open tab per station panel */
   lastTab: Record<string, string>;
   bubble: Bubble | null;
+  /** ask the Plot panel to open on a tab (e.g. "crops" / "gate"); consumed by PlotPanel */
+  forceTab: string | null;
 
   setOverlay: (o: OverlayId | null) => void;
   setNear: (s: StationId | null) => void;
@@ -57,6 +59,7 @@ type GameState = {
   setFocusTask: (id: string | null) => void;
   setLastTab: (station: string, tab: string) => void;
   say: (text: string, ms?: number) => void;
+  setForceTab: (t: string | null) => void;
 };
 
 export const useGame = create<GameState>()(
@@ -69,12 +72,13 @@ export const useGame = create<GameState>()(
       targetOverride: null,
       zoom: 1,
       showHelp: true,
-      farm: { key: null, sown: false, careIdx: 0, harvested: false },
+      farm: { key: null, sown: false, careIdx: 0, careDone: false, harvested: false },
       interactPulse: 0,
       touchMode: "auto",
       focusTaskId: null,
       lastTab: {},
       bubble: null,
+      forceTab: null,
 
       setOverlay: (overlay) => set({ overlay }),
       setNear: (nearStation) => set({ nearStation }),
@@ -93,13 +97,14 @@ export const useGame = create<GameState>()(
         }, duration);
         return true;
       },
+      setForceTab: (forceTab) => set({ forceTab }),
       setTouchMode: (touchMode) => set({ touchMode }),
       setFocusTask: (focusTaskId) => set({ focusTaskId }),
       setLastTab: (station, tab) => set({ lastTab: { ...get().lastTab, [station]: tab } }),
       say: (text, ms = 8000) => set({ bubble: { text, until: Date.now() + ms } }),
       updateFarm: (key, patch) => {
         const cur = get().farm;
-        const base: FarmView = cur.key === key ? cur : { key, sown: false, careIdx: 0, harvested: false };
+        const base: FarmView = cur.key === key ? cur : { key, sown: false, careIdx: 0, careDone: false, harvested: false };
         set({ farm: { ...base, ...patch, key } });
       },
     }),
@@ -113,5 +118,5 @@ export const useGame = create<GameState>()(
 
 /** Farm view for the current session (fresh defaults when the session changed). */
 export function farmFor(farm: FarmView, key: string | null): FarmView {
-  return farm.key === key ? farm : { key, sown: false, careIdx: 0, harvested: false };
+  return farm.key === key ? farm : { key, sown: false, careIdx: 0, careDone: false, harvested: false };
 }
