@@ -98,7 +98,7 @@ export function SourceBadge({ source }: { source: string }) {
   };
   const label: Record<string, string> = { form: "Form", description: "Your words", local_advice: "Local advice", check: "Field check", photo: "Photo" };
   return (
-    <span className={cx("inline-flex items-center rounded-md border px-1.5 py-0.5 font-heading text-[0.7rem] font-semibold uppercase tracking-wider", tone[source] ?? tone.photo)}>
+    <span className={cx("inline-flex items-center rounded-md border px-1.5 py-0.5 font-heading text-[0.75rem] font-semibold uppercase tracking-wider", tone[source] ?? tone.photo)}>
       {label[source] ?? source}
     </span>
   );

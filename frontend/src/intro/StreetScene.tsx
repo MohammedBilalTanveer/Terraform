@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { KModel, type ModelKey } from "../game/assets";
 import MiniCharacter, { type ClipPlay } from "../game/MiniCharacter";
 import { SkyDome } from "../game/WorldScene";
+import { distForAspect, fovForAspect } from "../game/useViewport";
 
 export type StreetPhase = "walk" | "encounter" | "game" | "taunt" | "glitch";
 
@@ -38,7 +39,7 @@ export default function StreetScene({ phase, reduceMotion }: { phase: StreetPhas
   const sx = useRef(5.2);
   const glitchT = useRef(0);
   const look = useRef(new THREE.Vector3(0, 1, 10));
-  const { camera, scene } = useThree();
+  const { camera, scene, size } = useThree();
 
   const [arrived, setArrived] = useState(false);
   const [stepping, setStepping] = useState(false);
@@ -84,13 +85,22 @@ export default function StreetScene({ phase, reduceMotion }: { phase: StreetPhas
       stranger.current.visible = phase !== "walk" || pz.current < STOP_Z + 6;
     }
     // camera: follow from behind while walking, then frame both characters
+    // adapt FOV + distance to the live aspect ratio so player and stranger stay framed in portrait and landscape
+    const aspect = size.width / Math.max(1, size.height);
+    const pc = camera as THREE.PerspectiveCamera;
+    const fov = fovForAspect(45, aspect, 72);
+    if (Math.abs(pc.fov - fov) > 0.05) {
+      pc.fov = fov;
+      pc.updateProjectionMatrix();
+    }
+    const dk = distForAspect(aspect);
     let pos: THREE.Vector3;
     let tgt: THREE.Vector3;
     if (phase === "walk") {
-      pos = new THREE.Vector3(2.6, 3.1, pz.current + 6.2);
+      pos = new THREE.Vector3(2.6 * dk, 3.1 + (dk - 1) * 2, pz.current + 6.2 * dk);
       tgt = new THREE.Vector3(-0.4, 1.1, pz.current - 2.5);
     } else {
-      pos = new THREE.Vector3(-2.4, 2.3, pz.current + 3.6);
+      pos = new THREE.Vector3(-2.4 * dk, 2.3 + (dk - 1) * 1.5, pz.current + 3.6 * dk);
       tgt = new THREE.Vector3((STRANGER.x - 0.6) / 2, 1.05, (STRANGER.z + pz.current) / 2);
     }
     const k = 1 - Math.exp(-dt * (phase === "walk" ? 3 : 2.6));

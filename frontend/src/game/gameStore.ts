@@ -17,7 +17,7 @@ export type ActiveAction = {
 };
 
 /** Per-session farm presentation (keyed by session id so a reset session starts fresh). */
-export type FarmView = { key: string | null; sown: boolean; careIdx: number; careDone?: boolean; harvested: boolean };
+export type FarmView = { key: string | null; sown: boolean; careIdx: number; careDone?: boolean; timeSeen?: boolean; harvested: boolean };
 
 /** Mutable per-frame player state (not reactive — read inside useFrame / rAF). */
 export const playerState = { x: SPAWN[0], z: SPAWN[1], y: 0, rot: Math.PI, speed: 0, vx: 0, vz: 0 };
@@ -26,6 +26,8 @@ export const joystick = { x: 0, z: 0, active: false, sprint: false };
 
 export type TouchMode = "auto" | "show" | "hide";
 export type Bubble = { text: string; until: number };
+/** what the player just completed — shown as TERRA's completion message when the station panel reopens */
+export type LastDone = { id: string; label: string; station: StationId; phase: string; sessionKey: string | null };
 
 type GameState = {
   overlay: OverlayId | null;
@@ -45,6 +47,11 @@ type GameState = {
   bubble: Bubble | null;
   /** ask the Plot panel to open on a tab (e.g. "crops" / "gate"); consumed by PlotPanel */
   forceTab: string | null;
+  /** quest step pinned by the player (quest list / "Go there"); the beacon stays on it until it is done */
+  pinnedId: string | null;
+  lastDone: LastDone | null;
+  /** quest step id for which the beacon was switched off ("stop guiding") */
+  beaconOff: string | null;
 
   setOverlay: (o: OverlayId | null) => void;
   setNear: (s: StationId | null) => void;
@@ -60,6 +67,9 @@ type GameState = {
   setLastTab: (station: string, tab: string) => void;
   say: (text: string, ms?: number) => void;
   setForceTab: (t: string | null) => void;
+  setPinned: (id: string | null) => void;
+  setLastDone: (d: LastDone | null) => void;
+  setBeaconOff: (id: string | null) => void;
 };
 
 export const useGame = create<GameState>()(
@@ -79,8 +89,12 @@ export const useGame = create<GameState>()(
       lastTab: {},
       bubble: null,
       forceTab: null,
+      pinnedId: null,
+      lastDone: null,
+      beaconOff: null,
 
-      setOverlay: (overlay) => set({ overlay }),
+      // closing a panel also dismisses any pending completion message
+      setOverlay: (overlay) => set(overlay === null ? { overlay, lastDone: null } : { overlay }),
       setNear: (nearStation) => set({ nearStation }),
       setArea: (area) => set({ area }),
       setTargetOverride: (targetOverride) => set({ targetOverride }),
@@ -98,6 +112,9 @@ export const useGame = create<GameState>()(
         return true;
       },
       setForceTab: (forceTab) => set({ forceTab }),
+      setPinned: (pinnedId) => set({ pinnedId, beaconOff: null, targetOverride: null }),
+      setLastDone: (lastDone) => set(lastDone && get().pinnedId === lastDone.id ? { lastDone, targetOverride: null, pinnedId: null } : { lastDone, targetOverride: null }),
+      setBeaconOff: (beaconOff) => set({ beaconOff }),
       setTouchMode: (touchMode) => set({ touchMode }),
       setFocusTask: (focusTaskId) => set({ focusTaskId }),
       setLastTab: (station, tab) => set({ lastTab: { ...get().lastTab, [station]: tab } }),

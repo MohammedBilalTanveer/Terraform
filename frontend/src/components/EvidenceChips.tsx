@@ -25,7 +25,7 @@ export default function EvidenceChips({ evidence, compact = false, className }: 
 
   return (
     <div className={cx("flex flex-wrap items-center gap-1.5", className)} aria-label="Knowledge-base evidence">
-      {!compact && <span className="eyebrow mr-1 !text-[0.7rem]">From the knowledge base</span>}
+      {!compact && <span className="eyebrow mr-1 !text-[0.75rem]">From the knowledge base</span>}
       {shown.map(({ id, kind }) => (
         <button
           key={kind + id}
@@ -34,7 +34,7 @@ export default function EvidenceChips({ evidence, compact = false, className }: 
           title={`From the TERRAFORM knowledge base — open record ${id}`}
           aria-label={kind === "kb" ? `Open knowledge-base record ${id}` : `Open source ${id}`}
           className={cx(
-            "group inline-flex max-w-full items-center gap-1 rounded-md border px-2 py-1 font-mono text-xs leading-none transition-colors",
+            "chip-btn group relative inline-flex max-w-full items-center gap-1 rounded-md border px-2 py-1 font-mono text-xs leading-none transition-colors",
             kind === "kb"
               ? "border-violet/35 bg-violet/10 text-violet-200 hover:border-violet/70 hover:bg-violet/20"
               : "border-cyan/30 bg-cyan/8 text-cyan-200 hover:border-cyan/60 hover:bg-cyan/15",

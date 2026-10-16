@@ -9,6 +9,8 @@ import { SkipForward } from "lucide-react";
 import { useTerraform } from "../store/terraformStore";
 import { playerState } from "../game/gameStore";
 import { SPAWN } from "../game/worldConfig";
+import { dprFor, useViewport } from "../game/useViewport";
+import "../game/game.css";
 import DialogueBox, { useTypewriter, type Choice, type Speaker } from "./Dialogue";
 import ShellGame from "./ShellGame";
 import GlitchOverlay, { GlitchStyles } from "./GlitchOverlay";
@@ -58,8 +60,10 @@ function usePrefersReducedMotion() {
 function BlackCard({ reduceMotion }: { reduceMotion: boolean }) {
   const { shown } = useTypewriter("You lost. The wager was your world.", 70, reduceMotion);
   return (
-    <div className="absolute inset-0 z-30 grid place-items-center bg-black px-6 text-center">
-      <p className="font-display text-xl tracking-[0.12em] text-ivory sm:text-3xl">{shown}</p>
+    <div className="absolute inset-0 z-30 grid place-items-center overflow-y-auto bg-black px-5 text-center">
+      <p className="max-w-[34rem] break-words font-display leading-snug tracking-[0.06em] text-ivory sm:tracking-[0.12em]" style={{ fontSize: "clamp(1.15rem, 5.2vw, 2rem)" }}>
+        {shown}
+      </p>
     </div>
   );
 }
@@ -68,11 +72,11 @@ function BootHud({ kb }: { kb: string }) {
   const a = useTypewriter("TERRAFORM // SYSTEM AWAKENING…", 45, false);
   const b = useTypewriter(a.done ? `knowledge base link: ${kb}` : "", 35, false);
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pointer-events-none absolute left-4 top-16 z-20 font-display sm:left-8 sm:top-20">
-      <div className="text-[13px] tracking-[0.28em] text-cyan-200 drop-shadow-[0_0_10px_rgba(56,225,255,0.6)] sm:text-[16px]">{a.shown}</div>
-      <div className={`mt-2 font-mono text-[12px] sm:text-[13px] ${kb === "offline" ? "text-rose-300" : "text-emerald-300"}`}>{b.shown}</div>
-      <div className="mt-3 h-px w-56 bg-gradient-to-r from-cyan-300/70 to-transparent" />
-      <div className="mt-2 font-sans text-[11px] text-ivory/55">KB-only mode · answers come only from the knowledge base</div>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="tf-boot pointer-events-none absolute z-20 font-display">
+      <div className="tracking-[0.16em] text-cyan-200 drop-shadow-[0_0_10px_rgba(56,225,255,0.6)] sm:tracking-[0.28em]" style={{ fontSize: "clamp(12px, 3.4vw, 16px)" }}>{a.shown}</div>
+      <div className={`mt-2 break-words font-mono ${kb === "offline" ? "text-rose-300" : "text-emerald-300"}`} style={{ fontSize: "clamp(12px, 3.2vw, 13px)" }}>{b.shown}</div>
+      <div className="mt-3 h-px w-[min(14rem,60vw)] bg-gradient-to-r from-cyan-300/70 to-transparent" />
+      <div className="mt-2 font-sans text-[12px] text-ivory/60">KB-only mode · answers come only from the knowledge base</div>
     </motion.div>
   );
 }
@@ -83,6 +87,7 @@ export default function IntroCinematic() {
   const storeReduce = useTerraform((s) => s.reduceMotion);
   const health = useTerraform((s) => s.health);
   const online = useTerraform((s) => s.backendOnline);
+  const vp = useViewport();
   const prefersReduced = usePrefersReducedMotion();
   const reduceMotion = storeReduce || !!prefersReduced;
   const kb = online && health?.kb_version ? `v${health.kb_version} · ${health.kb_record_count} records` : online === false ? "offline" : health?.kb_version ? `v${health.kb_version}` : "offline";
@@ -189,13 +194,13 @@ export default function IntroCinematic() {
   const street = phase === "walk" || phase === "encounter" || phase === "game" || phase === "taunt" || phase === "glitch";
 
   return (
-    <div className="fixed inset-0 overflow-hidden bg-black font-sans text-ivory">
+    <div className="tf-game fixed inset-0 overflow-hidden bg-black font-sans text-ivory" style={{ touchAction: "manipulation" }}>
       <GlitchStyles />
       <div className={phase === "glitch" ? (reduceMotion ? "tf-glitch-scene-calm absolute inset-0" : "tf-glitch-scene absolute inset-0") : "absolute inset-0"}>
         {phase !== "black" && (
           <Canvas
             shadows
-            dpr={[1, 1.5]}
+            dpr={dprFor(vp)}
             gl={{ antialias: true, powerPreference: "high-performance" }}
             camera={{ fov: 45, near: 0.2, far: 520, position: [3, 3, 22] }}
             onCreated={({ gl }) => {
@@ -212,8 +217,8 @@ export default function IntroCinematic() {
       </div>
 
       {/* letterbox bars for a cinematic feel */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[6vh] bg-black/80" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[6vh] bg-black/80" />
+      <div className="tf-letterbox pointer-events-none absolute inset-x-0 top-0 z-10 bg-black/80" />
+      <div className="tf-letterbox pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-black/80" />
 
       {phase === "glitch" && <GlitchOverlay reduceMotion={reduceMotion} />}
       {phase === "black" && <BlackCard reduceMotion={reduceMotion} />}
@@ -238,7 +243,7 @@ export default function IntroCinematic() {
       <button
         type="button"
         onClick={finish}
-        className="absolute bottom-[calc(6vh+0.75rem)] right-3 z-40 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/50 px-3 py-1.5 font-display text-[10px] tracking-[0.25em] text-ivory/85 backdrop-blur hover:border-cyan-300/60 hover:text-cyan-100"
+        className="tf-skip tf-keep absolute z-40 inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/60 px-4 font-display text-[12px] tracking-[0.2em] text-ivory/90 hover:border-cyan-300/60 hover:text-cyan-100"
         aria-label="Skip intro (Esc)"
       >
         SKIP <SkipForward className="h-3.5 w-3.5" /> <span className="hidden text-ivory/45 sm:inline">ESC</span>

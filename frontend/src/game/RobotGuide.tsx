@@ -73,7 +73,7 @@ export default function RobotGuide({ target, line, reduceMotion, showBubble }: {
         </group>
         {showBubble && line && (
           <Html position={[0, 0.85, 0]} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-            <div className="w-max max-w-[240px] -translate-y-3 rounded-xl border border-cyan-300/40 bg-[#070b1a]/85 px-3 py-1.5 text-[11px] leading-snug text-cyan-50 shadow-[0_0_18px_rgba(56,225,255,0.25)] backdrop-blur">
+            <div className="w-max max-w-[min(240px,60vw)] -translate-y-3 rounded-xl border border-cyan-300/40 bg-[#070b1a]/85 px-3 py-1.5 text-[11px] leading-snug text-cyan-50 shadow-[0_0_18px_rgba(56,225,255,0.25)] backdrop-blur">
               <span className="mr-1 font-display text-[9px] tracking-[0.2em] text-cyan-300">TERRA</span>
               {shorten(line)}
             </div>

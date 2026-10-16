@@ -5,13 +5,19 @@ import { useGame } from "../gameStore";
 import { LOCK_TEXT, unlockTab, type LockReason } from "../planData";
 import type { StationId } from "../worldConfig";
 import { GhostButton } from "./kit";
+import { pinStep } from "./pin";
+import { questSnapshot } from "../useQuest";
 
 export function goUnlock(reason: LockReason, here?: StationId | null) {
   const g = useGame.getState();
   g.setForceTab(unlockTab(reason));
   g.setFocusTask(null);
   if (here !== "plot") {
-    g.setTargetOverride("plot");
+    // pin what unlocks the task (the crop step, or the current quest task) and send the player there
+    const { steps, quest } = questSnapshot();
+    const target = reason === "choose_crop" ? steps.find((s) => s.id === "crop") ?? quest : quest;
+    if (target) pinStep(target, false);
+    g.setTargetOverride(target ? null : "plot");
     g.say(`${LOCK_TEXT[reason]} — head to the Unknown Land plot.`);
     g.setOverlay(null);
   }

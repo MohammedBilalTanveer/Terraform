@@ -25,7 +25,10 @@ import { useTerraform } from "../store/terraformStore";
 import { WORKFLOW_STEPS } from "../types/terraform";
 import { playerState, useGame } from "./gameStore";
 import TouchControls, { useTouchVisible } from "./TouchControls";
-import { GROUP_STATION, LOCK_TEXT, collectPlanItems, lockOf, progressCount, taskItems, unlockTab, type Guidance, type PlanItem } from "./planData";
+import { progressCount, unlockTab, type Guidance, type PlanItem, type QuestStep } from "./planData";
+import { questSnapshot, useQuest } from "./useQuest";
+import { useViewport } from "./useViewport";
+import { pinQuestStep } from "./ui/pin";
 import { CHANNEL, STATIONS, WORLD, stationById, type StationId } from "./worldConfig";
 import { Chips, cx } from "./ui/kit";
 
@@ -48,7 +51,7 @@ function TopBar({ onMenu }: { onMenu: () => void }) {
   const setOverlay = useGame((s) => s.setOverlay);
   const done = progressCount(analysis, plan);
   return (
-    <div className="pointer-events-auto absolute inset-x-0 top-0 z-20 flex items-center gap-1.5 border-b border-white/10 bg-[#070b1a]/70 px-2 py-1 backdrop-blur-md sm:gap-3 sm:px-4 sm:py-2">
+    <div className="tf-topbar pointer-events-auto absolute inset-x-0 top-0 z-20 flex items-center gap-1.5 border-b border-white/10 bg-[#070b1a]/80 pb-1 backdrop-blur-md sm:gap-3 sm:pb-2">
       <div className="flex items-baseline gap-2">
         <span className="font-display text-[12px] font-bold tracking-[0.2em] text-ivory sm:text-[15px] sm:tracking-[0.25em]">TERRAFORM</span>
         <span className="hidden font-display text-[9px] tracking-[0.25em] text-cyan-300/80 md:inline">EXPLORER</span>
@@ -85,77 +88,33 @@ function TopBar({ onMenu }: { onMenu: () => void }) {
   );
 }
 
-/** Point TERRA at the station where a plan task is done and remember it so that panel opens on it. */
+/** Back-compat for callers that hold a PlanItem (Research Outpost list). */
 export function focusPlanTask(item: PlanItem) {
-  const game = useGame.getState();
-  const tf = useTerraform.getState();
-  const station = GROUP_STATION[item.group];
-  const id = item.rec.task_id;
-  // locked plant-phase task: go to what unlocks it (Crops / Readiness at the plot), not to its station
-  const lock = lockOf(tf.plan, item, tf.selectedCropId);
-  if (lock) {
-    game.setTargetOverride("plot");
-    game.setFocusTask(null);
-    game.setForceTab(unlockTab(lock));
-    if (game.area === "plot" || game.nearStation === "plot") {
-      if (!game.action) game.setOverlay("plot");
-    } else {
-      game.say(`${LOCK_TEXT[lock]} — head to ${stationById("plot").name}.`);
-      game.setOverlay(null);
-    }
-    return;
-  }
-  game.setTargetOverride(station);
-  game.setFocusTask(id);
-  if (game.area === station || game.nearStation === station) {
-    if (!game.action) game.setOverlay(station);
-  } else {
-    game.say(`Head to ${stationById(station).name} — ${item.rec.task_label ?? item.rec.title}`);
-    game.setOverlay(null);
-  }
+  if (item.rec.task_id) pinQuestStep(item.rec.task_id);
 }
 
-const SHORT: Partial<Record<StationId, string>> = {
-  plot: "Plot",
-  compost: "Compost & Mulch",
-  water: "Water Storage",
-  terraces: "Stone Lines",
-  harvest: "Harvest",
-  outpost: "Outpost",
-};
+const DOT = (s: QuestStep) =>
+  s.done ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-300" /> : s.blocked ? <Lock className="h-3.5 w-3.5 shrink-0 text-amber-300/80" /> : <Circle className="h-3.5 w-3.5 shrink-0 text-ivory/35" />;
 
-function QuestPanel({ g }: { g: Guidance }) {
-  const plan = useTerraform((s) => s.plan);
-  const completed = useTerraform((s) => s.completedTasks);
+function QuestPanel({ g, target }: { g: Guidance; target: StationId | null }) {
+  const { steps, quest, plan, pinnedId } = useQuest();
   const setCurrentStep = useTerraform((s) => s.setCurrentStep);
   const setMode = useTerraform((s) => s.setMode);
-  const override = useGame((s) => s.targetOverride);
-  const focusTaskId = useGame((s) => s.focusTaskId);
-  const setTargetOverride = useGame((s) => s.setTargetOverride);
-  const openEvidence = useTerraform((s) => s.openEvidence);
-  const crop = useTerraform((s) => s.selectedCropId);
-  const [collapsed, setCollapsed] = useState(() => typeof window !== "undefined" && window.innerWidth < 640);
+  const setPinned = useGame((s) => s.setPinned);
+  const beaconOff = useGame((s) => s.beaconOff);
+  const setBeaconOff = useGame((s) => s.setBeaconOff);
+  const vp = useViewport();
+  const [collapsed, setCollapsed] = useState(() => typeof window !== "undefined" && (window.innerWidth < 640 || window.innerHeight < 500));
+  // rotating to a short landscape screen collapses the quest panel to its chip (no remount, no state loss)
+  useEffect(() => {
+    if (vp.short) setCollapsed(true);
+  }, [vp.short]);
   const [dist, setDist] = useState<number | null>(null);
-  const target = override ?? g.target;
-  const tasks = useMemo(() => taskItems(collectPlanItems(plan)), [plan]);
-  const isDone = (t: PlanItem) => completed.includes(t.rec.task_id!);
-  const doneCount = tasks.filter(isDone).length;
-  // unlocked open tasks first, then locked ones (greyed, with a lock), then done
-  const lockedOf = (t: PlanItem) => lockOf(plan, t, crop);
-  const openAll = tasks.filter((t) => !isDone(t));
-  const open = [...openAll.filter((t) => !lockedOf(t)), ...openAll.filter((t) => lockedOf(t))];
   const step = WORKFLOW_STEPS.find((s) => s.id === g.step);
-  const perStation = useMemo(() => {
-    const m = new Map<StationId, { open: number; total: number }>();
-    for (const t of tasks) {
-      const st = GROUP_STATION[t.group];
-      const cur = m.get(st) ?? { open: 0, total: 0 };
-      cur.total += 1;
-      if (!completed.includes(t.rec.task_id!)) cur.open += 1;
-      m.set(st, cur);
-    }
-    return [...m.entries()].sort((a, b) => b[1].open - a[1].open);
-  }, [tasks, completed]);
+  const real = steps.filter((s) => !s.optional);
+  const doneCount = real.filter((s) => s.done).length;
+  const upcoming = quest ? real.filter((s) => !s.done && s.id !== quest.id && steps.indexOf(s) > steps.indexOf(quest)).slice(0, 2) : [];
+  const off = !!quest && beaconOff === quest.id;
 
   useEffect(() => {
     if (!target) return;
@@ -171,103 +130,111 @@ function QuestPanel({ g }: { g: Guidance }) {
       <button
         type="button"
         onClick={() => setCollapsed(false)}
-        className="pointer-events-auto absolute left-2 top-14 z-10 flex min-h-11 max-w-[calc(100vw-1rem)] items-center gap-2 rounded-full border border-cyan-300/30 bg-[#0a1124]/85 px-3 py-1.5 text-left shadow-xl backdrop-blur-md sm:left-3"
+        className="tf-quest-chip pointer-events-auto absolute z-10 flex min-h-11 max-w-[calc(100vw-1rem)] items-center gap-2 rounded-full border border-cyan-300/30 bg-[#0a1124]/90 px-3 py-1.5 text-left shadow-xl"
         aria-label="Show TERRA quest panel"
       >
         <Bot className="h-4 w-4 shrink-0 text-cyan-300" />
         <span className="font-display text-[10px] tracking-[0.2em] text-cyan-200">STEP {step?.n ?? "?"}</span>
-        <span className="truncate text-[12px] text-ivory/85">{target ? stationById(target).name : step?.label}</span>
-        {tasks.length > 0 && <span className="shrink-0 font-display text-[10px] text-ivory/60">{doneCount}/{tasks.length}</span>}
+        <span className="truncate text-[12px] text-ivory/85">{quest ? quest.label : step?.label}</span>
+        {real.length > 0 && <span className="shrink-0 font-display text-[10px] text-ivory/60">{doneCount}/{real.length}</span>}
       </button>
     );
   }
 
   return (
-    <div className="pointer-events-auto absolute left-2 top-14 z-10 flex max-h-[calc(100vh-15rem)] w-[min(340px,calc(100vw-1rem))] flex-col overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#0a1124]/85 shadow-xl backdrop-blur-md sm:left-3 sm:max-h-[calc(100vh-6rem)]">
+    <div className="tf-quest pointer-events-auto absolute z-10 flex w-[min(340px,calc(100vw-1rem))] flex-col overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#0a1124]/92 shadow-xl">
       <button type="button" onClick={() => setCollapsed(true)} className="flex min-h-11 w-full shrink-0 items-center gap-2 border-b border-white/10 px-3 py-2 text-left sm:min-h-0">
         <Bot className="h-4 w-4 text-cyan-300" />
         <span className="font-display text-[10px] tracking-[0.25em] text-cyan-200">TERRA · STEP {step?.n ?? "?"}</span>
         <span className="truncate text-[12px] text-ivory/80">{step?.label}</span>
         <span className="ml-auto text-[10px] text-ivory/45">hide</span>
       </button>
-      <div className="min-h-0 space-y-2.5 overflow-y-auto px-3 py-2.5 [scrollbar-width:thin]">
+      <div className="min-h-0 space-y-2.5 overflow-y-auto overscroll-contain px-3 py-2.5 [scrollbar-width:thin]">
         {g.lines.map((l, i) => (
           <p key={i} className={cx("text-[12.5px] leading-snug", i === 0 ? "text-ivory" : "text-ivory/70")}>
             {l}
           </p>
         ))}
         {g.fromKb && <Chips evidence={g.evidence} />}
-        {target && (
+
+        {plan && quest && (
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between text-[10.5px] text-ivory/55">
+              <span>QUEST</span>
+              <span>
+                {doneCount}/{real.length} done
+              </span>
+            </div>
+            <div className="rounded-xl border border-cyan-300/40 bg-cyan-400/[0.08] px-2.5 py-2">
+              <div className="flex items-start gap-2">
+                <Compass className="mt-0.5 h-4 w-4 shrink-0 text-amber-200" />
+                <div className="min-w-0 flex-1">
+                  <div className="text-[12.5px] font-medium leading-snug text-ivory">{quest.label}</div>
+                  <div className="text-[11px] text-amber-100/85">
+                    {stationById(quest.station).name}
+                    {dist !== null && !off && <span className="text-ivory/50"> · {dist} m</span>}
+                  </div>
+                  <div className="mt-0.5 text-[10.5px] font-semibold text-cyan-200">← do this now{pinnedId === quest.id ? " (pinned)" : ""}</div>
+                </div>
+              </div>
+              <div className="mt-1.5 flex flex-wrap gap-x-3">
+                <button type="button" className="min-h-8 text-[11px] text-ivory/65 underline" onClick={() => setBeaconOff(off ? null : quest.id)}>
+                  {off ? "Guide me again" : "Stop guiding"}
+                </button>
+                {pinnedId === quest.id && (
+                  <button type="button" className="min-h-8 text-[11px] text-ivory/65 underline" onClick={() => setPinned(null)}>
+                    Unpin
+                  </button>
+                )}
+              </div>
+            </div>
+            {upcoming.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => pinQuestStep(s.id)}
+                className="flex min-h-9 w-full items-center gap-2 rounded-lg px-2 text-left opacity-60 hover:bg-white/5 hover:opacity-100"
+              >
+                {DOT(s)}
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[11.5px] text-ivory/80">{s.label}</span>
+                  <span className="block truncate text-[10px] text-ivory/45">{s.blocked && s.blockedText ? s.blockedText : stationById(s.station).name}</span>
+                </span>
+              </button>
+            ))}
+            <details className="rounded-lg border border-white/10 bg-white/[0.02] px-2">
+              <summary className="min-h-9 cursor-pointer text-[11.5px] text-ivory/70">All tasks ({real.length})</summary>
+              <ul className="pb-1">
+                {steps.map((s) => (
+                  <li key={s.id}>
+                    <button
+                      type="button"
+                      onClick={() => pinQuestStep(s.id)}
+                      title={s.blocked && s.blockedText ? s.blockedText : `Guide me to ${stationById(s.station).name}`}
+                      className={cx("flex min-h-9 w-full items-center gap-2 rounded-md px-1 text-left", quest?.id === s.id && "bg-cyan-400/10")}
+                    >
+                      {DOT(s)}
+                      <span className="min-w-0 flex-1">
+                        <span className={cx("block truncate text-[11.5px]", s.done ? "text-ivory/40 line-through" : s.blocked ? "text-ivory/45" : "text-ivory/85")}>{s.label}</span>
+                        <span className={cx("block truncate text-[10px]", s.blocked && !s.done ? "text-amber-200/70" : "text-ivory/40")}>
+                          {s.blocked && !s.done && s.blockedText ? s.blockedText : stationById(s.station).name}
+                          {s.optional ? " · optional" : ""}
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </div>
+        )}
+        {!quest && target && (
           <div className="flex items-center gap-2 rounded-lg bg-white/[0.04] px-2 py-1.5">
             <Compass className="h-3.5 w-3.5 text-amber-200" />
             <span className="flex-1 truncate text-[12px]">
-              {override ? "Guiding to" : "Next"}: <span className="font-medium text-amber-100">{stationById(target).name}</span>
+              Next: <span className="font-medium text-amber-100">{stationById(target).name}</span>
               {dist !== null && <span className="text-ivory/50"> · {dist} m</span>}
             </span>
-            {override && (
-              <button type="button" className="min-h-8 text-[10.5px] text-ivory/55 underline" onClick={() => setTargetOverride(null)}>
-                reset
-              </button>
-            )}
-          </div>
-        )}
-        {tasks.length > 0 && (
-          <div>
-            <div className="mb-1 flex items-center justify-between text-[10.5px] text-ivory/55">
-              <span>PLAN TASKS</span>
-              <span>
-                {doneCount}/{tasks.length} done
-              </span>
-            </div>
-            <div className="mb-1.5 flex flex-wrap gap-1">
-              {perStation.map(([st, c]) => (
-                <button
-                  key={st}
-                  type="button"
-                  onClick={() => setTargetOverride(st)}
-                  title={`Guide me to ${stationById(st).name}`}
-                  className={cx(
-                    "min-h-7 rounded-md border px-1.5 py-0.5 text-[10.5px]",
-                    c.open ? "border-amber-300/30 bg-amber-400/10 text-amber-100" : "border-emerald-300/30 bg-emerald-400/10 text-emerald-100",
-                  )}
-                >
-                  {SHORT[st] ?? stationById(st).name} · {c.open ? `${c.open} left` : "✓"}
-                </button>
-              ))}
-            </div>
-            <ul className="space-y-0.5">
-              {[...open.filter((t0) => !lockedOf(t0)).slice(0, 5), ...open.filter((t0) => lockedOf(t0)).slice(0, 3), ...tasks.filter(isDone).slice(0, 3)].map((t) => {
-                const done = isDone(t);
-                const st = GROUP_STATION[t.group];
-                const lock = done ? null : lockedOf(t);
-                const focused = focusTaskId === t.rec.task_id;
-                return (
-                  <li key={t.rec.task_id} className={cx("flex items-center gap-1.5 rounded-md px-1", focused && "bg-cyan-400/10 ring-1 ring-cyan-300/40")}>
-                    {done ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-300" /> : lock ? <Lock className="h-3.5 w-3.5 shrink-0 text-amber-300/80" /> : <Circle className="h-3.5 w-3.5 shrink-0 text-ivory/35" />}
-                    <button
-                      type="button"
-                      onClick={() => focusPlanTask(t)}
-                      title={lock ? LOCK_TEXT[lock] : `Guide me to ${stationById(st).name}`}
-                      className={cx("flex min-h-9 min-w-0 flex-1 flex-col justify-center text-left hover:text-cyan-100 sm:min-h-7", done ? "text-ivory/45" : lock ? "text-ivory/45" : "text-ivory/90")}
-                    >
-                      <span className={cx("truncate text-[12px]", done && "line-through")}>{t.rec.task_label ?? t.rec.title}</span>
-                      <span className={cx("truncate text-[10px]", lock ? "text-amber-200/70" : "text-ivory/45")}>{lock ? LOCK_TEXT[lock] : stationById(st).name}</span>
-                    </button>
-                    {t.rec.evidence.kb_ids[0] && (
-                      <button
-                        type="button"
-                        onClick={() => openEvidence(t.rec.evidence.kb_ids[0])}
-                        title={`Evidence: ${t.rec.evidence.kb_ids.join(", ")}`}
-                        aria-label={`Open evidence ${t.rec.evidence.kb_ids[0]}`}
-                        className="grid h-8 w-8 shrink-0 place-items-center rounded text-violet-200/80 hover:bg-violet-500/20 hover:text-violet-100"
-                      >
-                        <BookOpen className="h-3 w-3" />
-                      </button>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
           </div>
         )}
         <button
@@ -294,7 +261,7 @@ function InteractionPrompt() {
   if (!near || overlay || action) return null;
   const st = stationById(near);
   return (
-    <div className={cx("pointer-events-auto absolute left-1/2 z-10 w-max max-w-[calc(100vw-2rem)] -translate-x-1/2", touch ? "bottom-[10.5rem]" : "bottom-10")}>
+    <div className="tf-prompt pointer-events-auto absolute left-1/2 z-10 w-max -translate-x-1/2">
       <button type="button" onClick={pulse} className="flex min-h-11 items-center gap-2 rounded-xl border border-cyan-300/40 bg-[#070b1a]/80 px-3 py-2 text-[13px] shadow-[0_0_24px_rgba(56,225,255,0.25)] backdrop-blur">
         <kbd className="grid h-6 w-6 place-items-center rounded-md border border-cyan-200/60 bg-cyan-400/20 font-display text-[11px] text-cyan-50">E</kbd>
         <span>
@@ -322,7 +289,7 @@ function ActionProgress() {
   }, [action]);
   if (!action) return null;
   return (
-    <div className={cx("pointer-events-none absolute left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 rounded-xl border border-emerald-300/30 bg-[#070b1a]/80 px-3 py-2 backdrop-blur", touch ? "bottom-[10.5rem]" : "bottom-10")} role="status">
+    <div className="tf-prompt pointer-events-none absolute left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 rounded-xl border border-emerald-300/30 bg-[#070b1a]/80 px-3 py-2 backdrop-blur" role="status">
       <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden>
         <circle cx="20" cy="20" r="18" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="3" />
         <circle ref={circle} cx="20" cy="20" r="18" fill="none" stroke="#7bd389" strokeWidth="3" strokeDasharray="113" strokeDashoffset="113" strokeLinecap="round" transform="rotate(-90 20 20)" />
@@ -355,8 +322,8 @@ function Minimap({ target }: { target: string | null }) {
   return (
     <div
       className={cx(
-        "pointer-events-none absolute z-10 hidden rounded-full border border-cyan-300/25 bg-[#070b1a]/70 p-1 shadow-lg backdrop-blur sm:block",
-        touch ? "right-3 top-16 [&_svg]:h-[96px] [&_svg]:w-[96px]" : "bottom-3 right-3",
+        "tf-minimap pointer-events-none absolute z-10 hidden rounded-full border border-cyan-300/25 bg-[#070b1a]/70 p-1 shadow-lg backdrop-blur sm:block",
+        touch ? "[&_svg]:h-[96px] [&_svg]:w-[96px]" : "bottom-3",
       )}
       aria-label="Minimap"
     >
@@ -412,7 +379,7 @@ function LocationToast() {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
-          className="pointer-events-none absolute left-1/2 top-16 z-10 -translate-x-1/2 text-center"
+          className="tf-toast-top pointer-events-none absolute left-1/2 z-10 max-w-[calc(100vw-2rem)] -translate-x-1/2 text-center"
         >
           <div className="font-display text-[10px] tracking-[0.35em] text-amber-200/80">ENTERING</div>
           <div className="font-heading text-xl font-semibold text-ivory drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">{shown}</div>
@@ -463,8 +430,8 @@ function Menu({ onClose }: { onClose: () => void }) {
   const setTouchMode = useGame((s) => s.setTouchMode);
   const item = "flex w-full items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 text-left text-[13.5px] hover:border-cyan-300/40 hover:bg-white/[0.07]";
   return (
-    <div className="pointer-events-auto absolute inset-0 z-40 grid place-items-center overflow-y-auto bg-[#070b1a]/60 py-4 backdrop-blur-sm" onClick={onClose}>
-      <div role="dialog" aria-label="Explorer menu" className="w-[min(380px,calc(100vw-2rem))] space-y-2 rounded-2xl border border-cyan-300/25 bg-[#0a1124]/95 p-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+    <div className="pointer-events-auto absolute inset-0 z-40 flex overflow-y-auto bg-[#070b1a]/70 p-4" onClick={onClose}>
+      <div role="dialog" aria-label="Explorer menu" className="m-auto w-[min(380px,calc(100vw-2rem))] space-y-2 rounded-2xl border border-cyan-300/25 bg-[#0a1124]/95 p-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
         <div className="mb-2 flex items-center justify-between">
           <span className="font-display text-[12px] tracking-[0.3em] text-cyan-200">MENU</span>
           <button type="button" onClick={onClose} aria-label="Close menu" className="rounded-lg p-1 text-ivory/70 hover:bg-white/10">
@@ -517,17 +484,16 @@ function Menu({ onClose }: { onClose: () => void }) {
   );
 }
 
-export default function WorldHUD({ g }: { g: Guidance }) {
+export default function WorldHUD({ g, target }: { g: Guidance; target: StationId | null }) {
   const overlay = useGame((s) => s.overlay);
   const setOverlay = useGame((s) => s.setOverlay);
-  const override = useGame((s) => s.targetOverride);
   return (
     <div className="pointer-events-none absolute inset-0">
       <TopBar onMenu={() => setOverlay(overlay === "menu" ? null : "menu")} />
-      {(!overlay || overlay === "menu") && <QuestPanel g={g} />}
+      {(!overlay || overlay === "menu") && <QuestPanel g={g} target={target} />}
       <InteractionPrompt />
       <ActionProgress />
-      <Minimap target={override ?? g.target} />
+      {!overlay && <Minimap target={target} />}
       <LocationToast />
       <ControlsHelp />
       <TouchControls />

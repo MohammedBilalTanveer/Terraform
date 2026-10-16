@@ -57,16 +57,13 @@ export function GlassPanel({
     <div
       role="dialog"
       aria-label={title}
-      className={cx(
-        // phones: full-width bottom sheet with internal scroll; sm+: right-hand side panel
-        "pointer-events-auto absolute inset-x-0 bottom-0 z-30 flex h-[88dvh] flex-col overflow-hidden rounded-t-2xl border border-cyan-300/20 bg-[#0a1124] text-ivory shadow-[0_0_40px_rgba(7,11,26,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] sm:inset-x-auto sm:bottom-3 sm:right-4 sm:top-16 sm:h-auto sm:rounded-2xl",
-        wide ? "sm:w-[620px]" : "sm:w-[500px]",
-      )}
+      // positioning lives in game.css: bottom sheet on phones, side panel on tablets/desktop, side sheet on landscape phones
+      className={cx("tf-panel pointer-events-auto", wide && "tf-wide")}
     >
-      <div className="flex items-start gap-3 border-b border-white/10 px-4 pb-3 pt-3.5">
+      <div className="tf-panel-head flex shrink-0 items-start gap-3 border-b border-white/10">
         <div className="min-w-0 flex-1">
           {kicker && <div className="font-display text-[10px] tracking-[0.28em] text-cyan-300/90">{kicker}</div>}
-          <h2 className="truncate font-heading text-lg font-semibold">{title}</h2>
+          <h2 className="truncate font-heading text-[clamp(15px,4.2vw,18px)] font-semibold">{title}</h2>
           {steps && steps.length > 0 && (
             <div className="mt-1.5 flex flex-wrap gap-1.5">
               {steps.map((s) => (
@@ -77,14 +74,14 @@ export function GlassPanel({
             </div>
           )}
         </div>
-        <button type="button" onClick={onClose} aria-label="Close panel (Esc)" className="grid min-h-11 min-w-11 place-items-center rounded-lg p-1.5 text-ivory/70 hover:bg-white/10 hover:text-ivory sm:min-h-0 sm:min-w-0">
+        <button type="button" onClick={onClose} aria-label="Close panel (Esc)" className="tf-keep grid min-h-11 min-w-11 shrink-0 place-items-center rounded-lg p-1.5 text-ivory/70 hover:bg-white/10 hover:text-ivory">
           <X className="h-4 w-4" />
         </button>
       </div>
       <div data-panel-scroll className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 [scrollbar-width:thin]" style={{ touchAction: "pan-y", willChange: "transform", transform: "translateZ(0)" }}>
         {children}
       </div>
-      {footer && <div className="border-t border-white/10 px-4 py-3">{footer}</div>}
+      {footer && <div className="shrink-0 border-t border-white/10 px-4 py-2.5">{footer}</div>}
     </div>
   );
 }

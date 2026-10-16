@@ -2,7 +2,7 @@
 // recommendation; this store only caches the current session and UI state.
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { api, ApiError, SCENARIO_ID } from "../api/terraformApi";
+import { api, ApiError, SCENARIO_ID, getBackendStatus, subscribeBackend, waitForBackend } from "../api/terraformApi";
 import { harvestRequirements, taskLockFor } from "./workflowRules";
 import type {
   AnalysisResponse,
@@ -56,8 +56,8 @@ export type TerraformState = {
   // UI
   evidenceKbId: string | null;
   toasts: Toast[];
-  /** consecutive failed health checks since the last success (drives the "waking up the server" banner) */
-  healthAttempts: number;
+  /** the server answered health but is not fully ready yet (e.g. still loading the knowledge base) */
+  backendAnswered: boolean;
 
   // actions
   setMode: (mode: AppMode) => void;
@@ -176,9 +176,6 @@ export const useTerraform = create<TerraformState>()(
         }
       };
 
-      // ───────── cold-start friendly health checks (Render free tier needs 30–60 s to wake) ─────────
-      let healthTimer: ReturnType<typeof setTimeout> | null = null;
-
       return {
         mode: "landing",
         currentStep: "observation_log",
@@ -207,7 +204,7 @@ export const useTerraform = create<TerraformState>()(
         error: null,
         evidenceKbId: null,
         toasts: [],
-        healthAttempts: 0,
+        backendAnswered: false,
 
         setMode: (mode) => set({ mode }),
         setCurrentStep: (currentStep) => {
@@ -217,23 +214,13 @@ export const useTerraform = create<TerraformState>()(
         setIntroSeen: (introSeen) => set({ introSeen }),
         setReduceMotion: (reduceMotion) => set({ reduceMotion }),
 
+        // Probe now; if the backend is asleep the shared poller (api.waitForBackend) takes over and the
+        // global BackendGate shows until it answers. Status flows back through subscribeBackend below.
         checkHealth: async () => {
           try {
-            const health = await api.health();
-            if (healthTimer) {
-              clearTimeout(healthTimer);
-              healthTimer = null;
-            }
-            set({ health, backendOnline: true, healthAttempts: 0 });
+            await api.health();
           } catch {
-            set({ backendOnline: false, healthAttempts: get().healthAttempts + 1 });
-            // Not reachable (yet): keep trying every 5 s until it answers — a sleeping server is not an error.
-            if (!healthTimer) {
-              healthTimer = setTimeout(() => {
-                healthTimer = null;
-                void get().checkHealth();
-              }, 5000);
-            }
+            void waitForBackend();
           }
         },
 
@@ -563,3 +550,9 @@ export const useTerraform = create<TerraformState>()(
     },
   ),
 );
+
+// Connectivity lives in the API layer (one source of truth: requests + the shared wake-up poll) and flows into the store.
+const applyBackend = (b: ReturnType<typeof getBackendStatus>) =>
+  useTerraform.setState({ backendOnline: b.online, backendAnswered: b.answered, ...(b.health ? { health: b.health } : {}) });
+applyBackend(getBackendStatus());
+subscribeBackend(applyBackend);

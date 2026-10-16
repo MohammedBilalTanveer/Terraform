@@ -86,22 +86,22 @@ export default function DialogueBox({
       initial={reduceMotion ? false : { opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className="pointer-events-auto absolute inset-x-3 bottom-6 z-20 mx-auto max-w-2xl sm:bottom-10"
+      className="tf-dialogue pointer-events-auto absolute z-20 mx-auto max-w-2xl"
     >
       <div
         role="dialog"
         aria-live="polite"
         onClick={() => (!done ? finish() : !choices?.length ? onNext?.() : undefined)}
-        className={`relative cursor-pointer overflow-hidden rounded-2xl border ${sp.ring} bg-[#070b1a]/85 px-5 py-4 shadow-[0_10px_40px_rgba(0,0,0,0.5)] backdrop-blur-md`}
+        className={`tf-dialogue-box relative cursor-pointer rounded-2xl border ${sp.ring} bg-[#070b1a]/92 px-4 py-3 shadow-[0_10px_40px_rgba(0,0,0,0.5)] sm:px-5 sm:py-4`}
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent" />
-        {sp.name && <div className={`mb-1 font-display text-[10px] tracking-[0.3em] ${sp.color}`}>{sp.name}</div>}
-        <p className={`min-h-[3rem] font-heading text-[15px] leading-relaxed sm:text-[16px] ${speaker === "narrator" ? "italic text-ivory/80" : "text-ivory"}`}>
+        {sp.name && <div className={`mb-1 font-display text-[12px] tracking-[0.2em] ${sp.color}`}>{sp.name}</div>}
+        <p className={`min-h-[2.5rem] font-heading text-[clamp(14px,3.8vw,16px)] leading-relaxed ${speaker === "narrator" ? "italic text-ivory/80" : "text-ivory"}`}>
           {shown}
           {!done && <span className="ml-0.5 inline-block h-4 w-[2px] animate-pulse bg-cyan-300 align-middle" />}
         </p>
         {done && choices?.length ? (
-          <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+          <div className="mt-3 flex flex-col gap-2 min-[560px]:flex-row">
             {choices.map((c, i) => (
               <button
                 key={c.value}
@@ -110,15 +110,15 @@ export default function DialogueBox({
                   e.stopPropagation();
                   onChoice?.(c.value);
                 }}
-                className="flex-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-left text-[13.5px] text-ivory hover:border-cyan-300/60 hover:bg-cyan-400/10"
+                className="tf-keep min-h-12 flex-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-left text-[14px] text-ivory hover:border-cyan-300/60 hover:bg-cyan-400/10 active:bg-cyan-400/20"
               >
-                <span className="mr-2 font-display text-[10px] text-cyan-300">{i + 1}</span>
+                <span className="mr-2 font-display text-[12px] text-cyan-300">{i + 1}</span>
                 {c.label}
               </button>
             ))}
           </div>
         ) : done ? (
-          <div className="mt-1 text-right font-display text-[9px] tracking-[0.3em] text-ivory/40">CLICK / SPACE ▸</div>
+          <div className="mt-1 text-right font-display text-[12px] tracking-[0.2em] text-ivory/55">TAP ▸</div>
         ) : null}
       </div>
     </motion.div>

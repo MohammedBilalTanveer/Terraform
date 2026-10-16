@@ -6,10 +6,11 @@ import { useTerraform } from "../../store/terraformStore";
 import { useGame, type ActionKind } from "../gameStore";
 import { GROUP_STATION, SECTION_LABEL, lockOf, type PlanItem } from "../planData";
 import { LockedNotice } from "./lock";
+import { pinQuestStep } from "./pin";
 import { stationById, type StationId } from "../worldConfig";
 import { Bullets, Card, Chips, GhostButton, Pill, PrimaryButton, ThisOneBadge, cx, humanize } from "./kit";
 
-const VERB: Record<ActionKind, string> = {
+export const VERB: Record<ActionKind, string> = {
   inspect: "Check",
   dig: "Dig & prepare",
   stones: "Lay stones",
@@ -55,12 +56,7 @@ export function TaskButton({ item, here }: { item: PlanItem; here: StationId }) 
   if (!atStation) {
     return (
       <GhostButton
-        onClick={() => {
-          setTargetOverride(station);
-          useGame.getState().setFocusTask(taskId);
-          useGame.getState().say(`Head to ${stationById(station).name} — ${item.rec.task_label ?? item.rec.title}`);
-          setOverlay(null);
-        }}
+        onClick={() => pinQuestStep(taskId, false)}
       >
         <Navigation className="h-3.5 w-3.5" /> Go to {stationById(station).name}
       </GhostButton>

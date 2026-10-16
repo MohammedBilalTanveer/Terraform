@@ -183,9 +183,9 @@ export default function DashboardPage() {
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={safeStep}
-              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 14, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10, filter: "blur(4px)" }}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
               transition={{ duration: reduce ? 0.1 : 0.32, ease: [0.22, 1, 0.36, 1] }}
             >
               <StepFrame step={safeStep} status={statuses[safeStep]}>
@@ -218,8 +218,8 @@ export default function DashboardPage() {
       </div>
 
       {/* Mobile sticky action bar */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-midnight/85 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl lg:hidden">
-        <div className="mx-auto flex max-w-2xl items-center gap-2">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-midnight/85 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl [@media(max-height:500px)]:pt-1.5 lg:hidden">
+        <div className="mx-auto flex max-w-2xl items-center gap-2 [@media(max-height:500px)]:pb-1">
           <button type="button" className="btn-ghost !p-3" disabled={idx === 0} onClick={() => go(STEP_IDS[idx - 1])} aria-label="Previous step">
             <ArrowLeft className="h-5 w-5" aria-hidden />
           </button>

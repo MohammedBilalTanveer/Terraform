@@ -39,7 +39,7 @@ export default function SeasonComplete() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[60] grid place-items-center overflow-y-auto bg-[#050814]/95 p-4"
+          className="tap-scope fixed inset-0 z-[60] flex overflow-y-auto bg-[#050814]/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:p-4"
           role="dialog"
           aria-modal="true"
           aria-label={`Season ${season} complete`}
@@ -60,7 +60,7 @@ export default function SeasonComplete() {
           <motion.div
             initial={{ y: 30, scale: 0.96 }}
             animate={{ y: 0, scale: 1 }}
-            className="relative w-full max-w-3xl overflow-hidden rounded-3xl border border-amber-200/25 bg-gradient-to-b from-[#141b35] to-[#0a0f22] p-6 shadow-2xl sm:p-8"
+            className="relative m-auto w-full max-w-3xl overflow-hidden rounded-3xl border border-amber-200/25 bg-gradient-to-b from-[#141b35] to-[#0a0f22] p-6 shadow-2xl sm:p-8"
           >
             <span className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-gradient-to-br from-amber-300/25 via-coral/15 to-transparent blur-3xl" aria-hidden />
             <div className="relative">
@@ -69,7 +69,7 @@ export default function SeasonComplete() {
                   <Trophy className="h-7 w-7" aria-hidden />
                 </span>
                 <div>
-                  <div className="font-display text-[11px] tracking-[0.35em] text-amber-200">TERRAFORM // SEASON {season} COMPLETE</div>
+                  <div className="font-display text-[12px] tracking-[0.35em] text-amber-200">TERRAFORM // SEASON {season} COMPLETE</div>
                   <h2 className="font-display text-2xl font-bold tracking-wide text-ivory sm:text-3xl">
                     You harvested {crop?.name ?? "your crop"}.
                   </h2>
@@ -141,7 +141,7 @@ export default function SeasonComplete() {
                   <RotateCcw className="h-4 w-4" aria-hidden /> Restart from the beginning
                 </button>
               </div>
-              <p className="mt-3 text-[11.5px] text-ivory/45">
+              <p className="mt-3 text-[12px] text-ivory/45">
                 “Start season {season + 1}” keeps your land notes and journal, clears this season’s plan, tasks and tests, and takes you back to
                 Step 1 so you can describe what changed (deeper soil, new pits, where water now goes) and get a new plan from the knowledge base.
               </p>
@@ -156,7 +156,7 @@ export default function SeasonComplete() {
 function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
     <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
-      <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.15em] text-ivory/55">
+      <div className="flex items-center gap-1.5 text-[12px] uppercase tracking-[0.15em] text-ivory/55">
         {icon} {label}
       </div>
       <div className="mt-1 font-display text-2xl text-ivory">{value}</div>

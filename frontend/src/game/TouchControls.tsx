@@ -29,7 +29,6 @@ export function useTouchVisible() {
   return mode === "show" || (mode === "auto" && auto);
 }
 
-const R = 46;
 
 export default function TouchControls() {
   const visible = useTouchVisible();
@@ -72,6 +71,7 @@ export default function TouchControls() {
 
   const move = (e: RPointerEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
+    const R = Math.max(24, r.width * 0.32); // thumb travel scales with the (fluid) joystick size
     let dx = e.clientX - (r.left + r.width / 2);
     let dy = e.clientY - (r.top + r.height / 2);
     const d = Math.hypot(dx, dy);
@@ -88,7 +88,7 @@ export default function TouchControls() {
   return (
     <>
       <div
-        className="pointer-events-auto absolute bottom-5 left-4 z-20 grid h-36 w-36 select-none place-items-center rounded-full border border-white/20 bg-[#070b1a]/35 backdrop-blur-sm"
+        className="tf-joy pointer-events-auto absolute z-20 grid select-none place-items-center rounded-full border border-white/20 bg-[#070b1a]/45"
         style={{ touchAction: "none" }}
         onPointerDown={(e) => {
           if (stickId.current !== null) return;
@@ -108,12 +108,12 @@ export default function TouchControls() {
         aria-label="Movement joystick — drag to walk"
       >
         <div className="pointer-events-none absolute inset-6 rounded-full border border-white/10" />
-        <div ref={knob} className="pointer-events-none h-14 w-14 rounded-full border border-cyan-200/70 bg-cyan-400/30 shadow-[0_0_18px_rgba(56,225,255,0.35)]" />
+        <div ref={knob} className="pointer-events-none h-[40%] w-[40%] rounded-full border border-cyan-200/70 bg-cyan-400/30 shadow-[0_0_18px_rgba(56,225,255,0.35)]" />
       </div>
-      <div className="pointer-events-none absolute bottom-5 right-4 z-20 flex items-end gap-3" style={{ touchAction: "none" }}>
+      <div className="tf-acts pointer-events-none absolute z-20 flex items-end gap-3" style={{ touchAction: "none" }}>
         <button
           type="button"
-          className={`pointer-events-auto grid h-14 w-14 select-none place-items-center rounded-full border font-display text-[10px] tracking-[0.15em] ${
+          className={`tf-act-sprint tf-keep pointer-events-auto grid select-none place-items-center rounded-full border font-display text-[10px] tracking-[0.1em] ${
             sprinting ? "border-amber-200 bg-amber-300/40 text-amber-50" : "border-white/25 bg-[#070b1a]/45 text-ivory/85"
           }`}
           style={{ touchAction: "none" }}
@@ -137,7 +137,7 @@ export default function TouchControls() {
         <button
           type="button"
           onClick={pulse}
-          className={`pointer-events-auto grid h-[72px] w-[72px] select-none place-items-center rounded-full border font-display text-xl ${
+          className={`tf-act-e tf-keep pointer-events-auto grid select-none place-items-center rounded-full border font-display text-xl ${
             near ? "border-cyan-200 bg-cyan-400/35 text-cyan-50 shadow-[0_0_24px_rgba(56,225,255,0.45)]" : "border-white/25 bg-[#070b1a]/45 text-ivory/60"
           }`}
           style={{ touchAction: "manipulation" }}

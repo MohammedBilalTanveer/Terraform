@@ -284,7 +284,7 @@ function Answer({ r, onOpen }: { r: AskResponse; onOpen: (id: string) => void })
                   <ArrowRight className="h-3.5 w-3.5 text-violet-300 opacity-60 group-hover:opacity-100" aria-hidden />
                 </div>
                 {m.snippet && <div className="mt-0.5 line-clamp-2 text-xs text-mist">{m.snippet}</div>}
-                <div className="mt-1 font-mono text-[0.7rem] text-violet-300/80">{m.collection} · {m.kb_id}</div>
+                <div className="mt-1 font-mono text-[0.75rem] text-violet-300/80">{m.collection} · {m.kb_id}</div>
               </button>
             </li>
           ))}

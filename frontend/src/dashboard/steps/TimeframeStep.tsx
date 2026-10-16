@@ -301,7 +301,7 @@ function SeasonCalendar({ calendar }: { calendar: { kb_id: string; phases: { whe
         {phases.map((ph, i) => (
           <li key={i} className="relative w-64 shrink-0 snap-start">
             <div className="mb-3 flex items-center gap-2" aria-hidden>
-              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-cyan/50 bg-midnight font-display text-[0.7rem] font-bold text-cyan-100">
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-cyan/50 bg-midnight font-display text-[0.75rem] font-bold text-cyan-100">
                 {i + 1}
               </span>
               {i < phases.length - 1 && <span className="h-px flex-1 bg-gradient-to-r from-cyan/50 to-violet/30" />}

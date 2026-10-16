@@ -55,6 +55,8 @@ function classify(r: Recommendation, section: Section): TaskGroup {
   const k = keyOf(r);
   if (section === "regeneration") return "harvest";
   if (/stone|contour|half_moon|halfmoon|bund|terrace/.test(k)) return "terraces";
+  // checks/confirmations the readiness gate depends on are done at the plot itself
+  if (r.phase === "readiness" && !/fizz|recheck/.test(k)) return "plot";
   if (section === "sowing") return "plot";
   if (section === "dry_spell") return "water";
   if (/fizz|recheck/.test(k)) return "other";
@@ -151,9 +153,10 @@ export const isGateItem = (plan: PlanResponse | null, item: PlanItem) => !!item.
 
 export function taskPhase(plan: PlanResponse | null, item: PlanItem): TaskPhase {
   const id = item.rec.task_id ?? "";
-  if (gateTaskIds(plan).has(id)) return "readiness";
+  // The knowledge base's own phase wins (building a pit is `prepare` even though it also satisfies a gate).
   if (item.rec.phase) return item.rec.phase;
   // fallback when the backend/KB doesn't send `phase`
+  if (gateTaskIds(plan).has(id) && !/sow|plant_tree/.test(id) && /confirm|recheck|test_/.test(id)) return "readiness";
   if (item.action === "sow" || /sow|plant_tree/.test(id)) return "plant";
   if (item.section === "gate" || /confirm|recheck|test_/.test(id)) return "readiness";
   return "prepare";
@@ -253,6 +256,197 @@ export function worldView(
 }
 
 // ---------------------------------------------------------------------------------------------
+// QUEST: one linear order of work — prepare → readiness (tasks, then each gate's test) → choose crop →
+// plant → care → harvest. The beacon, TERRA and the quest list all follow the single "quest task".
+export type QuestKind = "task" | "test" | "crop" | "time" | "sow" | "care" | "harvest";
+export type QuestPhase = "prepare" | "readiness" | "crop" | "plant" | "care" | "harvest";
+
+export type QuestStep = {
+  id: string; // task_id | "test:<gate_id>" | "crop" | "sow" | "care" | "harvest"
+  kind: QuestKind;
+  phase: QuestPhase;
+  station: StationId;
+  label: string;
+  item?: PlanItem;
+  gateId?: string;
+  done: boolean;
+  /** not doable yet (locked, or waiting on something) — never shown as doable */
+  blocked: boolean;
+  lock: LockReason | null;
+  blockedText: string | null;
+  optional: boolean;
+};
+
+export type QuestCtx = {
+  analysis: AnalysisResponse | null;
+  plan: PlanResponse | null;
+  completed: string[];
+  crop: string | null;
+  farm: FarmView;
+  gateResults?: Record<string, "pass" | "fail">;
+};
+
+const PHASE_RANK: Record<TaskPhase, number> = { prepare: 0, readiness: 1, plant: 2 };
+
+export function buildQuest(ctx: QuestCtx): QuestStep[] {
+  const { analysis, plan, completed, crop, farm } = ctx;
+  if (!plan) return [];
+  const items = collectPlanItems(plan);
+  const gates = plan.workflow.next_action.readiness_gate ?? [];
+  const view = worldView(analysis, plan, completed, crop, farm);
+  const isDone = (id: string | null | undefined) => !!id && completed.includes(id);
+  const gatesOf = (id: string) => gates.filter((g) => g.satisfied_by_tasks?.includes(id));
+  const readyOk = plan.workflow.next_action.planting_readiness !== "not_ready";
+
+  const all = items.filter((i) => i.rec.task_id && i.section !== "avoid" && !/plant_tree/.test(i.rec.task_id!));
+  const isOptional = (i: PlanItem) => i.section === "optional" || i.rec.priority === "optional";
+  // alternatives (pits OR beds OR containers …): once one satisfies a gate, the rest are redundant
+  const redundant = (i: PlanItem) => {
+    const id = i.rec.task_id!;
+    if (isDone(id)) return false;
+    const gs = gatesOf(id);
+    return gs.length > 0 && gs.every((g) => g.satisfied_by_tasks.some((o) => o !== id && isDone(o)));
+  };
+  const mk = (i: PlanItem): QuestStep => {
+    const lock = lockOf(plan, i, crop);
+    const ph = taskPhase(plan, i);
+    return {
+      id: i.rec.task_id!,
+      kind: "task",
+      phase: ph,
+      station: GROUP_STATION[i.group],
+      label: i.rec.task_label ?? i.rec.title,
+      item: i,
+      done: isDone(i.rec.task_id),
+      blocked: !!lock,
+      lock,
+      blockedText: lock ? LOCK_TEXT[lock] : null,
+      optional: isOptional(i),
+    };
+  };
+  const required = all.filter((i) => !isOptional(i) && !redundant(i));
+  const early = required
+    .filter((i) => taskPhase(plan, i) !== "plant")
+    .sort((a, b) => PHASE_RANK[taskPhase(plan, a)] - PHASE_RANK[taskPhase(plan, b)]);
+  const steps: QuestStep[] = early.map(mk);
+
+  // each required gate's verification test comes right after its (last listed) task
+  for (const g of gates) {
+    if (!g.required || !g.verification?.test) continue;
+    const taskDone = g.task_done ?? g.satisfied_by_tasks.some((id) => isDone(id));
+    const done = !!g.satisfied || !!g.accepted_risk || (ctx.gateResults?.[g.id] ?? g.test_result) === "pass";
+    let at = -1;
+    steps.forEach((s, i) => {
+      if (s.kind === "task" && g.satisfied_by_tasks.includes(s.id)) at = i;
+    });
+    const step: QuestStep = {
+      id: `test:${g.id}`,
+      kind: "test",
+      phase: "readiness",
+      station: "plot",
+      label: `Run the test: ${g.label}`,
+      gateId: g.id,
+      done,
+      blocked: !taskDone,
+      lock: null,
+      blockedText: taskDone ? null : "Finish this gate's task first",
+      optional: false,
+    };
+    steps.splice(at < 0 ? steps.length : at + 1, 0, step);
+  }
+
+  steps.push({
+    id: "crop",
+    kind: "crop",
+    phase: "crop",
+    station: "plot",
+    label: "Choose a crop for the plot",
+    done: !!crop,
+    blocked: !readyOk,
+    lock: readyOk ? null : "pass_gate",
+    blockedText: readyOk ? null : LOCK_TEXT.pass_gate,
+    optional: false,
+  });
+
+  steps.push({
+    id: "time",
+    kind: "time",
+    phase: "crop",
+    station: "plot",
+    label: `Check the timeframe${view.cropName ? ` for ${view.cropName}` : ""}`,
+    done: view.sown || !!farm.timeSeen,
+    blocked: !crop,
+    lock: null,
+    blockedText: crop ? null : LOCK_TEXT.choose_crop,
+    optional: false,
+  });
+
+  const plantTasks = required.filter((i) => taskPhase(plan, i) === "plant");
+  plantTasks.forEach((i) => steps.push(mk(i)));
+  if (!plantTasks.some((i) => i.action === "sow" || /sow_seeds/.test(i.rec.task_id!))) {
+    steps.push({
+      id: "sow",
+      kind: "sow",
+      phase: "plant",
+      station: "plot",
+      label: view.cropName ? `Sow ${view.cropName}` : "Sow the chosen crop",
+      done: view.sown,
+      blocked: !crop || !readyOk,
+      lock: !crop && !readyOk ? "choose_crop_and_pass_gate" : !crop ? "choose_crop" : !readyOk ? "pass_gate" : null,
+      blockedText: !crop ? LOCK_TEXT.choose_crop : !readyOk ? LOCK_TEXT.pass_gate : null,
+      optional: false,
+    });
+  }
+  const careDone = view.stage === "harvest_ready" || !!farm.harvested;
+  steps.push({
+    id: "care",
+    kind: "care",
+    phase: "care",
+    station: "plot",
+    label: "Tend the crop through its care stages",
+    done: careDone,
+    blocked: !view.sown,
+    lock: null,
+    blockedText: view.sown ? null : "Sow the crop first",
+    optional: false,
+  });
+  steps.push({
+    id: "harvest",
+    kind: "harvest",
+    phase: "harvest",
+    station: "harvest",
+    label: "Harvest the crop",
+    done: !!farm.harvested,
+    blocked: view.stage !== "harvest_ready" && !farm.harvested,
+    lock: null,
+    blockedText: view.stage === "harvest_ready" || farm.harvested ? null : "Finish the care stages first",
+    optional: false,
+  });
+  // optional tasks are doable at their stations but never forced by the quest
+  all.filter((i) => isOptional(i) && !isDone(i.rec.task_id)).forEach((i) => steps.push(mk(i)));
+  return steps;
+}
+
+/** The single quest task: the pinned step if still doable, else the first open, unblocked, required step. */
+export function questTask(steps: QuestStep[], pinnedId: string | null): QuestStep | null {
+  if (pinnedId) {
+    const p = steps.find((s) => s.id === pinnedId);
+    if (p && !p.done && !p.blocked) return p;
+  }
+  return steps.find((s) => !s.done && !s.blocked && !s.optional) ?? null;
+}
+
+export const QUEST_STEP_ID: Record<QuestKind, StepId> = {
+  task: "fix_protocol",
+  test: "next_action",
+  crop: "crop_suggestions",
+  time: "timeframe",
+  sow: "planting_method",
+  care: "ongoing_care",
+  harvest: "harvest",
+};
+
+// ---------------------------------------------------------------------------------------------
 export type Guidance = {
   target: StationId | null;
   step: StepId;
@@ -260,6 +454,8 @@ export type Guidance = {
   lines: string[];
   evidence: Evidence | null;
   fromKb: boolean;
+  /** the single current quest task (only once a plan exists) */
+  quest?: QuestStep | null;
 };
 
 export function guidance(args: {
@@ -269,6 +465,8 @@ export function guidance(args: {
   completed: string[];
   selectedCropId: string | null;
   farm: FarmView;
+  pinnedId?: string | null;
+  gateResults?: Record<string, "pass" | "fail">;
 }): Guidance {
   const { backendOnline, analysis, plan, completed, selectedCropId, farm } = args;
   if (!analysis) {
@@ -306,33 +504,19 @@ export function guidance(args: {
   let step: StepId = "next_action";
   let evidence: Evidence | null = na.evidence;
 
-  const firstDoFirst = open.find((i) => i.section === "do_first" && !lockOf(plan, i, selectedCropId));
-  const gateBlock = na.readiness_gate.find((g) => g.required && !g.satisfied && !g.accepted_risk);
-  const gateItem = gateBlock ? open.find((i) => gateBlock.satisfied_by_tasks.includes(i.rec.task_id ?? "")) : undefined;
-
-  // order: prepare → readiness → choose crop → plant → care → harvest
-  if (firstDoFirst) {
-    target = GROUP_STATION[firstDoFirst.group];
-    step = firstDoFirst.step;
-    evidence = firstDoFirst.rec.evidence;
+  // the beacon follows the QUEST TASK only (pinned, else first open unlocked in workflow order)
+  void open;
+  const quest = questTask(buildQuest({ analysis, plan, completed, crop: selectedCropId, farm, gateResults: args.gateResults }), args.pinnedId ?? null);
+  if (quest) {
+    target = quest.station;
+    step = QUEST_STEP_ID[quest.kind];
+    if (quest.item) evidence = quest.item.rec.evidence;
   } else if (na.planting_readiness === "not_ready") {
-    target = gateItem ? GROUP_STATION[gateItem.group] : "plot";
+    target = "plot";
     step = "next_action";
-  } else if (!selectedCropId) {
-    target = "plot";
-    step = "crop_suggestions";
-  } else if (!view.sown) {
-    target = "plot";
-    step = "planting_method";
-  } else if (view.stage !== "harvest_ready") {
-    target = "plot";
-    step = "ongoing_care";
-  } else {
-    target = "harvest";
-    step = "harvest";
   }
   if (view.cropName) lines.push(`Selected crop: ${view.cropName}.`);
-  return { target, step, lines, evidence, fromKb: true };
+  return { target, step, lines, evidence, fromKb: true, quest };
 }
 
 // ---------------------------------------------------------------------------------------------

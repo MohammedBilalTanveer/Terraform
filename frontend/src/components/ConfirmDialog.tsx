@@ -39,13 +39,13 @@ export default function ConfirmDialog({
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[95] grid place-items-center p-4">
+        <div className="fixed inset-0 z-[95] flex overflow-y-auto p-4">
           <motion.div className="absolute inset-0 bg-black/60 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onCancel} aria-hidden />
           <motion.div
             role="alertdialog"
             aria-modal="true"
             aria-labelledby="confirm-title"
-            className="glass-strong hero-ring relative w-full max-w-md rounded-2xl p-6"
+            className="glass-strong hero-ring relative m-auto w-full max-w-md rounded-2xl p-5 sm:p-6"
             initial={{ opacity: 0, scale: 0.96, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97 }}

@@ -5,7 +5,6 @@ import EvidenceDrawer from "./EvidenceDrawer";
 import ModeSwitcher from "./ModeSwitcher";
 import RestartButton from "./RestartButton";
 import HeaderMenu from "./HeaderMenu";
-import WakeBanner from "./WakeBanner";
 import { BackendPill, GenerationModePill, KbOnlyPill, KbPill, SavePill } from "./StatusPills";
 import Toasts from "./Toasts";
 
@@ -34,13 +33,13 @@ export default function AppShell({ children, showStatus = true }: { children: Re
         Skip to content
       </a>
       <Background />
-      <header className="sticky top-0 z-40 border-b border-white/8 bg-midnight/70 backdrop-blur-xl">
+      <header className="app-header sticky top-0 z-40 border-b border-white/8 bg-midnight/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1680px] items-center gap-3 px-4 py-3 sm:gap-4 lg:px-6">
           <button type="button" onClick={() => setMode("landing")} className="shrink-0 rounded-lg" aria-label="TERRAFORM home">
             <Logo />
           </button>
           <div className="hidden min-w-0 border-l border-white/10 pl-4 sm:block">
-            <div className="eyebrow !text-[0.68rem]">The System Awakens</div>
+            <div className="eyebrow !text-[0.75rem]">The System Awakens</div>
             <div className="truncate font-heading text-sm font-semibold text-ivory">Scenario 5 · Lateritic Hardpan Plateau</div>
           </div>
           {showStatus && (
@@ -69,7 +68,6 @@ export default function AppShell({ children, showStatus = true }: { children: Re
           </div>
         )}
       </header>
-      <WakeBanner />
       {children}
       <EvidenceDrawer />
       <Toasts />

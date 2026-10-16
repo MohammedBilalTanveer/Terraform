@@ -19,12 +19,17 @@ import { STATION_COLLIDERS } from "./StationProps";
 import { farmFor, playerState, useGame } from "./gameStore";
 import { clearKeys, installKeyboard, isTypingTarget } from "./input";
 import { guidance } from "./planData";
-import { SPAWN, type StationId } from "./worldConfig";
+import { SPAWN, stationById, type StationId } from "./worldConfig";
 import { preloadModels } from "./assets";
 import ObservationPanel from "./ui/ObservationPanel";
 import SoilPanel from "./ui/SoilPanel";
 import StationPanel from "./ui/StationPanel";
-import PlotPanel from "./ui/PlotPanel";
+import PlotWizard from "./ui/PlotWizard";
+import { useTouchVisible } from "./TouchControls";
+import { dprFor, useViewport } from "./useViewport";
+import { cx } from "./ui/kit";
+import "./game.css";
+import StationCards from "./ui/StationCards";
 import HarvestPanel from "./ui/HarvestPanel";
 import AskPanel from "./ui/AskPanel";
 
@@ -95,7 +100,7 @@ function Overlay({ id, onClose }: { id: StationId | "ask"; onClose: () => void }
     case "gully":
       return <SoilPanel onClose={onClose} mode="gully" />;
     case "plot":
-      return <PlotPanel onClose={onClose} />;
+      return <PlotWizard onClose={onClose} />;
     case "harvest":
       return <HarvestPanel onClose={onClose} />;
     case "ask":
@@ -104,6 +109,7 @@ function Overlay({ id, onClose }: { id: StationId | "ask"; onClose: () => void }
     case "terraces":
     case "compost":
     case "water":
+      return <StationCards station={id} onClose={onClose} />;
     case "outpost":
       return <StationPanel station={id} onClose={onClose} />;
     default:
@@ -124,7 +130,13 @@ export default function ExplorerPage() {
   const setOverlay = useGame((s) => s.setOverlay);
   const override = useGame((s) => s.targetOverride);
   const setTargetOverride = useGame((s) => s.setTargetOverride);
+  const pinnedId = useGame((s) => s.pinnedId);
+  const beaconOff = useGame((s) => s.beaconOff);
+  const area = useGame((s) => s.area);
+  const gateResults = useTerraform((s) => s.gateResults);
   const pulse = useGame((s) => s.interactPulse);
+  const vp = useViewport();
+  const touchOn = useTouchVisible();
   const bubble = useGame((s) => s.bubble);
   // TERRA's temporary line (e.g. "Head to <station> — <task>") expires on its own
   useEffect(() => {
@@ -145,10 +157,33 @@ export default function ExplorerPage() {
   }, []);
 
   const g = useMemo(
-    () => guidance({ backendOnline, analysis, plan, completed, selectedCropId: crop, farm }),
-    [backendOnline, analysis, plan, completed, crop, farm],
+    () => guidance({ backendOnline, analysis, plan, completed, selectedCropId: crop, farm, pinnedId, gateResults }),
+    [backendOnline, analysis, plan, completed, crop, farm, pinnedId, gateResults],
   );
-  const target = override ?? g.target;
+  // The beacon follows the QUEST TASK's station and never moves on arrival — only when that task is
+  // completed (or the player pins another one / stops guiding).
+  const questId = g.quest?.id ?? null;
+  const target = beaconOff && beaconOff === questId ? null : override ?? g.target;
+
+  // a manual "guide me to …" override lives only until the quest task changes; stale quest state never
+  // leaks across sessions
+  const lastQuest = useRef<string | null>(questId);
+  useEffect(() => {
+    if (lastQuest.current !== questId) {
+      lastQuest.current = questId;
+      const st = useGame.getState();
+      if (st.targetOverride) st.setTargetOverride(null);
+      if (st.beaconOff) st.setBeaconOff(null);
+    }
+  }, [questId]);
+  const lastSession = useRef(sessionId);
+  useEffect(() => {
+    if (lastSession.current === sessionId) return;
+    lastSession.current = sessionId;
+    const st = useGame.getState();
+    st.setPinned(null);
+    st.setLastDone(null);
+  }, [sessionId]);
 
   // world setup: colliders + keyboard
   useEffect(() => {
@@ -166,16 +201,6 @@ export default function ExplorerPage() {
       useGame.getState().setOverlay(null);
     };
   }, []);
-
-  // reaching the overridden target clears the override
-  useEffect(() => {
-    const t = window.setInterval(() => {
-      const o = useGame.getState().targetOverride;
-      const area = useGame.getState().area;
-      if (o && area === o) setTargetOverride(null);
-    }, 500);
-    return () => window.clearInterval(t);
-  }, [setTargetOverride]);
 
   const interact = useCallback((id: StationId) => {
     const game = useGame.getState();
@@ -223,14 +248,20 @@ export default function ExplorerPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, [interact]);
 
+  // arriving at the quest station only changes TERRA's line — never the beacon
+  const arrivalLine =
+    g.quest && !override && area && area === g.quest.station && target === g.quest.station
+      ? `You're at ${stationById(area).name}. Press E — ${g.quest.label}`
+      : null;
+
   const closeOverlay = useCallback(() => setOverlay(null), [setOverlay]);
 
   return (
-    <div className="fixed inset-0 overflow-hidden bg-[#2a1610] font-sans text-ivory">
+    <div className={cx("tf-game fixed inset-0 overflow-hidden bg-[#2a1610] font-sans text-ivory", touchOn && "tf-touch")}>
       <Canvas
         style={{ touchAction: "none" }}
         shadows
-        dpr={[1, 1.5]}
+        dpr={dprFor(vp)}
         gl={{ antialias: true, powerPreference: "high-performance" }}
         camera={{ fov: 42, near: 0.3, far: 520, position: [SPAWN[0], 14, SPAWN[1] + 13] }}
         onCreated={({ gl }) => {
@@ -243,11 +274,11 @@ export default function ExplorerPage() {
         <Suspense fallback={null}>
           <WorldScene follow={playerState} reduceMotion={reduceMotion} />
           <PlayerController enabled={!overlay} />
-          <RobotGuide target={target} line={bubble && bubble.until > Date.now() ? bubble.text : g.lines[0] ?? ""} reduceMotion={reduceMotion} showBubble={!overlay} />
+          <RobotGuide target={target} line={bubble && bubble.until > Date.now() ? bubble.text : arrivalLine ?? g.lines[0] ?? ""} reduceMotion={reduceMotion} showBubble={!overlay && !vp.short && !touchOn} />
         </Suspense>
         <FollowCamera />
       </Canvas>
-      <WorldHUD g={g} />
+      <WorldHUD g={g} target={target} />
       {overlay && overlay !== "menu" && (
         <div className="pointer-events-none absolute inset-0 z-30">
           <Overlay id={overlay} onClose={closeOverlay} />

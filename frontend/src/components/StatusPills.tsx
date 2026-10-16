@@ -10,7 +10,7 @@ export function BackendPill() {
   return online ? (
     <Badge tone="cyan" icon={<Wifi className="h-3 w-3" aria-hidden />} title="Backend reachable">Backend online</Badge>
   ) : (
-    <Badge tone="coral" icon={<WifiOff className="h-3 w-3" aria-hidden />} title="Backend not reachable">Backend offline</Badge>
+    <Badge tone="amber" icon={<LoaderCircle className="h-3 w-3 animate-spin" aria-hidden />} title="The free server is waking up — reconnecting automatically">Reconnecting…</Badge>
   );
 }
 

@@ -48,8 +48,9 @@ export default function GlitchOverlay({ reduceMotion }: { reduceMotion: boolean 
         ))}
       <div className="absolute inset-0 grid place-items-center" style={{ animation: reduceMotion ? undefined : "tf-flicker 0.6s steps(6) infinite" }}>
         <div
-          className="font-display text-2xl font-bold tracking-[0.3em] text-white sm:text-4xl"
-          style={{ textShadow: reduceMotion ? undefined : "3px 0 rgba(255,40,90,0.9), -3px 0 rgba(56,225,255,0.9)" }}
+          className="max-w-[92vw] break-words px-3 text-center font-display font-bold tracking-[0.12em] text-white sm:tracking-[0.3em]"
+         
+          style={{ fontSize: "clamp(1.1rem, 5.6vw, 2.25rem)", textShadow: reduceMotion ? undefined : "0.1em 0 rgba(255,40,90,0.9), -0.1em 0 rgba(56,225,255,0.9)" }}
         >
           REALITY_INDEX // ERR
         </div>

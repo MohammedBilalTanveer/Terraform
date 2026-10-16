@@ -101,7 +101,7 @@ export default function WorkflowStepper({ orientation = "vertical", className, o
                 )}
                 <span
                   className={cx(
-                    "relative grid h-8 w-8 shrink-0 place-items-center rounded-full border bg-midnight font-display text-[0.7rem] font-bold",
+                    "relative grid h-8 w-8 shrink-0 place-items-center rounded-full border bg-midnight font-display text-[0.75rem] font-bold",
                     m.ring,
                     active && "shadow-[0_0_0_3px_rgba(56,225,255,0.15)]",
                   )}

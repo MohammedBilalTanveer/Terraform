@@ -8,6 +8,7 @@ import { GROUP_STATION, collectPlanItems, gateTaskIds, guidance, lockOf, taskPha
 import { stationById } from "../worldConfig";
 import RecCard, { RecDetails, TaskButton } from "./RecCard";
 import CareTab from "./CareTab";
+import { pinQuestStep } from "./pin";
 import { Bullets, Busy, Card, Chips, DetailsButton, ErrorNote, GhostButton, GlassPanel, Pill, PrimaryButton, Section, ThisOneBadge, cx, humanize, useAutoFocusItem } from "./kit";
 
 type Tab = "gate" | "crops" | "time" | "plant" | "care";
@@ -57,12 +58,7 @@ function GateTaskRow({ t, onSwitchTab }: { t: PlanItem; onSwitchTab: (tab: Tab) 
         ) : (
           !done && (
             <GhostButton
-              onClick={() => {
-                setFocusTask(t.rec.task_id);
-                setTargetOverride(st);
-                say(`Head to ${stationById(st).name} — ${t.rec.task_label ?? t.rec.title}`);
-                setOverlay(null);
-              }}
+              onClick={() => pinQuestStep(t.rec.task_id!, false)}
             >
               <Navigation className="h-3.5 w-3.5" /> Go there
             </GhostButton>
@@ -84,7 +80,7 @@ function GateTaskRow({ t, onSwitchTab }: { t: PlanItem; onSwitchTab: (tab: Tab) 
   );
 }
 
-function CropCardView({ c }: { c: CropCard }) {
+export function CropCardView({ c, onChosen }: { c: CropCard; onChosen?: (c: CropCard) => void }) {
   const selected = useTerraform((s) => s.selectedCropId);
   const selectCrop = useTerraform((s) => s.selectCrop);
   const loading = useTerraform((s) => s.loading);
@@ -112,7 +108,7 @@ function CropCardView({ c }: { c: CropCard }) {
           </div>
         </div>
         {c.category !== "tree" && c.fit_label !== "excluded" && (
-          <PrimaryButton tone={isSel ? "sprout" : "cyan"} disabled={!!loading || isSel} onClick={() => void selectCrop(c.crop_id)}>
+          <PrimaryButton tone={isSel ? "sprout" : "cyan"} disabled={!!loading || isSel} onClick={() => void selectCrop(c.crop_id).then(() => onChosen?.(c))}>
             {isSel ? <CheckCircle2 className="h-4 w-4" /> : null} {isSel ? "Chosen" : "Choose"}
           </PrimaryButton>
         )}
@@ -150,7 +146,7 @@ function CropCardView({ c }: { c: CropCard }) {
   );
 }
 
-export default function PlotPanel({ onClose }: { onClose: () => void }) {
+export default function PlotPanel({ onClose, onBack }: { onClose: () => void; onBack?: () => void }) {
   const plan = useTerraform((s) => s.plan);
   const analysis = useTerraform((s) => s.analysis);
   const backendOnline = useTerraform((s) => s.backendOnline);
@@ -286,7 +282,14 @@ export default function PlotPanel({ onClose }: { onClose: () => void }) {
       wide
       footer={
         <div className="flex items-center justify-between gap-2">
-          <DetailsButton step={tabStep} />
+          <div className="flex items-center gap-2">
+            {onBack && (
+              <button type="button" onClick={onBack} className="inline-flex min-h-11 items-center rounded-lg border border-cyan-300/40 bg-cyan-400/10 px-2.5 text-[12px] font-medium text-cyan-50 hover:bg-cyan-400/20 sm:min-h-0 sm:py-1">
+                Guided view
+              </button>
+            )}
+            <DetailsButton step={tabStep} />
+          </div>
           <span className="text-[11px] text-ivory/55">All guidance shown here comes from your knowledge-base plan.</span>
         </div>
       }

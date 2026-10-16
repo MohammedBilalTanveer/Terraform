@@ -7,11 +7,12 @@ import MiniCharacter, { type ClipPlay } from "../game/MiniCharacter";
 import TerraRobot from "../game/TerraRobot";
 import { heightAt } from "../game/terrain";
 import { SPAWN } from "../game/worldConfig";
+import { distForAspect, fovForAspect } from "../game/useViewport";
 
 export type WakeStage = "lying" | "boot" | "standing";
 
 export default function ValleyScene({ stage, reduceMotion }: { stage: WakeStage; reduceMotion: boolean }) {
-  const { camera } = useThree();
+  const { camera, size } = useThree();
   const [x, z] = SPAWN;
   const y = heightAt(x, z);
   const follow = useRef({ x, z, y: 0 }).current;
@@ -37,7 +38,15 @@ export default function ValleyScene({ stage, reduceMotion }: { stage: WakeStage;
       started.current = true;
     }
     const lying = stage === "lying";
-    const camPos = lying ? new THREE.Vector3(x + 1.2, y + 7.5, z + 4.5) : new THREE.Vector3(x + 3.2, y + 2.8, z + 5.2);
+    const aspect = size.width / Math.max(1, size.height);
+    const pc = camera as THREE.PerspectiveCamera;
+    const fov = fovForAspect(45, aspect, 72);
+    if (Math.abs(pc.fov - fov) > 0.05) {
+      pc.fov = fov;
+      pc.updateProjectionMatrix();
+    }
+    const dk = distForAspect(aspect);
+    const camPos = lying ? new THREE.Vector3(x + 1.2 * dk, y + 7.5 * dk, z + 4.5 * dk) : new THREE.Vector3(x + 3.2 * dk, y + 2.8 + (dk - 1) * 2, z + 5.2 * dk);
     const camTgt = new THREE.Vector3(x, y + (lying ? 0.2 : 1.1), z - (lying ? 0 : 0.6));
     const k = 1 - Math.exp(-dt * (lying ? 0.6 : 1.4));
     camera.position.lerp(camPos, k);

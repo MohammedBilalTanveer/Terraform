@@ -176,6 +176,40 @@ body { margin: 0; background: var(--color-midnight); color: var(--color-ivory); 
 
 /* v1.3 — comfortable touch targets on touch screens */
 @media (pointer: coarse) {
-  .tap-scope :is(button, summary, [role="button"], input[type="checkbox"], input[type="radio"], select) { min-height: 44px; }
-  .tap-scope button { min-width: 44px; }
+  .tap-scope :is(button, summary, [role="button"], input[type="checkbox"], input[type="radio"], select):not(.chip-btn) { min-height: 44px; }
+  .tap-scope button:not(.chip-btn) { min-width: 44px; }
+  /* Dense evidence chips keep their compact look; their touch target is extended invisibly to 44px. */
+  .tap-scope .chip-btn::after { content: ""; position: absolute; inset: -11px -4px; }
+  .tap-scope .chip-btn { margin-block: 3px; }
+}
+
+/* v1.5 — short landscape screens (phones on their side): don't let sticky bars eat the page */
+@media (max-height: 500px) {
+  .app-header { position: static; }
+  .app-header + * , .app-header ~ * { scroll-margin-top: 0; }
+}
+
+/* v1.5 — backend wake-up gate */
+@keyframes gate-sweep { 0% { transform: translateX(-110%); } 100% { transform: translateX(320%); } }
+.gate-sweep { animation: gate-sweep 1.7s ease-in-out infinite; }
+.gate-pad {
+  padding-top: max(1.5rem, env(safe-area-inset-top));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+@media (max-height: 480px) and (orientation: landscape) {
+  .gate-card { display: flex; align-items: center; gap: 1.25rem; max-width: 42rem; padding: 1rem 1.25rem; text-align: left; }
+  .gate-card .gate-robot { height: 4.5rem; width: 4.5rem; }
+  .gate-card .eyebrow { margin-top: 0; }
+  .gate-card h2 { font-size: 1.05rem; }
+  .gate-card .gate-text p, .gate-card .gate-text ol { margin-left: 0; margin-right: 0; }
+  .gate-card .gate-text ol { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; max-width: none; margin-top: 0.75rem; }
+  .gate-card .gate-text > div, .gate-card .gate-text .mt-5 { margin-top: 0.75rem; }
+}
+
+/* v1.5 — grid tracks may shrink below their content (prevents horizontal page overflow when a child scrolls or is wide).
+   Lives in the base layer so any grid-cols-* utility still wins. */
+@layer base {
+  .grid { grid-template-columns: minmax(0, 1fr); }
 }
