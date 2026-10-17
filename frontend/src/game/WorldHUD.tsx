@@ -13,6 +13,7 @@ import {
   Lock,
   Keyboard,
   LayoutDashboard,
+  Map as MapIcon,
   Menu as MenuIcon,
   MessageSquare,
   Play,
@@ -25,6 +26,7 @@ import { useTerraform } from "../store/terraformStore";
 import { WORKFLOW_STEPS } from "../types/terraform";
 import { playerState, useGame } from "./gameStore";
 import TouchControls, { useTouchVisible } from "./TouchControls";
+import { TeleportVeil } from "./WorldMap";
 import { progressCount, unlockTab, type Guidance, type PlanItem, type QuestStep } from "./planData";
 import { questSnapshot, useQuest } from "./useQuest";
 import { useViewport } from "./useViewport";
@@ -79,6 +81,15 @@ function TopBar({ onMenu }: { onMenu: () => void }) {
         </button>
         <button type="button" onClick={() => setMode("dashboard")} aria-label="Dashboard" className="inline-flex min-h-11 items-center gap-1 rounded-lg bg-amber-300/90 px-2.5 py-1 text-[12px] font-semibold text-[#1a1003] hover:bg-amber-200 sm:min-h-0">
           <LayoutDashboard className="h-3.5 w-3.5" /> <span className="hidden min-[400px]:inline">Dashboard</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setOverlay(useGame.getState().overlay === "map" ? null : "map")}
+          aria-label="Open map (M)"
+          title="Map (M)"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center gap-1 rounded-lg border border-emerald-300/35 bg-emerald-400/10 px-2 py-1 text-[12px] text-emerald-50 hover:bg-emerald-400/20"
+        >
+          <MapIcon className="h-4 w-4" /> <span className="hidden md:inline">Map</span>
         </button>
         <button type="button" onClick={onMenu} aria-label="Menu (Esc)" className="grid min-h-11 min-w-11 place-items-center rounded-lg p-1.5 text-ivory/80 hover:bg-white/10 sm:min-h-0 sm:min-w-0">
           <MenuIcon className="h-4 w-4" />
@@ -322,10 +333,15 @@ function Minimap({ target }: { target: string | null }) {
   return (
     <div
       className={cx(
-        "tf-minimap pointer-events-none absolute z-10 hidden rounded-full border border-cyan-300/25 bg-[#070b1a]/70 p-1 shadow-lg backdrop-blur sm:block",
+        "tf-minimap pointer-events-auto absolute z-10 hidden cursor-pointer rounded-full border border-cyan-300/25 bg-[#070b1a]/70 p-1 shadow-lg backdrop-blur hover:border-cyan-300/60 sm:block",
         touch ? "[&_svg]:h-[96px] [&_svg]:w-[96px]" : "bottom-3",
       )}
-      aria-label="Minimap"
+      aria-label="Minimap — click to open the map"
+      title="Open map (M)"
+      role="button"
+      tabIndex={0}
+      onClick={() => useGame.getState().setOverlay("map")}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && useGame.getState().setOverlay("map")}
     >
       <svg width={MAP} height={MAP} viewBox={`0 0 ${MAP} ${MAP}`}>
         <defs>
@@ -412,6 +428,7 @@ function ControlsHelp() {
         <span className="font-mono text-cyan-100">WASD / ←↑↓→</span><span>Move</span>
         <span className="font-mono text-cyan-100">Shift</span><span>Sprint</span>
         <span className="font-mono text-cyan-100">E / Enter</span><span>Interact</span>
+        <span className="font-mono text-cyan-100">M</span><span>Map / travel</span>
         <span className="font-mono text-cyan-100">Scroll</span><span>Zoom</span>
         <span className="font-mono text-cyan-100">Esc</span><span>Close / menu</span>
       </div>
@@ -495,6 +512,7 @@ export default function WorldHUD({ g, target }: { g: Guidance; target: StationId
       <ActionProgress />
       {!overlay && <Minimap target={target} />}
       <LocationToast />
+      <TeleportVeil />
       <ControlsHelp />
       <TouchControls />
       {overlay === "menu" && <Menu onClose={() => setOverlay(null)} />}

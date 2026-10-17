@@ -13,6 +13,7 @@ export default function FollowCamera() {
   const look = useRef(new THREE.Vector3(playerState.x, playerState.y, playerState.z));
   const ahead = useRef(new THREE.Vector2());
   const inited = useRef(false);
+  const seenTeleport = useRef(playerState.teleportedAt);
 
   useEffect(() => {
     const el = gl.domElement;
@@ -50,9 +51,12 @@ export default function FollowCamera() {
     }
     const zoom = (g.action ? g.zoom * 0.82 : g.zoom) * distForAspect(aspect);
     const desired = target.clone().add(OFFSET.clone().multiplyScalar(zoom));
-    if (!inited.current) {
+    if (!inited.current || seenTeleport.current !== p.teleportedAt) {
+      // first frame, or the player was teleported from the map: jump instead of gliding across the world
       camera.position.copy(desired);
       look.current.copy(target);
+      ahead.current.set(0, 0);
+      seenTeleport.current = p.teleportedAt;
       inited.current = true;
     }
     const k = 1 - Math.exp(-dt * 4.5);

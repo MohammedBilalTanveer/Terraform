@@ -17,6 +17,7 @@ export default function RobotGuide({ target, line, reduceMotion, showBubble }: {
   const holder = useRef<THREE.Group>(null);
   const chevrons = useRef<THREE.Group>(null);
   const pos = useRef(new THREE.Vector3(playerState.x - 1.5, 2.4, playerState.z + 1));
+  const seenTeleport = useRef(playerState.teleportedAt);
   const tgt = target ? stationById(target).pos : null;
 
   useFrame(({ clock }, dtRaw) => {
@@ -35,6 +36,10 @@ export default function RobotGuide({ target, line, reduceMotion, showBubble }: {
     }
     const bob = reduceMotion ? 0 : Math.sin(t * 2) * 0.12;
     const desired = new THREE.Vector3(p.x + ox, p.y + 2.3 + bob, p.z + oz);
+    if (seenTeleport.current !== p.teleportedAt) {
+      pos.current.copy(desired); // teleported from the map: TERRA arrives with the player
+      seenTeleport.current = p.teleportedAt;
+    }
     pos.current.lerp(desired, 1 - Math.exp(-dt * 3));
     if (holder.current) holder.current.position.copy(pos.current);
     if (bot.current) {

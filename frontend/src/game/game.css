@@ -276,3 +276,45 @@
     top: calc(var(--tf-sat) + 4rem);
   }
 }
+
+
+/* ---- world map ---------------------------------------------------------------------------------- */
+@keyframes tf-teleport {
+  0% { opacity: 0; }
+  35% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.tf-teleport-veil {
+  background: #050814;
+  animation: tf-teleport 0.55s ease both;
+}
+.tf-mk:hover circle:nth-of-type(3),
+.tf-mk:focus-visible circle:nth-of-type(3) {
+  stroke: #fff;
+}
+.tf-mk:focus-visible {
+  filter: drop-shadow(0 0 6px rgba(56, 225, 255, 0.9));
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  /* short landscape phones: map on the left (sized by height), list on the right */
+  .tf-map {
+    flex-direction: row;
+    overflow: hidden;
+  }
+  .tf-map-body {
+    padding: 0.5rem;
+  }
+  .tf-map-body > div:nth-of-type(2) {
+    max-width: calc(100dvh - 7rem) !important;
+  }
+  .tf-map-list {
+    width: 260px;
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tf-teleport-veil {
+    animation-duration: 0.2s;
+  }
+}

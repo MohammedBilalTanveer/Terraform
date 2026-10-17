@@ -23,6 +23,7 @@ import { SPAWN, stationById, type StationId } from "./worldConfig";
 import { preloadModels } from "./assets";
 import ObservationPanel from "./ui/ObservationPanel";
 import SoilPanel from "./ui/SoilPanel";
+import WorldMap from "./WorldMap";
 import StationPanel from "./ui/StationPanel";
 import PlotWizard from "./ui/PlotWizard";
 import { useTouchVisible } from "./TouchControls";
@@ -91,8 +92,10 @@ function LoadingVeil() {
   );
 }
 
-function Overlay({ id, onClose }: { id: StationId | "ask"; onClose: () => void }) {
+function Overlay({ id, onClose, target }: { id: StationId | "ask" | "map"; onClose: () => void; target: StationId | null }) {
   switch (id) {
+    case "map":
+      return <WorldMap onClose={onClose} target={target} />;
     case "board":
       return <ObservationPanel onClose={onClose} />;
     case "soil":
@@ -237,6 +240,11 @@ export default function ExplorerPage() {
         return;
       }
       if (isTypingTarget(e.target)) return;
+      if (e.code === "KeyM" && !e.repeat && !game.action) {
+        e.preventDefault();
+        game.setOverlay(game.overlay === "map" ? null : game.overlay ? game.overlay : "map");
+        return;
+      }
       if (e.code === "KeyE" || (e.key === "Enter" && !(e.target instanceof HTMLButtonElement))) {
         if (!game.overlay && game.nearStation) {
           e.preventDefault();
@@ -281,7 +289,7 @@ export default function ExplorerPage() {
       <WorldHUD g={g} target={target} />
       {overlay && overlay !== "menu" && (
         <div className="pointer-events-none absolute inset-0 z-30">
-          <Overlay id={overlay} onClose={closeOverlay} />
+          <Overlay id={overlay} onClose={closeOverlay} target={target} />
         </div>
       )}
       <LoadingVeil />

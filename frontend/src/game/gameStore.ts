@@ -6,7 +6,7 @@ import type { StationId } from "./worldConfig";
 import { SPAWN } from "./worldConfig";
 
 export type ActionKind = "inspect" | "dig" | "stones" | "compost" | "sow" | "water" | "harvest";
-export type OverlayId = StationId | "menu" | "ask";
+export type OverlayId = StationId | "menu" | "ask" | "map";
 
 export type ActiveAction = {
   kind: ActionKind;
@@ -20,7 +20,7 @@ export type ActiveAction = {
 export type FarmView = { key: string | null; sown: boolean; careIdx: number; careDone?: boolean; timeSeen?: boolean; harvested: boolean };
 
 /** Mutable per-frame player state (not reactive — read inside useFrame / rAF). */
-export const playerState = { x: SPAWN[0], z: SPAWN[1], y: 0, rot: Math.PI, speed: 0, vx: 0, vz: 0 };
+export const playerState = { x: SPAWN[0], z: SPAWN[1], y: 0, rot: Math.PI, speed: 0, vx: 0, vz: 0, /** performance.now() of the last teleport — camera + TERRA snap instead of gliding */ teleportedAt: 0 };
 /** Mobile joystick vector (-1..1). */
 export const joystick = { x: 0, z: 0, active: false, sprint: false };
 
@@ -31,6 +31,8 @@ export type LastDone = { id: string; label: string; station: StationId; phase: s
 
 type GameState = {
   overlay: OverlayId | null;
+  /** timestamp of the last map teleport (drives the quick fade) */
+  teleportFx: number;
   nearStation: StationId | null;
   area: StationId | null;
   action: ActiveAction | null;
@@ -76,6 +78,7 @@ export const useGame = create<GameState>()(
   persist(
     (set, get) => ({
       overlay: null,
+      teleportFx: 0,
       nearStation: null,
       area: null,
       action: null,
