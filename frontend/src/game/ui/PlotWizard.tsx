@@ -4,13 +4,13 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { CheckCircle2, Lock, Map as MapIcon, Sprout } from "lucide-react";
 import { useTerraform } from "../../store/terraformStore";
 import { useGame } from "../gameStore";
-import { worldView } from "../planData";
+import { alternativesOf, isDoable, worldView } from "../planData";
 import { stationById } from "../worldConfig";
 import { useQuest } from "../useQuest";
 import CareTab from "./CareTab";
 import PlotPanel, { CropCardView } from "./PlotPanel";
 import { Bullets, Card, Chips, DetailsButton, GlassPanel, Pill, PrimaryButton, Section, cx } from "./kit";
-import { CheckCardView, CompletionFlow, StationChecklist, SuggestedNext, TaskCard, TestCard, WhyLine, announceDone, pinStep } from "./cards";
+import { CheckCardView, CompletionFlow, StationChecklist, StepCard, SuggestedNext, TestCard, WhyLine, announceDone, pinStep } from "./cards";
 import { collectChecks } from "../checks";
 
 type Wiz = "readiness" | "crop" | "time" | "plant" | "care" | "done";
@@ -85,12 +85,12 @@ export default function PlotWizard({ onClose }: { onClose: () => void }) {
   const stages = [...(w.ongoing_care.stages ?? [])].sort((a, b) => a.order - b.order);
 
   const plotSteps = steps.filter((s) => s.station === "plot");
-  const readinessSteps = plotSteps.filter((s) => (s.kind === "task" || s.kind === "test") && (s.phase === "prepare" || s.phase === "readiness"));
-  const readinessDoable = readinessSteps.filter((s) => !s.done && !s.blocked);
+  const readinessSteps = plotSteps.filter((s) => (s.kind === "task" || s.kind === "test" || s.kind === "tip") && (s.phase === "prepare" || s.phase === "readiness"));
+  const readinessDoable = readinessSteps.filter(isDoable);
   const plantSteps = plotSteps.filter((s) => (s.kind === "task" || s.kind === "sow") && s.phase === "plant");
-  const plantDoable = plantSteps.filter((s) => !s.done && !s.blocked);
+  const plantDoable = plantSteps.filter(isDoable);
 
-  const pick = (list: typeof plotSteps) => (viewId ? list.find((s) => s.id === viewId) : null) ?? list.find((s) => quest && s.id === quest.id) ?? list[0] ?? null;
+  const pick = (list: typeof plotSteps) => (viewId ? list.find((s) => s.id === viewId) : null) ?? list.find((s) => quest && s.id === quest.id) ?? list.find((s) => !s.optional) ?? list[0] ?? null;
 
   const sowManually = () =>
     runAction({ kind: "sow", label: cropCard ? `Sowing ${cropCard.name}` : "Sowing", station: "plot", fast: reduceMotion }, async () => {
@@ -118,11 +118,12 @@ export default function PlotWizard({ onClose }: { onClose: () => void }) {
     });
 
   // ---- header ------------------------------------------------------------------------------------
-  const readyDone = readinessSteps.filter((s) => s.done).length;
+  const reqReadiness = readinessSteps.filter((s) => !s.optional);
+  const readyDone = reqReadiness.filter((s) => s.done).length;
   const stepNo = order.indexOf(active) + 1;
   const kicker =
     active === "readiness"
-      ? `TERRA · TASK ${Math.min(readyDone + 1, Math.max(readinessSteps.length, 1))} OF ${Math.max(readinessSteps.length, 1)} HERE`
+      ? `TERRA · TASK ${Math.min(readyDone + 1, Math.max(reqReadiness.length, 1))} OF ${Math.max(reqReadiness.length, 1)} HERE`
       : active === "done"
         ? "TERRA · ALL DONE AT THE PLOT"
         : `TERRA · STEP ${stepNo} OF 5 · ${STRIP[stepNo - 1].label.toUpperCase()}`;
@@ -169,7 +170,7 @@ export default function PlotWizard({ onClose }: { onClose: () => void }) {
     const cur = pick(readinessDoable);
     body = cur ? (
       <>
-        {cur.kind === "test" ? <TestCard step={cur} /> : <TaskCard step={cur} station="plot" />}
+        {cur.kind === "test" ? <TestCard step={cur} /> : <StepCard step={cur} station="plot" alts={alternativesOf(plan, steps, cur)} onPickAlt={setViewId} />}
         <SuggestedNext current={cur} here="plot" />
         <StationChecklist
           key={listOpenKey}
@@ -275,7 +276,7 @@ export default function PlotWizard({ onClose }: { onClose: () => void }) {
         </div>
       ) : (
         <>
-          <TaskCard step={cur} station="plot" />
+          <StepCard step={cur} station="plot" />
           <SuggestedNext current={cur} here="plot" />
           <StationChecklist title="See all planting tasks" steps={plantSteps} currentId={cur.id} onPick={(id) => setViewId(id)} />
         </>
@@ -288,13 +289,13 @@ export default function PlotWizard({ onClose }: { onClose: () => void }) {
       </Card>
     );
   } else if (active === "care") {
-    const follow = plantDoable.find((s) => s.kind === "task");
+    const follow = plantDoable.find((s) => s.kind === "task" && !s.optional) ?? plantDoable.find((s) => s.kind === "task");
     body = (
       <>
         {follow && (
           <Card className="space-y-2 border-amber-300/30">
-            <div className="text-[11px] font-semibold text-amber-200">Planting follow-up</div>
-            <TaskCard step={follow} station="plot" />
+            <div className="text-[11px] font-semibold text-amber-200">{follow.optional ? "Optional planting step" : "Planting follow-up"}</div>
+            <StepCard step={follow} station="plot" />
           </Card>
         )}
         <CareTab plan={plan} view={view} stages={stages} sown={sown} onAdvance={advanceStage} onFinish={finishCare} />
@@ -310,13 +311,26 @@ export default function PlotWizard({ onClose }: { onClose: () => void }) {
     );
   }
 
+  // an optional plot task the player chose to do now (raised beds after pits, …) shows whatever the stage is
+  const pinnedOpt = quest && quest.optional && quest.station === "plot" && (quest.kind === "task" || quest.kind === "tip") && isDoable(quest) ? quest : null;
+  if (pinnedOpt && active !== "readiness") {
+    body = (
+      <>
+        <StepCard step={pinnedOpt} station="plot" alts={alternativesOf(plan, steps, pinnedOpt)} onPickAlt={setViewId} />
+        <button type="button" onClick={() => useGame.getState().setPinned(null)} className="tf-keep min-h-11 text-[12.5px] text-cyan-200 underline">
+          Back to the guided steps
+        </button>
+      </>
+    );
+  }
+
   // v1.5: the seed sprout test comes BEFORE the sow card; the watch-trial-plants check AFTER sowing
   const checkById = new Map(collectChecks(analysis, plan).map((c0) => [c0.id, c0]));
-  const preOpen = plotSteps.filter((s) => s.kind === "check" && s.checkPhase === "pre_plant" && !s.done && !s.blocked);
-  const postOpen = plotSteps.filter((s) => s.kind === "check" && s.checkPhase === "post_sow" && !s.done && !s.blocked);
+  const preOpen = plotSteps.filter((s) => s.kind === "check" && s.checkPhase === "pre_plant" && isDoable(s));
+  const postOpen = plotSteps.filter((s) => s.kind === "check" && s.checkPhase === "post_sow" && isDoable(s));
   const preCheck = preOpen[0]?.checkId ? checkById.get(preOpen[0].checkId) : undefined;
   const postCheck = postOpen[0]?.checkId ? checkById.get(postOpen[0].checkId) : undefined;
-  if (active === "plant" && preCheck) {
+  if (!(pinnedOpt && active !== "readiness") && active === "plant" && preCheck) {
     body = (
       <>
         <p className="text-[12.5px] text-ivory/70">Before you sow: this check is recommended, never required.</p>
@@ -324,7 +338,7 @@ export default function PlotWizard({ onClose }: { onClose: () => void }) {
         <StationChecklist title="See all checks here" steps={plotSteps.filter((s) => s.kind === "check")} pickDone />
       </>
     );
-  } else if ((active === "care" || active === "done") && postCheck) {
+  } else if (!(pinnedOpt && active !== "readiness") && (active === "care" || active === "done") && postCheck) {
     body = (
       <>
         <Card className="space-y-2 border-amber-300/30">

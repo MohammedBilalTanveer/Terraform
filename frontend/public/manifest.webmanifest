@@ -1,0 +1,14 @@
+{
+  "name": "TERRAFORM — The System Awakens",
+  "short_name": "TERRAFORM",
+  "description": "From bare red stone to harvest — a knowledge-base-only guide to growing food on lateritic hardpan.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070b1a",
+  "theme_color": "#070b1a",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

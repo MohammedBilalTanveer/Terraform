@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TERRAFORM">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a2552"/>
+      <stop offset="1" stop-color="#070b1a"/>
+    </linearGradient>
+    <radialGradient id="planet" cx="35%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#f3a984"/>
+      <stop offset="0.55" stop-color="#c0583a"/>
+      <stop offset="1" stop-color="#6e2f1d"/>
+    </radialGradient>
+    <linearGradient id="grass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c4f58a"/>
+      <stop offset="1" stop-color="#3fae6a"/>
+    </linearGradient>
+    <clipPath id="clip"><circle cx="32" cy="34" r="17"/></clipPath>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <!-- ring, back half -->
+  <g transform="rotate(-24 32 34)">
+    <ellipse cx="32" cy="34" rx="27" ry="8" fill="none" stroke="#38e1ff" stroke-width="2.2" opacity="0.5"/>
+  </g>
+  <!-- barren laterite planet with a terraformed green cap -->
+  <circle cx="32" cy="34" r="17" fill="url(#planet)"/>
+  <g clip-path="url(#clip)">
+    <path d="M12 31 C 22 22, 34 29, 52 20 L52 8 L12 8 Z" fill="url(#grass)"/>
+  </g>
+  <!-- sprout -->
+  <path d="M32 22 V13" stroke="#6fd38a" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+  <path d="M32 15.5 C26 15.5 23.5 10.5 24.5 8 C30 8 32 11.5 32 15.5 Z" fill="#c4f58a"/>
+  <path d="M32 17.5 C38 17.5 40.5 12.5 39.5 10 C34 10 32 13.5 32 17.5 Z" fill="#7bd389"/>
+  <!-- ring, front half -->
+  <g transform="rotate(-24 32 34)">
+    <path d="M5 34 A27 8 0 0 0 59 34" fill="none" stroke="#38e1ff" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+</svg>

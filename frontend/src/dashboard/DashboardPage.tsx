@@ -8,7 +8,7 @@ import AssistantPanel from "../components/AssistantPanel";
 import RobotAvatar from "../components/RobotAvatar";
 import WorkflowStepper from "../components/WorkflowStepper";
 import { ErrorState } from "../components/LoadingAndError";
-import { STEP_IDS, stepIndex, stepInfo, useStepStatuses } from "../components/workflow";
+import { STEP_IDS, auditDashboardTasks, stepIndex, stepInfo, useStepStatuses } from "../components/workflow";
 import StepFrame from "./StepFrame";
 import ObservationStep from "./steps/ObservationStep";
 import InputEchoStep from "./steps/InputEchoStep";
@@ -120,6 +120,13 @@ export default function DashboardPage() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [safeStep]);
+
+  // Dev-only safety net: every plan task / item must be rendered on Steps 4, 5 or 8. Logs anything that is not.
+  useEffect(() => {
+    if (!import.meta.env.DEV || !plan) return;
+    const missing = auditDashboardTasks(plan);
+    if (missing.length) console.error(`[terraform] ${missing.length} plan item(s) are NOT rendered on Steps 4/5/8:`, missing);
+  }, [plan]);
 
   // Keyboard: Alt+← / Alt+→ moves between steps (ignored while typing).
   useEffect(() => {

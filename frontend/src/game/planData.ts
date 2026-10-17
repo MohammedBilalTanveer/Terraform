@@ -1,5 +1,6 @@
 // Maps API plan data onto world stations. This file only *routes* records returned by the backend
 // (by category / id / task id keywords); it never invents agricultural text.
+import { tasksAreSubstitutes } from "../store/gateRules";
 import type { AnalysisResponse, CheckCard, Evidence, PlanResponse, Recommendation, StepId, StepStatus } from "../types/terraform";
 import { checkPhase, checkState, checkStation, collectChecks, sortChecks } from "./checks";
 import { WORKFLOW_STEPS } from "../types/terraform";
@@ -210,7 +211,9 @@ export function worldView(
   const items = collectPlanItems(plan);
   const done = (i: PlanItem) => has(completed, i.rec.task_id);
   const plotPrep = items.filter((i) => i.group === "plot" && i.action === "dig");
-  const sowItems = items.filter((i) => i.group === "plot" && i.action === "sow" && i.rec.task_id);
+  // tree seedlings only count as "the sowing" when the chosen crop is a tree (otherwise they are an optional long-term step)
+  const treeCrop = isTreeCrop(plan, selectedCropId);
+  const sowItems = items.filter((i) => i.group === "plot" && i.action === "sow" && i.rec.task_id && (treeCrop || !/plant_tree/.test(i.rec.task_id)));
   const prepDoneItems = plotPrep.filter(done);
   const k = (i: PlanItem) => keyOf(i.rec);
   const pits = prepDoneItems.filter((i) => /pit/.test(k(i))).length;
@@ -260,7 +263,7 @@ export function worldView(
 // ---------------------------------------------------------------------------------------------
 // QUEST: one linear order of work — prepare → readiness (tasks, then each gate's test) → choose crop →
 // plant → care → harvest. The beacon, TERRA and the quest list all follow the single "quest task".
-export type QuestKind = "log" | "echo" | "check" | "plan" | "task" | "test" | "crop" | "time" | "sow" | "care" | "harvest" | "regen";
+export type QuestKind = "log" | "echo" | "check" | "plan" | "task" | "test" | "crop" | "time" | "sow" | "care" | "harvest" | "regen" | "tip";
 export type QuestPhase = "prepare" | "readiness" | "crop" | "plant" | "care" | "harvest";
 
 export type QuestStep = {
@@ -282,7 +285,18 @@ export type QuestStep = {
   checkPhase?: "diagnose" | "pre_plant" | "post_sow";
   /** recommended but never blocking: the player may skip it */
   skippable?: boolean;
+  /** another way to meet the same readiness gate (pits / raised beds / containers): kept, but optional once one is done */
+  alternative?: boolean;
+  /** the player chose "Skip this step" (only optional / skippable steps can be skipped; never blocks anything) */
+  skipped?: boolean;
+  /** optional long-term step (e.g. tree seedlings while the chosen crop is not a tree) */
+  longTerm?: boolean;
 };
+
+/** Steps the player may skip: optional ones and the recommended-never-required checks. Done steps never. */
+export const canSkip = (s: QuestStep) => !s.done && (s.optional || !!s.skippable);
+/** Open and doable right now (not done, not locked, not skipped). */
+export const isDoable = (s: QuestStep) => !s.done && !s.blocked && !s.skipped;
 
 export type QuestCtx = {
   analysis: AnalysisResponse | null;
@@ -293,9 +307,9 @@ export type QuestCtx = {
   gateResults?: Record<string, "pass" | "fail">;
   checkOutcomes?: { check_id: string; outcome_id: string }[];
   unableChecks?: string[];
+  /** ids of steps the player skipped (store.skippedSteps) */
+  skipped?: string[];
 };
-
-const PHASE_RANK: Record<TaskPhase, number> = { prepare: 0, readiness: 1, plant: 2 };
 
 const base = (o: Partial<QuestStep> & Pick<QuestStep, "id" | "kind" | "phase" | "station" | "label" | "done">): QuestStep => ({
   blocked: false,
@@ -367,9 +381,33 @@ function preSteps(ctx: QuestCtx): QuestStep[] {
   return out;
 }
 
+/** True when the chosen crop is a (long-term) tree: tree seedlings then become a required plant step. */
+export function isTreeCrop(plan: PlanResponse | null, cropId: string | null): boolean {
+  if (!plan || !cropId) return false;
+  const cs = plan.workflow.crop_suggestions;
+  return [...(cs?.field_crops ?? []), ...(cs?.tree_options ?? [])].some((c) => c.crop_id === cropId && c.category === "tree");
+}
+
+/** Plan advice that has no task (e.g. "overflow notch", "legume rotation"): shown as optional "Good to know" tip steps. */
+export function adviceItems(items: PlanItem[]): PlanItem[] {
+  const seen = new Set<string>();
+  const out: PlanItem[] = [];
+  for (const i of items) {
+    if (i.rec.task_id || !["do_first", "do_next", "optional", "dry_spell"].includes(i.section) || seen.has(i.rec.id)) continue;
+    seen.add(i.rec.id);
+    out.push(i);
+  }
+  return out;
+}
+
+export const tipId = (recId: string) => `tip:${recId}`;
+
 export function buildQuest(ctx: QuestCtx): QuestStep[] {
   const { analysis, plan, completed, crop, farm } = ctx;
-  const pre = preSteps(ctx);
+  const skippedIds = ctx.skipped ?? [];
+  // Skipping only ever applies to optional / recommended steps; it never touches the backend or any gate.
+  const mark = (s: QuestStep): QuestStep => (canSkip(s) && skippedIds.includes(s.id) ? { ...s, skipped: true } : s);
+  const pre = preSteps(ctx).map(mark);
   if (!plan) return pre;
   const items = collectPlanItems(plan);
   const gates = plan.workflow.next_action.readiness_gate ?? [];
@@ -377,23 +415,29 @@ export function buildQuest(ctx: QuestCtx): QuestStep[] {
   const isDone = (id: string | null | undefined) => !!id && completed.includes(id);
   const gatesOf = (id: string) => gates.filter((g) => g.satisfied_by_tasks?.includes(id));
   const readyOk = plan.workflow.next_action.planting_readiness !== "not_ready";
+  const treeCrop = isTreeCrop(plan, crop);
 
-  const all = items.filter((i) => i.rec.task_id && i.section !== "avoid" && !/plant_tree/.test(i.rec.task_id!));
-  const isOptional = (i: PlanItem) => i.section === "optional" || i.rec.priority === "optional";
-  // alternatives (pits OR beds OR containers …): once one satisfies a gate, the rest are redundant
+  // EVERY task of the plan is a step (nothing is filtered out); only the "avoid" list has no tasks.
+  const all = items.filter((i) => i.rec.task_id && i.section !== "avoid");
+  const isPlant = (i: PlanItem) => taskPhase(plan, i) === "plant";
+  const longTerm = (i: PlanItem) => isPlant(i) && /plant_tree/.test(i.rec.task_id!) && !treeCrop;
+  const isOptional = (i: PlanItem) => i.section === "optional" || i.rec.priority === "optional" || longTerm(i);
+  // alternatives (pits OR beds OR containers …): once one satisfies a gate the rest become OPTIONAL — never dropped
   const redundant = (i: PlanItem) => {
+    if (isPlant(i)) return false;
     const id = i.rec.task_id!;
     if (isDone(id)) return false;
-    const gs = gatesOf(id);
+    // only SUBSTITUTE tasks (pits/beds/containers, stone lines/half-moons) become alternatives; complementary ones (mulch + compost) stay required
+    const gs = gatesOf(id).filter(tasksAreSubstitutes);
     return gs.length > 0 && gs.every((g) => g.satisfied_by_tasks.some((o) => o !== id && isDone(o)));
   };
   const mk = (i: PlanItem): QuestStep => {
     const lock = lockOf(plan, i, crop);
-    const ph = taskPhase(plan, i);
+    const alt = !isOptional(i) && redundant(i);
     return {
       id: i.rec.task_id!,
       kind: "task",
-      phase: ph,
+      phase: taskPhase(plan, i),
       station: GROUP_STATION[i.group],
       label: i.rec.task_label ?? i.rec.title,
       item: i,
@@ -401,14 +445,29 @@ export function buildQuest(ctx: QuestCtx): QuestStep[] {
       blocked: !!lock,
       lock,
       blockedText: lock ? LOCK_TEXT[lock] : null,
-      optional: isOptional(i),
+      optional: isOptional(i) || alt,
+      alternative: alt || undefined,
+      longTerm: longTerm(i) || undefined,
     };
   };
-  const required = all.filter((i) => !isOptional(i) && !redundant(i));
-  const early = required
-    .filter((i) => taskPhase(plan, i) !== "plant")
-    .sort((a, b) => PHASE_RANK[taskPhase(plan, a)] - PHASE_RANK[taskPhase(plan, b)]);
-  const steps: QuestStep[] = early.map(mk);
+
+  // --- prepare / readiness tasks: plan order, with the ways of meeting one gate (pits, raised beds, containers …) side by side
+  const gateGroup = (id: string) => gates.find((g) => (g.satisfied_by_tasks?.length ?? 0) > 1 && g.satisfied_by_tasks.includes(id))?.id;
+  const ordered: PlanItem[] = [];
+  const lastOfGroup = new Map<string, number>();
+  for (const i of all.filter((x) => !isPlant(x))) {
+    const gid = gateGroup(i.rec.task_id!);
+    if (gid && lastOfGroup.has(gid)) {
+      const at = lastOfGroup.get(gid)! + 1;
+      ordered.splice(at, 0, i);
+      for (const [k, v] of lastOfGroup) if (v >= at) lastOfGroup.set(k, v + 1);
+      lastOfGroup.set(gid, at);
+    } else {
+      ordered.push(i);
+      if (gid) lastOfGroup.set(gid, ordered.length - 1);
+    }
+  }
+  const steps: QuestStep[] = ordered.map(mk);
 
   // each required gate's verification test comes right after its (last listed) task
   for (const g of gates) {
@@ -433,6 +492,43 @@ export function buildQuest(ctx: QuestCtx): QuestStep[] {
       optional: false,
     };
     steps.splice(at < 0 ? steps.length : at + 1, 0, step);
+  }
+
+  // optional extras sit INLINE right after the step they relate to (never at the end of the quest):
+  // ash / shell right after the compost step, the fizz re-check right after that
+  const moveAfter = (stepId: string, anchorId: string | undefined) => {
+    const from = steps.findIndex((s) => s.id === stepId);
+    const anchor = steps.findIndex((s) => s.id === anchorId);
+    if (from < 0 || anchor < 0 || from === anchor + 1) return;
+    const [s] = steps.splice(from, 1);
+    steps.splice(steps.findIndex((x) => x.id === anchorId) + 1, 0, s);
+  };
+  const taskSteps = steps.filter((s) => s.kind === "task");
+  const compostAnchor = (taskSteps.find((s) => /fill_compost/.test(s.id)) ?? taskSteps.find((s) => /organic_matter/.test(s.id)) ?? [...taskSteps].reverse().find((s) => !s.optional && s.item?.group === "compost"))?.id;
+  const ashStep = taskSteps.find((s) => s.optional && /(^|_)(ash|shell)(_|$)/.test(s.id));
+  const fizzStep = taskSteps.find((s) => s.optional && /fizz|recheck/.test(s.id));
+  if (ashStep) moveAfter(ashStep.id, compostAnchor);
+  if (fizzStep) moveAfter(fizzStep.id, ashStep?.id ?? compostAnchor);
+
+  // advice without a task ("Good to know"): optional tip steps next to the work at the same station
+  for (const it of adviceItems(items)) {
+    let at = -1;
+    steps.forEach((s, i) => {
+      if (s.item && s.item.group === it.group) at = i;
+    });
+    steps.splice(at < 0 ? steps.length : at + 1, 0, {
+      id: tipId(it.rec.id),
+      kind: "tip",
+      phase: "prepare",
+      station: GROUP_STATION[it.group],
+      label: it.rec.title,
+      item: it,
+      done: false,
+      blocked: false,
+      lock: null,
+      blockedText: null,
+      optional: true,
+    });
   }
 
   steps.push({
@@ -468,12 +564,14 @@ export function buildQuest(ctx: QuestCtx): QuestStep[] {
     steps.push(checkStep(c, ctx, { phase: "plant", blocked: !crop, blockedText: crop ? null : LOCK_TEXT.choose_crop })),
   );
 
-  const plantTasks = required.filter((i) => taskPhase(plan, i) === "plant");
-  plantTasks.forEach((i) => steps.push(mk(i)));
-  postChecks.forEach((c) =>
-    steps.push(checkStep(c, ctx, { phase: "care", blocked: !view.sown, blockedText: view.sown ? null : "Sow the crop first" })),
-  );
-  if (!plantTasks.some((i) => i.action === "sow" || /sow_seeds/.test(i.rec.task_id!))) {
+  // --- plant phase: sowing, then tree seedlings (required for a tree crop, otherwise an optional long-term step), then the rest
+  const plantSteps = all
+    .filter(isPlant)
+    .map(mk)
+    .map((s, idx) => ({ s, idx, rank: /plant_tree/.test(s.id) ? 1 : s.item?.action === "sow" ? 0 : 2 }))
+    .sort((a, b) => a.rank - b.rank || a.idx - b.idx)
+    .map((x) => x.s);
+  if (!plantSteps.some((s) => !s.optional && (s.item?.action === "sow" || /sow_seeds/.test(s.id)))) {
     steps.push({
       id: "sow",
       kind: "sow",
@@ -487,6 +585,10 @@ export function buildQuest(ctx: QuestCtx): QuestStep[] {
       optional: false,
     });
   }
+  plantSteps.forEach((s) => steps.push(s));
+  postChecks.forEach((c) =>
+    steps.push(checkStep(c, ctx, { phase: "care", blocked: !view.sown, blockedText: view.sown ? null : "Sow the crop first" })),
+  );
   const careDone = view.stage === "harvest_ready" || !!farm.harvested;
   steps.push({
     id: "care",
@@ -525,19 +627,42 @@ export function buildQuest(ctx: QuestCtx): QuestStep[] {
     blockedText: farm.harvested ? null : "Harvest first",
     optional: false,
   });
-  // optional diagnose checks left over (still doable at their locations)
-  // optional tasks are doable at their stations but never forced by the quest
-  all.filter((i) => isOptional(i) && !isDone(i.rec.task_id)).forEach((i) => steps.push(mk(i)));
-  return [...pre, ...steps];
+  return [...pre, ...steps.map(mark)];
 }
 
-/** The single quest task: the pinned step if still doable, else the first open, unblocked, required step. */
+/**
+ * Safety net (used in dev by useQuest and when verifying): ids of plan tasks / plan advice that have NO step in the quest.
+ * Scans the raw plan (independently of collectPlanItems), excluding the "avoid" list. Always expected to be [].
+ */
+export function auditQuest(plan: PlanResponse | null, steps: QuestStep[]): string[] {
+  if (!plan) return [];
+  const w = plan.workflow as unknown as Record<string, Record<string, unknown>>;
+  const have = new Set(steps.map((s) => s.id));
+  const missing = new Set<string>();
+  for (const obj of Object.values(w)) {
+    if (!obj || typeof obj !== "object") continue;
+    for (const [key, list] of Object.entries(obj)) {
+      if (key === "avoid" || !Array.isArray(list)) continue;
+      for (const r of list as Record<string, unknown>[]) {
+        if (r && typeof r === "object" && typeof r.task_id === "string" && !have.has(r.task_id)) missing.add(r.task_id);
+      }
+    }
+  }
+  const fp = w.fix_protocol as unknown as Record<string, Recommendation[] | undefined> | undefined;
+  const oc = w.ongoing_care as unknown as Record<string, Recommendation[] | undefined> | undefined;
+  for (const r of [...(fp?.do_first ?? []), ...(fp?.do_next ?? []), ...(fp?.optional ?? []), ...(oc?.dry_spell_plan ?? [])]) {
+    if (!r.task_id && !have.has(tipId(r.id))) missing.add(r.id);
+  }
+  return [...missing].sort();
+}
+
+/** The single quest task: the pinned step if still doable, else the first open, unblocked, required, unskipped step. */
 export function questTask(steps: QuestStep[], pinnedId: string | null): QuestStep | null {
   if (pinnedId) {
     const p = steps.find((s) => s.id === pinnedId);
-    if (p && !p.done && !p.blocked) return p;
+    if (p && isDoable(p)) return p;
   }
-  return steps.find((s) => !s.done && !s.blocked && !s.optional) ?? null;
+  return steps.find((s) => isDoable(s) && !s.optional) ?? null;
 }
 
 export const QUEST_STEP_ID: Record<QuestKind, StepId> = {
@@ -553,6 +678,7 @@ export const QUEST_STEP_ID: Record<QuestKind, StepId> = {
   sow: "planting_method",
   care: "ongoing_care",
   harvest: "harvest",
+  tip: "fix_protocol",
 };
 
 // ---------------------------------------------------------------------------------------------
@@ -578,9 +704,10 @@ export function guidance(args: {
   gateResults?: Record<string, "pass" | "fail">;
   checkOutcomes?: { check_id: string; outcome_id: string }[];
   unableChecks?: string[];
+  skipped?: string[];
 }): Guidance {
   const { backendOnline, analysis, plan, completed, selectedCropId, farm } = args;
-  const ctx: QuestCtx = { analysis, plan, completed, crop: selectedCropId, farm, gateResults: args.gateResults, checkOutcomes: args.checkOutcomes, unableChecks: args.unableChecks };
+  const ctx: QuestCtx = { analysis, plan, completed, crop: selectedCropId, farm, gateResults: args.gateResults, checkOutcomes: args.checkOutcomes, unableChecks: args.unableChecks, skipped: args.skipped };
   if (!analysis) {
     const quest0 = questTask(buildQuest(ctx), args.pinnedId ?? null);
     return {
@@ -654,3 +781,13 @@ export function progressCount(analysis: AnalysisResponse | null, plan: PlanRespo
 }
 
 export const allEvidenceIds = (e: Evidence | null | undefined) => [...(e?.kb_ids ?? []), ...(e?.source_ids ?? [])];
+
+/** Other tasks that meet the same readiness gate while none of them is done yet (pits OR raised beds OR containers …). */
+export function alternativesOf(plan: PlanResponse | null, steps: QuestStep[], step: QuestStep): QuestStep[] {
+  if (!plan || step.kind !== "task") return [];
+  const gates = (plan.workflow.next_action.readiness_gate ?? []).filter((g) => g.satisfied_by_tasks?.includes(step.id));
+  const sib = new Set(gates.flatMap((g) => g.satisfied_by_tasks.filter((id) => id !== step.id)));
+  const anyDone = gates.some((g) => g.satisfied_by_tasks.some((id) => steps.find((s) => s.id === id)?.done));
+  if (anyDone) return [];
+  return steps.filter((s) => s.kind === "task" && sib.has(s.id) && !s.done && !s.blocked && !s.skipped);
+}

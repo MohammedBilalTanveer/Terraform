@@ -11,8 +11,8 @@ import { AskBody } from "./AskPanel";
 import { CropCardView } from "./PlotPanel";
 import { OutpostTerminal } from "./StationPanel";
 import { Card, Chips, GlassPanel, Pill, PrimaryButton, Section, cx } from "./kit";
-import { CheckCardView, CompletionFlow, EmptyPlace, StationChecklist, TaskCard, WhyLine, announceDone } from "./cards";
-import type { QuestStep } from "../planData";
+import { CheckCardView, CompletionFlow, EmptyPlace, StationChecklist, StepCard, WhyLine, announceDone } from "./cards";
+import { alternativesOf, isDoable, type QuestStep } from "../planData";
 
 function useStationChecks(station: StationId) {
   const q = useQuest();
@@ -50,11 +50,11 @@ export function ChecksBody({ station, after }: { station: StationId; after?: Rea
   if (!q.analysis) {
     return <EmptyPlace station={station} title="Log your observations first" body="Checks are chosen from what you describe at the Observation Board." />;
   }
-  const open = q.stepsHere.filter((s) => !s.done && !s.blocked);
+  const open = q.stepsHere.filter(isDoable);
   const cur: QuestStep | undefined =
-    (viewId ? q.stepsHere.find((s) => s.id === viewId && !s.blocked) : undefined) ?? open.find((s) => q.quest?.id === s.id) ?? open[0];
+    (viewId ? q.stepsHere.find((s) => s.id === viewId && !s.blocked && !s.skipped) : undefined) ?? open.find((s) => q.quest?.id === s.id) ?? open[0];
   const check = cur?.checkId ? q.byId.get(cur.checkId) : undefined;
-  const waiting = q.stepsHere.filter((s) => !s.done && s.blocked);
+  const waiting = q.stepsHere.filter((s) => !s.done && !s.skipped && s.blocked);
   return (
     <>
       {check ? (
@@ -80,7 +80,7 @@ export function ChecksBody({ station, after }: { station: StationId; after?: Rea
 
 function checkKicker(steps: QuestStep[]) {
   const total = steps.filter((s) => !s.optional).length || steps.length;
-  const done = steps.filter((s) => s.done).length;
+  const done = steps.filter((s) => s.done || s.skipped).length;
   return steps.length ? `TERRA · CHECK ${Math.min(done + 1, total)} OF ${total} HERE` : "TERRA · LOCATION";
 }
 
@@ -110,8 +110,8 @@ export function SoilStation({ onClose }: { onClose: () => void }) {
   const busy = useGame((s) => !!s.action);
   if (lastDone && lastDone.station === station) return <CompletionFlow station={station} onStay={() => undefined} />;
 
-  const openChecks = q.stepsHere.filter((s) => !s.done && !s.blocked);
-  const soilTasks = q.steps.filter((s) => s.kind === "task" && s.station === station && !s.done && !s.blocked);
+  const openChecks = q.stepsHere.filter(isDoable);
+  const soilTasks = q.steps.filter((s) => (s.kind === "task" || s.kind === "tip") && s.station === station && isDoable(s));
   const echoStep = q.steps.find((s) => s.kind === "echo");
 
   const doPlan = (skip: boolean) => {
@@ -210,7 +210,7 @@ export function SoilStation({ onClose }: { onClose: () => void }) {
     kicker = "TERRA · OPTIONAL FOLLOW-UP HERE";
     body = (
       <>
-        <TaskCard step={soilTasks[0]} station={station} />
+        <StepCard step={soilTasks[0]} station={station} />
         <StationChecklist title="See all checks here" steps={q.stepsHere} pickDone />
       </>
     );
@@ -320,6 +320,22 @@ export function GrovePanel({ onClose }: { onClose: () => void }) {
 }
 
 // ---------------------------------------------------------------------------------------------
+/** Plan tasks / "good to know" tips whose station is this place (rare — e.g. advice that fits no other station). */
+function PendingHere({ station }: { station: StationId }) {
+  const { steps, plan, quest } = useQuest();
+  const [viewId, setViewId] = useState<string | null>(null);
+  const here = steps.filter((s) => (s.kind === "task" || s.kind === "tip") && s.station === station);
+  const doable = here.filter(isDoable);
+  const cur = (viewId ? doable.find((s) => s.id === viewId) : undefined) ?? doable.find((s) => s.id === quest?.id) ?? doable.find((s) => !s.optional) ?? doable[0];
+  if (here.length === 0) return null;
+  return (
+    <>
+      {cur && <StepCard step={cur} station={station} alts={alternativesOf(plan, steps, cur)} onPickAlt={setViewId} />}
+      <StationChecklist title="See all steps here" steps={here} currentId={cur?.id} onPick={setViewId} />
+    </>
+  );
+}
+
 export function OutpostPanel({ onClose }: { onClose: () => void }) {
   const station: StationId = "outpost";
   const q = useStationChecks(station);
@@ -331,7 +347,10 @@ export function OutpostPanel({ onClose }: { onClose: () => void }) {
       <WhyLine station={station} />
       <Tabs tabs={[{ id: "check", label: "Supplies check" }, { id: "terminal", label: "Field terminal" }]} value={tab} onChange={setTab} />
       {tab === "check" ? (
-        <ChecksBody station={station} />
+        <>
+          <PendingHere station={station} />
+          <ChecksBody station={station} />
+        </>
       ) : q.plan ? (
         <OutpostTerminal />
       ) : (

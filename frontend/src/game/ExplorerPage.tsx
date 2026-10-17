@@ -144,6 +144,7 @@ export default function ExplorerPage() {
   const gateResults = useTerraform((s) => s.gateResults);
   const checkOutcomes = useTerraform((s) => s.checkOutcomes);
   const unableChecks = useTerraform((s) => s.unableChecks);
+  const skipped = useTerraform((s) => s.skippedSteps);
   const pulse = useGame((s) => s.interactPulse);
   const vp = useViewport();
   const touchOn = useTouchVisible();
@@ -167,8 +168,8 @@ export default function ExplorerPage() {
   }, []);
 
   const g = useMemo(
-    () => guidance({ backendOnline, analysis, plan, completed, selectedCropId: crop, farm, pinnedId, gateResults, checkOutcomes, unableChecks }),
-    [backendOnline, analysis, plan, completed, crop, farm, pinnedId, gateResults, checkOutcomes, unableChecks],
+    () => guidance({ backendOnline, analysis, plan, completed, selectedCropId: crop, farm, pinnedId, gateResults, checkOutcomes, unableChecks, skipped }),
+    [backendOnline, analysis, plan, completed, crop, farm, pinnedId, gateResults, checkOutcomes, unableChecks, skipped],
   );
   // The beacon follows the QUEST TASK's station and never moves on arrival — only when that task is
   // completed (or the player pins another one / stops guiding).
@@ -193,6 +194,7 @@ export default function ExplorerPage() {
     const st = useGame.getState();
     st.setPinned(null);
     st.setLastDone(null);
+    useGame.setState({ declinedOptional: [] });
   }, [sessionId]);
 
   // world setup: colliders + keyboard

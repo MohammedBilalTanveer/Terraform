@@ -19,6 +19,7 @@ import {
   Play,
   RotateCcw,
   Settings2,
+  SkipForward,
   Smartphone,
   X,
 } from "lucide-react";
@@ -124,7 +125,9 @@ function QuestPanel({ g, target }: { g: Guidance; target: StationId | null }) {
   const step = WORKFLOW_STEPS.find((s) => s.id === g.step);
   const real = steps.filter((s) => !s.optional);
   const doneCount = real.filter((s) => s.done).length;
-  const upcoming = quest ? real.filter((s) => !s.done && s.id !== quest.id && steps.indexOf(s) > steps.indexOf(quest)).slice(0, 2) : [];
+  const skippedSteps = steps.filter((s) => s.skipped);
+  const skippedTxt = skippedSteps.length > 0 ? ` · ${skippedSteps.length} skipped` : "";
+  const upcoming = quest ? real.filter((s) => !s.done && !s.skipped && s.id !== quest.id && steps.indexOf(s) > steps.indexOf(quest)).slice(0, 2) : [];
   const off = !!quest && beaconOff === quest.id;
 
   useEffect(() => {
@@ -147,7 +150,7 @@ function QuestPanel({ g, target }: { g: Guidance; target: StationId | null }) {
         <Bot className="h-4 w-4 shrink-0 text-cyan-300" />
         <span className="font-display text-[10px] tracking-[0.2em] text-cyan-200">STEP {step?.n ?? "?"}</span>
         <span className="truncate text-[12px] text-ivory/85">{quest ? quest.label : step?.label}</span>
-        {real.length > 0 && <span className="shrink-0 font-display text-[10px] text-ivory/60">{doneCount}/{real.length}</span>}
+        {real.length > 0 && <span className="shrink-0 font-display text-[10px] text-ivory/60">{doneCount}/{real.length}{skippedTxt}</span>}
       </button>
     );
   }
@@ -173,7 +176,7 @@ function QuestPanel({ g, target }: { g: Guidance; target: StationId | null }) {
             <div className="flex items-center justify-between text-[10.5px] text-ivory/55">
               <span>QUEST</span>
               <span>
-                {doneCount}/{real.length} done
+                {doneCount}/{real.length} done{skippedTxt}
               </span>
             </div>
             <div className="rounded-xl border border-cyan-300/40 bg-cyan-400/[0.08] px-2.5 py-2">
@@ -216,7 +219,7 @@ function QuestPanel({ g, target }: { g: Guidance; target: StationId | null }) {
             <details className="rounded-lg border border-white/10 bg-white/[0.02] px-2">
               <summary className="min-h-9 cursor-pointer text-[11.5px] text-ivory/70">All tasks ({real.length})</summary>
               <ul className="pb-1">
-                {steps.map((s) => (
+                {steps.filter((s) => !s.skipped).map((s) => (
                   <li key={s.id}>
                     <button
                       type="button"
@@ -229,7 +232,7 @@ function QuestPanel({ g, target }: { g: Guidance; target: StationId | null }) {
                         <span className={cx("block truncate text-[11.5px]", s.done ? "text-ivory/40 line-through" : s.blocked ? "text-ivory/45" : "text-ivory/85")}>{s.label}</span>
                         <span className={cx("block truncate text-[10px]", s.blocked && !s.done ? "text-amber-200/70" : "text-ivory/40")}>
                           {s.blocked && !s.done && s.blockedText ? s.blockedText : stationById(s.station).name}
-                          {s.optional ? " · optional" : ""}
+                          {s.optional ? (s.kind === "tip" ? " · good to know" : s.alternative ? " · alternative" : " · optional") : ""}
                         </span>
                       </span>
                     </button>
@@ -238,6 +241,32 @@ function QuestPanel({ g, target }: { g: Guidance; target: StationId | null }) {
               </ul>
             </details>
           </div>
+        )}
+        {skippedSteps.length > 0 && (
+          <details className="rounded-lg border border-white/10 bg-white/[0.02] px-2">
+            <summary className="min-h-9 cursor-pointer text-[11.5px] text-ivory/70">Skipped ({skippedSteps.length})</summary>
+            <ul className="pb-1">
+              {skippedSteps.map((s) => (
+                <li key={s.id} className="flex items-center gap-1">
+                  <SkipForward className="h-3.5 w-3.5 shrink-0 text-ivory/40" aria-hidden />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-[11.5px] text-ivory/60">{s.label}</span>
+                    <span className="block truncate text-[10px] text-ivory/40">{stationById(s.station).name}</span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      useTerraform.getState().unskipStep(s.id);
+                      pinQuestStep(s.id);
+                    }}
+                    className="min-h-9 shrink-0 rounded-md border border-cyan-300/40 bg-cyan-400/10 px-2 text-[11px] font-medium text-cyan-100 hover:bg-cyan-400/20"
+                  >
+                    Do it now
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </details>
         )}
         {!quest && target && (
           <div className="flex items-center gap-2 rounded-lg bg-white/[0.04] px-2 py-1.5">

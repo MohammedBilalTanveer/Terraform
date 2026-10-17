@@ -24,7 +24,10 @@ export default function MissingAnalysisStep() {
   const allChecks = useAllChecks();
   const diagnose = checksOfPhase(allChecks, "diagnose");
   // The baking-soda ("sodium bicarbonate") fizz test goes first so it can't be missed.
-  const ordered = [...diagnose].sort((a, b) => Number(isRough(b)) - Number(isRough(a)));
+  const skippedIds = useTerraform((s) => s.skippedSteps);
+  const sorted = [...diagnose].sort((a, b) => Number(isRough(b)) - Number(isRough(a)));
+  // Skipped checks move to the bottom.
+  const ordered = [...sorted.filter((c) => !skippedIds.includes(c.id)), ...sorted.filter((c) => skippedIds.includes(c.id))];
   const progress = useCheckProgress(diagnose);
   if (!analysis) return <NeedAnalysis />;
   const ma = analysis.missing_analysis;
@@ -148,7 +151,7 @@ export default function MissingAnalysisStep() {
           <div className="flex flex-wrap items-center gap-2">
             {diagnose.length > 0 && (
               <Badge tone={progress.done === diagnose.length ? "sprout" : "cyan"} icon={<FlaskConical className="h-3 w-3" aria-hidden />}>
-                {progress.done} of {diagnose.length} checks done
+                {progress.done} of {diagnose.length} checks done{progress.skippedChecks > 0 ? ` · ${progress.skippedChecks} skipped` : ""}
               </Badge>
             )}
             {progress.skipped > 0 && <Badge tone="stone">{progress.skipped} not possible</Badge>}

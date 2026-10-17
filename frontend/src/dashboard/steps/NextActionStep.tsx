@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, ChevronDown, CircleCheck, CircleX, Compass, Hourglass, Info, FlaskConical, ListChecks, Lock, LockOpen, RotateCcw, ShieldAlert, TriangleAlert, X } from "lucide-react";
+import { SkipForward, Check, ChevronDown, CircleCheck, CircleX, Compass, Hourglass, Info, FlaskConical, ListChecks, Lock, LockOpen, RotateCcw, ShieldAlert, TriangleAlert, X } from "lucide-react";
 import type { GateItem, Recommendation } from "../../types/terraform";
 import { useTerraform } from "../../store/terraformStore";
 import ConfirmDialog from "../../components/ConfirmDialog";
@@ -21,6 +21,7 @@ export default function NextActionStep() {
   const plan = useTerraform((s) => s.plan);
   const acceptRisk = useTerraform((s) => s.acceptRisk);
   const [confirm, setConfirm] = useState<GateItem | null>(null);
+  const skipped = useTerraform((s) => s.skippedSteps);
   if (!plan) return <NeedPlan />;
   const na = plan.workflow.next_action;
   const labels = taskLabelMap(plan);
@@ -30,8 +31,13 @@ export default function NextActionStep() {
   for (const r of planTaskRecs(plan)) if (r.task_id && !gateTasks[r.task_id]) gateTasks[r.task_id] = r;
   const r = READINESS[na.planting_readiness] ?? READINESS.not_ready;
   const Icon = r.icon;
-  const gates = arr(na.readiness_gate);
-  const firstOpenGate = gates.find((g) => !g.satisfied && !g.accepted_risk)?.id ?? null;
+  const gatesRaw = arr(na.readiness_gate);
+  // Skipped optional items go to the bottom; they never change the gate itself.
+  const isSkipped = (g: GateItem) => !g.required && skipped.includes(g.id);
+  const gates = [...gatesRaw.filter((g) => !isSkipped(g)), ...gatesRaw.filter(isSkipped)];
+  const gateDone = gatesRaw.filter((g) => !isSkipped(g) && (g.satisfied || g.accepted_risk)).length;
+  const gateSkipped = gatesRaw.filter(isSkipped).length;
+  const firstOpenGate = gates.find((g) => !g.satisfied && !g.accepted_risk && !isSkipped(g))?.id ?? null;
   const satisfiedCount = gates.filter((g) => g.satisfied || g.accepted_risk).length;
   const withTests = gates.filter((g) => g.verification).length;
 
@@ -73,7 +79,12 @@ export default function NextActionStep() {
           icon={<Lock className="h-4 w-4" aria-hidden />}
           eyebrow="Must pass before planting"
           title={<span id="gate-title">Readiness gate</span>}
-          right={withTests > 0 ? <Badge tone="violet" icon={<FlaskConical className="h-3 w-3" aria-hidden />}>{withTests} empirical tests</Badge> : undefined}
+          right={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <Badge tone={gateDone === gatesRaw.length ? "sprout" : "cyan"}>{gateDone} of {gatesRaw.length} done{gateSkipped > 0 ? ` · ${gateSkipped} skipped` : ""}</Badge>
+              {withTests > 0 && <Badge tone="violet" icon={<FlaskConical className="h-3 w-3" aria-hidden />}>{withTests} empirical tests</Badge>}
+            </div>
+          }
         />
         {withTests > 0 && (
           <p className="mb-3 text-sm text-mist">
@@ -139,6 +150,9 @@ function GateCard({
   onAcceptRisk: () => void;
 }) {
   const optional = !g.required;
+  const skipStep = useTerraform((s) => s.skipStep);
+  const unskipStep = useTerraform((s) => s.unskipStep);
+  const gateSkippedHere = useTerraform((s) => !g.required && s.skippedSteps.includes(g.id));
   // The optional "repeat the baking-soda fizz test" item: a weak clue that never blocks planting.
   const weakClue = /fizz|baking.?soda|sodium/i.test(`${g.id} ${arr(g.satisfied_by_tasks).join(" ")}`);
   const [testOpen, setTestOpen] = useState(testOpenByDefault || weakClue);
@@ -166,6 +180,19 @@ function GateCard({
     await fn();
     setPending(null);
   };
+
+  if (gateSkippedHere) {
+    return (
+      <li className="flex flex-wrap items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.02] px-4 py-3" aria-label={`Skipped: ${g.label}`}>
+        <SkipForward className="h-4 w-4 shrink-0 text-mist" aria-hidden />
+        <span className="min-w-0 flex-1 font-heading text-sm text-mist line-through decoration-white/20">{g.label}</span>
+        <Badge tone="stone">Skipped</Badge>
+        <button type="button" onClick={() => unskipStep(g.id)} className="inline-flex min-h-11 items-center gap-1.5 px-2 font-heading text-sm text-cyan-200 underline-offset-2 hover:underline">
+          <RotateCcw className="h-3.5 w-3.5" aria-hidden /> Undo
+        </button>
+      </li>
+    );
+  }
 
   return (
     <li
@@ -316,6 +343,11 @@ function GateCard({
 
           <EvidenceChips evidence={g.evidence} compact className="mt-3" />
         </div>
+        {optional && !met && (
+          <button type="button" className="btn-ghost !px-3 !py-2 text-sm" onClick={() => skipStep(g.id)} aria-label={`Skip: ${g.label}`}>
+            <SkipForward className="h-4 w-4" aria-hidden /> Skip
+          </button>
+        )}
         {!met && !risk && canAccept && g.required && (
           <button type="button" className="btn-ghost !py-1.5 text-sm text-amber-100" onClick={onAcceptRisk} title="Skips the test only — the task stays required">
             <LockOpen className="h-4 w-4" aria-hidden /> Accept risk

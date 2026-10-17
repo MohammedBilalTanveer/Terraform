@@ -2,7 +2,7 @@
 // Everything shown comes from the API's CheckCard (KB text); the outcome buttons call the shared store actions.
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Ban, ChevronDown, FlaskConical, Lock, ShieldAlert } from "lucide-react";
+import { Ban, ChevronDown, FlaskConical, Lock, RotateCcw, ShieldAlert, SkipForward } from "lucide-react";
 import type { CheckCard } from "../types/terraform";
 import { useTerraform } from "../store/terraformStore";
 import EvidenceChips from "./EvidenceChips";
@@ -16,9 +16,11 @@ export const isRoughClue = (c: CheckCard) => !!c.weak_evidence || /fizz|baking.?
 export function useCheckProgress(cards: CheckCard[]) {
   const outcomes = useTerraform((s) => s.checkOutcomes);
   const unable = useTerraform((s) => s.unableChecks ?? []);
+  const skippedIds = useTerraform((s) => s.skippedSteps);
   const done = cards.filter((c) => outcomes.some((o) => o.check_id === c.id) || !!c.user_outcome).length;
   const skipped = cards.filter((c) => unable.includes(c.id) && !outcomes.some((o) => o.check_id === c.id)).length;
-  return { done, skipped, total: cards.length };
+  const skippedChecks = cards.filter((c) => skippedIds.includes(c.id) && !outcomes.some((o) => o.check_id === c.id)).length;
+  return { done, skipped, skippedChecks, total: cards.length };
 }
 
 export default function CheckCardView({ card, defaultHowOpen }: { card: CheckCard; defaultHowOpen?: boolean }) {
@@ -26,6 +28,9 @@ export default function CheckCardView({ card, defaultHowOpen }: { card: CheckCar
   const unable = useTerraform((s) => s.unableChecks ?? []);
   const setCheckOutcome = useTerraform((s) => s.setCheckOutcome);
   const setCheckUnable = useTerraform((s) => s.setCheckUnable);
+  const skipStep = useTerraform((s) => s.skipStep);
+  const unskipStep = useTerraform((s) => s.unskipStep);
+  const isSkipped = useTerraform((s) => s.skippedSteps.includes(card.id));
   const loading = useTerraform((s) => s.loading);
   const [pending, setPending] = useState<string | null>(null);
   const roughClue = isRoughClue(card);
@@ -70,6 +75,19 @@ export default function CheckCardView({ card, defaultHowOpen }: { card: CheckCar
       {label}
     </button>
   );
+
+  if (isSkipped) {
+    return (
+      <div id={`check-${card.id}`} className="flex flex-wrap items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.02] px-4 py-3" role="group" aria-label={`Skipped: ${card.title}`}>
+        <SkipForward className="h-4 w-4 shrink-0 text-mist" aria-hidden />
+        <span className="min-w-0 flex-1 font-heading text-sm text-mist line-through decoration-white/20">{card.title}</span>
+        <Badge tone="stone">Skipped</Badge>
+        <button type="button" onClick={() => unskipStep(card.id)} className="inline-flex min-h-11 items-center gap-1.5 px-2 font-heading text-sm text-cyan-200 underline-offset-2 hover:underline">
+          <RotateCcw className="h-3.5 w-3.5" aria-hidden /> Undo
+        </button>
+      </div>
+    );
+  }
 
   return (
     <article
@@ -150,6 +168,11 @@ export default function CheckCardView({ card, defaultHowOpen }: { card: CheckCar
           {optBtn("none", "Not tried", !selected && !isUnable, () => void choose(null, "none"), "stone")}
           {arr(card.possible_outcomes).map((o) => optBtn(o.outcome_id, o.label, selected === o.outcome_id, () => void choose(o.outcome_id, o.outcome_id)))}
           {optBtn("unable", "Unable to do", isUnable, () => void markUnable(), "coral")}
+          {!selected && (
+            <button type="button" onClick={() => skipStep(card.id)} className="btn-ghost !px-3 !py-2 text-sm" aria-label={`Skip: ${card.title}`}>
+              <SkipForward className="h-4 w-4" aria-hidden /> Skip
+            </button>
+          )}
         </div>
         {chosen && (
           <motion.p initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="mt-3 rounded-lg border border-cyan/20 bg-cyan/[0.06] px-3 py-2 text-sm text-ivory/90">

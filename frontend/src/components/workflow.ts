@@ -1,4 +1,5 @@
 // Derived, read-only views over the store's API responses (no content authored here).
+import { tasksAreSubstitutes } from "../store/gateRules";
 import { RUBRIC_STAGE, WORKFLOW_STEPS } from "../types/terraform";
 import type {
   AnalysisResponse,
@@ -12,7 +13,7 @@ import type {
   StepStatus,
 } from "../types/terraform";
 import { useTerraform } from "../store/terraformStore";
-import { harvestRequirements, planTaskRecs, recLock, stepPrereqs } from "../store/workflowRules";
+import { harvestRequirements, planTaskRecs, recLock, stepPrereqs, taskPhase } from "../store/workflowRules";
 
 export { planTaskRecs, recLock, taskPhase, harvestRequirements, stepPrereqs, SOW_TASK_IDS, LOCK_MESSAGE } from "../store/workflowRules";
 export type { TaskLock, Prereq, LockReason } from "../store/workflowRules";
@@ -139,4 +140,79 @@ export function goToStep(step: StepId) {
   if (t.mode !== "dashboard") t.setMode("dashboard");
   t.setCurrentStep(step);
   if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+// ───────── v1.6: every plan item is a visible row; optional ones can be skipped (UI-only, never completes a task) ─────────
+export type SkipKind = "optional" | "alternative" | "good_to_know";
+/** Key under which a recommendation is remembered as skipped (task id, or the record id for items without a task). */
+export const skipKey = (r: Pick<Recommendation, "id" | "task_id">) => r.task_id ?? r.id;
+
+/** Task ids rendered as checkbox rows on the readiness-gate page (Step 5). */
+export function gateTaskIdSet(plan: PlanResponse | null): Set<string> {
+  const ids = new Set<string>();
+  for (const g of plan?.workflow?.next_action?.readiness_gate ?? []) for (const t of g.satisfied_by_tasks ?? []) ids.add(t);
+  return ids;
+}
+
+const plantingAll = (plan: PlanResponse | null) => {
+  const pm = plan?.workflow?.planting_method;
+  return { methods: pm?.methods ?? [], water: pm?.water_capture ?? [], sowing: pm?.sowing ?? [], irrigation: pm?.irrigation ?? [] };
+};
+
+/** Rows shown on Step 4 (prepare work). A readiness/plant task is only moved off this page when it is rendered elsewhere. */
+export function fixProtocolRows(plan: PlanResponse | null) {
+  const fp = plan?.workflow?.fix_protocol;
+  const gate = gateTaskIdSet(plan);
+  const pl = plantingAll(plan);
+  const planting = new Set([...pl.methods, ...pl.water, ...pl.sowing, ...pl.irrigation].map((r) => r.task_id).filter(Boolean) as string[]);
+  const keep = (r: Recommendation) => {
+    const ph = taskPhase(r, plan);
+    if (r.task_id && ph === "readiness" && gate.has(r.task_id)) return false;
+    if (r.task_id && ph === "plant" && planting.has(r.task_id)) return false;
+    return true;
+  };
+  return {
+    doFirst: (fp?.do_first ?? []).filter(keep),
+    doNext: (fp?.do_next ?? []).filter(keep),
+    optional: (fp?.optional ?? []).filter(keep),
+  };
+}
+
+/** Rows shown on Step 8 (planting): everything except readiness tasks that live on the gate page. */
+export function plantingRows(plan: PlanResponse | null) {
+  const gate = gateTaskIdSet(plan);
+  const keep = (r: Recommendation) => !(r.task_id && taskPhase(r, plan) === "readiness" && gate.has(r.task_id));
+  const pl = plantingAll(plan);
+  return { methods: pl.methods.filter(keep), water: pl.water.filter(keep), sowing: pl.sowing.filter(keep), irrigation: pl.irrigation.filter(keep) };
+}
+
+/** What kind of Skip (if any) a recommendation row offers right now. Tasks that are done are never skippable. */
+export function skipKind(rec: Recommendation, plan: PlanResponse | null, completed: string[]): SkipKind | null {
+  if (!rec.task_id) return "good_to_know";
+  if (completed.includes(rec.task_id)) return null;
+  if (rec.priority === "optional") return "optional";
+  // Alternatives: when another option of the same gate item is already done, this one becomes skippable.
+  for (const g of plan?.workflow?.next_action?.readiness_gate ?? []) {
+    const opts = g.satisfied_by_tasks ?? [];
+    if (tasksAreSubstitutes(g) && opts.includes(rec.task_id) && opts.some((t) => t !== rec.task_id && completed.includes(t))) return "alternative";
+  }
+  return null;
+}
+
+/**
+ * Dev safety net: every task and every non-task plan item (except "avoid") must be rendered somewhere on Steps 4/5/8.
+ * Returns the ids that are NOT shown (should always be []). Logged by DashboardPage in dev.
+ */
+export function auditDashboardTasks(plan: PlanResponse | null): string[] {
+  if (!plan?.workflow) return [];
+  const fp = plan.workflow.fix_protocol;
+  const pl = plantingAll(plan);
+  const candidates = new Set<string>();
+  for (const r of [...(fp?.do_first ?? []), ...(fp?.do_next ?? []), ...(fp?.optional ?? []), ...pl.methods, ...pl.water, ...pl.sowing, ...pl.irrigation]) candidates.add(skipKey(r));
+  for (const r of planTaskRecs(plan)) candidates.add(skipKey(r));
+  const rendered = new Set<string>(gateTaskIdSet(plan));
+  const f = fixProtocolRows(plan);
+  const p = plantingRows(plan);
+  for (const r of [...f.doFirst, ...f.doNext, ...f.optional, ...p.methods, ...p.water, ...p.sowing, ...p.irrigation]) rendered.add(skipKey(r));
+  return [...candidates].filter((id) => !rendered.has(id)).sort();
 }

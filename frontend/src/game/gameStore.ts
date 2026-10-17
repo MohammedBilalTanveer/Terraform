@@ -51,6 +51,8 @@ type GameState = {
   forceTab: string | null;
   /** quest step pinned by the player (quest list / "Go there"); the beacon stays on it until it is done */
   pinnedId: string | null;
+  /** optional offers the player said "Skip for now" to (this session) */
+  declinedOptional: string[];
   lastDone: LastDone | null;
   /** quest step id for which the beacon was switched off ("stop guiding") */
   beaconOff: string | null;
@@ -70,6 +72,7 @@ type GameState = {
   say: (text: string, ms?: number) => void;
   setForceTab: (t: string | null) => void;
   setPinned: (id: string | null) => void;
+  declineOptional: (id: string) => void;
   setLastDone: (d: LastDone | null) => void;
   setBeaconOff: (id: string | null) => void;
 };
@@ -93,6 +96,7 @@ export const useGame = create<GameState>()(
       bubble: null,
       forceTab: null,
       pinnedId: null,
+      declinedOptional: [],
       lastDone: null,
       beaconOff: null,
 
@@ -116,6 +120,7 @@ export const useGame = create<GameState>()(
       },
       setForceTab: (forceTab) => set({ forceTab }),
       setPinned: (pinnedId) => set({ pinnedId, beaconOff: null, targetOverride: null }),
+      declineOptional: (id) => set({ declinedOptional: [...get().declinedOptional.filter((x) => x !== id), id] }),
       setLastDone: (lastDone) => set(lastDone && get().pinnedId === lastDone.id ? { lastDone, targetOverride: null, pinnedId: null } : { lastDone, targetOverride: null }),
       setBeaconOff: (beaconOff) => set({ beaconOff }),
       setTouchMode: (touchMode) => set({ touchMode }),

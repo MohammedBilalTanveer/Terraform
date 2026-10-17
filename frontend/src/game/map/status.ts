@@ -23,10 +23,10 @@ export function stationStatuses(steps: QuestStep[]): Record<StationId, StationSt
   const out = {} as Record<StationId, StationStatus>;
   for (const st of STATIONS) {
     const req = steps.filter((s) => s.station === st.id && !s.optional);
-    const open = req.filter((s) => !s.done);
+    const open = req.filter((s) => !s.done && !s.skipped); // skipped steps are not open
     // optional steps (skipped checks, optional repeats) that can be done right now still make a place worth visiting
-    const optionalNow = steps.filter((s) => s.station === st.id && s.optional && !s.done && !s.blocked);
-    const optionalChip = { kind: "todo" as const, open: optionalNow.length, total: optionalNow.length, chip: `${optionalNow.length} optional ${optionalNow.length === 1 ? "check" : "checks"}`, lockText: null };
+    const optionalNow = steps.filter((s) => s.station === st.id && s.optional && !s.done && !s.blocked && !s.skipped);
+    const optionalChip = { kind: "todo" as const, open: optionalNow.length, total: optionalNow.length, chip: `${optionalNow.length} optional ${optionalNow.length === 1 ? "step" : "steps"}`, lockText: null };
     if (req.length === 0) {
       out[st.id] = optionalNow.length
         ? optionalChip

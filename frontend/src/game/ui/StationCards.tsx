@@ -5,7 +5,8 @@ import { useGame } from "../gameStore";
 import { stationById, type StationId } from "../worldConfig";
 import { useQuest } from "../useQuest";
 import { Card, DetailsButton, GlassPanel, PrimaryButton } from "./kit";
-import { CompletionFlow, EmptyPlace, StationChecklist, SuggestedNext, TaskCard, WhyLine } from "./cards";
+import { CompletionFlow, EmptyPlace, StationChecklist, StepCard, SuggestedNext, WhyLine } from "./cards";
+import { alternativesOf, isDoable } from "../planData";
 
 const KICKER: Partial<Record<StationId, string>> = {
   terraces: "WATER CAPTURE · STONE LINES",
@@ -19,14 +20,15 @@ export default function StationCards({ station, onClose }: { station: StationId;
   const [viewId, setViewId] = useState<string | null>(null);
   const [listOpen, setListOpen] = useState(false);
   const st = stationById(station);
-  const here = useMemo(() => steps.filter((s) => s.station === station && s.kind === "task"), [steps, station]);
+  // plan tasks AND the optional "good to know" tips of this station (skipped ones stay in the list)
+  const here = useMemo(() => steps.filter((s) => s.station === station && (s.kind === "task" || s.kind === "tip")), [steps, station]);
   const required = here.filter((s) => !s.optional);
-  const doable = here.filter((s) => !s.done && !s.blocked);
+  const doable = here.filter(isDoable);
   const pinnedHere = useGame((s) => s.pinnedId);
 
   // arriving via the quest/pin opens that exact card
   useEffect(() => {
-    if (pinnedHere && here.some((s) => s.id === pinnedHere && !s.done && !s.blocked)) setViewId(pinnedHere);
+    if (pinnedHere && here.some((s) => s.id === pinnedHere && isDoable(s))) setViewId(pinnedHere);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,11 +47,13 @@ export default function StationCards({ station, onClose }: { station: StationId;
     );
   }
 
-  const current = (viewId ? doable.find((s) => s.id === viewId) : null) ?? doable.find((s) => quest && s.id === quest.id) ?? doable[0] ?? null;
+  // the card shown: the one picked/pinned, else the quest task, else required work first, then optional extras
+  const current = (viewId ? doable.find((s) => s.id === viewId) : null) ?? doable.find((s) => quest && s.id === quest.id) ?? doable.find((s) => !s.optional) ?? doable[0] ?? null;
   const doneCount = required.filter((s) => s.done).length;
   const idx = current ? Math.max(1, required.filter((s) => s.done).length + (current.optional ? 0 : 1)) : required.length;
   const overall = steps.filter((s) => s.kind === "task" && !s.optional);
   const overallDone = overall.filter((s) => s.done).length;
+  const overallSkipped = steps.filter((s) => s.kind !== "check" && s.skipped).length;
 
   return (
     <GlassPanel
@@ -60,7 +64,7 @@ export default function StationCards({ station, onClose }: { station: StationId;
         <div className="flex items-center justify-between gap-2">
           <DetailsButton step={current?.item?.step ?? "fix_protocol"} />
           <span className="text-[11px] text-ivory/55">
-            Overall {overallDone}/{overall.length} tasks · KB-only
+            Overall {overallDone}/{overall.length} tasks{overallSkipped > 0 ? ` · ${overallSkipped} skipped` : ""} · KB-only
           </span>
         </div>
       }
@@ -68,7 +72,7 @@ export default function StationCards({ station, onClose }: { station: StationId;
       <WhyLine station={station} />
       {current ? (
         <>
-          <TaskCard step={current} station={station} />
+          <StepCard step={current} station={station} alts={alternativesOf(plan, steps, current)} onPickAlt={setViewId} />
           <SuggestedNext current={current} here={station} />
         </>
       ) : (
@@ -77,7 +81,8 @@ export default function StationCards({ station, onClose }: { station: StationId;
           title={required.length > 0 ? "All done here" : "Nothing planned here for this plan"}
           body={
             (required.length > 0 ? `You finished ${doneCount} of ${required.length} tasks at this station.` : "Your observations did not call for any task at this station.") +
-            (here.some((s0) => !s0.done && s0.blocked) ? " Anything still locked opens once its step is done." : "")
+            (here.some((s0) => !s0.done && s0.blocked) ? " Anything still locked opens once its step is done." : "") +
+            (here.some((s0) => s0.skipped) ? " Skipped steps are listed below — you can do them any time." : "")
           }
         />
       )}

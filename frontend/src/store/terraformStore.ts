@@ -41,6 +41,8 @@ export type TerraformState = {
   checkOutcomes: { check_id: string; outcome_id: string }[];
   /** Checks the user reported they were unable to perform (UI-only; not sent as an outcome). */
   unableChecks: string[];
+  /** optional steps the user chose to skip (ids of tasks / checks / tips). Skipping never completes a backend task. */
+  skippedSteps: string[];
   /** Empirical readiness-gate test results recorded by the user (v1.1). */
   gateResults: Record<string, "pass" | "fail">;
   journal: { at: string; text: string }[];
@@ -72,6 +74,8 @@ export type TerraformState = {
   generatePlan: () => Promise<PlanResponse | null>;
   setCheckOutcome: (check_id: string, outcome_id: string | null) => Promise<void>;
   setCheckUnable: (check_id: string, unable: boolean) => Promise<void>;
+  skipStep: (id: string) => void;
+  unskipStep: (id: string) => void;
   selectCrop: (cropId: string) => Promise<void>;
   toggleTask: (taskId: string) => Promise<void>;
   acceptRisk: (gateId: string) => Promise<void>;
@@ -194,6 +198,7 @@ export const useTerraform = create<TerraformState>()(
         acceptedRisks: [],
         checkOutcomes: [],
         unableChecks: [],
+        skippedSteps: [],
         gateResults: {},
         journal: [],
         harvestedAt: null,
@@ -311,6 +316,11 @@ export const useTerraform = create<TerraformState>()(
           await get().analyze();
           if (get().plan) await get().generatePlan();
         },
+
+        skipStep: (id) => {
+          if (!get().skippedSteps.includes(id)) set({ skippedSteps: [...get().skippedSteps, id] });
+        },
+        unskipStep: (id) => set({ skippedSteps: get().skippedSteps.filter((x) => x !== id) }),
 
         setCheckUnable: async (check_id, unable) => {
           const rest = get().unableChecks.filter((c) => c !== check_id);
@@ -495,6 +505,7 @@ export const useTerraform = create<TerraformState>()(
             acceptedRisks: [],
             checkOutcomes: [],
             unableChecks: [],
+            skippedSteps: [],
             gateResults: {},
             currentStep: "observation_log",
             journal: [...get().journal, { at: new Date().toISOString(), text: `Season ${next} started — update your land description with what changed.` }],
@@ -516,6 +527,7 @@ export const useTerraform = create<TerraformState>()(
             acceptedRisks: [],
             checkOutcomes: [],
             unableChecks: [],
+            skippedSteps: [],
             gateResults: {},
             journal: [],
             currentStep: "observation_log",
@@ -537,6 +549,7 @@ export const useTerraform = create<TerraformState>()(
         acceptedRisks: s.acceptedRisks,
         checkOutcomes: s.checkOutcomes,
         unableChecks: s.unableChecks,
+        skippedSteps: s.skippedSteps,
         gateResults: s.gateResults,
         journal: s.journal,
         harvestedAt: s.harvestedAt,

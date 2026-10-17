@@ -1,14 +1,14 @@
 // One-card-at-a-time quest UI: task card, verification-test card, TERRA completion message.
 // All task/test text comes from the plan (KB); only the wrapper wording is UI copy.
 import { useState } from "react";
-import { CheckCircle2, Circle, Compass, Lock, ShieldAlert } from "lucide-react";
+import { CheckCircle2, Circle, Compass, Lock, ShieldAlert, SkipForward } from "lucide-react";
 import DialogueBox, { type Choice } from "../../intro/Dialogue";
 import { useTerraform } from "../../store/terraformStore";
 import type { CheckCard } from "../../types/terraform";
 import { checkPhase, checkState } from "../checks";
 import { PLACE_INFO } from "../places";
 import { useGame, type LastDone } from "../gameStore";
-import type { QuestStep } from "../planData";
+import { alternativesOf, canSkip, isDoable, type QuestStep } from "../planData";
 import { useQuest } from "../useQuest";
 import { stationById, type StationId } from "../worldConfig";
 import { VERB } from "./RecCard";
@@ -40,6 +40,35 @@ export function announceDone(label: string, station: StationId, phase: string, i
   useGame.getState().setLastDone({ id, label, station, phase, sessionKey: useTerraform.getState().sessionId, note });
 }
 
+/** "Skip this step": local only (never calls the backend / toggleTask, never changes a gate). */
+export function skipStepById(id: string, label?: string) {
+  useTerraform.getState().skipStep(id);
+  const g = useGame.getState();
+  if (g.pinnedId === id) g.setPinned(null);
+  if (g.focusTaskId === id) g.setFocusTask(null);
+  if (g.beaconOff === id) g.setBeaconOff(null);
+  if (label) g.say(`Skipped: ${label}. It stays in your list under "Skipped".`, 4500);
+}
+
+/** Bring a skipped step back and make it the current one. */
+export function unskipAndPin(step: QuestStep, announce = false) {
+  useTerraform.getState().unskipStep(step.id);
+  pinStep({ ...step, skipped: false }, announce);
+}
+
+/** Clearly visible secondary action on every optional card. */
+export function SkipButton({ id, label, text = "Skip this step" }: { id: string; label?: string; text?: string }) {
+  return (
+    <button
+      type="button"
+      onClick={() => skipStepById(id, label)}
+      className="tf-keep inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl border border-white/25 bg-white/[0.05] px-3 text-[13.5px] font-medium text-ivory/90 hover:border-cyan-300/50 hover:text-cyan-100"
+    >
+      <SkipForward className="h-4 w-4" aria-hidden /> {text}
+    </button>
+  );
+}
+
 // ---------------------------------------------------------------------------------------------
 export function SuggestedNext({ current, here }: { current?: QuestStep | null; here: StationId }) {
   const { quest } = useQuest();
@@ -68,24 +97,45 @@ export function SuggestedNext({ current, here }: { current?: QuestStep | null; h
 export function StationChecklist({ steps, currentId, onPick, title, defaultOpen = false, pickDone = false }: { steps: QuestStep[]; currentId?: string | null; onPick?: (id: string) => void; title: string; defaultOpen?: boolean; pickDone?: boolean }) {
   if (steps.length === 0) return null;
   const done = steps.filter((s) => s.done).length;
+  const skipped = steps.filter((s) => s.skipped).length;
   return (
     <details open={defaultOpen} className="rounded-xl border border-white/10 bg-white/[0.02] px-3 py-1.5">
       <summary className="min-h-9 cursor-pointer text-[12px] font-medium text-ivory/75">
-        {title} ({done}/{steps.length} done)
+        {title} ({done}/{steps.length} done{skipped > 0 ? ` · ${skipped} skipped` : ""})
       </summary>
       <ul className="mb-1 mt-1 space-y-0.5">
         {steps.map((s) => (
-          <li key={s.id}>
+          <li key={s.id} className="flex items-center gap-1">
             <button
               type="button"
-              disabled={(s.done && !pickDone) || s.blocked || !onPick}
+              disabled={(s.done && !pickDone) || s.blocked || s.skipped || !onPick}
               onClick={() => onPick?.(s.id)}
-              className={cx("flex min-h-9 w-full items-center gap-2 rounded-md px-1 text-left text-[12px]", s.id === currentId && "bg-cyan-400/10", !s.done && !s.blocked && onPick && "hover:bg-white/5")}
+              className={cx("flex min-h-9 min-w-0 flex-1 items-center gap-2 rounded-md px-1 text-left text-[12px]", s.id === currentId && "bg-cyan-400/10", !s.done && !s.blocked && !s.skipped && onPick && "hover:bg-white/5")}
             >
-              {s.done ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-300" /> : s.blocked ? <Lock className="h-3.5 w-3.5 shrink-0 text-amber-300/80" /> : <Circle className="h-3.5 w-3.5 shrink-0 text-ivory/40" />}
-              <span className={cx("min-w-0 flex-1 truncate", s.done && "text-ivory/45 line-through", s.blocked && !s.done && "text-ivory/50")}>{s.label}</span>
-              {s.blocked && !s.done && s.blockedText && <span className="shrink-0 text-[10px] text-amber-200/70">{s.blockedText}</span>}
+              {s.done ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-300" /> : s.skipped ? <SkipForward className="h-3.5 w-3.5 shrink-0 text-ivory/45" /> : s.blocked ? <Lock className="h-3.5 w-3.5 shrink-0 text-amber-300/80" /> : <Circle className="h-3.5 w-3.5 shrink-0 text-ivory/40" />}
+              <span className={cx("min-w-0 flex-1 truncate", s.done && "text-ivory/45 line-through", s.skipped && "text-ivory/50", s.blocked && !s.done && !s.skipped && "text-ivory/50")}>{s.label}</span>
+              {s.skipped ? (
+                <span className="shrink-0 rounded border border-white/15 bg-white/5 px-1 text-[10px] text-ivory/65">Skipped</span>
+              ) : (
+                s.optional &&
+                !s.done && (
+                  <span className="shrink-0 rounded border border-white/15 bg-white/5 px-1 text-[10px] text-ivory/65">{s.kind === "tip" ? "Good to know" : s.alternative ? "Alternative" : "Optional"}</span>
+                )
+              )}
+              {s.blocked && !s.done && !s.skipped && s.blockedText && <span className="shrink-0 text-[10px] text-amber-200/70">{s.blockedText}</span>}
             </button>
+            {s.skipped && (
+              <button
+                type="button"
+                onClick={() => {
+                  unskipAndPin(s);
+                  onPick?.(s.id);
+                }}
+                className="tf-keep min-h-9 shrink-0 rounded-md border border-cyan-300/40 bg-cyan-400/10 px-2 text-[11.5px] font-medium text-cyan-100 hover:bg-cyan-400/20"
+              >
+                Do it now
+              </button>
+            )}
           </li>
         ))}
       </ul>
@@ -95,7 +145,7 @@ export function StationChecklist({ steps, currentId, onPick, title, defaultOpen 
 
 // ---------------------------------------------------------------------------------------------
 /** The task card: why it matters, how (numbered), amounts, safety, limitations, evidence and ONE big button. */
-export function TaskCard({ step, station }: { step: QuestStep; station: StationId }) {
+export function TaskCard({ step, station, alts, onPickAlt }: { step: QuestStep; station: StationId; alts?: QuestStep[]; onPickAlt?: (id: string) => void }) {
   const rec = step.item!.rec;
   const loading = useTerraform((s) => s.loading);
   const busy = useGame((s) => !!s.action);
@@ -103,6 +153,12 @@ export function TaskCard({ step, station }: { step: QuestStep; station: StationI
   return (
     <div className="space-y-3.5">
       <div>
+        {step.optional && !step.done && (
+          <div className="mb-1 flex flex-wrap items-center gap-1.5">
+            <Pill tone="violet">{step.alternative ? "Alternative — also fine" : step.longTerm ? "Optional — long-term" : "Optional extra"}</Pill>
+            {!step.alternative && <Pill tone={rec.confidence === "high" ? "sprout" : rec.confidence === "medium" ? "amber" : "coral"}>confidence: {rec.confidence}</Pill>}
+          </div>
+        )}
         <h3 className="font-heading text-[19px] font-semibold leading-snug">{step.label}</h3>
         {rec.title && rec.title !== step.label && <div className="text-[12px] text-ivory/55">{rec.title}</div>}
       </div>
@@ -138,16 +194,31 @@ export function TaskCard({ step, station }: { step: QuestStep; station: StationI
         </section>
       )}
       {rec.limitations?.length > 0 && (
-        <details className="rounded-lg border border-white/10 bg-white/[0.02] px-2.5 py-1">
-          <summary className="min-h-9 cursor-pointer text-[12px] text-ivory/70">Limitations</summary>
+        // optional extras keep every KB caution visible up-front
+        <details open={step.optional && !step.alternative} className="rounded-lg border border-white/10 bg-white/[0.02] px-2.5 py-1">
+          <summary className="min-h-9 cursor-pointer text-[12px] text-ivory/70">Limitations{step.optional && !step.alternative ? " & cautions" : ""}</summary>
           <div className="pb-1.5">
             <Bullets items={rec.limitations} tone="warn" />
           </div>
         </details>
       )}
       <Chips evidence={rec.evidence} />
+      {alts && alts.length > 0 && onPickAlt && (
+        <div className="space-y-2">
+          {alts.map((a) => (
+            <div key={a.id} className="rounded-xl border border-violet-300/25 bg-violet-400/[0.06] p-2.5">
+              <div className="text-[11px] font-semibold text-violet-200">Another way to meet this step</div>
+              <div className="text-[13px] font-medium text-ivory">{a.label}</div>
+              {a.item?.rec.explanation && <p className="line-clamp-3 text-[12px] leading-snug text-ivory/70">{a.item.rec.explanation}</p>}
+              <button type="button" onClick={() => onPickAlt(a.id)} className="tf-keep mt-1.5 min-h-11 rounded-lg border border-violet-300/40 bg-violet-400/15 px-3 text-[13px] font-medium text-violet-50 hover:bg-violet-400/25">
+                Show that option
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
       {/* the primary action stays visible at the bottom of the scrolling card */}
-      <div className="tf-sticky-cta">
+      <div className="tf-sticky-cta space-y-2">
         <button
           type="button"
           disabled={busy || loading === "progress"}
@@ -156,9 +227,82 @@ export function TaskCard({ step, station }: { step: QuestStep; station: StationI
         >
           {verb} — mark complete
         </button>
+        {canSkip(step) && <SkipButton id={step.id} label={step.label} />}
       </div>
     </div>
   );
+}
+
+// ---------------------------------------------------------------------------------------------
+/** Plan advice that has no task ("Good to know"): read it, then "Got it" or "Skip". Both just hide it from the open list. */
+export function TipCard({ step }: { step: QuestStep }) {
+  const rec = step.item!.rec;
+  return (
+    <div className="space-y-3.5">
+      <div>
+        <div className="mb-1 flex flex-wrap items-center gap-1.5">
+          <Pill tone="violet">Good to know — optional</Pill>
+          <Pill tone={rec.confidence === "high" ? "sprout" : rec.confidence === "medium" ? "amber" : "coral"}>confidence: {rec.confidence}</Pill>
+        </div>
+        <h3 className="font-heading text-[19px] font-semibold leading-snug">{step.label}</h3>
+      </div>
+      {rec.explanation && (
+        <section>
+          <div className="mb-1 font-display text-[10px] uppercase tracking-[0.22em] text-amber-200/90">Why it matters</div>
+          <p className="text-[13.5px] leading-relaxed text-ivory/90">{rec.explanation}</p>
+        </section>
+      )}
+      {rec.actions?.length > 0 && (
+        <section>
+          <div className="mb-1 font-display text-[10px] uppercase tracking-[0.22em] text-amber-200/90">How</div>
+          <ol className="space-y-1.5 text-[13.5px] leading-relaxed">
+            {rec.actions.map((a, i) => (
+              <li key={i} className="flex gap-2.5">
+                <span className="mt-[2px] grid h-5 w-5 shrink-0 place-items-center rounded-full bg-cyan-400/20 font-display text-[10px] text-cyan-100">{i + 1}</span>
+                <span className="text-ivory/90">{a}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+      {rec.everyday_amounts?.length > 0 && (
+        <section>
+          <div className="mb-1 font-display text-[10px] uppercase tracking-[0.22em] text-amber-200/90">Everyday amounts</div>
+          <Bullets items={rec.everyday_amounts} />
+        </section>
+      )}
+      {rec.safety_notes?.length > 0 && (
+        <section>
+          <div className="mb-1 font-display text-[10px] uppercase tracking-[0.22em] text-rose-200/90">Safety</div>
+          <Bullets items={rec.safety_notes} tone="safety" />
+        </section>
+      )}
+      {rec.limitations?.length > 0 && (
+        <details open className="rounded-lg border border-white/10 bg-white/[0.02] px-2.5 py-1">
+          <summary className="min-h-9 cursor-pointer text-[12px] text-ivory/70">Limitations &amp; cautions</summary>
+          <div className="pb-1.5">
+            <Bullets items={rec.limitations} tone="warn" />
+          </div>
+        </details>
+      )}
+      <Chips evidence={rec.evidence} />
+      <div className="tf-sticky-cta grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={() => skipStepById(step.id)}
+          className="tf-keep min-h-12 rounded-xl bg-emerald-400/90 px-3 py-3 text-[15px] font-semibold text-[#06101f] hover:bg-emerald-300"
+        >
+          Got it
+        </button>
+        <SkipButton id={step.id} text="Skip" />
+      </div>
+    </div>
+  );
+}
+
+/** The right card for a quest step that is a plan task or plan advice. */
+export function StepCard({ step, station, alts, onPickAlt }: { step: QuestStep; station: StationId; alts?: QuestStep[]; onPickAlt?: (id: string) => void }) {
+  return step.kind === "tip" ? <TipCard step={step} /> : <TaskCard step={step} station={station} alts={alts} onPickAlt={onPickAlt} />;
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -291,7 +435,7 @@ export function CompletionFlow({ station, onStay }: { station: StationId; onStay
   const [line, setLine] = useState(0);
   if (!lastDone) return null;
 
-  const herePending = steps.filter((s) => s.station === station && !s.done && !s.blocked && !s.optional);
+  const herePending = steps.filter((s) => s.station === station && isDoable(s) && !s.optional);
   const next = quest;
   const nextAt = next ? stationById(next.station).name : null;
   const here = !!next && next.station === station;
@@ -321,11 +465,41 @@ export function CompletionFlow({ station, onStay }: { station: StationId; onStay
       { label: "Stay here", value: "stay" },
     ];
   }
-  const lines = [`✔ Done: ${lastDone.label.replace(/\.$/, "")}.`, ...(lastDone.note ? [lastDone.note] : []), second];
+  // OPTIONAL OFFER: when the step that follows the one just finished (in quest order) is optional, TERRA offers it —
+  // "Do it now" or "Skip this step". Skipped / done / locked optional steps are passed over; a required step ends the search.
+  const doneIdx = steps.findIndex((s) => s.id === lastDone.id);
+  let offer: QuestStep | undefined;
+  if (doneIdx >= 0) {
+    for (let j = doneIdx + 1; j < steps.length; j++) {
+      const s = steps[j];
+      if (s.done || s.skipped) continue;
+      if (s.optional && s.blocked) continue;
+      if (s.optional) offer = s;
+      break;
+    }
+  }
+  const offerLine = offer ? `Optional: ${offer.label.replace(/^optional:\s*/i, "")}${offer.station !== station ? ` (at ${stationById(offer.station).name})` : ""} — do it now, or skip this step?` : null;
+  const lines = [`✔ Done: ${lastDone.label.replace(/\.$/, "")}.`, ...(lastDone.note ? [lastDone.note] : []), ...(offerLine ? [offerLine] : []), second];
   const last = lines.length - 1;
+  const offerIdx = offerLine ? last - 1 : -1;
   const text = lines[Math.min(line, last)];
+  const offerChoices: Choice[] = [
+    { label: "Do it now", value: "offer-now" },
+    { label: "Skip this step", value: "offer-skip" },
+  ];
   const finish = (v: string) => {
     const g = useGame.getState();
+    if (v === "offer-skip" && offer) {
+      // the next optional step (if any) is offered right away, otherwise TERRA moves on to what comes next
+      skipStepById(offer.id);
+      return;
+    }
+    if (v === "offer-now" && offer) {
+      pinStep(offer, offer.station !== station);
+      if (offer.station !== station) g.setOverlay(null);
+      else g.setLastDone(null);
+      return;
+    }
     if (v === "go" && next) {
       pinStep(next);
       g.setOverlay(null); // also clears the message
@@ -340,7 +514,7 @@ export function CompletionFlow({ station, onStay }: { station: StationId; onStay
     <DialogueBox
       speaker="terra"
       text={text}
-      choices={line >= last ? choices : undefined}
+      choices={line === offerIdx ? offerChoices : line >= last ? choices : undefined}
       onNext={() => setLine((n) => Math.min(n + 1, last))}
       onChoice={finish}
       reduceMotion={reduceMotion}
@@ -463,6 +637,7 @@ export function CheckCardView({ check, station, offerSkipAll = false }: { check:
           </button>
         </div>
       </section>
+      {!state.done && <SkipButton id={stepId} label={check.title} />}
       {offerSkipAll && (
         <button type="button" onClick={skipAll} className="min-h-10 text-[12px] text-cyan-200 underline hover:text-cyan-100">
           Skip the remaining checks

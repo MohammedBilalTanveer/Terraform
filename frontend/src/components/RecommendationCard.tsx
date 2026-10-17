@@ -1,5 +1,5 @@
 // Renders one API Recommendation verbatim. No advice text is authored here.
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Ban, Check, ChevronDown, Ruler, ShieldAlert, Target, TriangleAlert } from "lucide-react";
 import type { Recommendation } from "../types/terraform";
@@ -18,22 +18,28 @@ export type RecommendationCardProps = {
   defaultOpen?: boolean;
   /** Collapsed by default: header, explanation, safety notes and the task control stay visible; steps/amounts fold away. */
   collapsible?: boolean;
+  /** Start with the "why this matches · limitations" block open (cautions up front). */
+  detailOpen?: boolean;
+  /** Extra controls next to the task checkbox (e.g. Skip / Got it). */
+  headerExtra?: ReactNode;
+  /** Extra badge in the badge row (e.g. "Good to know", "Required for tree crops"). */
+  note?: ReactNode;
 };
 
 const PRIORITY: Record<string, { label: string; tone: "cyan" | "violet" | "coral" | "stone"; accent: string }> = {
   do_first: { label: "Do first", tone: "cyan", accent: "from-cyan/70 to-violet/50" },
   do_next: { label: "Do next", tone: "violet", accent: "from-violet/70 to-fuchsia-400/40" },
   avoid: { label: "Avoid", tone: "coral", accent: "from-coral/80 to-terracotta/50" },
-  optional: { label: "Optional", tone: "stone", accent: "from-white/30 to-white/5" },
+  optional: { label: "Optional — you can skip this", tone: "stone", accent: "from-white/30 to-white/5" },
 };
 
-export default function RecommendationCard({ rec, index, className, defaultOpen = false, collapsible = false }: RecommendationCardProps) {
+export default function RecommendationCard({ rec, index, className, defaultOpen = false, collapsible = false, detailOpen = false, headerExtra, note }: RecommendationCardProps) {
   const completed = useTerraform((s) => s.completedTasks);
   const toggleTask = useTerraform((s) => s.toggleTask);
   const busy = useTerraform((s) => s.loading);
   const [open, setOpen] = useState(defaultOpen);
   const [pending, setPending] = useState(false);
-  const [detail, setDetail] = useState(!collapsible && defaultOpen);
+  const [detail, setDetail] = useState((!collapsible && defaultOpen) || detailOpen);
   const lock = useTaskLock(rec);
   const bodyShown = !collapsible || open;
 
@@ -86,12 +92,14 @@ export default function RecommendationCard({ rec, index, className, defaultOpen 
             </h4>
             <div className="mt-1.5 flex flex-wrap gap-1.5">
               {p && <Badge tone={p.tone}>{p.label}</Badge>}
+              {note}
               {rec.category && <Badge tone="stone">{humanize(rec.category)}</Badge>}
               <ConfidenceBadge value={rec.confidence} />
               {safety.length > 0 && !bodyShown && <Badge tone="amber" icon={<ShieldAlert className="h-3 w-3" aria-hidden />}>Safety notes inside</Badge>}
             </div>
           </div>
         </div>
+        <div className="flex flex-wrap items-center gap-2">
         {rec.task_id && !lock.locked && (
           <button
             type="button"
@@ -112,6 +120,8 @@ export default function RecommendationCard({ rec, index, className, defaultOpen 
             <span className="max-w-[14rem] truncate text-left">{rec.task_label ?? "Task"}</span>
           </button>
         )}
+        {headerExtra}
+        </div>
       </header>
 
       {rec.task_id && lock.locked && <LockedTask className="mt-3" reason={lock.reason} label={rec.task_label ?? rec.title} />}
