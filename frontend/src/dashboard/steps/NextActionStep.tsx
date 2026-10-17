@@ -138,7 +138,10 @@ function GateCard({
   testOpenByDefault: boolean;
   onAcceptRisk: () => void;
 }) {
-  const [testOpen, setTestOpen] = useState(testOpenByDefault);
+  const optional = !g.required;
+  // The optional "repeat the baking-soda fizz test" item: a weak clue that never blocks planting.
+  const weakClue = /fizz|baking.?soda|sodium/i.test(`${g.id} ${arr(g.satisfied_by_tasks).join(" ")}`);
+  const [testOpen, setTestOpen] = useState(testOpenByDefault || weakClue);
   const completed = useTerraform((s) => s.completedTasks);
   const gateResults = useTerraform((s) => s.gateResults ?? {});
   const toggleTask = useTerraform((s) => s.toggleTask);
@@ -187,10 +190,12 @@ function GateCard({
         <div className="min-w-[min(100%,15rem)] flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-heading font-semibold text-ivory">{g.label}</span>
-            <Badge tone={g.required ? "coral" : "stone"}>{g.required ? "Required" : "Recommended"}</Badge>
+            <Badge tone={g.required ? "coral" : "violet"}>{g.required ? "Required" : "Optional"}</Badge>
+            {weakClue && <Badge tone="amber" icon={<ShieldAlert className="h-3 w-3" aria-hidden />}>Weak clue · not a pH test</Badge>}
+            {optional && <Badge tone="stone">Never blocks planting</Badge>}
             {met && <Badge tone="sprout">Satisfied</Badge>}
             {risk && <Badge tone="amber">Risk accepted · test skipped</Badge>}
-            {!met && blocking && <Badge tone={blocking.tone}>{blocking.label}</Badge>}
+            {!met && !optional && blocking && <Badge tone={blocking.tone}>{blocking.label}</Badge>}
           </div>
           {g.detail && (testOpen || failed) && <p className="mt-1 text-sm leading-relaxed text-ivory/75">{g.detail}</p>}
 
@@ -311,12 +316,12 @@ function GateCard({
 
           <EvidenceChips evidence={g.evidence} compact className="mt-3" />
         </div>
-        {!met && !risk && canAccept && (
+        {!met && !risk && canAccept && g.required && (
           <button type="button" className="btn-ghost !py-1.5 text-sm text-amber-100" onClick={onAcceptRisk} title="Skips the test only — the task stays required">
             <LockOpen className="h-4 w-4" aria-hidden /> Accept risk
           </button>
         )}
-        {!met && !risk && !canAccept && !taskDone && (
+        {!met && !risk && !canAccept && !taskDone && g.required && (
           <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/12 bg-white/[0.03] px-2.5 py-1.5 text-xs text-mist" title="Accepting a risk only skips the test">
             <Hourglass className="h-3.5 w-3.5" aria-hidden /> Complete the task first
           </span>

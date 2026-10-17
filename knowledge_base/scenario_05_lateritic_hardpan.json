@@ -174,7 +174,8 @@
           ],
           "check_ids": [
             "check_ask_neighbours",
-            "check_soaking_rain_depth"
+            "check_soaking_rain_depth",
+            "check_rain_tally"
           ]
         },
         {
@@ -196,7 +197,9 @@
           "check_ids": [
             "check_baking_soda_fizz",
             "check_observe_vegetation",
-            "check_watch_trial_plants"
+            "check_watch_trial_plants",
+            "check_leaf_colour_hunger",
+            "check_life_count"
           ]
         },
         {
@@ -494,8 +497,8 @@
         },
         {
           "id": "gate_fizz_recheck_optional",
-          "label": "Optional: repeat the baking-soda fizz check after treatment",
-          "detail": "Optional weak clue only. A weaker fizz after adding organic matter and a little ash may hint at change, but it is not a soil test and is never needed before planting.",
+          "label": "Optional: repeat the baking-soda fizz test on filled pit soil",
+          "detail": "Optional weak clue only. Repeat the baking-soda (sodium bicarbonate) fizz test on filled pit soil: a weaker fizz is a hopeful sign, not proof. It is not a pH reading and is never needed before planting.",
           "required": false,
           "satisfied_by_tasks": [
             "task_recheck_fizz_optional"
@@ -507,8 +510,8 @@
           },
           "source_ids": [],
           "verification": {
-            "test": "Optional weak clue: repeat the baking-soda fizz check on a spoonful of wet soil from a filled pit.",
-            "pass": "Any result is acceptable: a weaker fizz than before is only a weak hint of change.",
+            "test": "Optional weak clue: repeat the baking-soda (sodium bicarbonate) fizz test on a small spoonful of wet soil from a filled pit, using the same small amounts as before, and watch for about a minute.",
+            "pass": "Any result is acceptable: a weaker fizz than before is a hopeful sign, not proof; no fizz or no change proves nothing.",
             "fail": "There is no fail for this optional clue; it never blocks planting.",
             "if_fail": "Nothing needed; keep relying on organic matter, tolerant crops and plant response."
           }

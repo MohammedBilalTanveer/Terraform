@@ -52,6 +52,83 @@ function NoPlan({ onClose, station }: { onClose: () => void; station: StationId 
   );
 }
 
+/** The Research Outpost field terminal: situation, adaptations, all tasks (body only — the caller supplies the panel). */
+export function OutpostTerminal() {
+  const plan = useTerraform((st) => st.plan);
+  const completed = useTerraform((st) => st.completedTasks);
+  const selectedCrop = useTerraform((st) => st.selectedCropId);
+  const items = useMemo(() => collectPlanItems(plan), [plan]);
+  if (!plan) return null;
+  const tasks = taskItems(items);
+  const avoid = items.filter((i) => i.section === "avoid");
+  const here = itemsForStation(items, "outpost");
+  return (
+    <>
+        <Section title="Situation" right={<Chips evidence={plan.evidence} />}>
+        <Card>
+          <p className="text-[13px] leading-relaxed text-ivory/85">{plan.situation_summary}</p>
+        </Card>
+      </Section>
+      {plan.adaptations.length > 0 && (
+        <Section title="Why this plan fits your land">
+          {plan.adaptations.map((a, i) => (
+            <Card key={i}>
+              <div className="font-medium text-[13px]">{a.label}</div>
+              <p className="text-[12.5px] text-ivory/75">{a.effect}</p>
+              <div className="mt-1.5">
+                <Chips evidence={{ kb_ids: a.kb_ids, source_ids: [] }} />
+              </div>
+            </Card>
+          ))}
+        </Section>
+      )}
+      <Section title={`All plan tasks (${tasks.filter((t) => completed.includes(t.rec.task_id!)).length}/${tasks.length} done)`}>
+        <ul className="space-y-1.5">
+          {tasks.map((t) => {
+            const done = completed.includes(t.rec.task_id!);
+            const target = GROUP_STATION[t.group];
+            const lock = done ? null : lockOf(plan, t, selectedCrop);
+            return (
+              <li key={t.rec.task_id} className={cx("flex items-center gap-2 rounded-lg border border-white/8 bg-white/[0.02] px-2.5 py-1.5", lock && "opacity-70")}>
+                {done ? <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" /> : lock ? <Lock className="h-4 w-4 shrink-0 text-amber-300" /> : <Circle className="h-4 w-4 shrink-0 text-ivory/40" />}
+                <div className="min-w-0 flex-1">
+                  <div className="truncate text-[12.5px] font-medium">{t.rec.task_label ?? t.rec.title}</div>
+                  <div className={cx("text-[10.5px]", lock ? "text-amber-200/80" : "text-ivory/55")}>{lock ? LOCK_TEXT[lock] : stationById(target).name}</div>
+                </div>
+                <Chips evidence={t.rec.evidence} />
+                {!done && (target !== "outpost" || lock) && (
+                  <button
+                    type="button"
+                    aria-label={`Guide me to ${stationById(target).name}`}
+                    className="grid min-h-11 min-w-11 place-items-center rounded-md p-1 text-cyan-200 hover:bg-white/10 sm:min-h-8 sm:min-w-8"
+                    onClick={() => focusPlanTask(t)}
+                  >
+                    <Navigation className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </Section>
+      {here.length > 0 && (
+        <Section title="Logged at the terminal">
+          {here.map((i) => (
+            <RecCard key={i.rec.id + i.section} rec={i.rec} item={i} here="outpost" />
+          ))}
+        </Section>
+      )}
+      {avoid.length > 0 && (
+        <Section title="Avoid">
+          {avoid.map((i) => (
+            <RecCard key={i.rec.id} rec={i.rec} />
+          ))}
+        </Section>
+      )}
+    </>
+  );
+}
+
 export default function StationPanel({ station, onClose }: { station: StationId; onClose: () => void }) {
   const plan = useTerraform((s) => s.plan);
   const completed = useTerraform((s) => s.completedTasks);
@@ -67,72 +144,9 @@ export default function StationPanel({ station, onClose }: { station: StationId;
   const st = stationById(station);
 
   if (station === "outpost") {
-    const tasks = taskItems(items);
-    const avoid = items.filter((i) => i.section === "avoid");
-    const here = itemsForStation(items, "outpost");
     return (
       <GlassPanel title="Research Outpost — Field Terminal" kicker={KICKER.outpost} onClose={onClose} wide footer={<DetailsButton step="fix_protocol" label="Open full plan in Dashboard" />}>
-        <Section title="Situation" right={<Chips evidence={plan.evidence} />}>
-          <Card>
-            <p className="text-[13px] leading-relaxed text-ivory/85">{plan.situation_summary}</p>
-          </Card>
-        </Section>
-        {plan.adaptations.length > 0 && (
-          <Section title="Why this plan fits your land">
-            {plan.adaptations.map((a, i) => (
-              <Card key={i}>
-                <div className="font-medium text-[13px]">{a.label}</div>
-                <p className="text-[12.5px] text-ivory/75">{a.effect}</p>
-                <div className="mt-1.5">
-                  <Chips evidence={{ kb_ids: a.kb_ids, source_ids: [] }} />
-                </div>
-              </Card>
-            ))}
-          </Section>
-        )}
-        <Section title={`All plan tasks (${tasks.filter((t) => completed.includes(t.rec.task_id!)).length}/${tasks.length} done)`}>
-          <ul className="space-y-1.5">
-            {tasks.map((t) => {
-              const done = completed.includes(t.rec.task_id!);
-              const target = GROUP_STATION[t.group];
-              const lock = done ? null : lockOf(plan, t, selectedCrop);
-              return (
-                <li key={t.rec.task_id} className={cx("flex items-center gap-2 rounded-lg border border-white/8 bg-white/[0.02] px-2.5 py-1.5", lock && "opacity-70")}>
-                  {done ? <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" /> : lock ? <Lock className="h-4 w-4 shrink-0 text-amber-300" /> : <Circle className="h-4 w-4 shrink-0 text-ivory/40" />}
-                  <div className="min-w-0 flex-1">
-                    <div className="truncate text-[12.5px] font-medium">{t.rec.task_label ?? t.rec.title}</div>
-                    <div className={cx("text-[10.5px]", lock ? "text-amber-200/80" : "text-ivory/55")}>{lock ? LOCK_TEXT[lock] : stationById(target).name}</div>
-                  </div>
-                  <Chips evidence={t.rec.evidence} />
-                  {!done && (target !== "outpost" || lock) && (
-                    <button
-                      type="button"
-                      aria-label={`Guide me to ${stationById(target).name}`}
-                      className="grid min-h-11 min-w-11 place-items-center rounded-md p-1 text-cyan-200 hover:bg-white/10 sm:min-h-8 sm:min-w-8"
-                      onClick={() => focusPlanTask(t)}
-                    >
-                      <Navigation className="h-3.5 w-3.5" />
-                    </button>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </Section>
-        {here.length > 0 && (
-          <Section title="Logged at the terminal">
-            {here.map((i) => (
-              <RecCard key={i.rec.id + i.section} rec={i.rec} item={i} here="outpost" />
-            ))}
-          </Section>
-        )}
-        {avoid.length > 0 && (
-          <Section title="Avoid">
-            {avoid.map((i) => (
-              <RecCard key={i.rec.id} rec={i.rec} />
-            ))}
-          </Section>
-        )}
+        <OutpostTerminal />
       </GlassPanel>
     );
   }

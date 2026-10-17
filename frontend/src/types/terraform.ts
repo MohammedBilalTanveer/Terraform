@@ -87,7 +87,23 @@ export type DerivedTag = {
   cue_id: string | null;
 };
 
-export type CheckCard = Recommendation & {
+export type CheckPhase = "diagnose" | "pre_plant" | "post_sow";
+export type CheckWhere =
+  | "ground"
+  | "water_hole"
+  | "runoff_path"
+  | "vegetation"
+  | "neighbours"
+  | "supplies"
+  | "seeds"
+  | "trial_plot";
+
+// A check's `phase` (diagnose | pre_plant | post_sow) is NOT a task phase, so drop the task field before intersecting.
+export type CheckCard = Omit<Recommendation, "phase"> & {
+  /** v1.5: when the check is done (before the plan / before sowing / after sowing) */
+  phase?: CheckPhase | null;
+  /** v1.5: the kind of place it is done at (the game maps this to a location) */
+  where?: CheckWhere | null;
   purpose: string;
   weak_evidence: boolean;
   gate_relevant: boolean;
@@ -255,6 +271,8 @@ export type PlanResponse = {
   situation_summary: string;
   adaptations: { trigger_tag: string; label: string; effect: string; kb_ids: string[] }[];
   workflow: {
+    /** v1.5: every applicable diagnostic check, all phases */
+    checks?: CheckCard[];
     fix_protocol: StepMeta & {
       do_first: Recommendation[];
       do_next: Recommendation[];

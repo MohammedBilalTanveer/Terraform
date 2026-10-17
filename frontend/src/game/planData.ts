@@ -1,9 +1,10 @@
 // Maps API plan data onto world stations. This file only *routes* records returned by the backend
 // (by category / id / task id keywords); it never invents agricultural text.
-import type { AnalysisResponse, Evidence, PlanResponse, Recommendation, StepId, StepStatus } from "../types/terraform";
+import type { AnalysisResponse, CheckCard, Evidence, PlanResponse, Recommendation, StepId, StepStatus } from "../types/terraform";
+import { checkPhase, checkState, checkStation, collectChecks, sortChecks } from "./checks";
 import { WORKFLOW_STEPS } from "../types/terraform";
 import type { ActionKind, FarmView } from "./gameStore";
-import type { StationId } from "./worldConfig";
+import { stationById, type StationId } from "./worldConfig";
 
 export type Section =
   | "do_first"
@@ -17,7 +18,7 @@ export type Section =
   | "regeneration"
   | "gate";
 
-export type TaskGroup = "terraces" | "compost" | "water" | "plot" | "harvest" | "other";
+export type TaskGroup = "terraces" | "compost" | "water" | "plot" | "harvest" | "soil" | "other";
 
 export type PlanItem = {
   rec: Recommendation;
@@ -46,6 +47,7 @@ export const GROUP_STATION: Record<TaskGroup, StationId> = {
   water: "water",
   plot: "plot",
   harvest: "harvest",
+  soil: "soil",
   other: "outpost",
 };
 
@@ -59,7 +61,7 @@ function classify(r: Recommendation, section: Section): TaskGroup {
   if (r.phase === "readiness" && !/fizz|recheck/.test(k)) return "plot";
   if (section === "sowing") return "plot";
   if (section === "dry_spell") return "water";
-  if (/fizz|recheck/.test(k)) return "other";
+  if (/fizz|recheck/.test(k)) return "soil";
   if (/after_sow/.test(k)) return "plot";
   if (/water|runoff|overflow|pool|storage|tank|catch/.test(k)) return "water";
   if (/compost|manure|mulch|fertil|ash|shell|acid|litter|organic|lime/.test(k)) return "compost";
@@ -258,7 +260,7 @@ export function worldView(
 // ---------------------------------------------------------------------------------------------
 // QUEST: one linear order of work — prepare → readiness (tasks, then each gate's test) → choose crop →
 // plant → care → harvest. The beacon, TERRA and the quest list all follow the single "quest task".
-export type QuestKind = "task" | "test" | "crop" | "time" | "sow" | "care" | "harvest";
+export type QuestKind = "log" | "echo" | "check" | "plan" | "task" | "test" | "crop" | "time" | "sow" | "care" | "harvest" | "regen";
 export type QuestPhase = "prepare" | "readiness" | "crop" | "plant" | "care" | "harvest";
 
 export type QuestStep = {
@@ -275,6 +277,11 @@ export type QuestStep = {
   lock: LockReason | null;
   blockedText: string | null;
   optional: boolean;
+  /** v1.5 diagnostic check (kind "check") */
+  checkId?: string;
+  checkPhase?: "diagnose" | "pre_plant" | "post_sow";
+  /** recommended but never blocking: the player may skip it */
+  skippable?: boolean;
 };
 
 export type QuestCtx = {
@@ -284,13 +291,86 @@ export type QuestCtx = {
   crop: string | null;
   farm: FarmView;
   gateResults?: Record<string, "pass" | "fail">;
+  checkOutcomes?: { check_id: string; outcome_id: string }[];
+  unableChecks?: string[];
 };
 
 const PHASE_RANK: Record<TaskPhase, number> = { prepare: 0, readiness: 1, plant: 2 };
 
+const base = (o: Partial<QuestStep> & Pick<QuestStep, "id" | "kind" | "phase" | "station" | "label" | "done">): QuestStep => ({
+  blocked: false,
+  lock: null,
+  blockedText: null,
+  optional: false,
+  ...o,
+});
+
+function checkStep(c: CheckCard, ctx: QuestCtx, extra: Partial<QuestStep> = {}): QuestStep {
+  const st = checkState(c, ctx.checkOutcomes ?? [], ctx.unableChecks ?? []);
+  return base({
+    id: `check:${c.id}`,
+    kind: "check",
+    phase: "prepare",
+    station: checkStation(c),
+    label: c.title,
+    done: st.done,
+    checkId: c.id,
+    checkPhase: checkPhase(c),
+    skippable: true,
+    ...extra,
+  });
+}
+
+/** board → soil echo → no-lab diagnose checks (recommended, skippable) → generate the plan */
+function preSteps(ctx: QuestCtx): QuestStep[] {
+  const { analysis, plan, farm } = ctx;
+  const hasPlan = !!plan;
+  const out: QuestStep[] = [
+    base({ id: "log", kind: "log", phase: "prepare", station: "board", label: "Log what you observe", done: !!analysis }),
+    base({
+      id: "echo",
+      kind: "echo",
+      phase: "prepare",
+      station: "soil",
+      label: "Read TERRA's echo of what you said",
+      done: !!farm.echoSeen || hasPlan,
+      blocked: !analysis,
+      blockedText: analysis ? null : "Log your observations first",
+    }),
+  ];
+  const diag = sortChecks(collectChecks(analysis, plan).filter((c) => checkPhase(c) === "diagnose"));
+  for (const c of diag) {
+    const st = checkState(c, ctx.checkOutcomes ?? [], ctx.unableChecks ?? []);
+    const skipped = !!farm.skipChecks && !st.done;
+    out.push(
+      checkStep(c, ctx, {
+        done: st.done || skipped,
+        // once the plan exists an unfinished diagnose check is no longer part of the main quest
+        optional: hasPlan && !st.done && !skipped,
+        blocked: !analysis,
+        blockedText: analysis ? null : "Log your observations first",
+      }),
+    );
+  }
+  out.push(
+    base({
+      id: "plan",
+      kind: "plan",
+      phase: "prepare",
+      station: "soil",
+      label: "Generate your plan",
+      done: hasPlan,
+      blocked: !analysis,
+      blockedText: analysis ? null : "Log your observations first",
+    }),
+  );
+  return out;
+}
+
 export function buildQuest(ctx: QuestCtx): QuestStep[] {
   const { analysis, plan, completed, crop, farm } = ctx;
-  if (!plan) return [];
+  const pre = preSteps(ctx);
+  if (!plan) return pre;
   const items = collectPlanItems(plan);
   const gates = plan.workflow.next_action.readiness_gate ?? [];
   const view = worldView(analysis, plan, completed, crop, farm);
@@ -381,8 +461,18 @@ export function buildQuest(ctx: QuestCtx): QuestStep[] {
     optional: false,
   });
 
+  const planChecks = collectChecks(analysis, plan);
+  const preChecks = sortChecks(planChecks.filter((c) => checkPhase(c) === "pre_plant"));
+  const postChecks = sortChecks(planChecks.filter((c) => checkPhase(c) === "post_sow"));
+  preChecks.forEach((c) =>
+    steps.push(checkStep(c, ctx, { phase: "plant", blocked: !crop, blockedText: crop ? null : LOCK_TEXT.choose_crop })),
+  );
+
   const plantTasks = required.filter((i) => taskPhase(plan, i) === "plant");
   plantTasks.forEach((i) => steps.push(mk(i)));
+  postChecks.forEach((c) =>
+    steps.push(checkStep(c, ctx, { phase: "care", blocked: !view.sown, blockedText: view.sown ? null : "Sow the crop first" })),
+  );
   if (!plantTasks.some((i) => i.action === "sow" || /sow_seeds/.test(i.rec.task_id!))) {
     steps.push({
       id: "sow",
@@ -422,9 +512,23 @@ export function buildQuest(ctx: QuestCtx): QuestStep[] {
     blockedText: view.stage === "harvest_ready" || farm.harvested ? null : "Finish the care stages first",
     optional: false,
   });
+  const regenN = plan.workflow.harvest?.regeneration?.length ?? 0;
+  steps.push({
+    id: "regen",
+    kind: "regen",
+    phase: "harvest",
+    station: "harvest",
+    label: "Rebuild the soil for next season",
+    done: regenN === 0 ? !!farm.harvested : (farm.regenIdx ?? 0) >= regenN,
+    blocked: !farm.harvested,
+    lock: null,
+    blockedText: farm.harvested ? null : "Harvest first",
+    optional: false,
+  });
+  // optional diagnose checks left over (still doable at their locations)
   // optional tasks are doable at their stations but never forced by the quest
   all.filter((i) => isOptional(i) && !isDone(i.rec.task_id)).forEach((i) => steps.push(mk(i)));
-  return steps;
+  return [...pre, ...steps];
 }
 
 /** The single quest task: the pinned step if still doable, else the first open, unblocked, required step. */
@@ -437,6 +541,11 @@ export function questTask(steps: QuestStep[], pinnedId: string | null): QuestSte
 }
 
 export const QUEST_STEP_ID: Record<QuestKind, StepId> = {
+  log: "observation_log",
+  echo: "input_echo",
+  check: "missing_analysis",
+  plan: "missing_analysis",
+  regen: "harvest",
   task: "fix_protocol",
   test: "next_action",
   crop: "crop_suggestions",
@@ -467,10 +576,15 @@ export function guidance(args: {
   farm: FarmView;
   pinnedId?: string | null;
   gateResults?: Record<string, "pass" | "fail">;
+  checkOutcomes?: { check_id: string; outcome_id: string }[];
+  unableChecks?: string[];
 }): Guidance {
   const { backendOnline, analysis, plan, completed, selectedCropId, farm } = args;
+  const ctx: QuestCtx = { analysis, plan, completed, crop: selectedCropId, farm, gateResults: args.gateResults, checkOutcomes: args.checkOutcomes, unableChecks: args.unableChecks };
   if (!analysis) {
+    const quest0 = questTask(buildQuest(ctx), args.pinnedId ?? null);
     return {
+      quest: quest0,
       target: "board",
       step: "observation_log",
       lines: [
@@ -484,12 +598,14 @@ export function guidance(args: {
   }
   if (!plan) {
     const ma = analysis.missing_analysis;
+    const quest1 = questTask(buildQuest(ctx), args.pinnedId ?? null);
     return {
-      target: "soil",
-      step: "missing_analysis",
+      quest: quest1,
+      target: quest1?.station ?? "soil",
+      step: quest1 ? QUEST_STEP_ID[quest1.kind] : "missing_analysis",
       lines: [
         ma.archetype.statement,
-        `${ma.unknowns.length} unknown${ma.unknowns.length === 1 ? "" : "s"} · ${ma.checks.length} check${ma.checks.length === 1 ? "" : "s"} suggested. Meet me at the Soil Inspection Patch.`,
+        `${ma.unknowns.length} unknown${ma.unknowns.length === 1 ? "" : "s"} · ${ma.checks.length} check${ma.checks.length === 1 ? "" : "s"} suggested.${quest1 ? ` Next: ${quest1.label} — at ${stationById(quest1.station).name}.` : ""}`,
       ].filter(Boolean),
       evidence: ma.archetype.evidence,
       fromKb: true,
@@ -506,7 +622,7 @@ export function guidance(args: {
 
   // the beacon follows the QUEST TASK only (pinned, else first open unlocked in workflow order)
   void open;
-  const quest = questTask(buildQuest({ analysis, plan, completed, crop: selectedCropId, farm, gateResults: args.gateResults }), args.pinnedId ?? null);
+  const quest = questTask(buildQuest(ctx), args.pinnedId ?? null);
   if (quest) {
     target = quest.station;
     step = QUEST_STEP_ID[quest.kind];

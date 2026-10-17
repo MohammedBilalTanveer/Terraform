@@ -64,7 +64,9 @@
       "digging_deep_possible"
      ]
     }
-   ]
+   ],
+   "phase": "diagnose",
+   "where": "ground"
   },
   {
    "id": "check_watch_first_heavy_rain",
@@ -121,7 +123,9 @@
       "slope_flat"
      ]
     }
-   ]
+   ],
+   "phase": "diagnose",
+   "where": "runoff_path"
   },
   {
    "id": "check_ask_neighbours",
@@ -177,7 +181,9 @@
       "local_advice_other"
      ]
     }
-   ]
+   ],
+   "phase": "diagnose",
+   "where": "neighbours"
   },
   {
    "id": "check_baking_soda_fizz",
@@ -229,7 +235,163 @@
       "fizz_none"
      ]
     }
-   ]
+   ],
+   "phase": "diagnose",
+   "where": "ground"
+  },
+  {
+   "id": "check_water_hole_drainage",
+   "topic": "diagnostic_check",
+   "title": "Water hole drainage test",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture: dig a hand-deep water hole, fill it with water and see how fast it drains.",
+   "instructions": [
+    "Fixture step for Water hole drainage test."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Probe several spots."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "purpose": "Fixture purpose of Water hole drainage test.",
+   "weak_evidence": false,
+   "gate_relevant": true,
+   "resolves_unknowns": [],
+   "possible_outcomes": [
+    {
+     "outcome_id": "drains_fast",
+     "label": "Outcome drains_fast",
+     "interpretation": "Fixture: drains_fast.",
+     "implies_tags": [
+      "drains_fast"
+     ]
+    },
+    {
+     "outcome_id": "drains_slow",
+     "label": "Outcome drains_slow",
+     "interpretation": "Fixture: drains_slow.",
+     "implies_tags": [
+      "drains_slow"
+     ]
+    }
+   ],
+   "phase": "diagnose",
+   "where": "water_hole"
+  },
+  {
+   "id": "check_seed_sprout_test",
+   "topic": "diagnostic_check",
+   "title": "Seed sprout test",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture: sprout ten seeds on a damp cloth.",
+   "instructions": [
+    "Fixture step for Seed sprout test."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Probe several spots."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "purpose": "Fixture purpose of Seed sprout test.",
+   "weak_evidence": false,
+   "gate_relevant": false,
+   "resolves_unknowns": [],
+   "possible_outcomes": [
+    {
+     "outcome_id": "most_sprout",
+     "label": "Outcome most_sprout",
+     "interpretation": "Fixture: most_sprout.",
+     "implies_tags": []
+    },
+    {
+     "outcome_id": "few_sprout",
+     "label": "Outcome few_sprout",
+     "interpretation": "Fixture: few_sprout.",
+     "implies_tags": []
+    }
+   ],
+   "phase": "pre_plant",
+   "where": "seeds"
+  },
+  {
+   "id": "check_watch_trial_plants",
+   "topic": "diagnostic_check",
+   "title": "Watch the trial plants",
+   "scenario_tags": [
+    "scenario_05_lateritic_hardpan"
+   ],
+   "applies_when": {
+    "any_tags": [],
+    "all_tags": [],
+    "none_tags": []
+   },
+   "summary": "Fixture: watch the trial plants for wilting.",
+   "instructions": [
+    "Fixture step for Watch the trial plants."
+   ],
+   "everyday_amounts": [
+    "a handful"
+   ],
+   "limitations": [
+    "Fixture limitation for Probe several spots."
+   ],
+   "safety_notes": [],
+   "evidence_level": "general_guidance",
+   "source_ids": [
+    "src_fixture_soils"
+   ],
+   "created_by": "TERRAFORM team - test fixture",
+   "version": "1.0.0",
+   "purpose": "Fixture purpose of Watch the trial plants.",
+   "weak_evidence": false,
+   "gate_relevant": false,
+   "resolves_unknowns": [],
+   "possible_outcomes": [
+    {
+     "outcome_id": "healthy",
+     "label": "Outcome healthy",
+     "interpretation": "Fixture: healthy.",
+     "implies_tags": []
+    },
+    {
+     "outcome_id": "wilting",
+     "label": "Outcome wilting",
+     "interpretation": "Fixture: wilting.",
+     "implies_tags": []
+    }
+   ],
+   "phase": "post_sow",
+   "where": "trial_plot"
   }
  ]
 }

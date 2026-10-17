@@ -60,7 +60,7 @@ from typing import Dict, List, Optional, Set, Tuple
 from .cards import strs, text, to_recommendation
 from .evidence import collect_all, confidence, make_evidence, merge_evidence
 from .kb_loader import KnowledgeBase
-from .reasoning import (LOCAL_ADVICE_HANDLING, archetype, local_advice_claim, local_advice_records,
+from .reasoning import (all_check_cards, LOCAL_ADVICE_HANDLING, archetype, local_advice_claim, local_advice_records,
                         open_unknowns, step)
 from .retrieval import applies, blocking_tags, for_crop, triggering_tags
 from .tagging import TagResult, observed_tags
@@ -235,7 +235,7 @@ def lock_state(phase: Optional[str], readiness: str, crop_selected: bool):
 def annotate_tasks(kb: KnowledgeBase, node, readiness: str, crop_selected: bool) -> None:
     """Add phase / locked / locked_reason to every Recommendation (dict with task_id + why_this_matches)."""
     if isinstance(node, dict):
-        if "task_id" in node and "why_this_matches" in node:
+        if "task_id" in node and "why_this_matches" in node and "possible_outcomes" not in node:
             ph = task_phase(kb, node.get("task_id"))
             locked, reason = lock_state(ph, readiness, crop_selected)
             node.update({"phase": ph, "locked": locked, "locked_reason": reason})
@@ -796,7 +796,9 @@ def build_plan(kb: KnowledgeBase, scenario: dict, tr: TagResult, obs: dict, sele
         "regeneration": regen,
     })
 
-    workflow = {"fix_protocol": fix_step, "next_action": na_step, "crop_suggestions": cs_step,
+    confirmed = {c.get("check_id"): c.get("outcome_id") for c in obs.get("user_confirmed_checks") or []
+                 if c.get("check_id")}
+    workflow = {"checks": all_check_cards(kb, tr, confirmed), "fix_protocol": fix_step, "next_action": na_step, "crop_suggestions": cs_step,
                 "timeframe": tf_step, "planting_method": pm_step, "ongoing_care": oc_step, "harvest": hv_step}
 
     annotate_tasks(kb, workflow, readiness, bool(sel_valid))

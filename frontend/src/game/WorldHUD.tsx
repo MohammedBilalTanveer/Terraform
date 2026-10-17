@@ -168,7 +168,7 @@ function QuestPanel({ g, target }: { g: Guidance; target: StationId | null }) {
         ))}
         {g.fromKb && <Chips evidence={g.evidence} />}
 
-        {plan && quest && (
+        {quest && (
           <div className="space-y-1.5">
             <div className="flex items-center justify-between text-[10.5px] text-ivory/55">
               <span>QUEST</span>

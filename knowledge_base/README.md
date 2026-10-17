@@ -44,6 +44,12 @@ Every file uses the envelope `{ "collection": <file stem>, "version": "1.2.0", "
 - **Irrigation.** `planting_methods.json` has five `method_type: "irrigation"` records: buried clay pot, bottle drip, mulched basin, watering at the base at cool times, and matching the planted area to stored water. `plant_direct_sowing` carries `planting_depth`, `spacing`, `seeds_per_spot` and `thinning`, all in finger-joints, hand-spans and paces.
 - **Regeneration.** Now includes `regen_cover_crop_living_mulch` and `regen_preserve_beds_windbreaks`.
 
+## v1.5: checks as real steps
+
+- Every record in `diagnostic_checks.json` has a required `phase` (`diagnose`, `pre_plant` or `post_sow`) and a required `where` (`ground`, `water_hole`, `runoff_path`, `vegetation`, `neighbours`, `supplies`, `seeds` or `trial_plot`). There is at least one check for every `where` value, and the validator enforces it.
+- The baking-soda (sodium bicarbonate) fizz test spells out how to do it: wet soil in a cup or lid, a pinch to a small spoonful of baking soda, and watch for about a minute. Its outcomes are `fizz_seen` and `fizz_none`. It is a weak clue, not a pH reading, and no fizz proves nothing. The optional post-treatment repeat (`treat_fizz_recheck_optional`, `task_recheck_fizz_optional`, `gate_fizz_recheck_optional`) says that a weaker fizz is a hopeful sign, not proof.
+- The depth check is worded as "dig as deep as you can" in hand-depths. Two checks were added: `check_leaf_colour_hunger` (a no-lab clue about nutrient shortage, taken from seedlings in the trial plot) and `check_rain_tally` (a running count of soaking rains, because exact rain dates are unknown). `plant_rainwater_harvest` now covers storing rainwater and mulching through dry spells.
+
 ## Provenance: teammate notes (v1.2)
 
 - A teammate wrote a separate, uncited Scenario 5 knowledge base: crop guides, troubleshooting, Q&A, a calendar counted from the first reliable rain, hand tests, compost, storage and sourcing tips. We merged the useful parts and **rewrote them in our own words** to fit this schema and our safety rules.

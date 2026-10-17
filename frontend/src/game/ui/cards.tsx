@@ -4,6 +4,9 @@ import { useState } from "react";
 import { CheckCircle2, Circle, Compass, Lock, ShieldAlert } from "lucide-react";
 import DialogueBox, { type Choice } from "../../intro/Dialogue";
 import { useTerraform } from "../../store/terraformStore";
+import type { CheckCard } from "../../types/terraform";
+import { checkPhase, checkState } from "../checks";
+import { PLACE_INFO } from "../places";
 import { useGame, type LastDone } from "../gameStore";
 import type { QuestStep } from "../planData";
 import { useQuest } from "../useQuest";
@@ -33,8 +36,8 @@ export function runTask(step: QuestStep, station: StationId) {
   });
 }
 
-export function announceDone(label: string, station: StationId, phase: string, id: string) {
-  useGame.getState().setLastDone({ id, label, station, phase, sessionKey: useTerraform.getState().sessionId });
+export function announceDone(label: string, station: StationId, phase: string, id: string, note?: string) {
+  useGame.getState().setLastDone({ id, label, station, phase, sessionKey: useTerraform.getState().sessionId, note });
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -62,7 +65,7 @@ export function SuggestedNext({ current, here }: { current?: QuestStep | null; h
 }
 
 // ---------------------------------------------------------------------------------------------
-export function StationChecklist({ steps, currentId, onPick, title, defaultOpen = false }: { steps: QuestStep[]; currentId?: string | null; onPick?: (id: string) => void; title: string; defaultOpen?: boolean }) {
+export function StationChecklist({ steps, currentId, onPick, title, defaultOpen = false, pickDone = false }: { steps: QuestStep[]; currentId?: string | null; onPick?: (id: string) => void; title: string; defaultOpen?: boolean; pickDone?: boolean }) {
   if (steps.length === 0) return null;
   const done = steps.filter((s) => s.done).length;
   return (
@@ -75,7 +78,7 @@ export function StationChecklist({ steps, currentId, onPick, title, defaultOpen 
           <li key={s.id}>
             <button
               type="button"
-              disabled={s.done || s.blocked || !onPick}
+              disabled={(s.done && !pickDone) || s.blocked || !onPick}
               onClick={() => onPick?.(s.id)}
               className={cx("flex min-h-9 w-full items-center gap-2 rounded-md px-1 text-left text-[12px]", s.id === currentId && "bg-cyan-400/10", !s.done && !s.blocked && onPick && "hover:bg-white/5")}
             >
@@ -318,7 +321,9 @@ export function CompletionFlow({ station, onStay }: { station: StationId; onStay
       { label: "Stay here", value: "stay" },
     ];
   }
-  const text = line === 0 ? `✔ Done: ${lastDone.label.replace(/\.$/, "")}.` : second;
+  const lines = [`✔ Done: ${lastDone.label.replace(/\.$/, "")}.`, ...(lastDone.note ? [lastDone.note] : []), second];
+  const last = lines.length - 1;
+  const text = lines[Math.min(line, last)];
   const finish = (v: string) => {
     const g = useGame.getState();
     if (v === "go" && next) {
@@ -335,11 +340,184 @@ export function CompletionFlow({ station, onStay }: { station: StationId; onStay
     <DialogueBox
       speaker="terra"
       text={text}
-      choices={line === 1 ? choices : undefined}
-      onNext={() => setLine(1)}
+      choices={line >= last ? choices : undefined}
+      onNext={() => setLine((n) => Math.min(n + 1, last))}
       onChoice={finish}
       reduceMotion={reduceMotion}
       autoAdvanceMs={null}
     />
+  );
+}
+
+// ---------------------------------------------------------------------------------------------
+const CHECK_PHASE_TO_QUEST = { diagnose: "prepare", pre_plant: "plant", post_sow: "care" } as const;
+
+/** A no-lab diagnostic check as a card: purpose, numbered KB steps, safety, outcome buttons, "couldn't do this". */
+export function CheckCardView({ check, station, offerSkipAll = false }: { check: CheckCard; station: StationId; offerSkipAll?: boolean }) {
+  const outcomes = useTerraform((st) => st.checkOutcomes);
+  const unable = useTerraform((st) => st.unableChecks);
+  const setCheckOutcome = useTerraform((st) => st.setCheckOutcome);
+  const setCheckUnable = useTerraform((st) => st.setCheckUnable);
+  const sessionId = useTerraform((st) => st.sessionId);
+  const loading = useTerraform((st) => st.loading);
+  const updateFarm = useGame((st) => st.updateFarm);
+  const runAction = useGame((st) => st.runAction);
+  const busy = useGame((st) => !!st.action);
+  const state = checkState(check, outcomes, unable);
+  const qphase = CHECK_PHASE_TO_QUEST[checkPhase(check)];
+  const stepId = `check:${check.id}`;
+
+  const record = (outcomeId: string) =>
+    runAction({ kind: "inspect", label: `Recording: ${check.title}`, station, fast: true }, async () => {
+      await setCheckOutcome(check.id, outcomeId);
+      const o = check.possible_outcomes.find((x) => x.outcome_id === outcomeId);
+      announceDone(`${check.title}${o ? ` — ${o.label}` : ""}`, station, qphase, stepId, o?.interpretation || undefined);
+      useGame.getState().setOverlay(station);
+    });
+  const cant = () =>
+    runAction({ kind: "inspect", label: "Noting that you could not do this", station, fast: true }, async () => {
+      await setCheckUnable(check.id, true);
+      announceDone(`Skipped: ${check.title}`, station, qphase, stepId, "No problem — checks are recommended, never required. TERRA treats this as unknown.");
+      useGame.getState().setOverlay(station);
+    });
+  const skipAll = () => {
+    updateFarm(sessionId, { skipChecks: true });
+    announceDone("Skipped the remaining checks", station, qphase, "skip-checks", "They stay available at their locations whenever you want to do them.");
+  };
+
+  return (
+    <div className="space-y-3.5">
+      <div>
+        <div className="mb-1 flex flex-wrap items-center gap-1.5">
+          <Pill tone="cyan">No-lab check</Pill>
+          {check.weak_evidence && <Pill tone="amber">Rough clue — not a lab/pH reading</Pill>}
+          {state.unable && <Pill tone="muted">skipped</Pill>}
+        </div>
+        <h3 className="font-heading text-[19px] font-semibold leading-snug">{check.title}</h3>
+      </div>
+      {check.purpose && (
+        <section>
+          <div className="mb-1 font-display text-[10px] uppercase tracking-[0.22em] text-amber-200/90">Why it matters</div>
+          <p className="text-[13.5px] leading-relaxed text-ivory/90">{check.purpose}</p>
+        </section>
+      )}
+      {check.actions?.length > 0 && (
+        <section>
+          <div className="mb-1 font-display text-[10px] uppercase tracking-[0.22em] text-amber-200/90">How</div>
+          <ol className="space-y-1.5 text-[13.5px] leading-relaxed">
+            {check.actions.map((a, i) => (
+              <li key={i} className="flex gap-2.5">
+                <span className="mt-[2px] grid h-5 w-5 shrink-0 place-items-center rounded-full bg-cyan-400/20 font-display text-[10px] text-cyan-100">{i + 1}</span>
+                <span className="text-ivory/90">{a}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+      {check.everyday_amounts?.length > 0 && (
+        <section>
+          <div className="mb-1 font-display text-[10px] uppercase tracking-[0.22em] text-amber-200/90">Everyday amounts</div>
+          <Bullets items={check.everyday_amounts} />
+        </section>
+      )}
+      {check.safety_notes?.length > 0 && (
+        <section>
+          <div className="mb-1 font-display text-[10px] uppercase tracking-[0.22em] text-rose-200/90">Safety</div>
+          <Bullets items={check.safety_notes} tone="safety" />
+        </section>
+      )}
+      {check.limitations?.length > 0 && (
+        <details className="rounded-lg border border-white/10 bg-white/[0.02] px-2.5 py-1">
+          <summary className="min-h-9 cursor-pointer text-[12px] text-ivory/70">Limitations</summary>
+          <div className="pb-1.5">
+            <Bullets items={check.limitations} tone="warn" />
+          </div>
+        </details>
+      )}
+      <Chips evidence={check.evidence} />
+      <section>
+        <div className="mb-1.5 font-display text-[10px] uppercase tracking-[0.22em] text-cyan-200/90">What did you find?</div>
+        <div className="flex flex-col gap-2">
+          {check.possible_outcomes.map((o) => (
+            <button
+              key={o.outcome_id}
+              type="button"
+              disabled={busy || !!loading}
+              onClick={() => record(o.outcome_id)}
+              className={cx(
+                "tf-keep min-h-12 rounded-xl border px-3 py-2.5 text-left text-[14px] font-medium transition disabled:opacity-50",
+                state.outcome === o.outcome_id ? "border-cyan-300/70 bg-cyan-400/20 text-cyan-50" : "border-white/15 bg-white/[0.04] text-ivory hover:border-cyan-300/50",
+              )}
+            >
+              {o.label}
+              {state.outcome === o.outcome_id && o.interpretation && <span className="mt-0.5 block text-[12.5px] font-normal text-cyan-100/85">{o.interpretation}</span>}
+            </button>
+          ))}
+          <button
+            type="button"
+            disabled={busy || !!loading || state.unable}
+            onClick={cant}
+            className="tf-keep min-h-12 rounded-xl border border-dashed border-white/25 px-3 py-2.5 text-left text-[13.5px] text-ivory/75 hover:border-white/45 disabled:opacity-50"
+          >
+            I couldn't do this
+          </button>
+        </div>
+      </section>
+      {offerSkipAll && (
+        <button type="button" onClick={skipAll} className="min-h-10 text-[12px] text-cyan-200 underline hover:text-cyan-100">
+          Skip the remaining checks
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------------------------
+/** "Why you're here" line at the top of every location's panel. */
+export function WhyLine({ station }: { station: StationId }) {
+  const info = PLACE_INFO[station];
+  return (
+    <div className="rounded-xl border border-amber-300/25 bg-amber-400/[0.06] px-3 py-2">
+      <div className="font-display text-[10px] uppercase tracking-[0.22em] text-amber-200/90">Why you're here</div>
+      <p className="mt-0.5 text-[12.5px] leading-snug text-ivory/85">{info.why}</p>
+    </div>
+  );
+}
+
+/** A location with nothing to do right now: what it is for, what happens next, and a way to the next step. */
+export function EmptyPlace({ station, title, body }: { station: StationId; title?: string; body?: string }) {
+  const { quest } = useQuest();
+  const info = PLACE_INFO[station];
+  const elsewhere = quest && quest.station !== station;
+  return (
+    <Card className="space-y-3">
+      <div className="font-heading text-[16px] font-semibold">{title ?? "Nothing to do here right now"}</div>
+      {body && <p className="text-[13px] leading-relaxed text-ivory/80">{body}</p>}
+      <p className="text-[12.5px] leading-relaxed text-ivory/65">
+        <span className="text-ivory/85">What this place is for:</span> {info.short}. You will use it later in the plan.
+      </p>
+      {quest ? (
+        <div className="space-y-2">
+          <p className="text-[12.5px] text-cyan-100/90">
+            Next: <span className="font-medium">{quest.label}</span>
+            {elsewhere && <span className="text-ivory/55"> — at {stationById(quest.station).name}</span>}
+          </p>
+          {elsewhere && (
+            <button
+              type="button"
+              onClick={() => {
+                pinStep(quest);
+                useGame.getState().setOverlay(null);
+              }}
+              className="tf-keep min-h-11 rounded-xl bg-cyan-400/90 px-4 text-[14px] font-semibold text-[#06101f] hover:bg-cyan-300"
+            >
+              Guide me there
+            </button>
+          )}
+        </div>
+      ) : (
+        <p className="text-[12.5px] text-ivory/65">Nothing else is waiting in the plan.</p>
+      )}
+    </Card>
   );
 }

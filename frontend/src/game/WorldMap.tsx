@@ -1,260 +1,613 @@
-// Full world map: live player position, the next quest destination, every location. Tap / click a location
-// (on the map or in the list) to teleport there. Presentation only — no agricultural content.
-import { useEffect, useState, type KeyboardEvent } from "react";
-import { Navigation, X } from "lucide-react";
+// World map: a fitted, zoomable/pannable tile of the valley with real shaded relief, trails, the runoff channel,
+// dark-glass lucide pins with state badges, collision-free name chips, a live player beacon + route to the next
+// quest location, a hover/tap card, and a grouped location list. Tap / click a location to teleport there.
+// Presentation only — no agricultural content (place copy comes from places.ts, status from the quest).
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent as RKeyboardEvent, type PointerEvent as RPointerEvent } from "react";
+import { createPortal } from "react-dom";
+import { Info, Maximize2, Minus, Plus, X } from "lucide-react";
+import { useTerraform } from "../store/terraformStore";
 import { playerState, useGame } from "./gameStore";
-import { distanceTo, teleportTo } from "./teleport";
-import { CHANNEL, POND, STATIONS, WORLD, type StationId } from "./worldConfig";
+import { teleportTo } from "./teleport";
+import { STATIONS, type StationId } from "./worldConfig";
+import { useQuest } from "./useQuest";
 import { cx } from "./ui/kit";
+import { Compass, Corners, Legend, ScaleBar } from "./map/Chrome";
+import { PlaceCard } from "./map/Card";
+import { LocationList, type Filter, type ListRow } from "./map/List";
+import { EXTENT, clampView, fitScale, fitView, placeLabels, stationBounds, textWidth, type LabelReq, type View } from "./map/mapGeo";
+import { GridTicks, OverlayDefs, PinLayer, PlayerLayer, RouteChip, type PinModel } from "./map/Pins";
+import { ORDER, SHORT_NAME, fullName } from "./map/pinIcons";
+import { stationStatuses } from "./map/status";
+import { TerrainLayer } from "./map/TerrainLayer";
+import { bakeTerrain, bakedTerrainUrl, prebakeTerrainSoon } from "./map/terrainBake";
 
-const S = 600; // svg viewBox size
-const R = WORLD.radius + 8;
-const K = S / (2 * R); // world units → svg units
-const toXY = (x: number, z: number) => [(x / R * 0.5 + 0.5) * S, (z / R * 0.5 + 0.5) * S] as const;
+// warm the terrain bitmap in idle time so the map opens instantly
+prebakeTerrainSoon();
 
-const ICON: Record<StationId, string> = {
-  camp: "⛺",
-  board: "📋",
-  soil: "🔍",
-  plot: "🌱",
-  compost: "♻️",
-  water: "💧",
-  terraces: "⛰️",
-  gully: "🏜️",
-  outpost: "🏛️",
-  harvest: "🌾",
-  grove: "🌳",
-  waterhole: "💦",
-};
-
-/** Teleport button list order: places you work at first, scenery last. */
-const ORDER: StationId[] = ["camp", "board", "soil", "compost", "water", "plot", "terraces", "gully", "outpost", "harvest", "grove", "waterhole"];
+const BOUNDS = stationBounds();
 const SORTED = ORDER.map((id) => STATIONS.find((s) => s.id === id)!).filter(Boolean);
+const DRAG_PX = 7;
 
-export default function WorldMap({ onClose, target }: { onClose: () => void; target: StationId | null }) {
+type CardState = { id: StationId; via: "hover" | "focus" | "touch" } | null;
+
+export default function WorldMap(props: { onClose: () => void; target: StationId | null }) {
+  // Rendered into the game root so it always sits above the loading pill (a sibling of the overlay layer).
+  const host = useMemo(() => (typeof document === "undefined" ? null : document.querySelector<HTMLElement>(".tf-game")), []);
+  const dialog = <MapDialog {...props} />;
+  return host ? createPortal(dialog, host) : dialog;
+}
+
+function MapDialog({ onClose, target }: { onClose: () => void; target: StationId | null }) {
   const area = useGame((s) => s.area);
-  const [pos, setPos] = useState({ x: playerState.x, z: playerState.z, rot: playerState.rot });
-  const [hover, setHover] = useState<StationId | null>(null);
+  const reduce = useTerraform((s) => s.reduceMotion);
+  const { steps, quest } = useQuest();
+  const statuses = useMemo(() => stationStatuses(steps), [steps]);
+  const nextLabel = quest?.label ?? null;
 
-  // live position (timer, not rAF, so it also updates in throttled tabs)
+  // ---- live player position (timer, not rAF) ----
+  const [pos, setPos] = useState(() => ({ x: playerState.x, z: playerState.z, rot: playerState.rot }));
   useEffect(() => {
-    const t = window.setInterval(() => setPos({ x: playerState.x, z: playerState.z, rot: playerState.rot }), 200);
+    const t = window.setInterval(() => {
+      setPos((p) => (Math.abs(p.x - playerState.x) > 0.02 || Math.abs(p.z - playerState.z) > 0.02 || Math.abs(p.rot - playerState.rot) > 0.01 ? { x: playerState.x, z: playerState.z, rot: playerState.rot } : p));
+    }, 200);
     return () => window.clearInterval(t);
   }, []);
 
-  const [px, py] = toXY(pos.x, pos.z);
-  const channel = CHANNEL.map(([x, z]) => toXY(x, z).join(",")).join(" ");
-  const [pondX, pondY] = toXY(POND.x, POND.z);
-  const worldR = WORLD.radius * K;
-  const grid: number[] = [];
-  for (let g = -60; g <= 60; g += 20) grid.push(g);
+  // ---- baked terrain bitmap ----
+  const [baked, setBaked] = useState<string | null>(bakedTerrainUrl);
+  useEffect(() => {
+    if (baked) return;
+    let live = true;
+    void bakeTerrain().then((u) => live && setBaked(u));
+    return () => {
+      live = false;
+    };
+  }, [baked]);
 
-  const go = (id: StationId) => teleportTo(id);
-  const onKey = (id: StationId) => (e: KeyboardEvent) => {
-    if (e.key === "Enter" || e.key === " ") {
+  // ---- viewport size + view (zoom/pan) ----
+  const vpRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ w: 0, h: 0 });
+  useLayoutEffect(() => {
+    const el = vpRef.current;
+    if (!el) return;
+    const read = () => {
+      const w = Math.round(el.clientWidth);
+      const h = Math.round(el.clientHeight);
+      setSize((o) => (o.w === w && o.h === h ? o : { w, h }));
+    };
+    read();
+    const ro = new ResizeObserver(read);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const { w: W, h: Hh } = size;
+  const fit = W ? fitScale(BOUNDS, W, Hh) : 1;
+  const minS = Math.max(fit * 0.55, Math.max(W, Hh) / (2 * EXTENT));
+  const maxS = fit * 3.2;
+  const lim = useRef({ W, Hh, minS, maxS });
+  lim.current = { W, Hh, minS, maxS };
+
+  const [view, setView] = useState<View | null>(null);
+  const viewRef = useRef<View | null>(null);
+  const touched = useRef(false);
+  const apply = useCallback((v: View) => {
+    const l = lim.current;
+    const c = clampView(v, l.W, l.Hh, l.minS, l.maxS);
+    viewRef.current = c;
+    setView(c);
+  }, []);
+  useEffect(() => {
+    if (!W) return;
+    if (!viewRef.current || !touched.current) apply(fitView(BOUNDS, W, Hh));
+    else apply(viewRef.current);
+  }, [W, Hh, apply]);
+
+  const v: View | null = view ?? (W ? fitView(BOUNDS, W, Hh) : null);
+
+  const anim = useRef(0);
+  const animT = useRef(0);
+  const animateTo = useCallback(
+    (to: View) => {
+      window.cancelAnimationFrame(anim.current);
+      window.clearTimeout(animT.current);
+      const from = viewRef.current;
+      if (!from || reduce) return apply(to);
+      const t0 = performance.now();
+      const dur = 260;
+      const step = (t: number) => {
+        const k = Math.min(1, (t - t0) / dur);
+        const e = 1 - Math.pow(1 - k, 3);
+        apply({ cx: from.cx + (to.cx - from.cx) * e, cz: from.cz + (to.cz - from.cz) * e, s: from.s * Math.pow(to.s / from.s, e) });
+        if (k < 1) anim.current = window.requestAnimationFrame(step);
+      };
+      anim.current = window.requestAnimationFrame(step);
+      animT.current = window.setTimeout(() => apply(to), dur + 90); // throttled-tab safety net
+    },
+    [apply, reduce],
+  );
+  useEffect(
+    () => () => {
+      window.cancelAnimationFrame(anim.current);
+      window.clearTimeout(animT.current);
+    },
+    [],
+  );
+
+  const stopAnim = () => {
+    window.cancelAnimationFrame(anim.current);
+    window.clearTimeout(animT.current);
+  };
+  const zoomAt = useCallback(
+    (mx: number, my: number, factor: number, smooth = false) => {
+      const cur = viewRef.current;
+      if (!cur) return;
+      const l = lim.current;
+      const s = Math.max(l.minS, Math.min(l.maxS, cur.s * factor));
+      const wx = cur.cx + (mx - l.W / 2) / cur.s;
+      const wz = cur.cz + (my - l.Hh / 2) / cur.s;
+      const next = { s, cx: wx - (mx - l.W / 2) / s, cz: wz - (my - l.Hh / 2) / s };
+      touched.current = true;
+      if (smooth) animateTo(clampView(next, l.W, l.Hh, l.minS, l.maxS));
+      else {
+        stopAnim();
+        apply(next);
+      }
+    },
+    [apply, animateTo],
+  );
+  const zoomCentre = (f: number) => zoomAt(lim.current.W / 2, lim.current.Hh / 2, f, true);
+  const doFit = () => {
+    touched.current = false;
+    animateTo(fitView(BOUNDS, lim.current.W, lim.current.Hh));
+  };
+
+  // wheel zoom needs a non-passive listener
+  useEffect(() => {
+    const el = vpRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      go(id);
+      const r = el.getBoundingClientRect();
+      const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
+      zoomAt(e.clientX - r.left, e.clientY - r.top, Math.exp(-dy * (e.ctrlKey ? 0.01 : 0.0017)));
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [zoomAt]);
+
+  // ---- pointer gestures: drag-pan (with threshold), pinch-zoom, tap on empty map clears the card ----
+  const ptrs = useRef(new Map<number, { x: number; y: number }>());
+  const gest = useRef<{ mode: "pending" | "pan" | "pinch"; sx: number; sy: number; v0: View; d0: number; mx0: number; my0: number; moved: boolean }>({
+    mode: "pending",
+    sx: 0,
+    sy: 0,
+    v0: { cx: 0, cz: 0, s: 1 },
+    d0: 1,
+    mx0: 0,
+    my0: 0,
+    moved: false,
+  });
+  const dragged = useRef(false);
+  const lastPtr = useRef<string>("mouse");
+  const rel = (e: { clientX: number; clientY: number }) => {
+    const r = vpRef.current!.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  };
+  const beginPinch = () => {
+    const pts = [...ptrs.current.values()];
+    const g = gest.current;
+    g.mode = "pinch";
+    g.v0 = viewRef.current ?? g.v0;
+    g.d0 = Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y));
+    g.mx0 = (pts[0].x + pts[1].x) / 2;
+    g.my0 = (pts[0].y + pts[1].y) / 2;
+    g.moved = true;
+    dragged.current = true;
+  };
+  const onPointerDown = (e: RPointerEvent<HTMLDivElement>) => {
+    lastPtr.current = e.pointerType || "mouse";
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    stopAnim();
+    const p = rel(e);
+    ptrs.current.set(e.pointerId, p);
+    if (ptrs.current.size === 1) {
+      dragged.current = false;
+      gest.current = { mode: "pending", sx: p.x, sy: p.y, v0: viewRef.current ?? { cx: 0, cz: 0, s: 1 }, d0: 1, mx0: 0, my0: 0, moved: false };
+    } else if (ptrs.current.size === 2) {
+      beginPinch();
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch {
+        /* ignore */
+      }
+    }
+  };
+  const onPointerMove = (e: RPointerEvent<HTMLDivElement>) => {
+    if (!ptrs.current.has(e.pointerId)) return;
+    const p = rel(e);
+    ptrs.current.set(e.pointerId, p);
+    const g = gest.current;
+    const l = lim.current;
+    if (g.mode === "pinch" && ptrs.current.size >= 2) {
+      const pts = [...ptrs.current.values()];
+      const d = Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y));
+      const mx = (pts[0].x + pts[1].x) / 2;
+      const my = (pts[0].y + pts[1].y) / 2;
+      const s = Math.max(l.minS, Math.min(l.maxS, g.v0.s * (d / g.d0)));
+      const wx = g.v0.cx + (g.mx0 - l.W / 2) / g.v0.s;
+      const wz = g.v0.cz + (g.my0 - l.Hh / 2) / g.v0.s;
+      touched.current = true;
+      apply({ s, cx: wx - (mx - l.W / 2) / s, cz: wz - (my - l.Hh / 2) / s });
+      return;
+    }
+    if (ptrs.current.size !== 1) return;
+    const dx = p.x - g.sx;
+    const dy = p.y - g.sy;
+    if (g.mode === "pending" && Math.hypot(dx, dy) > (e.pointerType === "touch" ? DRAG_PX + 3 : DRAG_PX)) {
+      g.mode = "pan";
+      g.moved = true;
+      dragged.current = true;
+      setCard((c) => (c && c.via === "touch" ? null : c));
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch {
+        /* ignore */
+      }
+    }
+    if (g.mode === "pan") {
+      touched.current = true;
+      apply({ s: g.v0.s, cx: g.v0.cx - dx / g.v0.s, cz: g.v0.cz - dy / g.v0.s });
+    }
+  };
+  const onPointerUp = (e: RPointerEvent<HTMLDivElement>) => {
+    if (!ptrs.current.has(e.pointerId)) return;
+    ptrs.current.delete(e.pointerId);
+    const g = gest.current;
+    if (ptrs.current.size === 1 && g.mode === "pinch") {
+      // continue as a pan with the remaining finger
+      const [rest] = [...ptrs.current.values()];
+      g.mode = "pan";
+      g.sx = rest.x;
+      g.sy = rest.y;
+      g.v0 = viewRef.current ?? g.v0;
+    }
+    if (ptrs.current.size === 0) {
+      if (!g.moved && e.type === "pointerup") {
+        // a tap on empty map: dismiss a tap-opened card
+        const onPin = (e.target as Element | null)?.closest?.(".tf-wm-pin");
+        if (!onPin) setCard((c) => (c && c.via === "touch" ? null : c));
+      }
+      g.mode = "pending";
+      window.setTimeout(() => {
+        dragged.current = false;
+      }, 0);
     }
   };
 
+  // ---- hover / focus / tap state ----
+  const [hot, setHot] = useState<StationId | null>(null);
+  const [card, setCard] = useState<CardState>(null);
+  const cardRef = useRef<CardState>(null);
+  cardRef.current = card;
+  const hideT = useRef(0);
+  const cancelHide = () => window.clearTimeout(hideT.current);
+  const scheduleHide = () => {
+    cancelHide();
+    hideT.current = window.setTimeout(() => {
+      setCard((c) => (c && c.via === "touch" ? c : null));
+      setHot(null);
+    }, 170);
+  };
+  useEffect(() => () => window.clearTimeout(hideT.current), []);
+  const go = useCallback((id: StationId) => teleportTo(id), []);
+  const handlers = useMemo(
+    () => ({
+      onClick: (id: StationId) => {
+        if (dragged.current) return;
+        if (lastPtr.current === "touch") {
+          const c = cardRef.current;
+          if (c && c.id === id && c.via === "touch") go(id);
+          else {
+            setCard({ id, via: "touch" });
+            setHot(id);
+          }
+        } else go(id);
+      },
+      onKey: (id: StationId, e: RKeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          go(id);
+        }
+      },
+      onEnter: (id: StationId, e: RPointerEvent) => {
+        if (e.pointerType === "touch") return;
+        cancelHide();
+        setCard((c) => (c && c.via === "touch" && c.id !== id ? c : { id, via: "hover" }));
+        setHot(id);
+      },
+      onLeave: (_id: StationId, e: RPointerEvent) => {
+        if (e.pointerType === "touch") return;
+        scheduleHide();
+      },
+      onFocus: (id: StationId) => {
+        cancelHide();
+        setCard({ id, via: "focus" });
+        setHot(id);
+      },
+      onBlur: () => scheduleHide(),
+    }),
+    [go],
+  );
+
+  const player = v ? { px: (pos.x - v.cx) * v.s + W / 2, py: (pos.z - v.cz) * v.s + Hh / 2 } : null;
+  // pin geometry (head radius, ground point and head centre per station) — independent of labels
+  const geo = useMemo(() => {
+    if (!v || !W) return null;
+    const R = Math.max(13, Math.min(20, Math.round(v.s * 3.6)));
+    const stem = R + 8;
+    const base = SORTED.map((s) => {
+      const gx = (s.pos[0] - v.cx) * v.s + W / 2;
+      const gy = (s.pos[1] - v.cz) * v.s + Hh / 2;
+      return { s, gx, gy, hx: gx, hy: gy - stem };
+    });
+    return { R, base };
+  }, [v, W, Hh]);
+  // route to the next location; the distance chip slides along the line to dodge pin heads
+  const route = useMemo(() => {
+    if (!v || !target || !geo || !player) return null;
+    const t = STATIONS.find((s) => s.id === target);
+    if (!t) return null;
+    const metres = Math.round(Math.hypot(t.pos[0] - pos.x, t.pos[1] - pos.z));
+    if (metres < 3) return null;
+    const tx = (t.pos[0] - v.cx) * v.s + W / 2;
+    const ty = (t.pos[1] - v.cz) * v.s + Hh / 2;
+    const len = Math.hypot(tx - player.px, ty - player.py);
+    let at = 0.5;
+    if (len > 80) {
+      let bc = Infinity;
+      for (const tt of [0.5, 0.42, 0.58, 0.34, 0.66, 0.26, 0.74]) {
+        const cx = player.px + (tx - player.px) * tt;
+        const cy = player.py + (ty - player.py) * tt;
+        let c = 0;
+        for (const h of geo.base) {
+          const d = Math.hypot(h.hx - cx, h.hy - cy);
+          if (d < geo.R + 36) c += geo.R + 36 - d;
+        }
+        if (c < bc) {
+          bc = c;
+          at = tt;
+        }
+        if (c === 0) break;
+      }
+    }
+    return { tx, ty, metres, t: at };
+  }, [v, target, geo, pos.x, pos.z, W, Hh, player?.px, player?.py]);
+  // ---- derived pin models (screen space) ----
+  const pins = useMemo<PinModel[]>(() => {
+    if (!geo) return [];
+    const { R, base } = geo;
+    const cardId = card?.id ?? null;
+    const reqs: LabelReq[] = base.map(({ s, hx, hy }) => {
+      const st = statuses[s.id];
+      const forced = s.id === target || s.id === area || s.id === hot || s.id === cardId;
+      const text = forced ? fullName(s.name) : SHORT_NAME[s.id];
+      const isNext = s.id === target;
+      return {
+        id: s.id,
+        px: hx,
+        py: hy,
+        r: R,
+        w: textWidth(text, 12) + 30,
+        h: 24,
+        forced,
+        priority: isNext ? 100 : s.id === area ? 90 : st.kind === "todo" ? 60 : st.kind === "locked" ? 40 : st.kind === "done" ? 30 : s.interactive ? 20 : 10,
+        reserve: isNext ? { x: hx - 28, y: hy - R - 44, w: 56, h: 42 } : undefined,
+      };
+    });
+    const chips = placeLabels(reqs, W, Hh, [
+      { x: 4, y: 4, w: 66, h: 66 }, // compass
+      { x: W - 60, y: 4, w: 58, h: 4 * 44 + 3 * 6 + 12 }, // toolbar
+      { x: 4, y: Hh - 46, w: 110, h: 44 }, // scale bar
+      ...(route && player && Math.hypot(route.tx - player.px, route.ty - player.py) > 80
+        ? [{ x: player.px + (route.tx - player.px) * route.t - 30, y: player.py + (route.ty - player.py) * route.t - 13, w: 60, h: 26 }]
+        : []), // route distance chip
+    ]);
+    return base.map(({ s, gx, gy, hx, hy }) => {
+      const forced = reqs.find((q) => q.id === s.id)!.forced;
+      return {
+        id: s.id,
+        name: fullName(s.name),
+        color: s.color,
+        status: statuses[s.id],
+        isNext: s.id === target,
+        isHere: s.id === area,
+        hot: s.id === hot || s.id === cardId,
+        gx,
+        gy,
+        hx,
+        hy,
+        R,
+        chip: chips.get(s.id) ?? null,
+        chipText: forced ? fullName(s.name) : SHORT_NAME[s.id],
+        interactive: s.interactive,
+      };
+    });
+  }, [geo, W, Hh, statuses, target, area, hot, card, route, player?.px, player?.py]);
+
+  const rows = useMemo<ListRow[]>(
+    () =>
+      SORTED.map((s) => ({
+        id: s.id,
+        name: fullName(s.name),
+        color: s.color,
+        status: statuses[s.id],
+        isNext: s.id === target,
+        isHere: s.id === area,
+        distance: Math.round(Math.hypot(s.pos[0] - pos.x, s.pos[1] - pos.z)),
+      })),
+    [statuses, target, area, pos.x, pos.z],
+  );
+  const [filter, setFilter] = useState<Filter>("all");
+  const [legend, setLegend] = useState(false);
+
+  const cardPin = card ? pins.find((p) => p.id === card.id) ?? null : null;
+  const cardRow = card ? rows.find((r) => r.id === card.id) ?? null : null;
+
+  // ---- a11y: focus trap-lite, restore focus on close, +/-/0 keys ----
+  const panelRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const prev = document.activeElement as HTMLElement | null;
+    panelRef.current?.focus({ preventScroll: true });
+    return () => {
+      if (prev && prev !== document.body && document.contains(prev)) prev.focus({ preventScroll: true });
+    };
+  }, []);
+  const onKeyDown = (e: RKeyboardEvent) => {
+    if (e.key === "Tab") {
+      const root = rootRef.current;
+      if (!root) return;
+      const els = [...root.querySelectorAll<HTMLElement>('button:not([disabled]), [tabindex="0"]')].filter((el) => el.getClientRects().length > 0);
+      if (!els.length) return;
+      const first = els[0];
+      const last = els[els.length - 1];
+      const act = document.activeElement;
+      if (e.shiftKey && (act === first || act === panelRef.current)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && act === last) {
+        e.preventDefault();
+        first.focus();
+      }
+      return;
+    }
+    if (e.key === "+" || e.key === "=") zoomCentre(1.4);
+    else if (e.key === "-" || e.key === "_") zoomCentre(1 / 1.4);
+    else if (e.key === "0") doFit();
+  };
+
+  const tbtn =
+    "pointer-events-auto grid h-11 w-11 place-items-center rounded-xl border border-white/15 bg-[#0a1124]/90 text-ivory/90 shadow-lg transition hover:border-cyan-300/60 hover:bg-[#13204a] hover:text-white active:scale-95 disabled:opacity-40";
+
   return (
     <div
-      className="pointer-events-auto absolute inset-0 z-40 grid place-items-center bg-[#050814]/85 p-2 sm:p-4"
+      ref={rootRef}
+      className={cx("tf-wm-root pointer-events-auto absolute inset-0 z-[70]", reduce && "tf-wm-calm")}
       onClick={onClose}
+      onKeyDown={onKeyDown}
       role="dialog"
       aria-modal="true"
       aria-label="World map"
     >
-      <div
-        className="tf-map flex max-h-full w-full max-w-[980px] flex-col overflow-y-auto rounded-2xl border border-cyan-300/25 bg-[#0a1124] shadow-[0_0_50px_rgba(7,11,26,0.7)] md:flex-row md:overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* ---- the map ---- */}
-        <div className="tf-map-body flex min-w-0 flex-1 flex-col p-3 sm:p-4">
-          <div className="mb-2 flex items-start justify-between gap-3">
-            <div>
-              <div className="font-display text-[11px] tracking-[0.3em] text-cyan-300/90">WORLD MAP</div>
-              <div className="font-heading text-[13px] text-ivory/70">Tap a place to travel there instantly.</div>
+      <div className="tf-wm-frame" onClick={(e) => e.stopPropagation()}>
+        <div ref={panelRef} tabIndex={-1} className="tf-wm-panel outline-none">
+          <header className="tf-wm-head flex shrink-0 items-center justify-between gap-3 px-3.5 sm:px-4">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 font-display text-[12px] font-bold tracking-[0.32em] text-cyan-300 sm:text-[13px]">
+                <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#38e1ff]" aria-hidden />
+                WORLD MAP
+              </div>
+              <div className="tf-wm-sub truncate font-heading text-[12.5px] text-ivory/65">Tap a pin to preview it, then travel.</div>
             </div>
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close map (Esc)"
-              className="grid min-h-11 min-w-11 place-items-center rounded-lg border border-white/15 text-ivory/80 hover:bg-white/10"
-            >
-              <X className="h-4 w-4" />
+            <button type="button" onClick={onClose} aria-label="Close map (Esc)" className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-white/15 text-ivory/85 transition hover:border-white/40 hover:bg-white/10">
+              <X className="h-5 w-5" aria-hidden />
             </button>
+          </header>
+
+          <div className="tf-wm-body">
+            {/* ---- the map ---- */}
+            <div className="tf-wm-map">
+              <div
+                ref={vpRef}
+                className="tf-wm-viewport absolute inset-0 touch-none select-none overflow-hidden"
+                onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+                onPointerCancel={onPointerUp}
+              >
+                {v && W > 0 && (
+                  <>
+                    <svg
+                      className="absolute inset-0 block h-full w-full"
+                      viewBox={`${v.cx - W / 2 / v.s} ${v.cz - Hh / 2 / v.s} ${W / v.s} ${Hh / v.s}`}
+                      preserveAspectRatio="none"
+                      role="img"
+                      aria-label="Map of the valley"
+                    >
+                      <TerrainLayer imageUrl={baked} />
+                    </svg>
+                    <div className="tf-wm-grain pointer-events-none absolute inset-0" aria-hidden />
+                    <svg className="tf-wm-overlay absolute inset-0 block overflow-visible" width={W} height={Hh} viewBox={`0 0 ${W} ${Hh}`} style={{ pointerEvents: "none" }}>
+                      <OverlayDefs />
+                      <GridTicks cx={v.cx} cz={v.cz} s={v.s} W={W} H={Hh} />
+                      {player && <PlayerLayer px={player.px} py={player.py} rot={pos.rot} route={route} />}
+                      <PinLayer pins={pins} handlers={handlers} />
+                      {player && <RouteChip px={player.px} py={player.py} route={route} />}
+                    </svg>
+                  </>
+                )}
+              </div>
+              <div className="tf-wm-vignette pointer-events-none absolute inset-0" aria-hidden />
+              <div className="tf-wm-scan pointer-events-none absolute inset-0" aria-hidden />
+              <Corners />
+              <Compass />
+              {v && <ScaleBar s={v.s} />}
+
+              {/* toolbar */}
+              <div className="pointer-events-none absolute right-2.5 top-2.5 z-30 flex flex-col gap-1.5">
+                <button type="button" className={tbtn} onClick={() => zoomCentre(1.4)} aria-label="Zoom in (+)" disabled={!!v && v.s >= maxS - 0.01}>
+                  <Plus className="h-5 w-5" aria-hidden />
+                </button>
+                <button type="button" className={tbtn} onClick={() => zoomCentre(1 / 1.4)} aria-label="Zoom out (-)" disabled={!!v && v.s <= minS + 0.01}>
+                  <Minus className="h-5 w-5" aria-hidden />
+                </button>
+                <button type="button" className={tbtn} onClick={doFit} aria-label="Fit all locations (0)" title="Fit all locations">
+                  <Maximize2 className="h-[18px] w-[18px]" aria-hidden />
+                </button>
+                <button type="button" className={cx(tbtn, legend && "border-cyan-300/70 text-cyan-200")} onClick={() => setLegend((o) => !o)} aria-label="Legend" aria-expanded={legend} title="Legend">
+                  <Info className="h-5 w-5" aria-hidden />
+                </button>
+              </div>
+              {legend && <Legend onClose={() => setLegend(false)} />}
+
+              {cardPin && cardRow && W > 0 && (
+                <PlaceCard
+                  pin={cardPin}
+                  W={W}
+                  H={Hh}
+                  distance={cardRow.distance}
+                  nextLabel={nextLabel}
+                  touch={card?.via === "touch"}
+                  onTravel={go}
+                  onEnter={cancelHide}
+                  onLeave={scheduleHide}
+                />
+              )}
+            </div>
+
+            {/* ---- the list (44px+ rows, single tap travels) ---- */}
+            <aside className="tf-wm-list" aria-label="Locations">
+              <LocationList rows={rows} filter={filter} setFilter={setFilter} nextLabel={nextLabel} hot={hot} onHot={setHot} onTravel={go} />
+            </aside>
           </div>
 
-          <div className="relative mx-auto w-full" style={{ maxWidth: "min(640px, 72dvh)" }}>
-            <svg
-              viewBox={`0 0 ${S} ${S}`}
-              className="tf-map-svg block h-auto w-full rounded-xl border border-white/10 bg-[#120a08]"
-              style={{ aspectRatio: "1 / 1" }}
-              role="img"
-              aria-label="Map of the valley"
-            >
-              <defs>
-                <radialGradient id="wm-ground" cx="50%" cy="50%" r="55%">
-                  <stop offset="0%" stopColor="#b5603a" />
-                  <stop offset="70%" stopColor="#8f4429" />
-                  <stop offset="100%" stopColor="#6a301d" />
-                </radialGradient>
-                <clipPath id="wm-clip">
-                  <circle cx={S / 2} cy={S / 2} r={worldR} />
-                </clipPath>
-              </defs>
-
-              {/* escarpment ring + ground */}
-              <circle cx={S / 2} cy={S / 2} r={worldR + 18} fill="#3a1a10" />
-              <circle cx={S / 2} cy={S / 2} r={worldR + 18} fill="none" stroke="#1f0e08" strokeWidth={3} strokeDasharray="4 7" />
-              <circle cx={S / 2} cy={S / 2} r={worldR} fill="url(#wm-ground)" />
-              <g clipPath="url(#wm-clip)">
-                {grid.map((g) => {
-                  const [gx] = toXY(g, 0);
-                  const [, gy] = toXY(0, g);
-                  return (
-                    <g key={g} stroke="#fff" strokeOpacity={0.06}>
-                      <line x1={gx} y1={0} x2={gx} y2={S} />
-                      <line x1={0} y1={gy} x2={S} y2={gy} />
-                    </g>
-                  );
-                })}
-                <polyline points={channel} fill="none" stroke="#4a1c10" strokeWidth={9} strokeLinecap="round" strokeLinejoin="round" opacity={0.75} />
-                <polyline points={channel} fill="none" stroke="#7a3320" strokeWidth={3} strokeLinecap="round" strokeDasharray="2 9" />
-                <ellipse cx={pondX} cy={pondY} rx={POND.r * K * 1.15} ry={POND.r * K} fill="#3f8fb5" stroke="#9fd8ee" strokeWidth={2} opacity={0.9} />
-                {SORTED.map((s) => {
-                  const [x, y] = toXY(s.pos[0], s.pos[1]);
-                  return <circle key={s.id} cx={x} cy={y} r={s.areaR * K} fill={s.color} fillOpacity={0.11} />;
-                })}
-              </g>
-              <text x={S / 2} y={22} textAnchor="middle" fontSize={17} fill="#ffd9c4" fontFamily="Orbitron, sans-serif" letterSpacing={3}>N</text>
-              <path d={`M${S / 2},28 l-6,10 h12 z`} fill="#ffd9c4" />
-              <text x={S / 2} y={S - 8} textAnchor="middle" fontSize={11} fill="#c79a85" opacity={0.7} fontFamily="Orbitron, sans-serif" letterSpacing={4}>ESCARPMENT</text>
-
-              {/* locations */}
-              {SORTED.map((s) => {
-                const [x, y] = toXY(s.pos[0], s.pos[1]);
-                const isT = s.id === target;
-                const isHere = s.id === area;
-                const active = hover === s.id;
-                const showLabel = isT || isHere || active;
-                const anchor = x < 110 ? "start" : x > S - 110 ? "end" : "middle";
-                const lx = anchor === "start" ? x - 14 : anchor === "end" ? x + 14 : x;
-                return (
-                  <g
-                    key={s.id}
-                    className="tf-mk cursor-pointer outline-none"
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Travel to ${s.name}`}
-                    onClick={() => go(s.id)}
-                    onKeyDown={onKey(s.id)}
-                    onPointerEnter={() => setHover(s.id)}
-                    onPointerLeave={() => setHover(null)}
-                    onFocus={() => setHover(s.id)}
-                    onBlur={() => setHover(null)}
-                  >
-                    <circle cx={x} cy={y} r={28} fill="transparent" />
-                    {isT && <circle cx={x} cy={y} r={24} fill="none" stroke="#38e1ff" strokeWidth={3} className="animate-pulse" />}
-                    <circle
-                      cx={x}
-                      cy={y}
-                      r={s.interactive ? 16 : 13}
-                      fill={s.color}
-                      stroke={active ? "#ffffff" : "#070b1a"}
-                      strokeWidth={active ? 3.5 : 2.5}
-                    />
-                    <text x={x} y={y + 6} textAnchor="middle" fontSize={s.interactive ? 17 : 14} style={{ pointerEvents: "none" }}>
-                      {ICON[s.id]}
-                    </text>
-                    <g className={cx(showLabel ? "" : "max-md:hidden")} style={{ pointerEvents: "none" }}>
-                      <text
-                        x={lx}
-                        y={y + 36}
-                        textAnchor={anchor}
-                        fontSize={15}
-                        fontFamily="Space Grotesk, Inter, sans-serif"
-                        fontWeight={600}
-                        fill="#fff"
-                        stroke="#120a08"
-                        strokeWidth={4}
-                        paintOrder="stroke"
-                      >
-                        {s.name.replace("Unknown Land — Cultivation Plot", "Unknown Land")}
-                      </text>
-                    </g>
-                  </g>
-                );
-              })}
-
-              {/* the player */}
-              <g transform={`translate(${px} ${py}) rotate(${180 - (pos.rot * 180) / Math.PI})`} style={{ pointerEvents: "none" }}>
-                <circle r={17} fill="#f4efe6" fillOpacity={0.18} className="animate-pulse" />
-                <path d="M0,-13 L9,10 L0,5 L-9,10 Z" fill="#f4efe6" stroke="#070b1a" strokeWidth={2} strokeLinejoin="round" />
-              </g>
-            </svg>
-          </div>
-
-          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-ivory/65">
-            <span className="inline-flex items-center gap-1.5">
-              <span className="inline-block h-3 w-3 rotate-0 rounded-sm bg-[#f4efe6]" style={{ clipPath: "polygon(50% 0, 100% 100%, 50% 75%, 0 100%)" }} /> You
+          <footer className="tf-wm-foot flex shrink-0 items-center justify-between gap-3 px-3.5 text-[11.5px] text-ivory/55 sm:px-4">
+            <span className="whitespace-nowrap font-display tracking-[0.16em] text-ivory/70">
+              YOU <span className="text-cyan-200">X {Math.round(pos.x)}</span> · <span className="text-cyan-200">Z {Math.round(pos.z)}</span> m
             </span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="inline-block h-3 w-3 animate-pulse rounded-full border-2 border-cyan-300" /> Next quest step
+            <span className="tf-wm-hint-fine hidden items-center gap-3 sm:flex">
+              <span>
+                <kbd className="tf-wm-kbd">M</kbd> toggle
+              </span>
+              <span>
+                <kbd className="tf-wm-kbd">Esc</kbd> close
+              </span>
+              <span>drag to pan</span>
+              <span>scroll to zoom</span>
             </span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="inline-block h-1 w-4 rounded bg-[#4a1c10]" /> Dry runoff channel
-            </span>
-          </div>
+            <span className="tf-wm-hint-coarse hidden">drag to pan · pinch to zoom</span>
+          </footer>
         </div>
-
-        {/* ---- the list (always usable by touch: 44px+ rows) ---- */}
-        <aside className="tf-map-list flex shrink-0 flex-col border-t border-white/10 md:w-[300px] md:border-l md:border-t-0">
-          <div className="px-3 pb-1 pt-3 font-display text-[10px] tracking-[0.28em] text-amber-200/90">LOCATIONS</div>
-          <ul className="min-h-0 flex-1 space-y-1.5 overflow-y-auto px-3 pb-3 md:overflow-y-auto">
-            {SORTED.map((s) => {
-              const d = Math.round(distanceTo(s.id));
-              const isT = s.id === target;
-              const here = s.id === area;
-              return (
-                <li key={s.id}>
-                  <button
-                    type="button"
-                    onClick={() => go(s.id)}
-                    onPointerEnter={() => setHover(s.id)}
-                    onPointerLeave={() => setHover(null)}
-                    className={cx(
-                      "flex min-h-12 w-full items-center gap-3 rounded-xl border px-3 py-2 text-left transition-colors",
-                      isT ? "border-cyan-300/60 bg-cyan-400/10" : "border-white/10 bg-white/[0.03] hover:border-white/30 hover:bg-white/[0.07]",
-                      hover === s.id && "border-white/40 bg-white/[0.08]",
-                    )}
-                  >
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-[18px]" style={{ background: s.color + "55", boxShadow: `inset 0 0 0 2px ${s.color}` }}>
-                      {ICON[s.id]}
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate font-heading text-[13.5px] font-semibold text-ivory">{s.name}</span>
-                      <span className="block truncate text-[11.5px] text-ivory/55">{s.interactive ? s.verb : "Scenic spot"}</span>
-                    </span>
-                    <span className="shrink-0 text-right">
-                      {here ? (
-                        <span className="block text-[10.5px] font-semibold text-emerald-300">● you’re here</span>
-                      ) : (
-                        <span className="block text-[11px] text-ivory/50">{d} m</span>
-                      )}
-                      {isT && (
-                        <span className="mt-0.5 inline-flex items-center gap-1 text-[10.5px] font-semibold text-cyan-200">
-                          <Navigation className="h-3 w-3" /> next
-                        </span>
-                      )}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </aside>
       </div>
     </div>
   );

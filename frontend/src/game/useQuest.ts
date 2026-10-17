@@ -11,11 +11,13 @@ export function useQuest() {
   const crop = useTerraform((s) => s.selectedCropId);
   const sessionId = useTerraform((s) => s.sessionId);
   const gateResults = useTerraform((s) => s.gateResults);
+  const checkOutcomes = useTerraform((s) => s.checkOutcomes);
+  const unableChecks = useTerraform((s) => s.unableChecks);
   const farmRaw = useGame((s) => s.farm);
   const pinnedId = useGame((s) => s.pinnedId);
   const steps = useMemo(
-    () => buildQuest({ analysis, plan, completed, crop, farm: farmFor(farmRaw, sessionId), gateResults }),
-    [analysis, plan, completed, crop, farmRaw, sessionId, gateResults],
+    () => buildQuest({ analysis, plan, completed, crop, farm: farmFor(farmRaw, sessionId), gateResults, checkOutcomes, unableChecks }),
+    [analysis, plan, completed, crop, farmRaw, sessionId, gateResults, checkOutcomes, unableChecks],
   );
   const quest: QuestStep | null = useMemo(() => questTask(steps, pinnedId), [steps, pinnedId]);
   return { steps, quest, plan, analysis, sessionId, crop, completed, farm: farmFor(farmRaw, sessionId), pinnedId };
@@ -32,6 +34,8 @@ export function questSnapshot() {
     crop: t.selectedCropId,
     farm: farmFor(g.farm, t.sessionId),
     gateResults: t.gateResults,
+    checkOutcomes: t.checkOutcomes,
+    unableChecks: t.unableChecks,
   });
   return { steps, quest: questTask(steps, g.pinnedId) };
 }

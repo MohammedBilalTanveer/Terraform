@@ -433,7 +433,7 @@
     {
       "id": "plant_rainwater_harvest",
       "topic": "planting_method",
-      "title": "Harvesting and storing rainwater",
+      "title": "Harvesting and storing rainwater, and mulching through dry spells",
       "scenario_tags": [
         "scenario_05_lateritic_hardpan"
       ],
@@ -442,38 +442,46 @@
         "all_tags": [],
         "none_tags": []
       },
-      "summary": "Catch rain from roofs, sheets or tarps into covered containers, and use it only to rescue seedlings in dry spells.",
+      "summary": "Catch rain from roofs, sheets or tarps into covered containers, keep the soil under thick mulch, and use the stored water only to rescue seedlings and flowering plants through dry spells.",
       "instructions": [
-        "Set clean, covered containers under a roof edge, sheet or tarp before storms.",
-        "Let the first minutes of rain rinse the surface before collecting.",
-        "Keep containers covered and shaded.",
-        "In a dry spell, give each seedling a cupful at the base, early morning or evening.",
-        "Refill whenever it rains."
+        "Before the rains: set clean, covered containers under a roof edge, sheet or tarp, weighted with stones.",
+        "Let the first minutes of rain rinse the surface before collecting; keep containers covered and in shade.",
+        "Gather and store dry grass, leaves and prunings now, so mulch is ready before the first dry spell.",
+        "After sowing: mulch around the seedlings about a hand's depth, a finger's width clear of the stems.",
+        "In a dry spell: thicken the mulch first, then give each seedling a cupful at the base, early morning or evening, from the store.",
+        "Check a finger deep under the mulch: water only if it is dry.",
+        "Refill containers whenever it rains and top up the mulch as termites and weather break it down; keep both going through every dry spell and into the dry season."
       ],
       "everyday_amounts": [
-        "a cupful per seedling in dry spells"
+        "a cupful per seedling in dry spells",
+        "mulch about a hand's depth, thicker before a dry spell",
+        "count stored buckets against planting spots"
       ],
       "limitations": [
-        "Stored water is small; it rescues seedlings, it does not irrigate a field."
+        "Stored water is small; it rescues seedlings, it does not irrigate a field.",
+        "Mulch is eaten by termites and breaks down: it needs topping up."
       ],
       "safety_notes": [
         "Never use containers that held fuel or chemicals; keep drinking water separate; cover containers."
       ],
       "evidence_level": "general_guidance",
       "source_ids": [
-        "src_unccd_microcatchment"
+        "src_unccd_microcatchment",
+        "src_fao_reosa_ca_brief"
       ],
       "created_by": "TERRAFORM team — original synthesis",
       "version": "1.2.0",
       "method_type": "water_storage",
       "steps": [
-        "Set clean, covered containers under a roof edge, sheet or tarp before storms.",
-        "Let the first minutes of rain rinse the surface before collecting.",
-        "Keep containers covered and shaded.",
-        "In a dry spell, give each seedling a cupful at the base, early morning or evening.",
-        "Refill whenever it rains."
+        "Before the rains: set clean, covered containers under a roof edge, sheet or tarp, weighted with stones.",
+        "Let the first minutes of rain rinse the surface before collecting; keep containers covered and in shade.",
+        "Gather and store dry grass, leaves and prunings now, so mulch is ready before the first dry spell.",
+        "After sowing: mulch around the seedlings about a hand's depth, a finger's width clear of the stems.",
+        "In a dry spell: thicken the mulch first, then give each seedling a cupful at the base, early morning or evening, from the store.",
+        "Check a finger deep under the mulch: water only if it is dry.",
+        "Refill containers whenever it rains and top up the mulch as termites and weather break it down; keep both going through every dry spell and into the dry season."
       ],
-      "when_to_sow": "Set up before the rains start.",
+      "when_to_sow": "Set up before the rains start; use and top up through every dry spell.",
       "task": null
     },
     {

@@ -9,7 +9,7 @@ import { Busy, Card, Chips, ErrorNote, GlassPanel, Pill, cx } from "./kit";
 type QA = { q: string; a: AskResponse };
 let history: QA[] = []; // kept across panel open/close within the session
 
-export default function AskPanel({ onClose }: { onClose: () => void }) {
+export function AskBody({ autoFocus = true }: { autoFocus?: boolean }) {
   const sessionId = useTerraform((s) => s.sessionId);
   const plan = useTerraform((s) => s.plan);
   const step = useTerraform((s) => s.currentStep);
@@ -39,7 +39,7 @@ export default function AskPanel({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <GlassPanel title="Ask TERRA" kicker="KNOWLEDGE-BASE ONLY" onClose={onClose}>
+    <>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -49,7 +49,7 @@ export default function AskPanel({ onClose }: { onClose: () => void }) {
       >
         <input
           ref={inputRef}
-          autoFocus
+          autoFocus={autoFocus}
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="e.g. How do I check how deep the hard layer is?"
@@ -92,6 +92,14 @@ export default function AskPanel({ onClose }: { onClose: () => void }) {
           </Card>
         </div>
       ))}
+    </>
+  );
+}
+
+export default function AskPanel({ onClose }: { onClose: () => void }) {
+  return (
+    <GlassPanel title="Ask TERRA" kicker="KNOWLEDGE-BASE ONLY" onClose={onClose}>
+      <AskBody />
     </GlassPanel>
   );
 }

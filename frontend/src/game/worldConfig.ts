@@ -41,7 +41,7 @@ export type Station = {
 };
 
 export const STATIONS: Station[] = [
-  { id: "camp", name: "Survivor Camp", pos: [0, 11], interactR: 3, areaR: 7, flatR: 7, interactive: true, verb: "Sit by the fire — ask TERRA", steps: [], color: "#f6c177" },
+  { id: "camp", name: "Survivor Camp", pos: [0, 11], interactR: 3, areaR: 7, flatR: 7, interactive: true, verb: "Sit by the fire — neighbours & TERRA", steps: [], color: "#f6c177" },
   { id: "board", name: "Observation Board", pos: [7, 3], interactR: 2.6, areaR: 4, flatR: 4, interactive: true, verb: "Log what you observe", steps: ["observation_log"], color: "#38e1ff" },
   { id: "soil", name: "Soil Inspection Patch", pos: [-7, 0], interactR: 3, areaR: 4.5, flatR: 5, interactive: true, verb: "Inspect the soil", steps: ["input_echo", "missing_analysis"], color: "#e07a5f" },
   { id: "plot", name: "Unknown Land — Cultivation Plot", pos: [0, -13], interactR: 5.2, areaR: 7, flatR: 8, interactive: true, verb: "Work the plot", steps: ["next_action", "crop_suggestions", "timeframe", "planting_method", "ongoing_care"], color: "#7bd389" },
@@ -49,10 +49,10 @@ export const STATIONS: Station[] = [
   { id: "water", name: "Water Storage", pos: [-13, -10], interactR: 3, areaR: 5, flatR: 5, interactive: true, verb: "Check water capture", steps: ["fix_protocol", "ongoing_care"], color: "#5ab8e8" },
   { id: "harvest", name: "Harvest Point", pos: [10, -22], interactR: 3, areaR: 4.5, flatR: 5, interactive: true, verb: "Open harvest point", steps: ["harvest"], color: "#f6c177" },
   { id: "terraces", name: "Stone-Line Terraces", pos: [-8, -32], interactR: 5, areaR: 10, flatR: 0, interactive: true, verb: "Lay stone lines", steps: ["fix_protocol", "planting_method"], color: "#b5a48b" },
-  { id: "gully", name: "Runoff Gully", pos: [22, -30], interactR: 4, areaR: 9, flatR: 0, interactive: true, verb: "Survey the runoff", steps: ["missing_analysis"], color: "#b5523b" },
-  { id: "outpost", name: "Research Outpost", pos: [27, 6], interactR: 3.2, areaR: 10, flatR: 11, interactive: true, verb: "Open field terminal", steps: [], color: "#8b5cf6" },
-  { id: "grove", name: "Old Cashew Grove Lookout", pos: [-33, 15], interactR: 0, areaR: 11, flatR: 0, interactive: false, verb: "", steps: [], color: "#9bbf6a" },
-  { id: "waterhole", name: "Waterhole", pos: [-31, -24], interactR: 0, areaR: 8, flatR: 0, interactive: false, verb: "", steps: [], color: "#5ab8e8" },
+  { id: "gully", name: "Runoff Gully", pos: [22, -30], interactR: 4, areaR: 9, flatR: 0, interactive: true, verb: "Watch the runoff", steps: ["missing_analysis"], color: "#b5523b" },
+  { id: "outpost", name: "Research Outpost", pos: [27, 6], interactR: 3.2, areaR: 10, flatR: 11, interactive: true, verb: "Supplies & field terminal", steps: [], color: "#8b5cf6" },
+  { id: "grove", name: "Old Cashew Grove Lookout", pos: [-33, 15], interactR: 4.4, areaR: 11, flatR: 0, interactive: true, verb: "Survey from the lookout", steps: [], color: "#9bbf6a" },
+  { id: "waterhole", name: "Waterhole", pos: [-31, -24], interactR: 6.5, areaR: 8, flatR: 0, interactive: true, verb: "Try the water-hole test", steps: [], color: "#5ab8e8" },
 ];
 
 export const stationById = (id: StationId) => STATIONS.find((s) => s.id === id)!;

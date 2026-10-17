@@ -22,7 +22,7 @@ def walk_recs(node, out=None):
     if out is None:
         out = []
     if isinstance(node, dict):
-        if "task_id" in node and "why_this_matches" in node:
+        if "task_id" in node and "why_this_matches" in node and "possible_outcomes" not in node:  # not check cards
             out.append(node)
         for v in node.values():
             walk_recs(v, out)

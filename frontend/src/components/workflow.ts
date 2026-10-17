@@ -2,6 +2,7 @@
 import { RUBRIC_STAGE, WORKFLOW_STEPS } from "../types/terraform";
 import type {
   AnalysisResponse,
+  CheckCard,
   Evidence,
   GenerationMode,
   PlanResponse,
@@ -113,6 +114,18 @@ export function useHarvestRequirements() {
   const done = useTerraform((s) => s.completedTasks);
   return harvestRequirements(plan, crop, done);
 }
+
+/** Every applicable diagnostic check: plan.workflow.checks (all phases) when present, else the analysis' checks. */
+export function useAllChecks(): CheckCard[] {
+  const plan = useTerraform((s) => s.plan);
+  const analysis = useTerraform((s) => s.analysis);
+  const fromPlan = plan?.workflow?.checks;
+  if (fromPlan && fromPlan.length) return fromPlan;
+  return analysis?.missing_analysis?.checks ?? [];
+}
+/** Checks of one phase; a check without a phase counts as "diagnose" (before the plan). */
+export const checksOfPhase = (cs: CheckCard[], phase: "diagnose" | "pre_plant" | "post_sow") =>
+  cs.filter((c) => (c.phase ?? "diagnose") === phase);
 
 export function useStepPrereqs(step: StepId) {
   const plan = useTerraform((s) => s.plan);

@@ -85,7 +85,10 @@ class Index:
                                  " ".join(strs(rec.get("ripeness_cues_feel"))), text(rec.get("dry_spell")),
                                  text(rec.get("water_needs_plain")), text(rec.get("rooting_notes")),
                                  text(rec.get("explanation")), text(rec.get("when_to_sow")), crop_names, bio, tagtxt,
-                                 text(rec.get("answer")), " ".join(strs(rec.get("likely_causes")))])
+                                 text(rec.get("answer")), " ".join(strs(rec.get("likely_causes"))),
+                                 text(rec.get("phase")), text(rec.get("where")),
+                                 " ".join(text(o.get("label")) + " " + text(o.get("interpretation"))
+                                          for o in rec.get("possible_outcomes") or [] if isinstance(o, dict))])
                 tt = set(tokens(title)) | set(tokens(crop_names))
                 bt = set(tokens(body))
                 self.docs.append((rec["id"], coll, tt, bt))

@@ -41,6 +41,8 @@ COLLECTIONS = [
 OPTIONAL_COLLECTIONS = {"stress_mitigation", "troubleshooting", "field_faq"}
 CROP_CATEGORIES = ("field_crop", "tree", "soil_builder")
 TASK_PHASES = ("prepare", "readiness", "plant")  # v1.4 (optional for older KBs)
+CHECK_PHASES = ("diagnose", "pre_plant", "post_sow")  # v1.5 (optional for older KBs)
+CHECK_WHERE = ("ground", "water_hole", "runoff_path", "vegetation", "neighbours", "supplies", "seeds", "trial_plot")
 REQUIRED_COLLECTIONS = [c for c in COLLECTIONS if c not in OPTIONAL_COLLECTIONS]
 SCENARIO_COLLECTION = "scenarios"
 
@@ -330,6 +332,13 @@ def _check_references(kb: KnowledgeBase) -> None:
         if isinstance(task, dict) and task.get("phase") is not None and task.get("phase") not in TASK_PHASES:
             kb.errors.append(f"{where}: task '{task.get('task_id')}' has invalid phase {task.get('phase')!r} "
                              f"(expected one of {', '.join(TASK_PHASES)})")
+        if cname == "diagnostic_checks":
+            if rec.get("phase") is not None and rec.get("phase") not in CHECK_PHASES:
+                kb.errors.append(f"{where}: invalid check phase {rec.get('phase')!r} "
+                                 f"(expected one of {', '.join(CHECK_PHASES)})")
+            if rec.get("where") is not None and rec.get("where") not in CHECK_WHERE:
+                kb.errors.append(f"{where}: invalid check 'where' {rec.get('where')!r} "
+                                 f"(expected one of {', '.join(CHECK_WHERE)})")
         if cname in ("troubleshooting", "field_faq"):
             for x in _as_list(rec.get("related_kb_ids")):
                 _ref(kb, where, "related_kb_ids", x)

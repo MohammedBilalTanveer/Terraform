@@ -5,7 +5,7 @@ import { useGame } from "../gameStore";
 import { stationById, type StationId } from "../worldConfig";
 import { useQuest } from "../useQuest";
 import { Card, DetailsButton, GlassPanel, PrimaryButton } from "./kit";
-import { CompletionFlow, StationChecklist, SuggestedNext, TaskCard, pinStep } from "./cards";
+import { CompletionFlow, EmptyPlace, StationChecklist, SuggestedNext, TaskCard, WhyLine } from "./cards";
 
 const KICKER: Partial<Record<StationId, string>> = {
   terraces: "WATER CAPTURE · STONE LINES",
@@ -37,6 +37,7 @@ export default function StationCards({ station, onClose }: { station: StationId;
   if (!plan) {
     return (
       <GlassPanel title={st.name} kicker={KICKER[station] ?? "STATION"} onClose={onClose}>
+        <WhyLine station={station} />
         <Card>
           <p className="text-[13px] text-ivory/85">No plan has been generated yet, so this station has no tasks. TERRA only shows tasks from your knowledge-base plan.</p>
         </Card>
@@ -64,31 +65,21 @@ export default function StationCards({ station, onClose }: { station: StationId;
         </div>
       }
     >
+      <WhyLine station={station} />
       {current ? (
         <>
           <TaskCard step={current} station={station} />
           <SuggestedNext current={current} here={station} />
         </>
       ) : (
-        <Card className="space-y-3">
-          <div className="font-heading text-[16px] font-semibold">All done here</div>
-          <p className="text-[13px] text-ivory/80">
-            {required.length > 0 ? `You finished ${doneCount} of ${required.length} tasks at this station.` : "No plan tasks are done at this station."}
-            {here.some((s) => !s.done && s.blocked) && " Anything still locked will open once its step is done."}
-          </p>
-          {quest ? (
-            <PrimaryButton
-              onClick={() => {
-                pinStep(quest);
-                useGame.getState().setOverlay(null);
-              }}
-            >
-              <MapIcon className="h-4 w-4" /> Now go to {stationById(quest.station).name} — {quest.label}
-            </PrimaryButton>
-          ) : (
-            <p className="text-[13px] text-cyan-100/85">Nothing else is waiting. Check the Research Outpost terminal for the full plan.</p>
-          )}
-        </Card>
+        <EmptyPlace
+          station={station}
+          title={required.length > 0 ? "All done here" : "Nothing planned here for this plan"}
+          body={
+            (required.length > 0 ? `You finished ${doneCount} of ${required.length} tasks at this station.` : "Your observations did not call for any task at this station.") +
+            (here.some((s0) => !s0.done && s0.blocked) ? " Anything still locked opens once its step is done." : "")
+          }
+        />
       )}
       <StationChecklist key={String(listOpen)} defaultOpen={listOpen} title="See all tasks here" steps={here} currentId={current?.id} onPick={(id) => setViewId(id)} />
     </GlassPanel>

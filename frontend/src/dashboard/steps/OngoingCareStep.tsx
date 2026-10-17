@@ -6,6 +6,8 @@ import { Bug, CheckCheck, CloudRainWind, CloudSun, Droplets, Eye, FlaskConical, 
 import type { CareStage, PestCard, StressCard, TroubleCard } from "../../types/terraform";
 import { useTerraform } from "../../store/terraformStore";
 import Accordion, { CollapsibleSection, type AccordionItem } from "../../components/Accordion";
+import CheckCardView, { useCheckProgress } from "../../components/CheckCardView";
+import { checksOfPhase, useAllChecks } from "../../components/workflow";
 import EvidenceChips from "../../components/EvidenceChips";
 import RecommendationCard from "../../components/RecommendationCard";
 import { Badge, BulletList, Empty, Panel, SectionTitle, arr, cx } from "../../components/ui";
@@ -25,6 +27,8 @@ export default function OngoingCareStep() {
   const plan = useTerraform((s) => s.plan);
   const go = useGo();
   const [, bump] = useState(0);
+  const postChecks = checksOfPhase(useAllChecks(), "post_sow");
+  const postProgress = useCheckProgress(postChecks);
   if (!plan) return <NeedPlan />;
   const oc = plan.workflow.ongoing_care;
   const cs = plan.workflow.crop_suggestions;
@@ -88,6 +92,23 @@ export default function OngoingCareStep() {
         />
         {stageItems.length ? <Accordion key={currentId ?? "none"} items={stageItems} defaultOpenId={currentId} /> : <Empty>No care stages returned.</Empty>}
       </section>
+
+      {postChecks.length > 0 && (
+        <CollapsibleSection
+          icon={<FlaskConical className="h-4 w-4" aria-hidden />}
+          eyebrow={`${postProgress.done} of ${postChecks.length} checks done`}
+          title="After sowing — watch the trial plants"
+          count={postChecks.length}
+          defaultOpen
+          id="after-sowing"
+        >
+          <div className="grid gap-4">
+            {postChecks.map((c) => (
+              <CheckCardView key={c.id} card={c} />
+            ))}
+          </div>
+        </CollapsibleSection>
+      )}
 
       <div className="grid gap-3">
         {pests.length > 0 && (

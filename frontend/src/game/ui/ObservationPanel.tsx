@@ -7,6 +7,7 @@ import { api } from "../../api/terraformApi";
 import { useTerraform } from "../../store/terraformStore";
 import { useGame } from "../gameStore";
 import { Busy, Card, ErrorNote, GlassPanel, GhostButton, PrimaryButton, Section, cx } from "./kit";
+import { CompletionFlow, WhyLine, announceDone } from "./cards";
 
 type Opt = { v: string; l: string };
 const TEXTURE: Opt[] = [
@@ -175,9 +176,15 @@ export default function ObservationPanel({ onClose }: { onClose: () => void }) {
     if (!o.description.trim()) return;
     runAction({ kind: "inspect", label: "Logging observations", station: "board", fast: true });
     const res = await analyze(o);
-    if (res) toast("success", "Observations logged — TERRA has updated your next step.");
-    else useGame.getState().setOverlay("board");
+    if (res) {
+      toast("success", "Observations logged — TERRA has updated your next step.");
+      announceDone("Logged your observations", "board", "prepare", "log");
+    }
+    useGame.getState().setOverlay("board");
   };
+
+  const lastDone = useGame((s) => s.lastDone);
+  if (lastDone && lastDone.station === "board") return <CompletionFlow station="board" onStay={() => undefined} />;
 
   return (
     <GlassPanel
@@ -196,6 +203,7 @@ export default function ObservationPanel({ onClose }: { onClose: () => void }) {
     >
       {loading === "analyze" && <Busy label="Matching your observations against the knowledge base…" />}
       {error && <ErrorNote message={error} onRetry={() => void submit()} />}
+      <WhyLine station="board" />
       <Section title="Load an example">
         <div className="flex flex-wrap gap-1.5">
           {EXAMPLES.map((e) => (

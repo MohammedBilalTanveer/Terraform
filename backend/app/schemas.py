@@ -326,6 +326,9 @@ class PossibleOutcome(_Model):
 
 
 class CheckCard(Recommendation):
+    phase: Optional[Literal["diagnose", "pre_plant", "post_sow"]] = None  # v1.5 (overrides the task phase: checks carry no task)
+    where: Optional[Literal["ground", "water_hole", "runoff_path", "vegetation", "neighbours", "supplies",
+                            "seeds", "trial_plot"]] = None
     purpose: str
     weak_evidence: bool
     gate_relevant: bool
@@ -596,6 +599,7 @@ class HarvestStep(StepMeta):
 
 
 class Workflow(_Model):
+    checks: List[CheckCard] = Field(default_factory=list)
     fix_protocol: FixProtocolStep
     next_action: NextActionStep
     crop_suggestions: CropSuggestionsStep

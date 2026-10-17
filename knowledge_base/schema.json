@@ -344,6 +344,27 @@
         },
         "answer": {
           "type": "string"
+        },
+        "phase": {
+          "enum": [
+            "diagnose",
+            "pre_plant",
+            "post_sow"
+          ],
+          "description": "diagnostic_checks only: when the check is done"
+        },
+        "where": {
+          "enum": [
+            "ground",
+            "water_hole",
+            "runoff_path",
+            "vegetation",
+            "neighbours",
+            "supplies",
+            "seeds",
+            "trial_plot"
+          ],
+          "description": "diagnostic_checks only: the kind of place the check is done"
         }
       }
     },

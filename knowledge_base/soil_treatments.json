@@ -972,7 +972,7 @@
     {
       "id": "treat_fizz_recheck_optional",
       "topic": "soil_treatment",
-      "title": "Optional weak re-check: baking-soda fizz after treatment",
+      "title": "Optional: repeat the baking-soda fizz test on filled pit soil",
       "scenario_tags": [
         "scenario_05_lateritic_hardpan"
       ],
@@ -981,20 +981,23 @@
         "all_tags": [],
         "none_tags": []
       },
-      "summary": "After pits are filled and a few weeks of rain have passed, you may repeat the fizz check. A weaker fizz is a weak clue only.",
+      "summary": "After pits are filled and a few weeks of rain have passed, repeat the baking-soda fizz test on filled pit soil. A weaker fizz is a hopeful sign, not proof.",
       "instructions": [
-        "Repeat the baking-soda check on soil from a filled pit, the same way as before.",
+        "Take a small spoonful of wet soil from a filled pit, put it in a cup or lid, and sprinkle on a pinch to a small spoonful of baking soda (sodium bicarbonate), using the same small amounts as the first time.",
+        "Watch for about a minute and compare with what you saw before treatment.",
+        "A weaker fizz than before is a hopeful sign, not proof that the soil is better; no change proves nothing either way.",
         "Note the result in the journal. Do not delay planting for it."
       ],
       "everyday_amounts": [
-        "a spoonful of soil",
-        "a pinch of baking soda"
+        "a small spoonful of wet soil",
+        "a pinch to a small spoonful of baking soda",
+        "watch for about a minute"
       ],
       "limitations": [
-        "Weak evidence only; never a reason to plant or not plant."
+        "Weak evidence only: not a pH reading; never a reason to plant or not plant."
       ],
       "safety_notes": [
-        "Keep baking soda and soil out of eyes and mouth."
+        "Do not taste the soil or the mixture; keep baking soda and soil out of eyes and mouth."
       ],
       "evidence_level": "needs_local_confirmation",
       "source_ids": [],
@@ -1011,11 +1014,11 @@
         "No baking soda: skip it; watch the plants instead."
       ],
       "expected_observable_change": [
-        "Possibly less fizz than before (weak clue only)"
+        "Possibly a weaker fizz than before (a hopeful sign only, not proof)"
       ],
       "task": {
         "task_id": "task_recheck_fizz_optional",
-        "label": "Optional: repeat the fizz check on filled pit soil",
+        "label": "Optional: repeat the baking-soda fizz test on filled pit soil",
         "phase": "readiness"
       }
     },

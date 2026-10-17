@@ -26,6 +26,7 @@ import SoilPanel from "./ui/SoilPanel";
 import WorldMap from "./WorldMap";
 import StationPanel from "./ui/StationPanel";
 import PlotWizard from "./ui/PlotWizard";
+import { CampPanel, GrovePanel, OutpostPanel, PlaceChecksPanel, SoilStation } from "./ui/PlacePanels";
 import { useTouchVisible } from "./TouchControls";
 import { dprFor, useViewport } from "./useViewport";
 import { cx } from "./ui/kit";
@@ -99,22 +100,26 @@ function Overlay({ id, onClose, target }: { id: StationId | "ask" | "map"; onClo
     case "board":
       return <ObservationPanel onClose={onClose} />;
     case "soil":
-      return <SoilPanel onClose={onClose} />;
+      return <SoilStation onClose={onClose} />;
     case "gully":
-      return <SoilPanel onClose={onClose} mode="gully" />;
+    case "waterhole":
+      return <PlaceChecksPanel station={id} onClose={onClose} />;
+    case "grove":
+      return <GrovePanel onClose={onClose} />;
+    case "camp":
+      return <CampPanel onClose={onClose} />;
     case "plot":
       return <PlotWizard onClose={onClose} />;
     case "harvest":
       return <HarvestPanel onClose={onClose} />;
     case "ask":
-    case "camp":
       return <AskPanel onClose={onClose} />;
     case "terraces":
     case "compost":
     case "water":
       return <StationCards station={id} onClose={onClose} />;
     case "outpost":
-      return <StationPanel station={id} onClose={onClose} />;
+      return <OutpostPanel onClose={onClose} />;
     default:
       return null;
   }
@@ -137,6 +142,8 @@ export default function ExplorerPage() {
   const beaconOff = useGame((s) => s.beaconOff);
   const area = useGame((s) => s.area);
   const gateResults = useTerraform((s) => s.gateResults);
+  const checkOutcomes = useTerraform((s) => s.checkOutcomes);
+  const unableChecks = useTerraform((s) => s.unableChecks);
   const pulse = useGame((s) => s.interactPulse);
   const vp = useViewport();
   const touchOn = useTouchVisible();
@@ -160,8 +167,8 @@ export default function ExplorerPage() {
   }, []);
 
   const g = useMemo(
-    () => guidance({ backendOnline, analysis, plan, completed, selectedCropId: crop, farm, pinnedId, gateResults }),
-    [backendOnline, analysis, plan, completed, crop, farm, pinnedId, gateResults],
+    () => guidance({ backendOnline, analysis, plan, completed, selectedCropId: crop, farm, pinnedId, gateResults, checkOutcomes, unableChecks }),
+    [backendOnline, analysis, plan, completed, crop, farm, pinnedId, gateResults, checkOutcomes, unableChecks],
   );
   // The beacon follows the QUEST TASK's station and never moves on arrival — only when that task is
   // completed (or the player pins another one / stops guiding).

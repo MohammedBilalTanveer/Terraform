@@ -80,14 +80,14 @@ function GateTaskRow({ t, onSwitchTab }: { t: PlanItem; onSwitchTab: (tab: Tab) 
   );
 }
 
-export function CropCardView({ c, onChosen }: { c: CropCard; onChosen?: (c: CropCard) => void }) {
+export function CropCardView({ c, onChosen, readOnly = false }: { c: CropCard; onChosen?: (c: CropCard) => void; readOnly?: boolean }) {
   const selected = useTerraform((s) => s.selectedCropId);
   const selectCrop = useTerraform((s) => s.selectCrop);
   const loading = useTerraform((s) => s.loading);
   const [open, setOpen] = useState(false);
   const isSel = selected === c.crop_id;
   return (
-    <div data-incomplete={!selected && c.category !== "tree" && c.fit_label !== "excluded" ? "true" : undefined} className="rounded-xl transition-shadow">
+    <div data-incomplete={!readOnly && !selected && c.category === "field_crop" && c.fit_label !== "excluded" ? "true" : undefined} className="rounded-xl transition-shadow">
     <Card className={cx(isSel && "border-emerald-300/50 bg-emerald-400/[0.06]")}>
       <div className="flex items-start gap-2">
         <div className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white/5 font-display text-[11px] text-amber-200">#{c.rank}</div>
@@ -107,7 +107,7 @@ export function CropCardView({ c, onChosen }: { c: CropCard; onChosen?: (c: Crop
             <Pill tone={c.confidence === "high" ? "sprout" : c.confidence === "medium" ? "amber" : "coral"}>confidence: {c.confidence}</Pill>
           </div>
         </div>
-        {c.category !== "tree" && c.fit_label !== "excluded" && (
+        {!readOnly && c.category === "field_crop" && c.fit_label !== "excluded" && (
           <PrimaryButton tone={isSel ? "sprout" : "cyan"} disabled={!!loading || isSel} onClick={() => void selectCrop(c.crop_id).then(() => onChosen?.(c))}>
             {isSel ? <CheckCircle2 className="h-4 w-4" /> : null} {isSel ? "Chosen" : "Choose"}
           </PrimaryButton>

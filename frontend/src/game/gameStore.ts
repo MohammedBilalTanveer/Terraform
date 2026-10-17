@@ -17,7 +17,7 @@ export type ActiveAction = {
 };
 
 /** Per-session farm presentation (keyed by session id so a reset session starts fresh). */
-export type FarmView = { key: string | null; sown: boolean; careIdx: number; careDone?: boolean; timeSeen?: boolean; harvested: boolean };
+export type FarmView = { key: string | null; sown: boolean; careIdx: number; careDone?: boolean; timeSeen?: boolean; echoSeen?: boolean; skipChecks?: boolean; regenIdx?: number; harvested: boolean };
 
 /** Mutable per-frame player state (not reactive — read inside useFrame / rAF). */
 export const playerState = { x: SPAWN[0], z: SPAWN[1], y: 0, rot: Math.PI, speed: 0, vx: 0, vz: 0, /** performance.now() of the last teleport — camera + TERRA snap instead of gliding */ teleportedAt: 0 };
@@ -27,7 +27,7 @@ export const joystick = { x: 0, z: 0, active: false, sprint: false };
 export type TouchMode = "auto" | "show" | "hide";
 export type Bubble = { text: string; until: number };
 /** what the player just completed — shown as TERRA's completion message when the station panel reopens */
-export type LastDone = { id: string; label: string; station: StationId; phase: string; sessionKey: string | null };
+export type LastDone = { id: string; label: string; station: StationId; phase: string; sessionKey: string | null; note?: string };
 
 type GameState = {
   overlay: OverlayId | null;

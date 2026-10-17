@@ -5,7 +5,7 @@
     {
       "id": "check_probe_multiple_spots",
       "topic": "diagnostic_check",
-      "title": "Probe several spots with a stick or stone",
+      "title": "Dig as deep as you can at several spots with a stick or stone",
       "scenario_tags": [
         "scenario_05_lateritic_hardpan"
       ],
@@ -14,7 +14,7 @@
         "all_tags": [],
         "none_tags": []
       },
-      "summary": "Push a strong stick, a pointed stone or a hand tool into the ground at several spots to see whether the hard layer is the same everywhere or has softer, deeper pockets.",
+      "summary": "Dig as deep as you can with a strong stick, a pointed stone or a hand tool at several spots, and measure how deep you got in hand-depths, to see how deep the hard layer really is and whether it is the same everywhere or has softer, deeper pockets.",
       "instructions": [
         "Pick at least five to ten spots spread across the area you might plant: high points, low points, near shrubs and near any trees.",
         "At each spot, scrape away loose stones and dig or push down with a stick or pointed stone until it will not go further.",
@@ -75,7 +75,9 @@
             "digging_deep_possible"
           ]
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "ground"
     },
     {
       "id": "check_water_hole_drainage",
@@ -147,7 +149,9 @@
             "drains_slow"
           ]
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "water_hole"
     },
     {
       "id": "check_watch_first_heavy_rain",
@@ -226,7 +230,9 @@
             "pooling_none"
           ]
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "runoff_path"
     },
     {
       "id": "check_pour_water_slope",
@@ -293,12 +299,14 @@
             "slope_flat"
           ]
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "runoff_path"
     },
     {
       "id": "check_baking_soda_fizz",
       "topic": "diagnostic_check",
-      "title": "Baking-soda fizz check (weak clue only)",
+      "title": "Baking soda (sodium bicarbonate) fizz test: a weak clue only",
       "scenario_tags": [
         "scenario_05_lateritic_hardpan"
       ],
@@ -307,31 +315,34 @@
         "all_tags": [],
         "none_tags": []
       },
-      "summary": "Mix a pinch of baking soda into a spoonful of wet soil and look for fizzing. This is a weak hint, not a soil test.",
+      "summary": "Put a little wet soil in a cup or lid, sprinkle on a pinch to a small spoonful of baking soda (sodium bicarbonate) and watch for about a minute for fizzing. It is a weak hint about acidity, not a pH reading.",
       "instructions": [
-        "Take a spoonful of soil from the root zone, remove stones, and wet it into a mud with clean water.",
-        "Sprinkle a pinch of baking soda on top and watch and listen closely.",
-        "Note whether you see any fizzing or bubbles.",
-        "Whatever happens, keep planning for acidic, poor soil: add organic matter and choose tolerant crops."
+        "Take a small spoonful of soil from the planting depth, pick out the stones, and put it in a clean cup or bottle lid.",
+        "Add just enough clean water to turn it into wet mud.",
+        "Sprinkle a pinch to a small spoonful of baking soda (sodium bicarbonate) on top.",
+        "Watch closely, and listen, for about a minute for fizzing or bubbles.",
+        "Note what you saw (fizz or no fizz) in the journal, and where the sample came from.",
+        "Whatever happens, keep planning for poor, probably acidic soil: add organic matter and choose tolerant crops."
       ],
       "everyday_amounts": [
-        "a spoonful of soil",
-        "a pinch of baking soda"
+        "a small spoonful of wet soil in a cup or lid",
+        "a pinch to a small spoonful of baking soda",
+        "watch for about a minute"
       ],
       "limitations": [
-        "Weak evidence only: not a measurement and not a substitute for a soil test.",
-        "No fizz does not prove the soil is not acidic.",
-        "Results depend on water, soil moisture and how fresh the baking soda is.",
+        "Weak clue only: it is not a pH reading, not a measurement and not a substitute for a soil test.",
+        "No fizz proves nothing; a fizz does not say how acidic the soil is.",
+        "Results depend on water, soil moisture and how fresh the baking soda is, so use the same small amounts each time.",
         "Never required before planting; repeating it after treatment is an optional clue only."
       ],
       "safety_notes": [
-        "Keep baking soda and soil out of eyes and mouth; wash hands after."
+        "Do not taste the soil or the mixture; keep baking soda and soil out of eyes and mouth; wash hands after."
       ],
       "evidence_level": "needs_local_confirmation",
       "source_ids": [],
       "created_by": "TERRAFORM team — original synthesis",
       "version": "1.2.0",
-      "purpose": "Give a rough, optional hint about acidity when nothing else is available. It never decides the plan.",
+      "purpose": "Give a rough, optional hint about whether the soil might be acidic when nothing else is available. It never decides the plan, and it can be repeated on filled pit soil after treatment.",
       "weak_evidence": true,
       "gate_relevant": false,
       "resolves_unknowns": [
@@ -341,7 +352,7 @@
         {
           "outcome_id": "fizz_seen",
           "label": "Some fizzing or bubbles",
-          "interpretation": "A weak hint that the soil may be acidic. It does not tell you how acidic, and it does not change the basic plan.",
+          "interpretation": "A weak hint that the soil may be acidic. It does not say how acidic, it is not a pH reading, and it does not change the basic plan.",
           "implies_tags": [
             "fizz_seen"
           ]
@@ -349,12 +360,14 @@
         {
           "outcome_id": "fizz_none",
           "label": "No fizzing",
-          "interpretation": "Proves nothing: many acidic soils show no fizz with this check. Keep treating the soil as likely acidic and poor.",
+          "interpretation": "Proves nothing: many acidic soils show no fizz with this test. It is not a pH reading. Keep treating the soil as likely acidic and poor.",
           "implies_tags": [
             "fizz_none"
           ]
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "ground"
     },
     {
       "id": "check_rock_lumps_ironstone",
@@ -421,7 +434,9 @@
             "texture_rock_lumps"
           ]
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "ground"
     },
     {
       "id": "check_ask_neighbours",
@@ -488,7 +503,9 @@
             "local_advice_none"
           ]
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "neighbours"
     },
     {
       "id": "check_inventory_resources",
@@ -585,7 +602,9 @@
             "res_seeds"
           ]
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "supplies"
     },
     {
       "id": "check_observe_vegetation",
@@ -650,7 +669,9 @@
             "pooling_some"
           ]
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "vegetation"
     },
     {
       "id": "check_soaking_rain_depth",
@@ -707,7 +728,9 @@
             "runoff_fast"
           ]
         }
-      ]
+      ],
+      "phase": "pre_plant",
+      "where": "ground"
     },
     {
       "id": "check_watch_trial_plants",
@@ -764,7 +787,9 @@
           "interpretation": "Soil holds little water: deepen mulch, use stored water, shade seedlings.",
           "implies_tags": []
         }
-      ]
+      ],
+      "phase": "post_sow",
+      "where": "trial_plot"
     },
     {
       "id": "check_seed_sprout_test",
@@ -825,7 +850,9 @@
           "interpretation": "Do not rely on this seed. Find fresher seed from neighbours or a market; eat the rest if it is safe food grain.",
           "implies_tags": []
         }
-      ]
+      ],
+      "phase": "pre_plant",
+      "where": "seeds"
     },
     {
       "id": "check_float_seed_test",
@@ -878,7 +905,9 @@
           "interpretation": "Much of the seed may be empty or old; do a sprout test and find better seed if possible.",
           "implies_tags": []
         }
-      ]
+      ],
+      "phase": "pre_plant",
+      "where": "seeds"
     },
     {
       "id": "check_life_count",
@@ -934,7 +963,142 @@
           "interpretation": "Soil life is present; the organic matter and mulch are working.",
           "implies_tags": []
         }
-      ]
+      ],
+      "phase": "diagnose",
+      "where": "ground"
+    },
+    {
+      "id": "check_leaf_colour_hunger",
+      "topic": "diagnostic_check",
+      "title": "Leaf-colour hunger check on seedlings",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Look at the colour of leaves on seedlings in your trial pits and compare pits that got more compost with pits that got less. Colour is a clue to hungry soil, not a measurement.",
+      "instructions": [
+        "A couple of weeks after emergence, look at the leaves of seedlings in each trial pit, in daylight.",
+        "Pale or yellowing older leaves first suggest the soil is hungry; purplish tints suggest a poorly fed, cold or very acidic pocket; leaves that are green and growing evenly suggest the fill is doing its job.",
+        "Compare pits with more compost or mulch with pits with less, and note which look better.",
+        "Before blaming hunger, check dry roots, waterlogging, pests and disease, which can look the same.",
+        "Respond gently: more compost or rotted manure around the plants, more mulch, a legume neighbour; then watch for a week or two."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Not a measurement: drought, waterlogging, pests, disease and heat cause the same colours.",
+        "Different crops show hunger differently; compare plants of the same kind."
+      ],
+      "safety_notes": [
+        "Wash hands after handling plants with signs of disease."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Get a rough, no-lab clue about nutrient shortage from the plants themselves, and decide where more organic matter is needed.",
+      "weak_evidence": false,
+      "gate_relevant": false,
+      "resolves_unknowns": [
+        "unknown_acidity_nutrients"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "green_even",
+          "label": "Leaves green and growing evenly",
+          "interpretation": "The fill is working; expand gradually.",
+          "implies_tags": []
+        },
+        {
+          "outcome_id": "pale_older_leaves",
+          "label": "Older leaves pale or yellow first",
+          "interpretation": "A clue of hunger: add compost or rotted manure around the plants and watch.",
+          "implies_tags": []
+        },
+        {
+          "outcome_id": "purple_tints",
+          "label": "Purplish tints and stunting",
+          "interpretation": "Poorly fed or acidic pocket, or cold, wet roots: check drainage, add organic matter, and compare with a better pit.",
+          "implies_tags": []
+        }
+      ],
+      "phase": "post_sow",
+      "where": "trial_plot"
+    },
+    {
+      "id": "check_rain_tally",
+      "topic": "diagnostic_check",
+      "title": "Rain tally: count the soaking rains",
+      "scenario_tags": [
+        "scenario_05_lateritic_hardpan"
+      ],
+      "applies_when": {
+        "any_tags": [],
+        "all_tags": [],
+        "none_tags": []
+      },
+      "summary": "Keep a simple tally of each rain that soaks the soil, so you know when the rains have become reliable even though nobody knows the exact dates.",
+      "instructions": [
+        "Put a small stone or a notch on a stick in the journal for every rain that leaves the soil moist down to the hard layer (check the next day with a finger or stick).",
+        "Do not count showers that wet only the surface.",
+        "Note the dates in the journal and any dry gaps between rains.",
+        "Treat the rains as reliable only after more than one soaking rain without a long dry gap, and ask neighbours whether that matches how the season usually goes.",
+        "If you started the season later than hoped, update the weeks-left estimate."
+      ],
+      "everyday_amounts": [],
+      "limitations": [
+        "Exact rain dates are unknown until the season shows itself; this is a running record, not a forecast."
+      ],
+      "safety_notes": [
+        "Do not stand in open ground during lightning; check the soil after the storm."
+      ],
+      "evidence_level": "needs_local_confirmation",
+      "source_ids": [
+        "src_team_field_notes",
+        "src_tnau_ragi"
+      ],
+      "created_by": "TERRAFORM team — original synthesis",
+      "version": "1.2.0",
+      "purpose": "Replace unknown rain dates with your own record of what is actually happening, before committing seed.",
+      "weak_evidence": false,
+      "gate_relevant": true,
+      "resolves_unknowns": [
+        "unknown_rain_window",
+        "unknown_season_length"
+      ],
+      "possible_outcomes": [
+        {
+          "outcome_id": "one_soaking",
+          "label": "Only one soaking rain so far",
+          "interpretation": "Not reliable yet: keep preparing and wait for the next rain.",
+          "implies_tags": [
+            "rain_just_started"
+          ]
+        },
+        {
+          "outcome_id": "several_soaking",
+          "label": "More than one soaking rain without a long gap",
+          "interpretation": "Rains look reliable: do the soaking-depth check and sow.",
+          "implies_tags": [
+            "rain_ongoing"
+          ]
+        },
+        {
+          "outcome_id": "rains_fading",
+          "label": "Fewer and lighter rains",
+          "interpretation": "The rains may be ending: choose only short crops and prepare for next season.",
+          "implies_tags": [
+            "rain_ending"
+          ]
+        }
+      ],
+      "phase": "pre_plant",
+      "where": "runoff_path"
     }
   ]
 }

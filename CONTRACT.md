@@ -480,3 +480,13 @@ Order of work, enforced by the BACKEND and displayed identically by the Dashboar
 - `GateItem` gate tasks (`next_action.gate_tasks`) must always include `task_confirm_reliable_rains` (phase `readiness`) so it is completable at the gate; it must NOT be locked.
 - Frontends: never offer a "complete" button for a locked task; show a lock + reason + a button that goes to what unlocks it (Crops tab/step, Readiness tab/step).
   "Sown/planted" state requires a selected crop AND readiness ok AND the sowing task done.
+
+# v1.5 — Diagnostic checks as real steps; every location has a purpose (additive)
+Problem: the no-lab checks (stick probe, baking-soda "sodium bicarbonate" fizz test, hand-deep water-hole drainage test, watching where rain runs, observing vegetation, asking neighbours, supplies inventory, seed sprout test, watching trial plants, …) existed only as an optional list; the guided quest never walked the player through them, and some map locations did nothing.
+- **KB (`diagnostic_checks.json`)**: every check gains
+  `"phase": "diagnose" | "pre_plant" | "post_sow"` (before the plan / before sowing / after sowing) and
+  `"where": "ground" | "water_hole" | "runoff_path" | "vegetation" | "neighbours" | "supplies" | "seeds" | "trial_plot"`
+  (the kind of place the check is done — the game maps it to a location).
+- **API**: `CheckCard` gains `phase` and `where`. `PlanResponse.workflow.checks: CheckCard[]` = EVERY applicable check (all phases, deduped) with `user_outcome` merged from `observation.user_confirmed_checks`.
+  `missing_analysis.checks` keeps its current meaning (checks relevant to unresolved unknowns) and also carries phase/where.
+- **Game**: `where` → location: ground→soil, water_hole→waterhole, runoff_path→gully, vegetation→grove, neighbours→camp, supplies→outpost, seeds→plot, trial_plot→plot. Every location must have a purpose, real content and an explanation (see `frontend/src/game/places.ts`).

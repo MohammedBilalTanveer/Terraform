@@ -10,7 +10,8 @@ import { useQuest } from "../useQuest";
 import CareTab from "./CareTab";
 import PlotPanel, { CropCardView } from "./PlotPanel";
 import { Bullets, Card, Chips, DetailsButton, GlassPanel, Pill, PrimaryButton, Section, cx } from "./kit";
-import { CompletionFlow, StationChecklist, SuggestedNext, TaskCard, TestCard, announceDone, pinStep } from "./cards";
+import { CheckCardView, CompletionFlow, StationChecklist, SuggestedNext, TaskCard, TestCard, WhyLine, announceDone, pinStep } from "./cards";
+import { collectChecks } from "../checks";
 
 type Wiz = "readiness" | "crop" | "time" | "plant" | "care" | "done";
 const STRIP: { id: Exclude<Wiz, "done">; label: string; tab: string }[] = [
@@ -309,6 +310,32 @@ export default function PlotWizard({ onClose }: { onClose: () => void }) {
     );
   }
 
+  // v1.5: the seed sprout test comes BEFORE the sow card; the watch-trial-plants check AFTER sowing
+  const checkById = new Map(collectChecks(analysis, plan).map((c0) => [c0.id, c0]));
+  const preOpen = plotSteps.filter((s) => s.kind === "check" && s.checkPhase === "pre_plant" && !s.done && !s.blocked);
+  const postOpen = plotSteps.filter((s) => s.kind === "check" && s.checkPhase === "post_sow" && !s.done && !s.blocked);
+  const preCheck = preOpen[0]?.checkId ? checkById.get(preOpen[0].checkId) : undefined;
+  const postCheck = postOpen[0]?.checkId ? checkById.get(postOpen[0].checkId) : undefined;
+  if (active === "plant" && preCheck) {
+    body = (
+      <>
+        <p className="text-[12.5px] text-ivory/70">Before you sow: this check is recommended, never required.</p>
+        <CheckCardView check={preCheck} station="plot" />
+        <StationChecklist title="See all checks here" steps={plotSteps.filter((s) => s.kind === "check")} pickDone />
+      </>
+    );
+  } else if ((active === "care" || active === "done") && postCheck) {
+    body = (
+      <>
+        <Card className="space-y-2 border-amber-300/30">
+          <div className="text-[11px] font-semibold text-amber-200">After sowing — recommended check</div>
+          <CheckCardView check={postCheck} station="plot" />
+        </Card>
+        {body}
+      </>
+    );
+  }
+
   return (
     <GlassPanel
       title="Unknown Land — Cultivation Plot"
@@ -332,6 +359,7 @@ export default function PlotWizard({ onClose }: { onClose: () => void }) {
       }
     >
       {strip}
+      <WhyLine station="plot" />
       {body}
     </GlassPanel>
   );

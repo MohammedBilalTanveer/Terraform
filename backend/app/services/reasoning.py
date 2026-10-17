@@ -28,6 +28,7 @@ PHOTO_MESSAGE_ATTACHED = "Photo attached; visual analysis is not enabled. The te
 PHOTO_MESSAGE_NONE = "No photo attached. The text description was used."
 PHOTO_MESSAGE_CONFIRMED = ("Photo cues you confirmed were used as tentative observations: {labels}. "
                            "A photo cannot show soil chemistry, depth or hardpan continuity.")
+CHECK_PHASE_ORDER = {"diagnose": 0, "pre_plant": 1, "post_sow": 2}
 FACTOR_ORDER = {"observed": 0, "likely": 1, "not_indicated": 2}
 LOCAL_ADVICE_HANDLING = "Treated as a claim to check against your own observations, not as verified fact."
 NO_LOCAL_ADVICE = "No local advice was given."
@@ -103,6 +104,34 @@ def unknown_cards(kb: KnowledgeBase, scenario: dict, unknowns: List[dict]) -> Li
     } for u in unknowns]
 
 
+def check_card(kb: KnowledgeBase, rec: dict, tr: TagResult, confirmed: Dict[str, str], why=None) -> dict:
+    """CheckCard from a diagnostic_checks record (phase/where copied from the KB, null when absent)."""
+    card = to_recommendation(kb, rec, tr, "check", why=why or None)
+    card.update({
+        "phase": rec.get("phase") if rec.get("phase") in CHECK_PHASE_ORDER else None,
+        "where": rec.get("where") if isinstance(rec.get("where"), str) else None,
+        "purpose": text(rec.get("purpose")) or text(rec.get("summary")),
+        "weak_evidence": bool(rec.get("weak_evidence")),
+        "gate_relevant": bool(rec.get("gate_relevant")),
+        "possible_outcomes": [{
+            "outcome_id": str(o.get("outcome_id", "")),
+            "label": text(o.get("label")),
+            "interpretation": text(o.get("interpretation")),
+            "implies_tags": [t for t in o.get("implies_tags") or [] if isinstance(t, str)],
+        } for o in rec.get("possible_outcomes") or [] if isinstance(o, dict)],
+        "user_outcome": confirmed.get(rec["id"]),
+    })
+    return card
+
+
+def all_check_cards(kb: KnowledgeBase, tr: TagResult, confirmed: Dict[str, str]) -> List[dict]:
+    """v1.5: EVERY applicable check (all phases), ordered diagnose -> pre_plant -> post_sow (KB order within;
+    checks without a phase go last), each with the user's recorded outcome."""
+    cards = [check_card(kb, r, tr, confirmed) for r in kb.records("diagnostic_checks") if applies(r, tr.tag_set)]
+    cards.sort(key=lambda c: CHECK_PHASE_ORDER.get(c["phase"], len(CHECK_PHASE_ORDER)))  # stable
+    return cards
+
+
 def check_cards(kb: KnowledgeBase, tr: TagResult, unknowns: List[dict], confirmed: Dict[str, str]) -> List[dict]:
     open_ids = {u.get("id") for u in unknowns}
     label_of = {u.get("id"): text(u.get("label")) for u in unknowns}
@@ -121,20 +150,7 @@ def check_cards(kb: KnowledgeBase, tr: TagResult, unknowns: List[dict], confirme
         if not relevant and rid not in confirmed:
             continue
         why = [label_of[x] for x in resolves if label_of.get(x)]
-        card = to_recommendation(kb, rec, tr, "check", why=why or None)
-        card.update({
-            "purpose": text(rec.get("purpose")) or text(rec.get("summary")),
-            "weak_evidence": bool(rec.get("weak_evidence")),
-            "gate_relevant": bool(rec.get("gate_relevant")),
-            "possible_outcomes": [{
-                "outcome_id": str(o.get("outcome_id", "")),
-                "label": text(o.get("label")),
-                "interpretation": text(o.get("interpretation")),
-                "implies_tags": [t for t in o.get("implies_tags") or [] if isinstance(t, str)],
-            } for o in rec.get("possible_outcomes") or [] if isinstance(o, dict)],
-            "user_outcome": confirmed.get(rid),
-        })
-        cards.append(card)
+        cards.append(check_card(kb, rec, tr, confirmed, why))
     cards.sort(key=lambda c: (c["user_outcome"] is not None, not c["gate_relevant"], c["weak_evidence"]))
     return cards
 
